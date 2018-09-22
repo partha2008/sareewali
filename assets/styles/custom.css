@@ -1,0 +1,36 @@
+	/* Styles for Page not found */	
+	body{
+		font-family: 'Capriola', sans-serif;
+	}
+	body{
+		background:#DAD6CC;
+	}	
+	.wrap{
+		margin:0 auto;
+		width:1000px;
+	}
+	.logo h1{
+		font-size:200px;
+		color:#FF7A00;
+		text-align:center;
+		margin-bottom:1px;
+		text-shadow:4px 4px 1px white;
+	}	
+	.logo p{
+		color:#B1A18D;;
+		font-size:20px;
+		margin-top:1px;
+		text-align:center;
+	}	
+	.logo p span{
+		color:lightgreen;
+	}	
+	.sub a{
+		color:#ff7a00;
+		text-decoration:none;
+		padding:5px;
+		font-size:13px;
+		font-family: arial, serif;
+		font-weight:bold;
+	}	
+	/* End */
