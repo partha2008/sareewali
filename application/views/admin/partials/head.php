@@ -35,6 +35,9 @@
 			<!-- Fine Uploader -->
 			<link rel="stylesheet" href="<?php echo base_url(); ?>assets/styles/fine-uploader-new.min.css">
 
+			<!-- Select 2 -->
+			<link rel="stylesheet" href="<?php echo base_url(); ?>assets/styles/select2.min.css">
+
 			<script>
 				var BASEPATH = '<?php echo base_url();?>';
 			</script>

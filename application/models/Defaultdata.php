@@ -31,7 +31,7 @@ class Defaultdata extends CI_Model {
 		$this->mydata["modal"] = $this->load->view('partials/modal', null, true);	
 		$this->mydata['admin_profile'] = $this->grabProfileData();		
 		$this->mydata['final_tree'] = $this->grabTree();
-		$this->mydata['prd_cat'] = $this->entitydata->grab_entity(array("level" => "1"));		
+		$this->mydata['prd_cat'] = $this->entitydata->grab_entity(array("level" => "1", "status" => "Y"));		
 		$this->data = $this->mydata;
 		$this->headerdata = $this->mydata;
 		$this->data["header"] = $this->load->view('partials/header', $this->headerdata, true);			
@@ -55,9 +55,9 @@ class Defaultdata extends CI_Model {
 		if(!empty($tree)){
 			foreach($tree as $tr){
 				if(isset($recArr[$tr->parent_id])){
-					$final_tree[$tr->name.'_'.$tr->is_special] = $recArr[$tr->parent_id]->name.'_'.$tr->is_special;
+					$final_tree[$tr->name.'_'.$tr->is_special.'_'.$tr->slug] = $recArr[$tr->parent_id]->name.'_'.$tr->is_special.'_'.$tr->slug;
 				}else{
-					$final_tree[$tr->name.'_'.$tr->is_special] = null;
+					$final_tree[$tr->name.'_'.$tr->is_special.'_'.$tr->slug] = null;
 				}
 			}
 		}	

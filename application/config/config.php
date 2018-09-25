@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 switch(ENVIRONMENT){
 	case "development":
-		$config['base_url'] = 'http://localhost/sareewali_ci';
+		$config['base_url'] = 'http://localhost/sareewali_git';
 	break;
 	default:
 		$config['base_url'] = 'https://www.sareewali.com/';

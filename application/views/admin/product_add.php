@@ -72,6 +72,14 @@
 											<input class="form-control" type="text" name="sku" value="<?php echo (isset($product_details->sku) && $product_details->sku) ? $product_details->sku : '';?>">
 										</div>
 										<div class="form-group">
+											<label class="control-label">Color <span style="color:#a94442;">*</span></label>
+											<select class="form-control js-example-tags" multiple="multiple" name="color[]">
+											  	<option selected="selected">orange</option>
+											  	<option>white</option>
+											  	<option selected="selected">purple</option>
+											</select>
+										</div>
+										<div class="form-group">
 											<label class="control-label">Out of Stock</label>
 											<label class="radio-inline">
 												<input type="radio" name="out_of_stock" value="Y" <?php if(isset($product_details->out_of_stock)){if($product_details->out_of_stock == 'Y'){echo 'checked';}}else{echo 'checked';}?> >Yes

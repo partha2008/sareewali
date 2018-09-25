@@ -128,15 +128,15 @@
                                 $name = explode("_", $node['name']);
                                 if(!empty($node['children'])){
                                   if($name[1] == 'Y'){
-                                    echo '<li><a class="coutreNav" href="javascript:void(0);">'.$name[0].'</a>';
+                                    echo '<li><a class="coutreNav" href="'.base_url('product-list/'.$name[2]).'">'.$name[0].'</a>';
                                   }else{
-                                    echo '<li><a href="javascript:void(0);">'.$name[0].'</a>';
+                                    echo '<li><a href="'.base_url('product-list/'.$name[2]).'">'.$name[0].'</a>';
                                   }                                  
                                 }else{
                                   if($name[1] == 'Y'){
-                                    echo '<li><a class="coutreNav" href="#">'.$name[0].'</a>';
+                                    echo '<li><a class="coutreNav" href="'.base_url('product-list/'.$name[2]).'">'.$name[0].'</a>';
                                   }else{
-                                    echo '<li><a href="#">'.$name[0].'</a>';
+                                    echo '<li><a href="'.base_url('product-list/'.$name[2]).'">'.$name[0].'</a>';
                                   }
                                 }
                                 printTree($node['children']);

@@ -28,6 +28,9 @@
 		<!-- Fine Uploader js library -->
 		<script src="<?php echo base_url(); ?>assets/scripts/jquery.fine-uploader.min.js"></script>
 
+		<!-- Select2 -->
+		<script src="<?php echo base_url(); ?>assets/scripts/select2.min.js"></script>
+
 		<!-- Custom JS File -->
 		<script src="<?php echo base_url(); ?>assets/scripts/custom.js"></script>
 		

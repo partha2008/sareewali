@@ -64,6 +64,10 @@
 		public function add_product(){
 			$post_data = $this->input->post();
 
+			echo "<pre>";
+			print_r($post_data);
+			die();
+
 			$attrname = $post_data['attrname'];
 			$attrval = $post_data['attrval'];
 			$attrunit = $post_data['attrunit'];

@@ -11,7 +11,7 @@
             <?php 
               foreach ($prd_cat as $key => $value) {                
             ?>
-            <li><a href="#"><?php echo $value->name;?></a></li>
+            <li><a href="<?php echo base_url('product-list/'. $value->slug);?>"><?php echo $value->name;?></a></li>
             <?php
               }
             ?>

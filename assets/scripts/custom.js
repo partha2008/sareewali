@@ -148,4 +148,8 @@
                 $("#state_id").html(data);
             });
         });
+
+        $(".js-example-tags").select2({
+            tags: true
+        });
     });
