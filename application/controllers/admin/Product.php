@@ -57,6 +57,9 @@
 
 			$unit = $this->config->item('unit');
 			$this->data['unit'] = $unit;
+
+			$colors = $this->productdata->grab_color();
+			$this->data['colors'] = $colors;
 			
 			$this->load->view('admin/product_add', $this->data); 
 		}
@@ -64,25 +67,25 @@
 		public function add_product(){
 			$post_data = $this->input->post();
 
-			echo "<pre>";
-			print_r($post_data);
-			die();
-
 			$attrname = $post_data['attrname'];
 			$attrval = $post_data['attrval'];
 			$attrunit = $post_data['attrunit'];
 			$prd_entity = $post_data['entity_id'];
+			$color = $post_data['color'];
 
 			$this->load->library('form_validation');
 			
 			if(empty($prd_entity)){
 				$this->form_validation->set_rules('entity_id[]', 'Entity', 'trim|required');
-			}
+			}			
 			$this->form_validation->set_rules('name', 'Name', 'trim|required|is_unique['.TABLE_PRODUCT.'.name]');
 			$this->form_validation->set_rules('description', 'Description', 'trim|required');
 			$this->form_validation->set_rules('price', 'Price', 'trim|required');
 			$this->form_validation->set_rules('quantity', 'Quantity', 'trim|required');
 			$this->form_validation->set_rules('sku', 'SKU', 'trim|required|is_unique['.TABLE_PRODUCT.'.sku]');
+			if(empty($color)){
+				$this->form_validation->set_rules('color[]', 'Color', 'trim|required');
+			}
 			$this->form_validation->set_rules('upload_image', 'Upload Images', 'required');
 			
 			$this->session->unset_userdata($post_data);
@@ -99,6 +102,7 @@
 				unset($post_data['attrunit']);
 				unset($post_data['upload_image']);
 				unset($post_data['entity_id']);
+				unset($post_data['color']);
 
 				// product
 				$post_data['slug'] = $this->defaultdata->slugify($post_data['name']);
@@ -148,6 +152,20 @@
 						$this->productdata->update_product_image(array("product_image_id" => $value->product_image_id), array("product_id" => $prd_last_id, is_featured => $is_featured));
 					}
 				}
+
+				// add product color
+				if(!empty($color)){
+					foreach ($color as $key => $value) {
+						$colors = $this->productdata->grab_color(array("name" => $value));
+						if(empty($colors)){
+							$last_id = $this->productdata->insert_color(array("name" => $value));
+						}else{
+							$last_id = $color[0]['color_id'];
+						}					
+
+						$this->productdata->insert_product_color(array("product_id" => $prd_last_id, "color_id" => $last_id));
+					}
+				}
 				
 				redirect(base_url('admin/product-list'));
 			}
@@ -156,14 +174,19 @@
 		public function product_edit($code){
 			if($this->session->userdata('has_error')){
 				$sess_data = $this->session->userdata;
-				$this->data['product_details'] = (object)$sess_data;
+				$product_details = (object)$sess_data;
+				/*echo "<pre>";
+				print_r($product_details);
+				die();*/
+				$this->data['product_details'] = $product_details;
 				$this->data['entity_id'] = $sess_data['entity_id'];
 			}else{
 				$cond['slug'] = $code;
 				$product_details = $this->productdata->grab_product($cond);
 				$this->data['product_details'] = $product_details[0];
+				$product_details = $product_details[0];
 
-				$entity_id = $this->productdata->grab_product_entity_rel(array("product_id" => $product_details[0]->product_id));
+				$entity_id = $this->productdata->grab_product_entity_rel(array("product_id" => $product_details->product_id));
 
 				if(!empty($entity_id)){
 					foreach ($entity_id as $entity) {
@@ -172,15 +195,28 @@
 				}
 
 				$this->data['entity_id'] = $entity_arr;
+
+				$product_colors = $this->productdata->grab_product_color(array("product_id" => $product_details->product_id));
+				if(!empty($product_colors)){
+					foreach ($product_colors as $key => $value) {
+						$selected_colors[] = $value->color_id;
+					}				
+				}
+				$this->data['selected_colors'] = $selected_colors;
 			}
 			$cat_data = $this->entitydata->grab_entity(array("status" => "Y", "parent_id !=" => "0"), array(), array());
 			$this->data['cat_list'] = $cat_data;
 
-			$product_attribute = $this->productdata->grab_product_attribute(array(TABLE_PRODUCT_ATTRIBUTE.".product_id" => $product_details[0]->product_id));
+			$product_attribute = $this->productdata->grab_product_attribute(array(TABLE_PRODUCT_ATTRIBUTE.".product_id" => $product_details->product_id));
 			$this->data['attr_list'] = $product_attribute;
 
 			$unit = $this->config->item('unit');
 			$this->data['unit'] = $unit;
+
+			$colors = $this->productdata->grab_color();
+			$this->data['colors'] = $colors;
+
+			
 			
 			$this->load->view('admin/product_edit', $this->data); 
 		}
@@ -200,6 +236,9 @@
 			$this->form_validation->set_rules('price', 'Price', 'trim|required');
 			$this->form_validation->set_rules('quantity', 'Quantity', 'trim|required');
 			$this->form_validation->set_rules('sku', 'SKU', 'trim|required');
+			if(empty($color)){
+				$this->form_validation->set_rules('color[]', 'Color', 'trim|required');
+			}
 			$this->form_validation->set_rules('upload_image', 'Upload Images', 'required');
 
 			$attrname = $post_data['attrname'];
@@ -207,6 +246,7 @@
 			$attrunit = $post_data['attrunit'];
 			$product_id = $post_data['product_id'];
 			$prd_entity = $post_data['entity_id'];
+			$color = $post_data['color'];
 			
 			$this->session->unset_userdata($post_data);
 			if($this->form_validation->run() == FALSE)
@@ -225,6 +265,7 @@
 				unset($post_data['product_id']);
 				unset($post_data['upload_image']);
 				unset($post_data['entity_id']);
+				unset($post_data['color']);
 
 				// product
 				$slug = $post_data['slug'];
@@ -270,6 +311,23 @@
 				if(!empty($images)){
 					foreach ($images as $key => $value) {
 						$this->productdata->update_product_image(array("product_image_id" => $value->product_image_id), array("product_id" => $product_id));
+					}
+				}
+
+				// delete product color
+				$this->productdata->delete_product_color(array("product_id" => $product_id));
+
+				// add product color
+				if(!empty($color)){
+					foreach ($color as $key => $value) {
+						$colors = $this->productdata->grab_color(array("name" => $value));
+						if(empty($colors)){
+							$last_id = $this->productdata->insert_color(array("name" => $value));
+						}else{
+							$last_id = $colors[0]->color_id;
+						}					
+
+						$this->productdata->insert_product_color(array("product_id" => $product_id, "color_id" => $last_id));
 					}
 				}
 				

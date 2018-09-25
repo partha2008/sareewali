@@ -213,6 +213,33 @@ class Productdata extends CI_Model {
 		return true;
 	}
 
+	public function grab_color($cond = array(), $like = array(), $limit = array()){
+		if(!empty($cond)){
+			$this->db->where($cond);
+		}		
+		if(!empty($like)){
+			$this->db->like($like);
+		}
+		if(!empty($limit)){
+			$per_page = $limit[0];
+			$offset = $limit[1];
+			$start = max(0, ( $offset -1 ) * $per_page);
+			$this->db->limit($per_page, $start);
+		}	
+		$query = $this->db->get(TABLE_COLOR);
+		
+		return $query->result();
+	}
+
+	public function insert_color($data = array()){
+
+		$this->db->insert(TABLE_COLOR, $data); 
+		
+		$insert_id = $this->db->insert_id();
+		
+		return $insert_id;
+	}
+
 	public function grab_product_color($cond = array(), $like = array(), $limit = array()){
 		if(!empty($cond)){
 			$this->db->where($cond);
@@ -226,8 +253,25 @@ class Productdata extends CI_Model {
 			$start = max(0, ( $offset -1 ) * $per_page);
 			$this->db->limit($per_page, $start);
 		}	
-		$query = $this->db->get(TABLE_PRODUCT_ENTITY);
+		$query = $this->db->get(TABLE_PRODUCT_COLOR);
 		
 		return $query->result();
+	}
+
+	public function insert_product_color($data = array()){
+
+		$this->db->insert(TABLE_PRODUCT_COLOR, $data); 
+		
+		$insert_id = $this->db->insert_id();
+		
+		return $insert_id;
+	}
+
+	public function delete_product_color($cond = array()){
+		$this->db->where($cond);
+		
+		$this->db->delete(TABLE_PRODUCT_COLOR);
+		
+		return true;
 	}
 }

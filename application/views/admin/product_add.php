@@ -25,6 +25,7 @@
 					<?php } 
 						$this->session->unset_userdata('has_error');
 						$this->session->unset_userdata('productadd_notification');
+						$this->session->unset_userdata('color');
 					?>
 					<div class="panel panel-default">
 						<div class="panel-body">
@@ -38,7 +39,7 @@
 													<?php foreach($cat_list AS $list) {?>
 														<option value="<?php echo $list->entity_id;?>"
 															<?php
-																if(isset($product_details)){
+																if(isset($product_details) && !empty($product_details->entity_id)){
 																	if(in_array($list->entity_id, $product_details->entity_id)){
 																		echo 'selected';
 																	}
@@ -74,9 +75,30 @@
 										<div class="form-group">
 											<label class="control-label">Color <span style="color:#a94442;">*</span></label>
 											<select class="form-control js-example-tags" multiple="multiple" name="color[]">
-											  	<option selected="selected">orange</option>
-											  	<option>white</option>
-											  	<option selected="selected">purple</option>
+												<?php
+													$sess_color = $product_details->color;
+													if(!empty($colors)){
+														foreach ($colors as $key => $value) {
+															if(in_array($value->name, $sess_color)){
+																echo '<option selected="selected">'.$value->name.'</option>';
+																if (($key = array_search($value->name, $sess_color)) !== false) {
+																    unset($sess_color[$key]);
+																}
+															}else{
+																echo '<option>'.$value->name.'</option>';
+															}			
+														}
+														if(!empty($sess_color)){
+															foreach($sess_color as $color){
+																echo '<option selected="selected">'.$color.'</option>';
+															}
+														}
+													}elseif(!empty($sess_color)){
+														foreach ($sess_color as $key => $value) {
+															echo '<option selected="selected">'.$value.'</option>';
+														}
+													}
+												?>
 											</select>
 										</div>
 										<div class="form-group">

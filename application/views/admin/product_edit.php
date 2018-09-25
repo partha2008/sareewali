@@ -25,6 +25,7 @@
 					<?php } 
 						$this->session->unset_userdata('has_error');
 						$this->session->unset_userdata('productedit_notification');
+						$this->session->unset_userdata('color');
 					?>
 					<div class="panel panel-default">
 						<div class="panel-body">
@@ -70,6 +71,28 @@
 										<div class="form-group">
 											<label class="control-label">SKU <span style="color:#a94442;">*</span></label>
 											<input class="form-control" type="text" name="sku" value="<?php echo (isset($product_details->sku) && $product_details->sku) ? $product_details->sku : '';?>" readonly>
+										</div>
+										<div class="form-group">
+											<label class="control-label">Color <span style="color:#a94442;">*</span></label>
+											<select class="form-control js-example-tags" multiple="multiple" name="color[]">
+												<?php
+													$sess_color = $product_details->color;
+													if(!empty($colors)){
+														foreach ($colors as $key => $value) {
+															if(in_array($value->color_id, $selected_colors)){
+																echo '<option selected="selected">'.$value->name.'</option>';
+															}else{
+																echo '<option>'.$value->name.'</option>';
+															}			
+														}
+														if(!empty($sess_color)){
+															foreach($sess_color as $color){
+																echo '<option selected="selected">'.$color.'</option>';
+															}
+														}
+													}
+												?>
+											</select>
 										</div>
 										<div class="form-group">
 											<label class="control-label">Out of Stock</label>

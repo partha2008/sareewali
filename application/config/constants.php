@@ -131,3 +131,5 @@ define('TABLE_COUNTRY', TABLE_PREFIX.'country');
 define('TABLE_STATE', TABLE_PREFIX.'state');
 define('TABLE_ADS', TABLE_PREFIX.'ads');
 define('TABLE_ADS_SECTION', TABLE_PREFIX.'ads_section');
+define('TABLE_COLOR', TABLE_PREFIX.'color');
+define('TABLE_PRODUCT_COLOR', TABLE_PREFIX.'product_color');
