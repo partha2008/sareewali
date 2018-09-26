@@ -27,9 +27,9 @@
                 <div class="shortByBox">Trending
                   <div class="shortByDropDown">
                     <ul>
-                      <li><a href="#" class="active">View All</a></li>
-                      <li><a href="#" >Newest</a></li>
+                      <li><a href="#" class="active">Newest</a></li>
                       <li><a href="#" >Most popular</a></li>
+                      <li><a href="#" >Best Selling</a></li>
                       <li><a href="#" >Price High To Low</a></li>
                       <li><a href="#" >Price Low To High</a></li>
                     </ul>
@@ -37,6 +37,9 @@
                 </div>
               </div>
               <div class="row" id="load_products"><?php echo $products;?></div>
+              <div class="ajax-load text-center" style="display:none">
+                <p><img src="<?php echo base_url(); ?>resources/images/loader.gif"></p>
+              </div>
             </div>
           </div>
         </div>

@@ -46,6 +46,7 @@
 <script>
 	var BASEPATH = '<?php echo base_url();?>';
 	var PAGENAME = '<?php echo $tot_segments[1];?>';
+	var VIEW = '<?php echo isset($tot_segments[3]) ? $tot_segments[3] : $tot_segments[2];?>';
 </script>
 <?php
     if($tot_segments[1] == 'product-details'){

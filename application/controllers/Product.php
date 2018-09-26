@@ -4,6 +4,8 @@
 	class Product extends CI_Controller {
 		
 		public $data = array();
+
+		private $perPage = 6;
 		
 		public function __construct(){
 			parent::__construct();
@@ -49,11 +51,11 @@
 			if($sub_entity){
 				$sub_entity_data = $this->entitydata->grab_entity(array("slug" => $sub_entity));
 				$this->breadcrumb->add($sub_entity_data[0]->name, base_url('product-list/'.$entity));
-				$product_list = $this->productdata->grab_product_list_all($sub_entity);
+				$product_list = $this->productdata->grab_product_list_all($sub_entity, 0, $this->perPage);
 
 				$this->data['entity'] = $sub_entity_data[0]->name;
 			}else{
-				$product_list = $this->productdata->grab_product_list_all($entity);
+				$product_list = $this->productdata->grab_product_list_all($entity, 0 , $this->perPage);
 				$this->data['entity'] = $entity_data[0]->name;
 			}	
 			$this->data['product_list'] = $product_list;
@@ -70,10 +72,14 @@
 		}
 
 		public function load_products(){
-			$post_data = $this->input->post();
-			echo "<pre>";
-			print_r($post_data);
-			die();
+			$start = ceil($this->input->get("page") * $this->perPage);
+			$entity = $this->input->get("view");
+
+			$this->data['product_list'] = $this->productdata->grab_product_list_all($entity, $start, $this->perPage);
+
+			$products = $this->load->view('partials/products', $this->data, true);		
+
+			echo $products;
 		}
 	}
 ?>

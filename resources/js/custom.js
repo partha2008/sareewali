@@ -251,19 +251,17 @@
 				}
 	        });
 		}else if(PAGENAME == 'product-list'){
-			$(".scroll-fabric").mCustomScrollbar({
-				setHeight:300,
-				theme:"dark-3"
-			}); 
-
-			$(".scroll-work").mCustomScrollbar({
-				setHeight:300,
-				theme:"dark-3"
-			}); 
-
 			$(".scroll-color").mCustomScrollbar({
 				setHeight:300,
 				theme:"dark-3"
+			});
+
+			var page = 0;
+			$(window).scroll(function() {
+			    if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+			        page++;
+			        load_products(page, VIEW);
+			    }
 			});
 		}else{
 	        $('#horizontalTab').easyResponsiveTabs({

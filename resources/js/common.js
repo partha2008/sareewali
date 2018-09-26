@@ -166,12 +166,6 @@ function saveUserInfo(user){
     });
 }
 
-function load_products(){
-    $.post(BASEPATH+"product/load_products", {}, function(data){
-        $("#load_products").html(data);
-    });
-}
-
 // Called when Google Javascript API Javascript is loaded
 function HandleGoogleApiLibrary() {
     // Load "client" & "auth2" libraries
@@ -196,5 +190,25 @@ function HandleGoogleApiLibrary() {
         onerror: function() {
             // Failed to load libraries
         }
+    });
+}
+
+function load_products(page, view){
+    $.ajax({
+        url: BASEPATH+"product/load_products?page="+page+"&view="+view,
+        type: "get",
+        beforeSend: function()
+        {
+            $('.ajax-load').show();
+        }
+    })
+    .done(function(data)
+    {
+        $('.ajax-load').hide();
+        $("#load_products").append(data);
+    })
+    .fail(function(jqXHR, ajaxOptions, thrownError)
+    {
+          alert('server not responding...');
     });
 }
