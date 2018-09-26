@@ -74,8 +74,18 @@
 		public function load_products(){
 			$start = ceil($this->input->get("page") * $this->perPage);
 			$entity = $this->input->get("view");
+			$mode = $this->input->get("mode");
 
-			$this->data['product_list'] = $this->productdata->grab_product_list_all($entity, $start, $this->perPage);
+			if(isset($mode)){
+				if($mode == "low"){
+					$order_by = TABLE_PRODUCT.".price ASC";
+				}elseif($mode == "high"){
+					$order_by = TABLE_PRODUCT.".price DESC";
+				}				
+				$this->data['product_list'] = $this->productdata->grab_product_list_all($entity, $start, $this->perPage, $order_by);
+			}else{
+				$this->data['product_list'] = $this->productdata->grab_product_list_all($entity, $start, $this->perPage);
+			}
 
 			$products = $this->load->view('partials/products', $this->data, true);		
 

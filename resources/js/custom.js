@@ -97,6 +97,15 @@
 		$('.shortByDropDown').slideToggle(300);
 	});
 
+	$('.shortByDropDown ul li').on('click', function (e) {
+		var me = $(this);
+		var selected_text = me.text();
+		me.siblings().find("a").removeClass("active");
+		me.find("a").addClass("active");
+
+		$("#changed_txt").html(selected_text);
+	});
+
 	$('body').on('click', function () {
 		$('.shortByDropDown').slideUp(300);
 	});

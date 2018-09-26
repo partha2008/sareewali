@@ -194,8 +194,14 @@ function HandleGoogleApiLibrary() {
 }
 
 function load_products(page, view){
+    var mode = $(".shortByDropDown ul li").find("a.active").attr("param");
+    if(mode){
+        var url = BASEPATH+"product/load_products?page="+page+"&view="+view+"&mode="+mode;
+    }else{
+        var url = BASEPATH+"product/load_products?page="+page+"&view="+view;
+    }
     $.ajax({
-        url: BASEPATH+"product/load_products?page="+page+"&view="+view,
+        url: url,
         type: "get",
         beforeSend: function()
         {
@@ -206,6 +212,28 @@ function load_products(page, view){
     {
         $('.ajax-load').hide();
         $("#load_products").append(data);
+    })
+    .fail(function(jqXHR, ajaxOptions, thrownError)
+    {
+        alert('server not responding...');
+    });
+}
+
+function search_by_attr(elm){
+    var mode = elm.getAttribute("param");
+    var page = 0;
+    $.ajax({
+        url: BASEPATH+"product/load_products?page="+page+"&view="+VIEW+"&mode="+mode,
+        type: "get",
+        beforeSend: function()
+        {
+            $('#loading').show();
+        }
+    })
+    .done(function(data)
+    {
+        $('#loading').hide();
+        $("#load_products").html(data);
     })
     .fail(function(jqXHR, ajaxOptions, thrownError)
     {

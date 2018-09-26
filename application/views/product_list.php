@@ -24,14 +24,14 @@
               <div class="innerBanner"><img src="<?php echo base_url('resources/images/7_web_banner_915X270-01.jpg');?>" class="img-responsive" /></div>
               <div class="coutureBannerBtmTxt"><?php echo $entity;?></div>
               <div class="filterRow"> <span>Sort by : </span>
-                <div class="shortByBox">Trending
+                <div class="shortByBox"><span id="changed_txt">Trending</span>
                   <div class="shortByDropDown">
                     <ul>
-                      <li><a href="#" class="active">Newest</a></li>
-                      <li><a href="#" >Most popular</a></li>
-                      <li><a href="#" >Best Selling</a></li>
-                      <li><a href="#" >Price High To Low</a></li>
-                      <li><a href="#" >Price Low To High</a></li>
+                      <li><a href="javascript:void(0);">Newest</a></li>
+                      <li><a href="javascript:void(0);">Most popular</a></li>
+                      <li><a href="javascript:void(0);">Best Selling</a></li>
+                      <li><a href="javascript:void(0);" param="high" onclick="search_by_attr(this);">Price High To Low</a></li>
+                      <li><a href="javascript:void(0);" param="low" onclick="search_by_attr(this);">Price Low To High</a></li>
                     </ul>
                   </div>
                 </div>
