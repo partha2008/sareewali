@@ -70,8 +70,12 @@
 			$attrname = $post_data['attrname'];
 			$attrval = $post_data['attrval'];
 			$attrunit = $post_data['attrunit'];
+			unset($post_data['attrunit']);
 			$prd_entity = $post_data['entity_id'];
 			$color = $post_data['color'];
+			if(isset($post_data['tag'])){
+				$tags = $post_data['tag'];
+			}
 
 			$this->load->library('form_validation');
 			
@@ -86,11 +90,11 @@
 			if(empty($color)){
 				$this->form_validation->set_rules('color[]', 'Color', 'trim|required');
 			}
-			$this->form_validation->set_rules('upload_image', 'Upload Images', 'required');
+			$this->form_validation->set_rules('upload_image', 'Upload Images', 'required');			
 			
-			$this->session->unset_userdata($post_data);
 			if($this->form_validation->run() == FALSE)
 			{	
+				$this->session->unset_userdata($post_data);
 				$this->session->set_userdata($post_data);
 				$this->session->set_userdata('has_error', true);
 				$this->session->set_userdata('productadd_notification', validation_errors());
@@ -98,11 +102,13 @@
 				redirect($this->agent->referrer());
 			}else{
 				unset($post_data['attrname']);
-				unset($post_data['attrval']);
-				unset($post_data['attrunit']);
+				unset($post_data['attrval']);				
 				unset($post_data['upload_image']);
 				unset($post_data['entity_id']);
 				unset($post_data['color']);
+				if(isset($post_data['tag'])){
+					unset($post_data['tag']);
+				}
 
 				// product
 				$post_data['slug'] = $this->defaultdata->slugify($post_data['name']);
@@ -166,6 +172,13 @@
 						$this->productdata->insert_product_color(array("product_id" => $prd_last_id, "color_id" => $last_id));
 					}
 				}
+
+				// add product tag
+				if(isset($tags) && !empty($tags)){
+					foreach ($tags as $key => $value) {
+						$this->productdata->insert_product_tag(array("product_id" => $prd_last_id, "tag_id" =>$value));
+					}
+				}
 				
 				redirect(base_url('admin/product-list'));
 			}
@@ -175,11 +188,10 @@
 			if($this->session->userdata('has_error')){
 				$sess_data = $this->session->userdata;
 				$product_details = (object)$sess_data;
-				/*echo "<pre>";
-				print_r($product_details);
-				die();*/
+
 				$this->data['product_details'] = $product_details;
 				$this->data['entity_id'] = $sess_data['entity_id'];
+				$this->data['tags_sess'] = $product_details->tag;
 			}else{
 				$cond['slug'] = $code;
 				$product_details = $this->productdata->grab_product($cond);
@@ -203,6 +215,9 @@
 					}				
 				}
 				$this->data['selected_colors'] = $selected_colors;
+
+				$tags = $this->productdata->grab_product_tag(array("product_id" => $product_details->product_id));
+				$this->data['tags'] = $tags;
 			}
 			$cat_data = $this->entitydata->grab_entity(array("status" => "Y", "parent_id !=" => "0"), array(), array());
 			$this->data['cat_list'] = $cat_data;
@@ -215,8 +230,6 @@
 
 			$colors = $this->productdata->grab_color();
 			$this->data['colors'] = $colors;
-
-			
 			
 			$this->load->view('admin/product_edit', $this->data); 
 		}
@@ -247,6 +260,9 @@
 			$product_id = $post_data['product_id'];
 			$prd_entity = $post_data['entity_id'];
 			$color = $post_data['color'];
+			if(isset($post_data['tag'])){
+				$tags = $post_data['tag'];
+			}
 			
 			$this->session->unset_userdata($post_data);
 			if($this->form_validation->run() == FALSE)
@@ -266,6 +282,9 @@
 				unset($post_data['upload_image']);
 				unset($post_data['entity_id']);
 				unset($post_data['color']);
+				if(isset($post_data['tag'])){
+					unset($post_data['tag']);
+				}
 
 				// product
 				$slug = $post_data['slug'];
@@ -328,6 +347,16 @@
 						}					
 
 						$this->productdata->insert_product_color(array("product_id" => $product_id, "color_id" => $last_id));
+					}
+				}
+
+				// delete product tag
+				$this->productdata->delete_product_tag(array("product_id" => $product_id));
+
+				// add product tag
+				if(isset($tags) && !empty($tags)){
+					foreach ($tags as $key => $value) {
+						$this->productdata->insert_product_tag(array("product_id" => $product_id, "tag_id" =>$value));
 					}
 				}
 				

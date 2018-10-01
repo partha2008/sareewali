@@ -102,6 +102,13 @@
 											</select>
 										</div>
 										<div class="form-group">
+											<label class="control-label">Tag</label>
+											<select name="tag[]" class="form-control" multiple="multiple">
+												<option value="1" <?php if(isset($product_details->tag) && in_array(1, $product_details->tag)){echo 'selected';}?>>Best Selling</option>
+												<option value="2" <?php if(isset($product_details->tag) && in_array(2, $product_details->tag)){echo 'selected';}?>>Most Popular</option>
+											</select>
+										</div>
+										<div class="form-group">
 											<label class="control-label">Out of Stock</label>
 											<label class="radio-inline">
 												<input type="radio" name="out_of_stock" value="Y" <?php if(isset($product_details->out_of_stock)){if($product_details->out_of_stock == 'Y'){echo 'checked';}}else{echo 'checked';}?> >Yes

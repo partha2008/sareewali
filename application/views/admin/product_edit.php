@@ -95,6 +95,13 @@
 											</select>
 										</div>
 										<div class="form-group">
+											<label class="control-label">Tag</label>
+											<select name="tag[]" class="form-control" multiple="multiple">
+												<option value="1" <?php if(isset($tags_sess) && !empty($tags_sess)){if(in_array("1", $tags_sess)){echo 'selected';}}elseif($this->defaultdata->in_assoc("tag_id", "1", $tags)){echo 'selected';}?> >Best Selling</option>
+												<option value="2" <?php if(isset($tags_sess) && !empty($tags_sess)){if(in_array("2", $tags_sess)){echo 'selected';}}elseif($this->defaultdata->in_assoc("tag_id", "2", $tags)){echo 'selected';}?> >Most Popular</option>
+											</select>
+										</div>
+										<div class="form-group">
 											<label class="control-label">Out of Stock</label>
 											<label class="radio-inline">
 												<input type="radio" name="out_of_stock" value="Y" <?php if(isset($product_details->out_of_stock)){if($product_details->out_of_stock == 'Y'){echo 'checked';}}else{echo 'checked';}?> >Yes

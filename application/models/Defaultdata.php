@@ -316,5 +316,18 @@ class Defaultdata extends CI_Model {
 	    $this->image_lib->resize();
 	    $this->image_lib->clear();
 	}
+
+	public function in_assoc($key, $val, $array)
+	{
+	    $return = false;
+		foreach($array as $struct) {
+		    if ($val == $struct->$key) {
+		        $return = true;
+		        break;
+		    }
+		}
+
+		return $return;
+	}
 }
 ?>
