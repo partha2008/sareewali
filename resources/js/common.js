@@ -209,8 +209,12 @@ function load_products(page, view){
         }
     })
     .done(function(data)
-    {
+    {        
         $('.ajax-load').hide();
+        if(data.trim() == ""){
+            sessionStorage.setItem("page_end", true);
+            return false;
+        }
         $("#load_products").append(data);
     })
     .fail(function(jqXHR, ajaxOptions, thrownError)
@@ -219,9 +223,10 @@ function load_products(page, view){
     });
 }
 
-function search_by_attr(elm){
+function search_by_attr(page, elm){
+    sessionStorage.setItem("page", page);
+    sessionStorage.setItem("page_end", false);
     var mode = elm.getAttribute("param");
-    var page = 0;
     $.ajax({
         url: BASEPATH+"product/load_products?page="+page+"&view="+VIEW+"&mode="+mode,
         type: "get",

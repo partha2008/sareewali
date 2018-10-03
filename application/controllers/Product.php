@@ -77,12 +77,21 @@
 			$mode = $this->input->get("mode");
 
 			if(isset($mode)){
-				if($mode == "low"){
+				$where = '';
+				if($mode == "new"){
+					$order_by = TABLE_PRODUCT.".product_id DESC";
+				}elseif($mode == "popular"){
+					$where = "AND ".TABLE_PRODUCT_TAG.".tag_id = '2'";
+					$order_by = TABLE_PRODUCT.".product_id DESC";
+				}elseif($mode == "best"){
+					$where = "AND ".TABLE_PRODUCT_TAG.".tag_id = '1'";
+					$order_by = TABLE_PRODUCT.".product_id DESC";
+				}elseif($mode == "low"){
 					$order_by = TABLE_PRODUCT.".price ASC";
 				}elseif($mode == "high"){
 					$order_by = TABLE_PRODUCT.".price DESC";
 				}				
-				$this->data['product_list'] = $this->productdata->grab_product_list_all($entity, $start, $this->perPage, $order_by);
+				$this->data['product_list'] = $this->productdata->grab_product_list_all($entity, $start, $this->perPage, $order_by, $where);
 			}else{
 				$this->data['product_list'] = $this->productdata->grab_product_list_all($entity, $start, $this->perPage);
 			}

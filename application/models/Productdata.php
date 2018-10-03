@@ -20,12 +20,13 @@ class Productdata extends CI_Model {
 		return $query->result();
 	}
 
-	public function grab_product_list_all($entity, $start, $perpage, $order_by = null){	
+	public function grab_product_list_all($entity, $start, $perpage, $order_by = null, $where=null){	
 		if(!$order_by){
-			$order_by = TABLE_PRODUCT.".date_added DESC";
+			//$order_by = TABLE_PRODUCT.".date_added DESC";
+			$order_by = "RAND()";
 		}
 
-		$sql = "SELECT ".TABLE_PRODUCT.".slug, ".TABLE_PRODUCT.".name as prd_name, ".TABLE_PRODUCT.".price, ".TABLE_PRODUCT_IMAGES.".name as prd_img_name FROM ".TABLE_PRODUCT." INNER JOIN ".TABLE_PRODUCT_IMAGES." ON ".TABLE_PRODUCT.".product_id = ".TABLE_PRODUCT_IMAGES.".product_id INNER JOIN ".TABLE_PRODUCT_ENTITY." ON ".TABLE_PRODUCT.".product_id = ".TABLE_PRODUCT_ENTITY.".product_id INNER JOIN ".TABLE_ENTITY." ON ".TABLE_PRODUCT_ENTITY.".entity_id = ".TABLE_ENTITY.".entity_id WHERE ".TABLE_PRODUCT.".status='Y' AND ".TABLE_PRODUCT_IMAGES.".status='Y' AND ".TABLE_PRODUCT_IMAGES.".is_featured='Y' AND ".TABLE_ENTITY.".slug = '".$entity."' ORDER BY ".$order_by." LIMIT ".$start.", ".$perpage;
+		$sql = "SELECT ".TABLE_PRODUCT.".slug, ".TABLE_PRODUCT.".name as prd_name, ".TABLE_PRODUCT.".price, ".TABLE_PRODUCT_IMAGES.".name as prd_img_name FROM ".TABLE_PRODUCT." INNER JOIN ".TABLE_PRODUCT_IMAGES." ON ".TABLE_PRODUCT.".product_id = ".TABLE_PRODUCT_IMAGES.".product_id INNER JOIN ".TABLE_PRODUCT_ENTITY." ON ".TABLE_PRODUCT.".product_id = ".TABLE_PRODUCT_ENTITY.".product_id INNER JOIN ".TABLE_ENTITY." ON ".TABLE_PRODUCT_ENTITY.".entity_id = ".TABLE_ENTITY.".entity_id LEFT JOIN ".TABLE_PRODUCT_TAG." ON ".TABLE_PRODUCT.".product_id = ".TABLE_PRODUCT_TAG.".product_id WHERE ".TABLE_PRODUCT.".status='Y' AND ".TABLE_PRODUCT_IMAGES.".status='Y' AND ".TABLE_PRODUCT_IMAGES.".is_featured='Y' AND ".TABLE_ENTITY.".slug = '".$entity."' ".$where." ORDER BY ".$order_by." LIMIT ".$start.", ".$perpage;
 		
 		$query = $this->db->query($sql);
 		
@@ -49,7 +50,7 @@ class Productdata extends CI_Model {
 		}
 		
 		if($like){
-			$like = "WHERE ".TABLE_PRODUCT.".name LIKE '%".$like."%' OR ".TABLE_PRODUCT.".sku LIKE '%".$like."%' OR ".TABLE_ENTITY.".name LIKE '%".$like."%' ";
+			$like = "WHERE ".TABLE_PRODUCT.".name LIKE '%".$like."%' OR ".TABLE_PRODUCT.".sku LIKE '%".$like."%' ";
 		}
 
 		$sql = "SELECT ".TABLE_PRODUCT.".slug, ".TABLE_PRODUCT.".name, (CASE WHEN ".TABLE_PRODUCT.".status = 'Y' THEN 'Active' ELSE 'Inactive' END) status, ".TABLE_PRODUCT.".sku, ".TABLE_PRODUCT.".quantity, ".TABLE_PRODUCT.".price FROM ".TABLE_PRODUCT." ".$like." ORDER BY ".TABLE_PRODUCT.".date_modified DESC".$limits;

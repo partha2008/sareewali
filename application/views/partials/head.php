@@ -32,6 +32,7 @@
 }elseif($tot_segments[1] == 'product-list'){
 ?>
 <link rel="stylesheet" href="<?php echo base_url(); ?>resources/css/CustomScrollbar.css" />
+<link rel="stylesheet" href="<?php echo base_url(); ?>resources/css/jquery-ui.css" />
 <?php
 }else{
 ?>

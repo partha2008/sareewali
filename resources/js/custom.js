@@ -264,12 +264,15 @@
 				setHeight:300,
 				theme:"dark-3"
 			});
-
-			var page = 0;
+			
+			sessionStorage.setItem("page", 0);
+			sessionStorage.setItem("page_end", false);
 			$(window).scroll(function() {
 			    if($(window).scrollTop() + $(window).height() >= $(document).height()) {
-			        page++;
-			        load_products(page, VIEW);
+			    	if(sessionStorage.getItem("page_end") === 'false'){
+			    		sessionStorage.setItem("page", parseInt(sessionStorage.getItem("page"))+1);
+				        load_products(sessionStorage.getItem("page"), VIEW);
+				    }
 			    }
 			});
 		}else{
