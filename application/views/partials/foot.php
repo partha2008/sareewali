@@ -21,7 +21,8 @@
 <script src="<?php echo base_url(); ?>resources/js/responsiveslides.min.js" type="text/javascript"></script> 
 <script src="<?php echo base_url(); ?>resources/js/CustomScrollbar.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>resources/js/jquery-ui.min.js" type="text/javascript"></script> 
-<script src="<?php echo base_url(); ?>resources/js/price_range_script.js" type="text/javascript"></script>  
+<script src="<?php echo base_url(); ?>resources/js/price_range_script.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>resources/js/jquery.lazy.min.js" type="text/javascript"></script> 
 <?php
 	}else{
 ?>

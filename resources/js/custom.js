@@ -104,7 +104,17 @@
 		me.find("a").addClass("active");
 
 		$("#changed_txt").html(selected_text);
+
+		search_by_attr(0);
 	});
+
+	 $("input:checkbox[class=filter_color]").click(function(){
+	 	if($(this).is(':checked') == true){
+	 		$(this).next().css("color", "#e4097f");
+	 	}else{
+	 		$(this).next().css("color", "#000000");
+	 	}
+	 })
 
 	$('body').on('click', function () {
 		$('.shortByDropDown').slideUp(300);
@@ -275,6 +285,10 @@
 				    }
 			    }
 			});
+
+			$(function() {
+		        $('.lazy').lazy();
+		    });
 		}else{
 	        $('#horizontalTab').easyResponsiveTabs({
 	            type: 'default', //Types: default, vertical, accordion   

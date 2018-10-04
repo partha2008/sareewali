@@ -1930,3 +1930,11 @@ position: relative;
 .contact-message-block{ width:100%; padding:0 15px; margin:0; clear:both;}
 .contact-message-block .your-message{ width:100%; padding:0; margin:0; clear:both;}
 .contact-message-block .control-label{ text-align:left;}
+
+img.lazy {    
+    height: 400px; 
+    display: block;
+    background-image: url('../images/page-fade-loader.gif');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}

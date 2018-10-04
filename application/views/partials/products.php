@@ -18,7 +18,7 @@
                 </div>-->
                 <div class="images-container">
                   <a href="<?php echo base_url('product-details/'.$list->slug);?>">
-                    <img src="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($list->prd_img_name, PATHINFO_FILENAME).'_l.'.pathinfo($list->prd_img_name, PATHINFO_EXTENSION);?>" alt="<?php echo $list->prd_name;?>">
+                    <img class="lazy" data-src="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($list->prd_img_name, PATHINFO_FILENAME).'_l.'.pathinfo($list->prd_img_name, PATHINFO_EXTENSION);?>">
                   </a>
                 </div>
               </div>

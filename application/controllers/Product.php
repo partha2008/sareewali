@@ -99,7 +99,7 @@
 
 			$where .= " AND ".TABLE_PRODUCT.".price BETWEEN ".$min_price." AND ".$max_price;
 			if($colors){
-				$where .= " AND ".TABLE_PRODUCT_COLOR.".color_id IN ('".$colors."')";
+				$where .= " AND ".TABLE_PRODUCT_COLOR.".color_id IN (".$colors.")";
 			}
 
 			$this->data['product_list'] = $this->productdata->grab_product_list_all($entity, $start, $this->perPage, $order_by, $where);

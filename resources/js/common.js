@@ -241,13 +241,13 @@ function search_by_attr(page){
     var min_price = $("#min_price").val();
     var max_price = $("#max_price").val();
     var colors = '';
-    $("input:checkbox[class=filter_color]:checked").each(function () {
+    $("input:checkbox[class=filter_color]:checked").each(function () {        
         colors += $(this).val()+',';
     });
     if(colors){
         colors = colors.replace(/,+$/,'');
     }
-
+    
     if(mode){
         var url = BASEPATH+"product/load_products?page="+page+"&view="+VIEW+"&mode="+mode+"&min_price="+min_price+"&max_price="+max_price+"&colors="+colors;
     }else{
