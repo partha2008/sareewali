@@ -75,9 +75,13 @@
 			$start = ceil($this->input->get("page") * $this->perPage);
 			$entity = $this->input->get("view");
 			$mode = $this->input->get("mode");
+			$min_price = $this->input->get("min_price");
+			$max_price = $this->input->get("max_price");
+			$colors = $this->input->get("colors");
+			$where = '';
+			$order_by = '';
 
-			if(isset($mode)){
-				$where = '';
+			if(isset($mode)){				
 				if($mode == "new"){
 					$order_by = TABLE_PRODUCT.".product_id DESC";
 				}elseif($mode == "popular"){
@@ -90,11 +94,15 @@
 					$order_by = TABLE_PRODUCT.".price ASC";
 				}elseif($mode == "high"){
 					$order_by = TABLE_PRODUCT.".price DESC";
-				}				
-				$this->data['product_list'] = $this->productdata->grab_product_list_all($entity, $start, $this->perPage, $order_by, $where);
-			}else{
-				$this->data['product_list'] = $this->productdata->grab_product_list_all($entity, $start, $this->perPage);
+				}
 			}
+
+			$where .= " AND ".TABLE_PRODUCT.".price BETWEEN ".$min_price." AND ".$max_price;
+			if($colors){
+				$where .= " AND ".TABLE_PRODUCT_COLOR.".color_id IN ('".$colors."')";
+			}
+
+			$this->data['product_list'] = $this->productdata->grab_product_list_all($entity, $start, $this->perPage, $order_by, $where);
 
 			$products = $this->load->view('partials/products', $this->data, true);		
 

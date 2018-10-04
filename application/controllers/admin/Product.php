@@ -155,7 +155,7 @@
 						}else{
 							$is_featured = 'N';
 						}
-						$this->productdata->update_product_image(array("product_image_id" => $value->product_image_id), array("product_id" => $prd_last_id, is_featured => $is_featured));
+						$this->productdata->update_product_image(array("product_image_id" => $value->product_image_id), array("product_id" => $prd_last_id, "is_featured" => $is_featured));
 					}
 				}
 
@@ -166,7 +166,7 @@
 						if(empty($colors)){
 							$last_id = $this->productdata->insert_color(array("name" => $value));
 						}else{
-							$last_id = $color[0]['color_id'];
+							$last_id = $colors[0]->color_id;
 						}					
 
 						$this->productdata->insert_product_color(array("product_id" => $prd_last_id, "color_id" => $last_id));

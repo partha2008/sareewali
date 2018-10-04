@@ -195,10 +195,20 @@ function HandleGoogleApiLibrary() {
 
 function load_products(page, view){
     var mode = $(".shortByDropDown ul li").find("a.active").attr("param");
+    var min_price = $("#min_price").val();
+    var max_price = $("#max_price").val();
+    var colors = '';
+    $("input:checkbox[class=filter_color]:checked").each(function () {
+        colors += $(this).val()+',';
+    });
+    if(colors){
+        colors = colors.replace(/,+$/,'');
+    }
+
     if(mode){
-        var url = BASEPATH+"product/load_products?page="+page+"&view="+view+"&mode="+mode;
+        var url = BASEPATH+"product/load_products?page="+page+"&view="+view+"&mode="+mode+"&min_price="+min_price+"&max_price="+max_price+"&colors="+colors;
     }else{
-        var url = BASEPATH+"product/load_products?page="+page+"&view="+view;
+        var url = BASEPATH+"product/load_products?page="+page+"&view="+view+"&min_price="+min_price+"&max_price="+max_price+"&colors="+colors;
     }
     $.ajax({
         url: url,
@@ -223,12 +233,29 @@ function load_products(page, view){
     });
 }
 
-function search_by_attr(page, elm){
+function search_by_attr(page){
     sessionStorage.setItem("page", page);
     sessionStorage.setItem("page_end", false);
-    var mode = elm.getAttribute("param");
+
+    var mode = $(".shortByDropDown ul li").find("a.active").attr("param");    
+    var min_price = $("#min_price").val();
+    var max_price = $("#max_price").val();
+    var colors = '';
+    $("input:checkbox[class=filter_color]:checked").each(function () {
+        colors += $(this).val()+',';
+    });
+    if(colors){
+        colors = colors.replace(/,+$/,'');
+    }
+
+    if(mode){
+        var url = BASEPATH+"product/load_products?page="+page+"&view="+VIEW+"&mode="+mode+"&min_price="+min_price+"&max_price="+max_price+"&colors="+colors;
+    }else{
+        var url = BASEPATH+"product/load_products?page="+page+"&view="+VIEW+"&min_price="+min_price+"&max_price="+max_price+"&colors="+colors;
+    }
+
     $.ajax({
-        url: BASEPATH+"product/load_products?page="+page+"&view="+VIEW+"&mode="+mode,
+        url: url,
         type: "get",
         beforeSend: function()
         {

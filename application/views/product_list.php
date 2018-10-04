@@ -27,11 +27,11 @@
                 <div class="shortByBox"><span id="changed_txt">Trending</span>
                   <div class="shortByDropDown">
                     <ul>
-                      <li><a href="javascript:void(0);" param="new" onclick="search_by_attr(0, this);">Newest</a></li>
-                      <li><a href="javascript:void(0);" param="popular" onclick="search_by_attr(0, this);">Most popular</a></li>
-                      <li><a href="javascript:void(0);" param="best" onclick="search_by_attr(0, this);">Best Selling</a></li>
-                      <li><a href="javascript:void(0);" param="high" onclick="search_by_attr(0, this);">Price High To Low</a></li>
-                      <li><a href="javascript:void(0);" param="low" onclick="search_by_attr(0, this);">Price Low To High</a></li>
+                      <li><a href="javascript:void(0);" param="new" onclick="search_by_attr(0);">Newest</a></li>
+                      <li><a href="javascript:void(0);" param="popular" onclick="search_by_attr(0);">Most popular</a></li>
+                      <li><a href="javascript:void(0);" param="best" onclick="search_by_attr(0);">Best Selling</a></li>
+                      <li><a href="javascript:void(0);" param="high" onclick="search_by_attr(0);">Price High To Low</a></li>
+                      <li><a href="javascript:void(0);" param="low" onclick="search_by_attr(0);">Price Low To High</a></li>
                     </ul>
                   </div>
                 </div>
