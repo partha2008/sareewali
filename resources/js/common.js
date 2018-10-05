@@ -226,6 +226,7 @@ function load_products(page, view){
             return false;
         }
         $("#load_products").append(data);
+        $(".lazy").unveil(300);
     })
     .fail(function(jqXHR, ajaxOptions, thrownError)
     {
@@ -266,9 +267,14 @@ function search_by_attr(page){
     {
         $('#loading').hide();
         $("#load_products").html(data);
+        $(".lazy").unveil(300);
     })
     .fail(function(jqXHR, ajaxOptions, thrownError)
     {
           alert('server not responding...');
     });
+}
+
+function load_unveil(){
+    $(".lazy").unveil(300);
 }

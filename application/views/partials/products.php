@@ -1,8 +1,3 @@
-          <script>
-            $(function() {
-                $(".lazy").unveil(300);
-            });
-          </script>
           <?php
             if(!empty($product_list)){
               foreach ($product_list as $list) {
