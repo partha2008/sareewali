@@ -1,3 +1,8 @@
+          <script>
+            $(function() {
+                $(".lazy").unveil(300);
+            });
+          </script>
           <?php
             if(!empty($product_list)){
               foreach ($product_list as $list) {
@@ -23,7 +28,7 @@
                 ?>
                 <div class="images-container">
                   <a href="<?php echo base_url('product-details/'.$list->slug);?>">
-                    <img class="lazy" data-src="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($list->prd_img_name, PATHINFO_FILENAME).'_l.'.pathinfo($list->prd_img_name, PATHINFO_EXTENSION);?>">
+                    <img class="lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($list->prd_img_name, PATHINFO_FILENAME).'_l.'.pathinfo($list->prd_img_name, PATHINFO_EXTENSION);?>" data-src-retina="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($list->prd_img_name, PATHINFO_FILENAME).'_l.'.pathinfo($list->prd_img_name, PATHINFO_EXTENSION);?>">
                   </a>
                 </div>
               </div>

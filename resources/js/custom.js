@@ -287,7 +287,7 @@
 			});
 
 			$(function() {
-		        $('.lazy').lazy();
+		        $(".lazy").unveil(300);
 		    });
 		}else{
 	        $('#horizontalTab').easyResponsiveTabs({

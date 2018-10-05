@@ -1932,9 +1932,10 @@ position: relative;
 .contact-message-block .control-label{ text-align:left;}
 
 img.lazy {    
-    height: 400px; 
-    display: block;
-    background-image: url('../images/page-fade-loader.gif');
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
+    max-width: 100%;
+    min-width: 48px;
+    min-height: 48px; 
+    display: inline-block;
+    background: #f5eef2 url('../images/ezgif.com-resize.gif') no-repeat center;
+    background-size: 80px;
 }
