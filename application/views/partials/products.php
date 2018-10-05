@@ -12,10 +12,15 @@
                   </a> 
                 </div>
                 <div class="productDetailsBtn"><a href="<?php echo base_url('product-details/'.$list->slug);?>" title="">View Details</a></div>
-
-                <!--<div class="new-off">
+                <?php
+                  if($list->is_new == "YES"){
+                ?>
+                <div class="new-off">
                   <div class="new-percent">New</div>
-                </div>-->
+                </div>
+                <?php
+                  }
+                ?>
                 <div class="images-container">
                   <a href="<?php echo base_url('product-details/'.$list->slug);?>">
                     <img class="lazy" data-src="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($list->prd_img_name, PATHINFO_FILENAME).'_l.'.pathinfo($list->prd_img_name, PATHINFO_EXTENSION);?>">
