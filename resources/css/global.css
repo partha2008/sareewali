@@ -1934,7 +1934,7 @@ position: relative;
 img.lazy {    
     max-width: 100%;
     min-width: 48px;
-    min-height: 48px; 
+    min-height: 100%; 
     display: inline-block;
     background: #f5eef2 url('../images/ezgif.com-resize.gif') no-repeat center;
     background-size: 80px;
