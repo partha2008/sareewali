@@ -109,6 +109,7 @@
 				if(isset($post_data['tag'])){
 					unset($post_data['tag']);
 				}
+				unset($post_data['rad']);
 
 				// product
 				$post_data['slug'] = $this->defaultdata->slugify($post_data['name']);
@@ -285,6 +286,7 @@
 				if(isset($post_data['tag'])){
 					unset($post_data['tag']);
 				}
+				unset($post_data['rad']);
 
 				// product
 				$slug = $post_data['slug'];
@@ -329,8 +331,17 @@
 				$images = $this->productdata->grab_product_image(array("product_id" => "0", "admin_id" => $this->session->userdata('usrid')));
 				if(!empty($images)){
 					foreach ($images as $key => $value) {
+						if($key == 0){
+							$selected_product_image_id = $value->product_image_id;
+						}
 						$this->productdata->update_product_image(array("product_image_id" => $value->product_image_id), array("product_id" => $product_id));
 					}
+				}
+
+				$images = $this->productdata->grab_product_image(array("product_id" => $product_id, "admin_id" => $this->session->userdata('usrid'), "is_featured" => "Y"));
+
+				if(empty($images)){
+					$this->productdata->update_product_image(array("product_image_id" => $selected_product_image_id), array("is_featured" => "Y"));
 				}
 
 				// delete product color
@@ -418,12 +429,28 @@
 					$data[$key]['name'] = $value->name;
 					$data[$key]['uuid'] = $value->uuid;
 					$data[$key]['thumbnailUrl'] = ROOT_URL.$value->path;
+					$data[$key]['product_image_id'] = $value->product_image_id;
+					$data[$key]['is_featured'] = $value->is_featured;
+					$data[$key]['product_id'] = $value->product_id;
 				}
 			}else{
 				$data = array();
 			}
 
 			echo json_encode($data);
+		}
+
+		public function make_product_image_featured(){
+			$post_data = $this->input->post();
+			if($this->productdata->update_product_image(array("product_id" => $post_data['product_id']), array("is_featured" => "N"))){
+				if($this->productdata->update_product_image(array("product_image_id" => $post_data['val']), array("is_featured" => "Y"))){
+					echo "success";
+				}else{
+					echo "failure";
+				}
+			}else{
+				echo "failure";
+			}
 		}
 
 		public function delete_thumb($path, $marker){
@@ -454,6 +481,8 @@
 					}
 				}
 			}
+
+			return true;
 		}
 
 		public function delete_product_images($uuid){
@@ -461,6 +490,25 @@
 			$images = $this->productdata->grab_product_image(array("uuid" => $uuid, "admin_id" => $this->session->userdata('usrid')));
 			
 			if($this->remove_images($images)){
+				// update product image is_featured
+				$counter = 0;
+				$images = $this->productdata->grab_product_image(array("product_id" => $images[0]->product_id, "admin_id" => $this->session->userdata('usrid')));
+				if(!empty($images)){					
+					foreach ($images as $key => $value) {
+						if($key == 0){
+							$product_image_id = $value->product_image_id;
+						}
+						if($value->is_featured != "Y"){
+							$counter++;
+						}						
+					}
+				}
+				if($counter > 0){
+					$this->productdata->update_product_image(array("product_image_id" => $product_image_id), array("is_featured" => "Y"));
+					$response['product_image_id'] = $product_image_id;
+				}else{
+					$response['product_image_id'] = '';
+				}				
 				$response['success'] = true;
 
 				echo json_encode($response);

@@ -106,6 +106,27 @@
                 },
                 onSubmitted: function(id, name){
                     $.post(BASEPATH+'admin/product/unlink_product_image');
+                },
+                onSessionRequestComplete: function(response, flag){
+                    if(flag){
+                        if(response.length > 0){
+                            for(var i=0;i<response.length;i++){
+                                if(response[i].is_featured == "Y"){
+                                    $(document).find("#fine-uploader-manual-trigger ul li").eq(i).css("border", "2px solid #d43f3a").find("input:radio").prop('checked', true);
+                                }
+                                $(document).find("#fine-uploader-manual-trigger ul li").eq(i).find("input:radio").val(response[i].product_image_id).attr("product_id", response[i].product_id);
+                            }
+                        }
+                    }
+                },                
+                onDeleteComplete: function(id, xhr, isError){
+                    if(!isError){
+                        var response = JSON.parse(xhr.responseText);
+                        var product_image_id = response.product_image_id;
+                        if(product_image_id){
+                            $(document).find("#fine-uploader-manual-trigger ul li").find("input:radio[value='"+product_image_id+"']").closest("li").css("border", "2px solid #d43f3a").find("input:radio").prop('checked', true);
+                        }                        
+                    }
                 }
             },
             session: {
@@ -116,6 +137,17 @@
                 forceConfirm: true,
                 endpoint: BASEPATH+"admin/product/delete_product_images"
             }
+        });
+
+        $(document).on("click", ".feature_cls", function(){
+            var me = $(this);
+
+            $.post(BASEPATH+"admin/product/make_product_image_featured", {val: me.val(), product_id: me.attr("product_id")}, function(res){
+                if(res.trim() == "success"){
+                    $(document).find("#fine-uploader-manual-trigger ul li").css("border", "none").prop('checked', false);
+                    me.closest("li").css("border", "2px solid #d43f3a");
+                }                
+            });
         });
 
         $('#trigger-upload').click(function() {
