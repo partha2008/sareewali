@@ -289,58 +289,25 @@
 			$(function() {
 		        $(".lazy").unveil(300);
 		    });
-		}else{
-	        $('#horizontalTab').easyResponsiveTabs({
-	            type: 'default', //Types: default, vertical, accordion   
-	            width: 'auto', //auto or any width like 600px
-	            fit: true,   // 100% fit in a container
-	            closed: 'accordion', // Start closed if in accordion view
-	            activate: function(event) { // Callback function if tab is switched
-	                var $tab = $(this);
-	                var $info = $('#tabInfo');
-	                var $name = $('span', $info);
-	                $name.text($tab.text());
-	                $info.show();
-	            }
-	        });
+		}else if(PAGENAME == 'product-details'){
+			$('#notetabs a').tabs();
 
-	        $('#verticalTab').easyResponsiveTabs({
-	            type: 'vertical',
-	            width: 'auto',
-	            fit: true
-	        });
-
-	        $('.pInstructions').hide();
-    
-		    //ZOOM
-		    $("#girlstop1").glassCase({
-		        'widthDisplay': 435,
-		        'heightDisplay': 520,
-		        'isSlowZoom': true,
-		        'isSlowLens': true,
-		        'capZType': 'in',
-		        'thumbsPosition': 'left',
-		        'isHoverShowThumbs': true,
-		        'colorIcons': '#b5b4b4',
-		        'colorActiveThumb': '#b5b4b4',
-		        'slideType': 'slideElement',
-		        nrThumbsPerRow: 3,
-		        'mouseEnterDisplayCB': function() {
-		            $('.pInstructions').text('Click to open expanded view');
-		        },
-		        'mouseLeaveDisplayCB': function() {
-		            $('.pInstructions').text('Roll over image to zoom in');
-		        }
+			$('.offerbtn').click(function()
+		    {
+		        $('.prodoffer .offerdetail').toggleClass('show_me');
 		    });
 
-		    setTimeout(function() {
-		        $('.pInstructions').css({
-		            'width': $('.gc-display-area').outerWidth(),
-		            'left': parseFloat($('.gc-display-area').css('left'))
-		        });
-		        $('.pInstructions').fadeIn();
-		    }, 1000);
+		    $('.offerdetail .closebtn').click(function()
+		    {
+		        $('.prodoffer .offerdetail').toggleClass('show_me');
+		    });
 
+		     $('.pintitle').click(function()
+		    {
+		        $('.pintitle').toggleClass('show_me');
+		        $('.pincode').slideToggle(500);
+		    });
+		}else{
 		    $('#btnFeatures').on('click', function() {
 		        $('html, body').animate({
 		            scrollTop: $('.tc-all-features').offset().top - 50 + 'px'

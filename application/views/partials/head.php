@@ -25,7 +25,7 @@
 <?php
 	if($tot_segments[1] == 'product-details'){
 ?>
-<link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resources/css/easy-responsive-tabs.css" />
+<link rel="stylesheet" href="<?php echo base_url(); ?>resources/css/stylesheet.css" />
 <link rel="stylesheet" href="<?php echo base_url(); ?>resources/css/zoom.css" />
 <link rel="stylesheet" href="<?php echo base_url(); ?>resources/css/magiczoomplus.css" />
 <?php

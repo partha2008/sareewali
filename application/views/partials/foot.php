@@ -11,8 +11,7 @@
 	if($tot_segments[1] == 'product-details'){
 ?>
 <script src="<?php echo base_url(); ?>resources/js/modernizr.custom.js" type="text/javascript"></script> 
-<script src="<?php echo base_url(); ?>resources/js/easyResponsiveTabs.js" type="text/javascript"></script> 
-<script src="<?php echo base_url(); ?>resources/js/jquery.glasscase.minf195.js?v=2.1"></script>
+<script src="<?php echo base_url(); ?>resources/js/tabs.js" type="text/javascript"></script> 
 <script src="<?php echo base_url(); ?>resources/js/magiczoomplus.js"></script>
 <?php
 	}elseif($tot_segments[1] == 'product-list'){
