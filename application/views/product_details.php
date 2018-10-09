@@ -26,70 +26,27 @@
         <!---image--->
         
         <div class="app-figure" id="zoom-fig">
-        <a id="Zoom-1" class="MagicZoom" title="Show your product in stunning detail with Magic Zoom Plus."
-            href="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-1-z.jpg"
-        >
-            <img src="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-1-z.jpg?scale.height=400" alt=""/>
-        </a>
-        <div class="selectors">
-           <a
-                data-zoom-id="Zoom-1"
-                href="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-1-z.jpg"
-                data-image="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-1-z.jpg?scale.height=400"
-            >
-                <img srcset="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-1-z.jpg?scale.width=112 2x" src="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-1-z.jpg?scale.width=56"/>
-            </a>
-           <a
-                data-zoom-id="Zoom-1"
-                href="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-5-z.jpg"
-                data-image="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-5-z.jpg?scale.height=400"
-            >
-                <img srcset="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-5-z.jpg?scale.width=112 2x" src="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-5-z.jpg?scale.width=56"/>
-            </a>
-           <a
-                data-zoom-id="Zoom-1"
-                href="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-6-z.jpg"
-                data-image="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-6-z.jpg?scale.height=400"
-            >
-                <img srcset="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-6-z.jpg?scale.width=112 2x" src="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-6-z.jpg?scale.width=56"/>
-            </a>
-           <a
-                data-zoom-id="Zoom-1"
-                href="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-7-z.jpg"
-                data-image="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-7-z.jpg?scale.height=400"
-            >
-                <img srcset="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-7-z.jpg?scale.width=112 2x" src="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-7-z.jpg?scale.width=56"/>
-            </a>
-           <a
-                data-zoom-id="Zoom-1"
-                href="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-8-z.jpg"
-                data-image="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-8-z.jpg?scale.height=400"
-            >
-                <img srcset="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-8-z.jpg?scale.width=112 2x" src="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-8-z.jpg?scale.width=56"/>
-            </a>
-           <a
-                data-zoom-id="Zoom-1"
-                href="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-2-z.jpg"
-                data-image="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-2-z.jpg?scale.height=400"
-            >
-                <img srcset="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-2-z.jpg?scale.width=112 2x" src="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-2-z.jpg?scale.width=56"/>
-            </a>
-           <a
-                data-zoom-id="Zoom-1"
-                href="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-3-z.jpg"
-                data-image="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-3-z.jpg?scale.height=400"
-            >
-                <img srcset="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-3-z.jpg?scale.width=112 2x" src="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-3-z.jpg?scale.width=56"/>
-            </a>
-           <a
-                data-zoom-id="Zoom-1"
-                href="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-4-z.jpg"
-                data-image="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-4-z.jpg?scale.height=400"
-            >
-                <img srcset="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-4-z.jpg?scale.width=112 2x" src="https://magictoolbox.sirv.com/images/magiczoomplus/jeans-4-z.jpg?scale.width=56"/>
-            </a>
-        </div>
-    </div>
+          <a id="Zoom-1" class="MagicZoom" title="<?php echo $product->name;?>"
+              href="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($product_image[1]->name, PATHINFO_FILENAME).'_xl.'.pathinfo($product_image[0]->name, PATHINFO_EXTENSION);?>"
+          >
+              <img src="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($product_image[1]->name, PATHINFO_FILENAME).'_xl.'.pathinfo($product_image[1]->name, PATHINFO_EXTENSION);?>" alt=""/>
+          </a>
+          <div class="selectors" style="margin-top:2px;">
+            <?php
+              foreach ($product_image as $value) {                
+            ?>
+             <a
+                  data-zoom-id="Zoom-1"
+                  href="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($value->name, PATHINFO_FILENAME).'_xl.'.pathinfo($value->name, PATHINFO_EXTENSION);?>"
+                  data-image="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($value->name, PATHINFO_FILENAME).'_xl.'.pathinfo($value->name, PATHINFO_EXTENSION);?>"
+              >
+                  <img style="width:56px;" src="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($value->name, PATHINFO_FILENAME).'_s.'.pathinfo($value->name, PATHINFO_EXTENSION);?>"/>
+              </a>
+            <?php
+              }
+            ?>
+          </div>
+      </div>
       
         
         <!---image--[end]---> 
@@ -98,13 +55,13 @@
       <div class="product_information">
         <div class="product_column details_boxC">
           <div class="clearall"></div>
-          <h1><span>Red And Beige Color Silk And Lycra Saree</span></h1>
-          <div class="model_block"> SKU : <span>7547 </span></div>
+          <h1><span><?php echo $product->name;?></span></h1>
+          <div class="model_block"> SKU : <span><?php echo $product->sku;?> </span></div>
           <div class="time_to_ship"> Availability: Ship in <span> 2 Days </span> </div>
           <div class="stichnote">Stitching will take 4 to 5 working days extra (if required). </div>
           <div class="price">
             <div class="pricetitle"> Price : </div>
-            <span class="price-new updated-price"><span class="WebRupee">Rs</span>2,699.00</span> <br>
+            <span class="price-new updated-price"><span class="WebRupee">Rs </span><?php echo $product->price;?></span> <br>
           </div>
           <div class="clearall"></div>
           <div class="me_size_block"> <a href="#how_to_measure_tbl" title="How To Measure" class="inline_auto_measure chart cboxElement"> <i class="fa fa-crop"></i> How To Measure</a> <a href="#size_chart_tbl" title="Size Chart" class="inline_auto chart cboxElement"> <i class="fa fa-bar-chart"></i> Size Chart</a> </div>
@@ -267,13 +224,11 @@
               </label>
             </div>
           </div>
-          <!------------------------------------------------------- -->
+          
           <div class="more_details right">
             <h3>Product Highlights</h3>
             <div class="description comment more show-read-more">
-              <p> The fabulous pattern makes this saree from Aasvaa Fashion a classy number to be included in your wardrobe. Red and beige color silk fabrics and net work and lycra pattern saree. Ideal for party, festivesocial gatherings. this gorgeous saree featuring a beautiful mix of designs. Its attractive color and designer floral design, stone work over the attirecontrast hemline adds to the look. Comes along with a contrast unstitched blouse.</p>
-              <p>&nbsp; </p>
-              <p> "</p>
+              <p><?php echo $product->description;?></p>
             </div>
           </div>
           <div class="share_buttons">
