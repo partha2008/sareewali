@@ -346,7 +346,7 @@ a:focus{outline:none;text-decoration:none;}
 
 /* -- Navigation Start -- */
 
-.menu-container {float:left; width:87%;}
+.menu-container {float:left; width:64%;}
 
 .menu-mobile {display: none; padding: 20px;}
 
@@ -408,7 +408,7 @@ a:focus{outline:none;text-decoration:none;}
 
 .menu > ul > li > ul.normal-sub > li a {border: 0; padding: 8px 0;}
 
-.menu-right{float:right; padding:25px 0; text-align:right; text-transform:uppercase; width:12%}
+.menu-right{float:right; padding:25px 0; text-align:right; text-transform:uppercase; width:36%}
 
 
 
@@ -460,7 +460,7 @@ a:focus{outline:none;text-decoration:none;}
 
 .menu-right .search i{color:#231f20;transition:all 0.3s ease 0s;}
 
-.form-box{position:absolute;top:-12px;right:0px;background: #fff;padding: 12px 10px;z-index:4;box-shadow:0 3px 4px rgba(0, 0, 0, 0.2);width:360px;display: block !important;
+.form-box{position:absolute;top:-12px;right:0px;background: #fff;padding: 12px 10px;z-index:4;box-shadow:0 3px 4px rgba(0, 0, 0, 0.2);width:240px;display: block !important;
 display: block !important; transition: inherit !important;height: auto !important;}
 
 .form-box input[type="search"]{width:100%;border:1px solid #f1f1f1;padding:12px 54px 12px 10px;float:left;text-align:left;font-family: 'MontserratLight';}
