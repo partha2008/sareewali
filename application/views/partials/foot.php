@@ -1,5 +1,8 @@
 <!-- jquery latest version --> 
-<script src="<?php echo base_url(); ?>resources/js/jquery-1.12.0.min.js"></script> 
+<script src="<?php echo base_url(); ?>resources/js/jquery-1.12.0.min.js"></script>
+
+<!-- jQuery autocomplete -->
+<script src="<?php echo base_url(); ?>resources/js/jquery.autocomplete.min.js"></script>
 
 <!-- bootstrap --> 
 <script src="<?php echo base_url(); ?>resources/js/bootstrap.min.js"></script> 

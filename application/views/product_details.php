@@ -27,9 +27,9 @@
         
         <div class="app-figure" id="zoom-fig">
           <a id="Zoom-1" class="MagicZoom" title="<?php echo $product->name;?>"
-              href="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($product_image[1]->name, PATHINFO_FILENAME).'_xl.'.pathinfo($product_image[0]->name, PATHINFO_EXTENSION);?>"
+              href="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($product_image[0]->name, PATHINFO_FILENAME).'_xl.'.pathinfo($product_image[0]->name, PATHINFO_EXTENSION);?>"
           >
-              <img src="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($product_image[1]->name, PATHINFO_FILENAME).'_xl.'.pathinfo($product_image[1]->name, PATHINFO_EXTENSION);?>" alt=""/>
+              <img src="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($product_image[0]->name, PATHINFO_FILENAME).'_xl.'.pathinfo($product_image[0]->name, PATHINFO_EXTENSION);?>" alt=""/>
           </a>
           <div class="selectors" style="margin-top:2px;">
             <?php

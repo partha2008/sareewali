@@ -108,5 +108,36 @@
 
 			echo $products;
 		}
+
+		public function get_global_search(){
+			$keyword = $this->input->get("query");
+
+			$response = array();
+			$response1 = array();
+
+			$entity_data = $this->entitydata->grab_entity(array("status" => "Y", "parent_id !=" => "0"), array("name" => $keyword));
+			
+			if(!empty($entity_data)){
+				foreach ($entity_data as $key => $value) {
+					$response[$key]['value'] = $value->name;
+					$response[$key]['data'] = base_url("product-list/".$value->slug);
+				}
+
+			}
+
+			$product_data = $this->productdata->grab_product(array("status" => "Y"), array("name" => $keyword));
+
+			if(!empty($product_data)){
+				foreach ($product_data as $key => $value) {
+					$response1[$key]['value'] = $value->name;
+					$response1[$key]['data'] = base_url("product-details/".$value->slug);
+				}
+
+			}
+
+			$res['suggestions'] = array_merge($response, $response1);
+
+			echo json_encode($res);
+		}
 	}
 ?>

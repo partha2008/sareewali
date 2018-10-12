@@ -148,6 +148,16 @@ $(document).ready(function() {
             }
         );
     });
+
+    $('#keyword').autocomplete({
+        serviceUrl: BASEPATH+"product/get_global_search",
+        onSelect: function(suggestion) {
+            $("#srch-btn").attr("onclick", "window.location.href='"+suggestion.data+"'");
+        },
+        onHint: function (hint) {
+            $('#autocomplete-ajax-x').val(hint);
+        }
+    });
 });
 
 function openModal(mode){

@@ -151,19 +151,22 @@
 
           </div>
 
-          <div class="menu-right"> <span class="search"><a href="javascript:void(0)"><i class="fa fa-search" aria-hidden="true"></i></a>
+          <div class="menu-right"> 
 
-            <ul class="form-box">
+            <span class="search">
+              <a href="javascript:void(0)"><i class="fa fa-search" aria-hidden="true"></i></a>
+
+            <div class="form-box">
 
               <form name="frmSearch" id="frmSearch" method="get" action="" class="form-controls">
 
-                <input type="search" name="keyword" id="keyword" placeholder="type your search">
-
-                <button value="submit" type="submit"><i class="fa fa-search"></i></button>
+                <input type="search" name="keyword" id="keyword" placeholder="type your search" value="">
+                <input type="text" name="country" id="autocomplete-ajax-x" disabled="disabled"/>
+                <button value="submit" type="button" id="srch-btn"><i class="fa fa-search"></i></button>
 
               </form>
 
-            </ul>
+            </div>
 
             </span> <span class="offer"><a href="products.html">Offers</a></span> </div>
 
