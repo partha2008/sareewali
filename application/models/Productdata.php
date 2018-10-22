@@ -54,6 +54,27 @@ class Productdata extends CI_Model {
 		return $query->result();
 	}
 
+	public function grab_parent_entity($child){
+		$sql = "SELECT T2.entity_id, T2.name, T2.slug
+				FROM (
+				    SELECT
+				        @r AS _id,
+				        (SELECT @r := parent_id FROM ".TABLE_ENTITY." WHERE entity_id = _id) AS parent_id,
+				        @l := @l + 1 AS lvl
+				    FROM
+				        (SELECT @r := ".$child.", @l := 0) vars,
+				        ".TABLE_ENTITY." h
+				    WHERE @r <> 0) T1
+				JOIN ".TABLE_ENTITY." T2
+				ON T1._id = T2.entity_id
+				WHERE T2.parent_id != 0
+				ORDER BY T1.lvl DESC";
+
+				$query = $this->db->query($sql);
+		
+				return $query->result();
+	}
+
 	public function grab_product_list(){	
 		$sql = "SELECT ".TABLE_PRODUCT.".slug, ".TABLE_PRODUCT.".name as prd_name, ".TABLE_PRODUCT.".price, ".TABLE_PRODUCT_IMAGES.".name as prd_img_name FROM ".TABLE_PRODUCT." INNER JOIN ".TABLE_PRODUCT_IMAGES." ON ".TABLE_PRODUCT.".product_id = ".TABLE_PRODUCT_IMAGES.".product_id INNER JOIN ".TABLE_PRODUCT_ENTITY." ON ".TABLE_PRODUCT.".product_id = ".TABLE_PRODUCT_ENTITY.".product_id INNER JOIN ".TABLE_ENTITY." ON ".TABLE_PRODUCT_ENTITY.".entity_id = ".TABLE_ENTITY.".entity_id WHERE ".TABLE_PRODUCT.".status='Y' AND ".TABLE_PRODUCT_IMAGES.".status='Y' AND ".TABLE_PRODUCT_IMAGES.".is_featured='Y' AND ".TABLE_ENTITY.".name = 'New' ORDER BY RAND() DESC LIMIT 0, 10";
 		

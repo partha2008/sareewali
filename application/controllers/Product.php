@@ -23,6 +23,7 @@
 			$product = $this->productdata->grab_product(array("slug" => $slug));
 			$product_image = $this->productdata->grab_product_image(array("status" => "Y", "product_id" => $product[0]->product_id));
 			$product_attr = $this->productdata->grab_product_attribute(array("product_id" => $product[0]->product_id));
+			$random_entity_id = $this->entitydata->grab_random_product_entity(array("product_id" => $product[0]->product_id), array(1,1));
 
 			$this->data['product'] = $product[0];
 			$this->data['product_image'] = $product_image;
@@ -30,13 +31,15 @@
 
 			$this->load->library('breadcrumb');
 			$this->breadcrumb->add('Home', base_url());
-			$this->breadcrumb->add($product[0]->name, base_url('changepassword')); 
+			$parent_entity = $this->productdata->grab_parent_entity($random_entity_id[0]->entity_id);
+			if(!empty($parent_entity)){
+				foreach ($parent_entity as $key => $value) {
+					$this->breadcrumb->add($value->name, base_url('product-list/'.$value->slug)); 
+				}
+			}
+			$this->breadcrumb->add($product[0]->name, base_url()); 
 
 			$this->data['breadcrumb'] = $this->breadcrumb->output();
-
-			/*echo "<pre>";
-			print_r($product_image);
-			die();*/
 
 			$this->load->view('product_details', $this->data); 
 		}

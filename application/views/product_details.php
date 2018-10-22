@@ -285,12 +285,15 @@
           <!--   <div class="moretitle">More Options</div> 
  <a href="#reviews_box" title="Write a Review" class="reviews_inline"><i class="fa fa-commenting-o" aria-hidden="true"></i> Write a Review</a> --> 
           
-          <a onclick="addToWishList('7547');" title="Add to Wish List" class="add_to_wishlist"> <i class="fa fa-heart-o" aria-hidden="true"></i> Add to Wishlist</a> <a href="#tab-inquire" class="inquire_now inline_inquire cboxElement" title="Inquire for 7547"> <i class="fa fa-envelope-o" aria-hidden="true"></i> Inquire Now </a> </span>
+          <a onclick="addToWishList('7547');" title="Add to Wish List" class="add_to_wishlist"> <i class="fa fa-heart-o" aria-hidden="true"></i> Add to Wishlist</a> <!--<a href="#tab-inquire" class="inquire_now inline_inquire cboxElement" title="Inquire for 7547"> <i class="fa fa-envelope-o" aria-hidden="true"></i> Inquire Now </a>--> </span>
           <div class="clearall"></div>
           <div class="order_by_phone">
             <div class="ortitle"> Place Order By Phone / Whatsapp : </div>
-            <span class="callord"> <i class="fa fa-phone"></i> +91-9624660066</span> <span class="whatsa"><a href="https://api.whatsapp.com/send?phone=919624660066&amp;text=Hey! I m interested in Red And Beige Color Silk And Lycra Saree and Product SKU : 7547"><i class="fa fa-whatsapp"></i> Connect on Whatsapp </a></span> </div>
-          <div class="clearall"></div>
+            <span class="callord"> <i class="fa fa-phone"></i> <?php echo $admin_profile->contact_no;?></span> 
+            <!--<span class="whatsa"><a href="https://api.whatsapp.com/send?phone=919624660066&amp;text=Hey! I m interested in Red And Beige Color Silk And Lycra Saree and Product SKU : 7547"><i class="fa fa-whatsapp"></i> Connect on Whatsapp </a></span> 
+            -->
+          </div>
+          <!--<div class="clearall"></div>
           <div class="sharebutton">
             <div class="addthis_inline_share_toolbox_tipl" data-url="https://www.aasvaa.com/red-and-beige-color-silk-and-lycra-saree-7547" data-title="Red And Beige Color Silk And Lycra Saree" data-description="The fabulous pattern makes this saree from Aasvaa Fashion a classy number to be included in your wardrobe. Red and beige color silk fabrics and net work and lycra pattern saree. Ideal for party, festi..." style="clear: both;">
               <div id="atstbx" class="at-resp-share-element at-style-responsive addthis-smartlayers addthis-animated at4-show" aria-labelledby="at-2761f4a0-89b6-45c2-907a-1a927e30f66c" role="region"><span id="at-2761f4a0-89b6-45c2-907a-1a927e30f66c" class="at4-visually-hidden">AddThis Sharing Buttons</span>
@@ -326,9 +329,9 @@
               </div>
             </div>
             <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b712169df9eee01"></script> 
-          </div>
+          </div>-->
         </div>
-        <div class="prodoffer">
+        <!--<div class="prodoffer">
           <div class="offerdetail">
             <div id="offertext">
               <div class="offers_list">
@@ -344,7 +347,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
       </div>
       <div class="clearall"></div>
       <div id="tab-inquire" class="tab-content prodinq" style="display:none;">
