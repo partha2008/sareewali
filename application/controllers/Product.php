@@ -37,7 +37,15 @@
 					$this->breadcrumb->add($value->name, base_url('product-list/'.$value->slug)); 
 				}
 			}
-			$this->breadcrumb->add($product[0]->name, base_url()); 
+			$this->breadcrumb->add($product[0]->name, base_url());
+
+			$best_selling_entity = $parent_entity[count($parent_entity)-1]->slug;
+
+			$whr = "AND ".TABLE_PRODUCT_ENTITY.".product_id != ".$product[0]->product_id;
+			$whr .= " AND ".TABLE_PRODUCT_TAG.".tag_id = 1";
+			$best_selling_products = $this->productdata->grab_product_list_all($best_selling_entity, 0, 10, null, $whr);
+
+			$this->data['best_selling_products'] = $best_selling_products;
 
 			$this->data['breadcrumb'] = $this->breadcrumb->output();
 

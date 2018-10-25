@@ -26,7 +26,7 @@ class Productdata extends CI_Model {
 			$order_by = "RAND()";
 		}
 
-		$sql = "SELECT ".TABLE_PRODUCT.".slug, ".TABLE_PRODUCT.".name as prd_name, ".TABLE_PRODUCT.".price, ".TABLE_PRODUCT_IMAGES.".name as prd_img_name,"
+		$sql = "SELECT  ".TABLE_PRODUCT.".product_id, ".TABLE_PRODUCT.".slug, ".TABLE_PRODUCT.".name as prd_name, ".TABLE_PRODUCT.".price, ".TABLE_PRODUCT_IMAGES.".name as prd_img_name,"
 			."(CASE WHEN ".TABLE_PRODUCT.".product_id IN (
 				SELECT ".TABLE_PRODUCT.".product_id from ".TABLE_PRODUCT."
 				INNER JOIN ".TABLE_PRODUCT_ENTITY." ON ".TABLE_PRODUCT.".product_id = ".TABLE_PRODUCT_ENTITY.".product_id 
