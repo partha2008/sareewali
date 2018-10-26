@@ -817,20 +817,26 @@
       </div>
       <div class="row">
         <div id="more-collections" class="owl-carousel">
-
+          <?php
+            if(!empty($more_products)){
+              foreach ($more_products as $key => $value) {
+          ?>
           <div class="item">
             <div class="item-inner">
-              <div class="productIconBox"> <a href="javascript:void(0)" onclick="add_cart('311')" data-toggle="tooltip" data-placement="left" title="Add To Cart" ><i aria-hidden="true" class="fa fa-shopping-cart"></i></a> <a href="javascript:void(0)" onclick="add_wishlist('311')" data-toggle="tooltip" data-placement="left" title="Add To Wishlist" ><i aria-hidden="true" class="fa fa-heart-o"></i></a> </div>
-              <div class="images-container"><a href=""><img src="" alt=""></a></div>
-              <div class="productDetailsBtn"><a href="" title="">View Details</a></div>
+              <div class="productIconBox"> <a href="javascript:void(0)" onclick="add_cart('')" data-toggle="tooltip" data-placement="left" title="Add To Cart" ><i aria-hidden="true" class="fa fa-shopping-cart"></i></a> <a href="javascript:void(0)" onclick="add_wishlist('')" data-toggle="tooltip" data-placement="left" title="Add To Wishlist" ><i aria-hidden="true" class="fa fa-heart-o"></i></a> </div>
+              <div class="images-container"><a href="<?php echo base_url('product-details/'.$value->slug);?>"><img src="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($value->prd_img_name, PATHINFO_FILENAME).'_l.'.pathinfo($value->prd_img_name, PATHINFO_EXTENSION);?>" alt="<?php echo $value->prd_name;?>"></a></div>
+              <div class="productDetailsBtn"><a href="<?php echo base_url('product-details/'.$value->slug);?>" title="<?php echo $value->prd_name;?>">View Details</a></div>
             </div>
             <div class="des-container">
-              <div class="name"><a href="">40060 Kids Gown</a></div>
-              <div class="price"> <span><i class="fa fa-inr"></i> 4,000</span> </div>
-              <div class="productDetailsBtn"><a href="" title="">View Details</a></div>
+              <div class="name"><a href="<?php echo base_url('product-details/'.$value->slug);?>"><?php echo $value->prd_name;?></a></div>
+              <div class="price"> <span><i class="fa fa-inr"></i> <?php echo $value->price;?></span> </div>
+              <div class="productDetailsBtn"><a href="<?php echo base_url('product-details/'.$value->slug);?>" title="<?php echo $value->prd_name;?>">View Details</a></div>
             </div>
           </div>
-
+          <?php
+              }
+            }
+          ?>
         </div>
       </div>
     </div>
@@ -850,13 +856,13 @@
           <div class="item">
             <div class="item-inner">
               <div class="productIconBox"> <a href="javascript:void(0)" onclick="add_cart('')" data-toggle="tooltip" data-placement="left" title="Add To Cart" ><i aria-hidden="true" class="fa fa-shopping-cart"></i></a> <a href="javascript:void(0)" onclick="add_wishlist('')" data-toggle="tooltip" data-placement="left" title="Add To Wishlist" ><i aria-hidden="true" class="fa fa-heart-o"></i></a> </div>
-              <div class="images-container"><a href="#"><img src="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($value->prd_img_name, PATHINFO_FILENAME).'_l.'.pathinfo($value->prd_img_name, PATHINFO_EXTENSION);?>" alt="<?php echo $value->prd_name;?>"></a></div>
-              <div class="productDetailsBtn"><a href="<?php echo base_url('product-details/'.$value->slug);?>" title="">View Details</a></div>
+              <div class="images-container"><a href="<?php echo base_url('product-details/'.$value->slug);?>"><img src="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($value->prd_img_name, PATHINFO_FILENAME).'_l.'.pathinfo($value->prd_img_name, PATHINFO_EXTENSION);?>" alt="<?php echo $value->prd_name;?>"></a></div>
+              <div class="productDetailsBtn"><a href="<?php echo base_url('product-details/'.$value->slug);?>" title="<?php echo $value->prd_name;?>">View Details</a></div>
             </div>
             <div class="des-container">
-              <div class="name"><a href="#"><?php echo $value->prd_name;?></a></div>
+              <div class="name"><a href="<?php echo base_url('product-details/'.$value->slug);?>"><?php echo $value->prd_name;?></a></div>
               <div class="price"> <span><i class="fa fa-inr"></i> <?php echo $value->price;?></span> </div>
-              <div class="productDetailsBtn"><a href="<?php echo base_url('product-details/'.$value->slug);?>" title="">View Details</a></div>
+              <div class="productDetailsBtn"><a href="<?php echo base_url('product-details/'.$value->slug);?>" title="<?php echo $value->prd_name;?>">View Details</a></div>
             </div>
           </div>
           <?php

@@ -42,6 +42,9 @@
 			$best_selling_entity = $parent_entity[count($parent_entity)-1]->slug;
 
 			$whr = "AND ".TABLE_PRODUCT_ENTITY.".product_id != ".$product[0]->product_id;
+			$more_products = $this->productdata->grab_product_list_all($best_selling_entity, 0, 10, null, $whr);
+			$this->data['more_products'] = $more_products;
+			
 			$whr .= " AND ".TABLE_PRODUCT_TAG.".tag_id = 1";
 			$best_selling_products = $this->productdata->grab_product_list_all($best_selling_entity, 0, 10, null, $whr);
 
