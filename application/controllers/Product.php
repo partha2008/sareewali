@@ -29,7 +29,7 @@
 			$prd_color = '';
 			if(!empty($product_color)){
 				foreach ($product_color as $key => $value) {
-					$prd_color .= $value->name.',';
+					$prd_color .= ucfirst($value->name).',';
 				}
 			}
 
