@@ -24,10 +24,19 @@
 			$product_image = $this->productdata->grab_product_image(array("status" => "Y", "product_id" => $product[0]->product_id));
 			$product_attr = $this->productdata->grab_product_attribute(array("product_id" => $product[0]->product_id));
 			$random_entity_id = $this->entitydata->grab_random_product_entity(array("product_id" => $product[0]->product_id), array(1,1));
+			$product_color = $this->productdata->grab_product_color_rel(array(TABLE_PRODUCT.".product_id" => $product[0]->product_id));
+
+			$prd_color = '';
+			if(!empty($product_color)){
+				foreach ($product_color as $key => $value) {
+					$prd_color .= $value->name.',';
+				}
+			}
 
 			$this->data['product'] = $product[0];
 			$this->data['product_image'] = $product_image;
 			$this->data['product_attr'] = $product_attr;
+			$this->data['product_color'] = rtrim($prd_color, ',');
 
 			$this->load->library('breadcrumb');
 			$this->breadcrumb->add('Home', base_url());

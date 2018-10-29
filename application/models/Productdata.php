@@ -305,6 +305,18 @@ class Productdata extends CI_Model {
 		return $query->result();
 	}
 
+	public function grab_product_color_rel($cond = array()){	
+		$this->db->select(TABLE_COLOR.'.name')
+         ->from(TABLE_PRODUCT_COLOR)
+         ->join(TABLE_COLOR, TABLE_PRODUCT_COLOR.'.color_id = '.TABLE_COLOR.'.color_id')
+         ->join(TABLE_PRODUCT, TABLE_PRODUCT_COLOR.'.product_id = '.TABLE_PRODUCT.'.product_id')
+         ->where($cond);
+		
+		$query = $this->db->get();
+		
+		return $query->result();
+	}
+
 	public function insert_product_color($data = array()){
 
 		$this->db->insert(TABLE_PRODUCT_COLOR, $data); 
