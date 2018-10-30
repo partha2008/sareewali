@@ -70,6 +70,23 @@
 												<textarea name="review" class="form-control" placeholder="Enter Review"><?php echo (isset($review_data->review) && $review_data->review) ? $review_data->review : '';?></textarea>
 											</div>
 											<div class="form-group">
+												<label class="control-label">Product <span style="color:#a94442;">*</span></label>
+												<select name="product_id" class="form-control">
+													<option value="">Select Product</option>
+													<?php
+														if(!empty($product_data)){
+															foreach ($product_data as $key => $value) {
+																if($review_data->product_id == $value->product_id){
+																	echo '<option selected value="'.$value->product_id.'">'.$value->name.'</option>';
+																}else{
+																	echo '<option value="'.$value->product_id.'">'.$value->name.'</option>';
+																}		
+															}
+														}
+													?>
+												</select>
+											</div>
+											<div class="form-group">
 												<label class="control-label">Status</label>
 												<label class="radio-inline">
 													<input type="radio" name="status" value="Y" <?php if(isset($review_data->status)){if($review_data->status == 'Y'){echo 'checked';}}else{echo 'checked';}?>>Active

@@ -9,6 +9,7 @@ class Review extends CI_Controller{
 		parent::__construct();
 		
 		$this->load->model('reviewdata');
+		$this->load->model('productdata');
 			
 		$this->data = $this->defaultdata->getBackendDefaultData();
 		
@@ -62,6 +63,9 @@ class Review extends CI_Controller{
 		$state_data = $this->defaultdata->grabStateData(array("country_id" => 101));
 		$this->data['state_data'] = $state_data;
 
+		$product_data = $this->productdata->grab_product();
+		$this->data['product_data'] = $product_data;
+
 		$this->load->view('admin/review_add', $this->data); 
 	}
 	
@@ -75,6 +79,7 @@ class Review extends CI_Controller{
 		$this->form_validation->set_rules('phone', 'Phone', 'trim|required');
 		$this->form_validation->set_rules('state_id', 'State', 'trim|required');
 		$this->form_validation->set_rules('review', 'Review', 'trim|required');	
+		$this->form_validation->set_rules('product_id', 'Product', 'trim|required');	
 		
 		$this->session->unset_userdata($post_data);
 		if($this->form_validation->run() == FALSE)
@@ -104,6 +109,9 @@ class Review extends CI_Controller{
 
 		$state_data = $this->defaultdata->grabStateData(array("country_id" => 101));
 		$this->data['state_data'] = $state_data;
+
+		$product_data = $this->productdata->grab_product();
+		$this->data['product_data'] = $product_data;
 		
 		$this->load->view('admin/review_edit', $this->data); 
 	}
@@ -118,6 +126,7 @@ class Review extends CI_Controller{
 		$this->form_validation->set_rules('phone', 'Phone', 'trim|required');
 		$this->form_validation->set_rules('state_id', 'State', 'trim|required');
 		$this->form_validation->set_rules('review', 'Review', 'trim|required');	
+		$this->form_validation->set_rules('product_id', 'Product', 'trim|required');	
 		
 		$this->session->unset_userdata($post_data);
 		if($this->form_validation->run() == FALSE)
