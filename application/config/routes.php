@@ -92,6 +92,10 @@ $route['admin/banner-list'] = 'admin/banner/banner_list';
 $route['admin/banner-add'] = 'admin/banner/banner_add';
 $route['admin/banner-edit/(:num)'] = 'admin/banner/banner_edit/$1';
 
+$route['admin/review-list'] = 'admin/review/review_list';
+$route['admin/review-add'] = 'admin/review/review_add';
+$route['admin/review-edit/(:num)'] = 'admin/review/review_edit/$1';
+
 $route['admin/user-list'] = 'admin/user/user_list';
 $route['admin/user-add'] = 'admin/user/user_add';
 $route['admin/user-edit/(:num)'] = 'admin/user/user_edit/$1';

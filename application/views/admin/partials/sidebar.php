@@ -82,6 +82,17 @@
 					</ul>
 				</li>
 				<li>
+					<a href="#"><i class="fa fa-pencil"></i> Review Management<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li>
+							<a href="<?php echo base_url('admin/review-list');?>"><i class="fa fa-th-list fa-fw"></i> Review List</a>
+						</li>
+						<li>
+							<a href="<?php echo base_url('admin/review-add');?>"><i class="fa fa-plus fa-fw"></i> Add Review</a>
+						</li>
+					</ul>
+				</li>
+				<li>
 					<a href="#"><i class="fa fa-th fa-fw"></i> Content Management<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li>
