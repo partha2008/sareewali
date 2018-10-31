@@ -158,6 +158,31 @@ $(document).ready(function() {
             $('#autocomplete-ajax-x').val(hint);
         }
     });
+
+    $("#review_frm").submit(function(e){
+        var me = $(this);
+
+        $.ajax({
+            url: BASEPATH + "product/add_review",
+            type: 'post',
+            dataType: 'json',
+            data: me.serialize(),
+            crossDomain: true,
+            success: function(response) {
+                $('#review_frm .error').hide();
+                $('#review_frm .success').hide();
+                if (!response.success) {
+                    $('#review_frm .error').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert">&times;</a>' + response.msg + '</div>');
+                    $('#review_frm .error').show();
+                } else {
+                    $('#review_frm .error').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert">&times;</a>' + response.msg + '</div>');
+                    $('#review_frm .error').show();
+                }
+            },
+        });
+        return false;
+    });
+
 });
 
 function openModal(mode){

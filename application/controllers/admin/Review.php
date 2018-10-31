@@ -79,7 +79,8 @@ class Review extends CI_Controller{
 		$this->form_validation->set_rules('phone', 'Phone', 'trim|required');
 		$this->form_validation->set_rules('state_id', 'State', 'trim|required');
 		$this->form_validation->set_rules('review', 'Review', 'trim|required');	
-		$this->form_validation->set_rules('product_id', 'Product', 'trim|required');	
+		$this->form_validation->set_rules('product_id', 'Product', 'trim|required');
+		$this->form_validation->set_rules('rating', 'Rating', 'trim|required');	
 		
 		$this->session->unset_userdata($post_data);
 		if($this->form_validation->run() == FALSE)
@@ -126,7 +127,8 @@ class Review extends CI_Controller{
 		$this->form_validation->set_rules('phone', 'Phone', 'trim|required');
 		$this->form_validation->set_rules('state_id', 'State', 'trim|required');
 		$this->form_validation->set_rules('review', 'Review', 'trim|required');	
-		$this->form_validation->set_rules('product_id', 'Product', 'trim|required');	
+		$this->form_validation->set_rules('product_id', 'Product', 'trim|required');
+		$this->form_validation->set_rules('rating', 'Rating', 'trim|required');	
 		
 		$this->session->unset_userdata($post_data);
 		if($this->form_validation->run() == FALSE)

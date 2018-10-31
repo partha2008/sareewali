@@ -87,6 +87,17 @@
 												</select>
 											</div>
 											<div class="form-group">
+												<label class="control-label">Rating <span style="color:#a94442;">*</span></label>
+												<select name="rating" class="form-control">
+													<option value="">Select Rating</option>
+													<option value="1" <?php if($review_data->rating == 1){echo 'selected';}?>>1</option>
+													<option value="2" <?php if($review_data->rating == 2){echo 'selected';}?>>2</option>
+													<option value="3" <?php if($review_data->rating == 3){echo 'selected';}?>>3</option>
+													<option value="4" <?php if($review_data->rating == 4){echo 'selected';}?>>4</option>
+													<option value="5" <?php if($review_data->rating == 5){echo 'selected';}?>>5</option>
+												</select>
+											</div>
+											<div class="form-group">
 												<label class="control-label">Status</label>
 												<label class="radio-inline">
 													<input type="radio" name="status" value="Y" <?php if(isset($review_data->status)){if($review_data->status == 'Y'){echo 'checked';}}else{echo 'checked';}?>>Active

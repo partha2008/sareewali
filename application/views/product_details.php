@@ -58,10 +58,11 @@
           <h1><span><?php echo $product->name;?></span></h1>
           <div class="model_block"> SKU : <span><?php echo $product->sku;?> </span></div>
           <div class="time_to_ship"> Availability: Ship in <span> 2 Days </span> </div>
-          <div class="stichnote">Stitching will take 4 to 5 working days extra (if required). </div>
+          <!--<div class="stichnote">Stitching will take 4 to 5 working days extra (if required). </div>-->
           <div class="price">
             <div class="pricetitle"> Price : </div>
-            <span class="price-new updated-price"><span class="WebRupee">Rs </span><?php echo $product->price;?></span> <br>
+            <span class="old-price"><strike><i class="fa fa-inr"></i>8,700</strike></span>
+            <span class="price-new updated-price"><i class="fa fa-inr"></i><?php echo $product->price;?></span> <br>
           </div>
           <!--<div class="clearall"></div>
           <div class="me_size_block"> <a data-toggle="modal" data-target="#how_to_measure_tbl" href="javascript:void(0);" title="How To Measure" class="inline_auto_measure chart cboxElement"> <i class="fa fa-crop"></i> How To Measure</a> <a data-toggle="modal" data-target="#size_chart_tbl" href="javascript:void(0);" title="Size Chart" class="inline_auto chart cboxElement"> <i class="fa fa-bar-chart"></i> Size Chart</a> </div>-->
@@ -389,26 +390,25 @@
                 </div>
                 <div id="tab-notes" class="tab-content" style="display: none;">
                   <ul>
-                    <li> <span style="font-family:georgia,serif;"><span style="font-size:12px;">The first wash of the garment should always be Dry-Cleaned.</span></span></li>
-                  </ul>
-                  <ul>
-                    <li> <span style="font-family:georgia,serif;"><span style="font-size:12px;">The shades may vary slightly from the colors displayed on your screen.</span></span></li>
-                  </ul>
-                  <ul>
-                    <li> <span style="font-family:georgia,serif;"><span style="font-size:12px;">There might be slight color variation due to lightings &amp; flash while photo shoot.</span></span></li>
-                  </ul>
-                  <ul>
-                    <li> <span style="font-family:georgia,serif;"><span style="font-size:12px;">The bright shade seen is the best closer view of fabric's color</span></span></li>
+                    <li><span>The first wash of the garment should always be Dry-Cleaned.</span></li>
+                    <li> <span>The shades may vary slightly from the colors displayed on your screen.</span></li>
+                    <li> <span>There might be slight color variation due to lightings &amp; flash while photo shoot.</span></li>
+                    <li> <span>The bright shade seen is the best closer view of fabric's color</span></li>
                   </ul>
                 </div>
+                
+                
                 <div id="tab-shipping_policy_tab" class="tab-content" style="display: none;">
-                  <div style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> <u><span style="font-size:14px;"><span style="font-family:georgia,serif;"><strong>Shipping Outside India / International</strong></span></span></u></div>
+                
+                
+                  <div><strong>Shipping Outside India / International</strong></div>
+                  
                   <ul>
-                    <li style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> <span style="font-family:georgia,serif;"><span style="font-size:12px;"><strong>Shipping Time</strong></span></span></li>
+                    <li><strong>Shipping Time</strong></li>
                   </ul>
-                  <div style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> <span style="font-size:12px;"><span style="font-family:arial,helvetica,sans-serif;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; #&nbsp;</strong>05 - 10 Business days for Un-Stitched product.</span></span></div>
+                  <div>05 - 10 Business days for Un-Stitched product.</div>
                   <div style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> &nbsp;</div>
-                  <div style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> <span style="font-size:12px;"><span style="font-family:arial,helvetica,sans-serif;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # </strong>04 - 05&nbsp;</span></span><span style="font-family: arial, helvetica, sans-serif;">Extra</span><span style="font-family: arial, helvetica, sans-serif;">&nbsp;Business days for Custom Stitched product.</span></div>
+                  <div><span style="font-family:arial,helvetica,sans-serif;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # </strong>04 - 05&nbsp;</span></span><span style="font-family: arial, helvetica, sans-serif;">Extra</span><span style="font-family: arial, helvetica, sans-serif;">&nbsp;Business days for Custom Stitched product.</span></div>
                   <ul>
                     <li style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> <span style="font-family:georgia,serif;"><span style="font-size:12px;"><strong>Shipping Cost</strong></span></span></li>
                   </ul>
@@ -423,7 +423,23 @@
                   <div style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> <span style="font-size:12px;"><span style="font-family:arial,helvetica,sans-serif;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; #&nbsp;</strong>Free Shipping all Location in India.</span></span></div>
                   <div style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> &nbsp;</div>
                   <p style="margin-top: 0px; margin-bottom: 20px; color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> <strong style="font-family: georgia, serif;">Tip - Shipping cost decreases when you buy more than two products. Buy more, Save more!</strong></p>
+                  
+                  
+                  
+                  
+                  
+                  
                 </div>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
                 <div id="tab-payment_policy_tab" class="tab-content" style="display: none;">
                   <p style="margin-top: 0px; margin-bottom: 20px; color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> <span style="font-size:12px;"><strong style="font-family: georgia, serif;">You can choose from any of the following modes to make payment for your purchases on&nbsp;<a href="https://www.aasvaa.com/" style="text-decoration-line: none; color: rgb(51, 51, 51); cursor: pointer;">aasvaa.com</a></strong></span></p>
                   <ul style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;">
@@ -473,10 +489,59 @@
                     <!--     <div class="title">Reviews</div>-->
                     <div id="">
                       <div id="review">
-                        <div class="content">There are no reviews for this product.</div>
+                        <?php
+                          if(empty($reviews)){
+                            echo '<div class="content">There are no reviews for this product.</div>';
+                          }else{
+                        ?>
+                        <!----review-Comment-------->
+                        <div class="card">
+                            <div class="card-body">
+                              <?php
+                                foreach ($reviews as $key => $value) {
+                              ?> 
+                              <div class="card card-inner">
+                                  <div class="card-body">
+                                      <div class="row">
+                                          <div class="col-sm-1">
+                                              <img src="https://www.sareewali.com/resources/images/def_face.jpg" class="img img-rounded img-fluid"/>
+                                          </div>
+                                          <div class="col-sm-10">
+                                              <p><a href="#"><strong><?php echo $value->reviewer;?></strong></a>
+                                              	<span class="text-secondary date-block"><?php echo $this->defaultdata->time_elapsed_string('@'.$value->date_added);?></span>
+                                              </p>                                               
+                                              <p><?php echo $value->review;?></p>
+                                              <!--<p>
+                                                  <a class="float-right btn btn-outline-primary ml-2">  <i class="fa fa-reply"></i> Reply</a>
+                                                  <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+                                              </p>-->
+                                              <p class="rating">
+                                                <?php
+                                                  for($i=1;$i<6;$i++){
+                                                    if($i <= $value->rating){
+                                                      echo '<span class="fa fa-star checked"></span>';
+                                                    }else{
+                                                      echo '<span class="fa fa-star"></span>';
+                                                    } 
+                                                  }
+                                                ?>
+                                              </p>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <?php
+                                }
+                              ?>   
+                            </div>
+                        </div>
+    					         <!----review-Comment----[end]---->
+                        <?php
+                          }
+                        ?>    
                       </div>
                     </div>
-                    <a data-toggle="modal" data-target="#reviews_box" href="javascript:void(0);" title="Write a Review" class="reviews_inline button cboxElement">Write a Review</a> </div>
+                    <a data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#reviews_box" href="javascript:void(0);" title="Write a Review" class="reviews_inline button cboxElement">Write a Review</a> </div>
                   <!--  </div> --> 
                 </div>
               </div>
@@ -619,51 +684,62 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-                    <div id="tab-review">
-                      <div id="review-title"></div>
-                      <div id="review_write_box">
-                        <table>
-                          <tbody>
-                            <tr>
-                              <td><input type="text" name="name" value="" placeholder="Name:"></td>
-                              <td><input type="text" name="email" value="" placeholder="Email Address:"></td>
-                            </tr>
-                            <tr>
-                              <td><input type="text" name="phone" value="" placeholder="Phone"></td>
-                              <td>
-                                <select name="country" class="span4fordrop">
-                                  <option value="">Country</option>                                  
-                                </select>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td colspan="2"><textarea name="text" cols="40" rows="5" style="width: 95%;" placeholder="Review:"></textarea>
-                                <span style="font-size: 11px;"><span style="color: #FF0000;">Note:</span> HTML is not translated!</span><br>
-                                <br>
-                                <b>Rating:</b> <span>Bad</span>&nbsp;
-                                <input type="radio" name="rating" value="1">
-                                &nbsp;
-                                <input type="radio" name="rating" value="2">
-                                &nbsp;
-                                <input type="radio" name="rating" value="3">
-                                &nbsp;
-                                <input type="radio" name="rating" value="4">
-                                &nbsp;
-                                <input type="radio" name="rating" value="5">
-                                &nbsp; <span>Good</span> <br>
-                                
-                                <br>
-                                <div class="g-recaptcha" data-sitekey="6LcQeXcUAAAAAPcz5GT8d8lUhMgn5iFyILhuhWuV"></div>
-                                <br>
-                                <br>
-                                <div class="buttons">
-                                  <div class="left"><a id="button-review" class="button">Continue</a></div>
-                                </div></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
+          <div id="tab-review">
+            <div id="review-title"></div>
+            <div id="review_write_box">
+              <form id="review_frm">
+                <div class="error" style="display:none;"></div>
+                <div class="success" style="display:none;"></div>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td><input type="text" name="reviewer" value="" placeholder="Name:"></td>
+                      <td><input type="text" name="email" value="" placeholder="Email Address:"></td>
+                    </tr>
+                    <tr>
+                      <td><input type="text" name="phone" value="" placeholder="Phone"></td>
+                      <td>
+                        <select name="state_id" class="span4fordrop">
+                          <option value="">State</option>
+                          <?php
+                            if(!empty($state_data)){
+                              foreach ($state_data as $key => $value) {
+                                echo '<option value="'.$value->state_id.'">'.$value->name.'</option>';
+                              }
+                            }
+                          ?>                                  
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><textarea name="review" cols="40" rows="5" style="width: 97%;" placeholder="Review:"></textarea>
+                        <span style="font-size: 11px;"><span style="color: #FF0000;">Note:</span> HTML is not translated!</span><br>
+                        <br>
+                        <b>Rating:</b> <span>Bad</span>&nbsp;
+                        <input type="radio" name="rating" value="1">
+                        &nbsp;
+                        <input type="radio" name="rating" value="2">
+                        &nbsp;
+                        <input type="radio" name="rating" value="3">
+                        &nbsp;
+                        <input type="radio" name="rating" value="4">
+                        &nbsp;
+                        <input type="radio" name="rating" value="5">
+                        &nbsp; <span>Good</span> <br>
+                        
+                        <br>
+                        <div class="g-recaptcha" data-sitekey="6LcQeXcUAAAAAPcz5GT8d8lUhMgn5iFyILhuhWuV"></div>
+                        <br>
+                        <br>
+                        <div class="buttons">
+                          <div class="left"><button type="submit" id="button-review" class="button">Continue</button></div>
+                        </div></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
       
@@ -672,4 +748,3 @@
       
 <?php echo $footer; ?>
 <?php echo $foot; ?>
-

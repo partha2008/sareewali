@@ -15,6 +15,7 @@
 			$this->load->model('userdata');
 			$this->load->model('productdata');
 			$this->load->model('adsdata');
+			$this->load->model('reviewdata');
 
 			$this->data = $this->defaultdata->getFrontendDefaultData();
 		}
@@ -58,6 +59,12 @@
 			$best_selling_products = $this->productdata->grab_product_list_all($best_selling_entity, 0, 10, null, $whr);
 
 			$this->data['best_selling_products'] = $best_selling_products;
+
+			$reviews = $this->reviewdata->grab_review(array("status" => "Y"));
+			$this->data['reviews'] = $reviews;
+
+			$state_data = $this->defaultdata->grabStateData(array("country_id" => 101));
+			$this->data['state_data'] = $state_data;
 
 			$this->data['breadcrumb'] = $this->breadcrumb->output();
 
@@ -161,6 +168,35 @@
 			$res['suggestions'] = array_merge($response, $response1);
 
 			echo json_encode($res);
+		}
+
+		public function add_review(){
+			$post_data = $this->input->post();
+
+			$this->load->library('form_validation');
+
+			$this->form_validation->set_rules('reviewer', 'Name', 'trim|required');
+			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+			$this->form_validation->set_rules('phone', 'Phone', 'trim|required');
+			$this->form_validation->set_rules('state_id', 'State', 'trim|required');
+			$this->form_validation->set_rules('review', 'Review', 'trim|required');
+			$this->form_validation->set_rules('rating', 'Rating', 'trim|required');
+			$this->form_validation->set_rules('g-recaptcha-response', 'Rating', 'trim|required', array('required' => 'Captcha is Invalid'));
+
+			if($this->form_validation->run() == FALSE)
+			{					
+				$response['success'] = false;
+				$response['msg'] = validation_errors();
+			}else{
+				$post_data['date_added'] = time();
+
+				if($this->reviewdata->insert_review($post_data)){			
+					$response['success'] = true;
+					$response['msg'] = "Thank you for your valuable comments. It will be published after admin approval.";
+				}
+			}
+
+			echo json_encode($response);
 		}
 	}
 ?>
