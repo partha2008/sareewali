@@ -734,6 +734,7 @@
                         <div class="buttons">
                           <div class="left"><button type="submit" id="button-review" class="button">Continue</button></div>
                         </div></td>
+                        <input type="hidden" name="product_id" value="<?php echo $product->product_id;?>">
                     </tr>
                   </tbody>
                 </table>

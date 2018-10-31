@@ -189,7 +189,8 @@
 				$response['msg'] = validation_errors();
 			}else{
 				$post_data['date_added'] = time();
-
+                unset($post_data['g-recaptcha-response']);
+                
 				if($this->reviewdata->insert_review($post_data)){			
 					$response['success'] = true;
 					$response['msg'] = "Thank you for your valuable comments. It will be published after admin approval.";
