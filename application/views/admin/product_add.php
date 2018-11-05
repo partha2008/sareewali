@@ -64,6 +64,24 @@
 											<label class="control-label">Label Price <span style="color:#a94442;">*</span></label>
 											<input class="form-control" type="text" name="price" value="<?php echo (isset($product_details->price) && $product_details->price) ? $product_details->price : '';?>">
 										</div>
+										<div class="form-inline">
+											<div class="checkbox">
+											    <label><input type="checkbox" id="prd_dic_chk"> Discount</label>
+											</div>
+										    <div class="form-group">
+										    	<select class="form-control" id="prd_dis_mode">
+										    		<option value="flat">Flat</option>
+										    		<option value="per">Percentage</option>
+										    	</select>
+										    </div>
+										  <div class="form-group">
+										    <input type="text" class="form-control" placeholder="Enter Amount" id="prd_dis_amt">
+										  </div>
+										  <button type="button" class="btn btn-primary" id="prd_dis_btn">Submit</button>										  
+										 <div class="form-group">
+										    <input type="text" class="form-control" placeholder="Discounted Price" readonly>
+										  </div>
+										</div>
 										<div class="form-group">
 											<label class="control-label">Quantity <span style="color:#a94442;">*</span></label>
 											<input class="form-control" type="number" name="quantity" min="1" value="<?php echo (isset($product_details->quantity) && $product_details->quantity) ? $product_details->quantity : '';?>">

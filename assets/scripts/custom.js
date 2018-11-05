@@ -184,4 +184,19 @@
         $(".js-example-tags").select2({
             tags: true
         });
+
+        $("#prd_dis_btn").click(function(){
+            if($("#prd_dic_chk").is(':checked')){ 
+                var prd_dis_amt = $("#prd_dis_amt").val();  
+                if(prd_dis_amt){
+                    var mode = $("#prd_dis_mode option:selected").val();
+                    if(mode == "flat"){
+
+                    }else{
+
+                    }
+                }                
+            }
+        });
+
     });

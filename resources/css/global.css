@@ -819,7 +819,7 @@ a:focus{outline:none;text-decoration:none;}
 
 
 
-.menu-right{float:right; padding:25px 0; text-align:right; text-transform:uppercase; width:36%}
+.menu-right{float:right; padding:25px 0; text-align:right; text-transform:uppercase; width: 12%;}
 
 
 
@@ -913,45 +913,23 @@ a:focus{outline:none;text-decoration:none;}
 
 /* -- Search Box Css Start -- */
 
-
-
 .menu-right .search{position:relative;}
-
-
 
 .menu-right .search i{color:#231f20;transition:all 0.3s ease 0s;}
 
+.form-box{position:absolute;top: 48px;right: -11px;background: #fff;padding: 12px 10px;z-index:4;box-shadow:0 3px 4px rgba(0, 0, 0, 0.2);width:360px;display:none;}
 
-
-.form-box{position:absolute;top:-12px;right:0px;background: #fff;padding: 12px 10px;z-index:4;box-shadow:0 3px 4px rgba(0, 0, 0, 0.2);width:240px;display: block !important;
-
-display: block !important; transition: inherit !important;height: auto !important;}
-
-
-
-.form-box input[type="search"]{width:100%;border:1px solid #f1f1f1;padding:12px 54px 12px 10px;float:left;text-align:left;font-family: 'MontserratRegular'; height:48px;}
-
-
+.form-box input[type="search"]{width:100%;border:1px solid #f1f1f1;padding:12px 54px 12px 10px;float:left;text-align:left;font-family: 'MontserratRegular'; height:auto;}
 
 .form-box button{background:none;border:medium none;color:#087fe0;float:right;font-size:18px;padding:13px 0;position:absolute;right:0;text-align:center;text-transform:uppercase;width:17%;outline:none;}
 
-
-
 .form-box button:hover i{color:#e4097f !important;}
-
-
 
 .form-box input[type="search"]:focus, .search-form .form-box input[type="submit"]:focus{outline:none;bopx-shaddow:none;}
 
-
-
 .form-box input[type="submit"]:focus, .search-form .form-box input[type="submit"]:hover{background:#207FCD;color:#fff;}
 
-
-
 /* -- Search Box Css End -- */
-
-
 
 
 
@@ -3931,9 +3909,6 @@ img.lazy {
 
 
 
-.search .form-box{padding: 0;}
-
-#frmSearch input {border: 1px solid #e9e8e8;}
 
 #autocomplete-ajax-x{ display: none; color: #CCC; position: absolute; background: transparent; z-index: 1;}
 
@@ -3957,3 +3932,6 @@ font-family: 'MontserratRegular';}
 .rating .checked {
     color: orange;
 }
+.prorightcart .out-of-stock_button{background-color:#666; color: #fff;display: block;font-size: 16px;font-weight: 400;
+height: auto;margin-right: 0px;line-height: 32px;margin-top: 0px;border-radius: 3px;padding: 4px 50px;
+text-align: center;transition: all 0.3s linear 0s;text-transform: uppercase; margin:10px 0;}

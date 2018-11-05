@@ -64,6 +64,7 @@
             <span class="old-price"><strike><i class="fa fa-inr"></i>8,700</strike></span>
             <span class="price-new updated-price"><i class="fa fa-inr"></i><?php echo $product->price;?></span> <br>
           </div>
+          <p><span>Availability :</span> Out of Stock</p>
           <!--<div class="clearall"></div>
           <div class="me_size_block"> <a data-toggle="modal" data-target="#how_to_measure_tbl" href="javascript:void(0);" title="How To Measure" class="inline_auto_measure chart cboxElement"> <i class="fa fa-crop"></i> How To Measure</a> <a data-toggle="modal" data-target="#size_chart_tbl" href="javascript:void(0);" title="Size Chart" class="inline_auto chart cboxElement"> <i class="fa fa-bar-chart"></i> Size Chart</a> </div>-->
         </div>
@@ -248,6 +249,9 @@
           </div>
           <div class="clearall"></div>
           <input type="hidden" name="product_id" size="2" value="7547">
+          <?php
+            if($product->out_of_stock == 'N'){
+          ?>
           <div class="addtocartbuttonholder"> 
             <!--// Change for New Measurement--> 
             <a class="add_to_cart_button  quick_cart" onclick="validateLoginRequireField(0);" title="Login" href="javascript:void('0');">
@@ -255,7 +259,14 @@
             </a> 
             <!--// ------------------> 
           </div>
-          <a onclick="QuickBuyNow('7547');" title="Buy Now" class="button quick_buy_button ">Buy Now</a> 
+          <a onclick="QuickBuyNow('');" title="Buy Now" class="button quick_buy_button ">Buy Now</a> 
+          <?php
+            }else{
+          ?>
+          <span class="button out-of-stock_button">out of stock</span> 
+          <?php
+            }
+          ?>
           <!-- <div class="paysecure"></div> --> 
           <span class="add_links"> 
           <!--   <div class="moretitle">More Options</div> 
@@ -263,6 +274,20 @@
           
           <a onclick="addToWishList('7547');" title="Add to Wish List" class="add_to_wishlist"> <i class="fa fa-heart-o" aria-hidden="true"></i> Add to Wishlist</a> <!--<a href="#tab-inquire" class="inquire_now inline_inquire cboxElement" title="Inquire for 7547"> <i class="fa fa-envelope-o" aria-hidden="true"></i> Inquire Now </a>--> </span>
           <div class="clearall"></div>
+          
+          <div class="clearfix"></div>
+            <div class="codBox"> <span>Check COD available</span>
+              <div id="pin-panel">
+                <div class="errors"></div>
+                <div class="successs"></div>
+              </div>
+              <input id="pin_code" name="pin_code" type="text" placeholder="Enter Pincode">
+              <button id="btn-pin" onClick="return available_post_code($('#pin_code').val())">Check</button>
+            </div>
+            <div class="clearfix"></div>
+
+
+          
           <div class="order_by_phone">
             <div class="ortitle"> Place Order By Phone / Whatsapp : </div>
             <span class="callord"> <i class="fa fa-phone"></i> <?php echo $admin_profile->contact_no;?></span> 
