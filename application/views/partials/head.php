@@ -10,9 +10,9 @@
 
 <title><?php echo $general_settings->sitename;?></title>
 
-<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="<?php echo base_url(); ?>/favicon.ico" type="image/x-icon">
 
-<link rel="icon" href="./favicon.ico" type="image/x-icon">
+<link rel="icon" href="<?php echo base_url(); ?>/favicon.ico" type="image/x-icon">
 
 <link href="<?php echo base_url(); ?>resources/css/font-awesome.min.css" rel="stylesheet">
 
