@@ -26,6 +26,7 @@
 						$this->session->unset_userdata('has_error');
 						$this->session->unset_userdata('productedit_notification');
 						$this->session->unset_userdata('color');
+						$this->session->unset_userdata('prd_dic_chk');
 					?>
 					<div class="panel panel-default">
 						<div class="panel-body">
@@ -62,7 +63,25 @@
 										</div>
 										<div class="form-group">
 											<label class="control-label">Label Price <span style="color:#a94442;">*</span></label>
-											<input class="form-control" type="text" name="price" value="<?php echo (isset($product_details->price) && $product_details->price) ? $product_details->price : '';?>">
+											<input id="label_price" class="form-control" type="text" name="price" value="<?php echo (isset($product_details->price) && $product_details->price) ? $product_details->price : '';?>">
+										</div>
+										<div class="form-inline">
+											<div class="checkbox">
+											    <label><input <?php if(isset($product_details->prd_dic_chk) && ($product_details->prd_dic_chk == "Y")){echo 'checked';}?> type="checkbox" id="prd_dic_chk" name="prd_dic_chk" value="1"> Discount</label>
+											</div>
+										    <div class="form-group">
+										    	<select class="form-control" id="prd_dis_mode" name="prd_dis_mode">
+										    		<option value="flat" <?php if(isset($product_details->prd_dis_mode) && ($product_details->prd_dis_mode == 'flat')){echo 'selected';};?>>Flat</option>
+										    		<option value="per" <?php if(isset($product_details->prd_dis_mode) && ($product_details->prd_dis_mode == 'per')){echo 'selected';};?>>Percentage</option>
+										    	</select>
+										    </div>
+										  <div class="form-group">
+										    <input type="text" class="form-control" placeholder="Enter Amount" id="prd_dis_amt" name="prd_dis_amt" value="<?php if(isset($product_details->prd_dis_amt)){echo $product_details->prd_dis_amt;}?>">
+										  </div>
+										  <button type="button" class="btn btn-primary" id="prd_dis_btn">Submit</button>										  
+										 <div class="form-group">
+										    <input name="discounted_price" value="<?php if(isset($product_details->discounted_price)){echo $product_details->discounted_price;}?>" id="prd_dis_price" type="text" class="form-control" placeholder="Discounted Price" readonly>
+										  </div>
 										</div>
 										<div class="form-group">
 											<label class="control-label">Quantity <span style="color:#a94442;">*</span></label>

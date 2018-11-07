@@ -187,15 +187,27 @@
 
         $("#prd_dis_btn").click(function(){
             if($("#prd_dic_chk").is(':checked')){ 
-                var prd_dis_amt = $("#prd_dis_amt").val();  
-                if(prd_dis_amt){
+                var prd_dis_amt = $("#prd_dis_amt").val();
+                var prd_amt = $("#label_price").val();  
+                if(prd_dis_amt && prd_amt){
                     var mode = $("#prd_dis_mode option:selected").val();
                     if(mode == "flat"){
-
+                        var discounted_price = parseFloat(prd_amt)-parseFloat(prd_dis_amt);
                     }else{
-
+                        var dis = (parseFloat(prd_amt)*parseFloat(prd_dis_amt))/100;
+                        var discounted_price = (parseFloat(prd_amt))-dis;
                     }
+
+                    $("#prd_dis_price").val(discounted_price);
                 }                
+            }
+        });
+
+        $("#prd_dic_chk").click(function(){
+            if(!$(this).is(':checked')){
+                $("#prd_dis_price").val("");
+                $("#prd_dis_amt").val("");
+                $('#prd_dis_mode').prop('selectedIndex',0);
             }
         });
 

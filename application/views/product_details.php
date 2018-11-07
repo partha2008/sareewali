@@ -61,8 +61,25 @@
           <!--<div class="stichnote">Stitching will take 4 to 5 working days extra (if required). </div>-->
           <div class="price">
             <div class="pricetitle"> Price : </div>
-            <span class="old-price"><strike><i class="fa fa-inr"></i>8,700</strike></span>
-            <span class="price-new updated-price"><i class="fa fa-inr"></i><?php echo $product->price;?></span> <br>
+            <?php
+              if($product->prd_dic_chk == "Y"){
+            ?>
+            <span class="old-price"><strike><i class="fa fa-inr"></i><?php echo $product->price;?></strike></span>
+            <?php
+              }
+            ?>
+            <?php
+              if($product->prd_dic_chk == "Y"){
+            ?>
+            <span class="price-new updated-price"><i class="fa fa-inr"></i><?php echo $product->discounted_price;?></span>
+            <?php
+              }else{
+            ?>
+            <span class="price-new updated-price"><i class="fa fa-inr"></i><?php echo $product->price;?></span>
+            <?php
+              }
+            ?>
+            <br>
           </div>
           <p><span>Availability :</span> Out of Stock</p>
           <!--<div class="clearall"></div>
@@ -599,7 +616,17 @@
             </div>
             <div class="des-container">
               <div class="name"><a href="<?php echo base_url('product-details/'.$value->slug);?>"><?php echo $value->prd_name;?></a></div>
+              <?php
+                if($value->prd_dic_chk == "Y"){
+              ?>
+              <div class="price"> <span><i class="fa fa-inr"></i> <?php echo $value->discounted_price;?></span> </div>
+              <?php
+                }else{
+              ?>
               <div class="price"> <span><i class="fa fa-inr"></i> <?php echo $value->price;?></span> </div>
+              <?php
+                }
+              ?>
               <div class="productDetailsBtn"><a href="<?php echo base_url('product-details/'.$value->slug);?>" title="<?php echo $value->prd_name;?>">View Details</a></div>
             </div>
           </div>
@@ -631,7 +658,17 @@
             </div>
             <div class="des-container">
               <div class="name"><a href="<?php echo base_url('product-details/'.$value->slug);?>"><?php echo $value->prd_name;?></a></div>
+              <?php
+                if($value->prd_dic_chk == "Y"){
+              ?>
+              <div class="price"> <span><i class="fa fa-inr"></i> <?php echo $value->discounted_price;?></span> </div>
+              <?php
+                }else{
+              ?>
               <div class="price"> <span><i class="fa fa-inr"></i> <?php echo $value->price;?></span> </div>
+              <?php
+                }
+              ?>
               <div class="productDetailsBtn"><a href="<?php echo base_url('product-details/'.$value->slug);?>" title="<?php echo $value->prd_name;?>">View Details</a></div>
             </div>
           </div>
