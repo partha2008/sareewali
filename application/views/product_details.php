@@ -81,7 +81,13 @@
             ?>
             <br>
           </div>
+          <?php
+            if($product->out_of_stock == 'Y'){
+          ?>
           <p><span>Availability :</span> Out of Stock</p>
+          <?php
+            }
+          ?>
           <!--<div class="clearall"></div>
           <div class="me_size_block"> <a data-toggle="modal" data-target="#how_to_measure_tbl" href="javascript:void(0);" title="How To Measure" class="inline_auto_measure chart cboxElement"> <i class="fa fa-crop"></i> How To Measure</a> <a data-toggle="modal" data-target="#size_chart_tbl" href="javascript:void(0);" title="Size Chart" class="inline_auto chart cboxElement"> <i class="fa fa-bar-chart"></i> Size Chart</a> </div>-->
         </div>
@@ -418,13 +424,13 @@
                           <td class="variation_td"><div><span class="variation_name">Colors</span>: <?php echo $product_color;?> </div></td>
                         </tr>
                         <tr>
-                          <td class="variation_td"><div><span class="variation_name">Fabric</span>: <a href="https://www.aasvaa.com/sarees&amp;fabric=silk">Silk</a> </div></td>
+                          <td class="variation_td"><div><span class="variation_name">Fabric</span>: <?php echo $product_fabric;?> </div></td>
                         </tr>
                         <tr>
-                          <td class="variation_td"><div><span class="variation_name">Occasion</span>: <a href="https://www.aasvaa.com/sarees&amp;occasion=party">Party</a> </div></td>
+                          <td class="variation_td"><div><span class="variation_name">Occasion</span>: <?php echo $product_occassion;?> </div></td>
                         </tr>
                         <tr>
-                          <td class="variation_td"><div><span class="variation_name">Content</span>: <a href="https://www.aasvaa.com/sarees&amp;product_content=saree">Saree</a>, <a href="https://www.aasvaa.com/sarees&amp;product_content=unstitched-blouse">Unstitched Blouse</a> </div></td>
+                          <td class="variation_td"><div><span class="variation_name">Content</span>: <?php echo $product->content;?> </div></td>
                         </tr>
                       </tbody>
                     </table>

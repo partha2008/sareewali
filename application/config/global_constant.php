@@ -77,3 +77,32 @@
 	$config['unit']['m'] = 'Meter';
 	$config['unit']['in'] = 'Inch';
 	$config['unit']['ft'] = 'Foot';
+
+	// Fabric array
+	$config['fabric'][1] = 'Art Silk'; 
+	$config['fabric'][2] = 'Benarasi Silk'; 
+	$config['fabric'][3] = 'Chiffon'; 
+	$config['fabric'][4] = 'Chiffon Satin'; 
+	$config['fabric'][5] = 'Cotton Silk'; 
+	$config['fabric'][6] = 'Crepe'; 
+	$config['fabric'][7] = 'Fancy Fabric'; 
+	$config['fabric'][8] = 'Faux Chiffon'; 
+	$config['fabric'][9] = 'Georgette'; 
+	$config['fabric'][10] = 'Jacquard'; 
+	$config['fabric'][11] = 'Jacquard Silk'; 
+	$config['fabric'][12] = 'Lycra';
+	$config['fabric'][13] = 'Net';
+	$config['fabric'][14] = 'Patola Silk';
+	$config['fabric'][15] = 'Satin';
+	$config['fabric'][16] = 'Silk';
+	$config['fabric'][17] = 'Two Tone Silk';
+
+	// Occassion array
+	$config['occassion'][1] = 'Bridal'; 
+	$config['occassion'][2] = 'Casual'; 
+	$config['occassion'][3] = 'Ceremonial'; 
+	$config['occassion'][4] = 'Festival'; 
+	$config['occassion'][5] = 'Party'; 
+	$config['occassion'][6] = 'Reception'; 
+	$config['occassion'][7] = 'Sangeet'; 
+	$config['occassion'][8] = 'Wedding'; 

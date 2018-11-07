@@ -121,6 +121,52 @@
 											</select>
 										</div>
 										<div class="form-group">
+											<label class="control-label">Fabric</label>
+											<select name="fabric[]" class="form-control" multiple="multiple">
+												<?php
+													$fabric = $this->config->item('fabric');
+													foreach ($fabric as $key => $value) {	
+												?>
+												<option value="<?php echo $key;?>"
+												<?php
+													if(isset($fabrics) && !empty($fabrics)){
+														if(in_array($key, $fabrics)){
+															echo 'selected';
+														}
+													}
+												?>
+												><?php echo $value;?></option>
+												<?php
+													}
+												?>
+											</select>
+										</div>
+										<div class="form-group">
+											<label class="control-label">Occassion</label>
+											<select name="occassion[]" class="form-control" multiple="multiple">
+												<?php
+													$occassion = $this->config->item('occassion');
+													foreach ($occassion as $key => $value) {	
+												?>
+												<option value="<?php echo $key;?>"
+												<?php
+													if(isset($occassions) && !empty($occassions)){
+														if(in_array($key, $occassions)){
+															echo 'selected';
+														}
+													}
+												?>
+												><?php echo $value;?></option>
+												<?php
+													}
+												?>
+											</select>
+										</div>
+										<div class="form-group">
+											<label class="control-label">Content <span style="color:#a94442;">*</span></label>
+											<input placeholder="Fill up with comma seperated value. Ex: Saree, Blouse" class="form-control" type="text" name="content" value="<?php echo (isset($product_details->content) && $product_details->content) ? $product_details->content : '';?>">
+										</div>
+										<div class="form-group">
 											<label class="control-label">Out of Stock</label>
 											<label class="radio-inline">
 												<input type="radio" name="out_of_stock" value="Y" <?php if(isset($product_details->out_of_stock)){if($product_details->out_of_stock == 'Y'){echo 'checked';}}else{echo 'checked';}?> >Yes

@@ -26,6 +26,25 @@
 			$product_attr = $this->productdata->grab_product_attribute(array("product_id" => $product[0]->product_id));
 			$random_entity_id = $this->entitydata->grab_random_product_entity(array("product_id" => $product[0]->product_id), array(1,1));
 			$product_color = $this->productdata->grab_product_color_rel(array(TABLE_PRODUCT.".product_id" => $product[0]->product_id));
+			$product_fabric = $this->productdata->grab_product_fabric(array("product_id" => $product[0]->product_id));
+
+			$fabric_str = "";
+			if(!empty($product_fabric)){
+				foreach ($product_fabric as $key => $value) {
+					$fabric_arr = $this->config->item("fabric");
+					$fabric_str .= $fabric_arr[$value->fabric_id].", ";
+				}
+			}
+
+			$product_occassion = $this->productdata->grab_product_occassion(array("product_id" => $product[0]->product_id));
+
+			$occassion_str = "";
+			if(!empty($product_occassion)){
+				foreach ($product_occassion as $key => $value) {
+					$occassion_arr = $this->config->item("occassion");
+					$occassion_str .= $occassion_arr[$value->occassion_id].", ";
+				}
+			}
 
 			$prd_color = '';
 			if(!empty($product_color)){
@@ -38,6 +57,8 @@
 			$this->data['product_image'] = $product_image;
 			$this->data['product_attr'] = $product_attr;
 			$this->data['product_color'] = rtrim($prd_color, ',');
+			$this->data['product_fabric'] = rtrim($fabric_str, ", ");
+			$this->data['product_occassion'] = rtrim($occassion_str, ", ");
 
 			$this->load->library('breadcrumb');
 			$this->breadcrumb->add('Home', base_url());
