@@ -70,11 +70,23 @@
 			$attrname = $post_data['attrname'];
 			$attrval = $post_data['attrval'];
 			$attrunit = $post_data['attrunit'];
+			unset($post_data['attrname']);
+			unset($post_data['attrval']);
 			unset($post_data['attrunit']);
-			$prd_entity = $post_data['entity_id'];
-			$color = $post_data['color'];
+			if(isset($post_data['entity_id'])){
+				$prd_entity = $post_data['entity_id'];
+			}
+			if(isset($post_data['color'])){
+				$color = $post_data['color'];
+			}
 			if(isset($post_data['tag'])){
 				$tags = $post_data['tag'];
+			}
+			if(isset($post_data['fabric'])){
+				$fabrics = $post_data['fabric'];
+			}
+			if(isset($post_data['occassion'])){
+				$occassions = $post_data['occassion'];
 			}
 
 			$this->load->library('form_validation');
@@ -87,6 +99,7 @@
 			$this->form_validation->set_rules('price', 'Price', 'trim|required');
 			$this->form_validation->set_rules('quantity', 'Quantity', 'trim|required');
 			$this->form_validation->set_rules('sku', 'SKU', 'trim|required|is_unique['.TABLE_PRODUCT.'.sku]');
+			$this->form_validation->set_rules('content', 'Content', 'trim|required');
 			if(empty($color)){
 				$this->form_validation->set_rules('color[]', 'Color', 'trim|required');
 			}
@@ -100,14 +113,18 @@
 				$this->session->set_userdata('productadd_notification', validation_errors());
 				
 				redirect($this->agent->referrer());
-			}else{
-				unset($post_data['attrname']);
-				unset($post_data['attrval']);				
+			}else{			
 				unset($post_data['upload_image']);
 				unset($post_data['entity_id']);
 				unset($post_data['color']);
 				if(isset($post_data['tag'])){
 					unset($post_data['tag']);
+				}
+				if(isset($post_data['fabric'])){
+					unset($post_data['fabric']);
+				}
+				if(isset($post_data['occassion'])){
+					unset($post_data['occassion']);
 				}
 				unset($post_data['rad']);
 
@@ -180,6 +197,20 @@
 						$this->productdata->insert_product_tag(array("product_id" => $prd_last_id, "tag_id" =>$value));
 					}
 				}
+
+				// add product fabric
+				if(isset($fabrics) && !empty($fabrics)){
+					foreach ($fabrics as $key => $value) {
+						$this->productdata->insert_product_fabric(array("product_id" => $prd_last_id, "fabric_id" =>$value));
+					}
+				}
+
+				// add product occassion
+				if(isset($occassions) && !empty($occassions)){
+					foreach ($occassions as $key => $value) {
+						$this->productdata->insert_product_occassion(array("product_id" => $prd_last_id, "occassion_id" =>$value));
+					}
+				}
 				
 				redirect(base_url('admin/product-list'));
 			}
@@ -192,7 +223,11 @@
 
 				$this->data['product_details'] = $product_details;
 				$this->data['entity_id'] = $sess_data['entity_id'];
-				$this->data['tags_sess'] = $product_details->tag;
+				if(isset($product_details->tag)){
+					$this->data['tags_sess'] = $product_details->tag;
+				}
+				$this->data['fabrics'] = $product_details->fabric;
+				$this->data['occassions'] = $product_details->occassion;
 			}else{
 				$cond['slug'] = $code;
 				$product_details = $this->productdata->grab_product($cond);
@@ -219,6 +254,24 @@
 
 				$tags = $this->productdata->grab_product_tag(array("product_id" => $product_details->product_id));
 				$this->data['tags'] = $tags;
+
+				$fabric = array();
+				$fabrics = $this->productdata->grab_product_fabric(array("product_id" => $product_details->product_id));
+				if(!empty($fabrics)){
+					foreach ($fabrics as $key => $value) {
+						$fabric[] = $value->fabric_id;
+					}
+				}
+				$this->data['fabrics'] = $fabric;
+
+				$occassion = array();
+				$occassions = $this->productdata->grab_product_occassion(array("product_id" => $product_details->product_id));
+				if(!empty($occassions)){
+					foreach ($occassions as $key => $value) {
+						$occassion[] = $value->occassion_id;
+					}
+				}
+				$this->data['occassions'] = $occassion;
 			}
 			$cat_data = $this->entitydata->grab_entity(array("status" => "Y", "parent_id !=" => "0"), array(), array());
 			$this->data['cat_list'] = $cat_data;
@@ -253,16 +306,26 @@
 			if(empty($color)){
 				$this->form_validation->set_rules('color[]', 'Color', 'trim|required');
 			}
+			$this->form_validation->set_rules('content', 'Content', 'trim|required');
 			$this->form_validation->set_rules('upload_image', 'Upload Images', 'required');
 
 			$attrname = $post_data['attrname'];
+			unset($post_data['attrname']);
 			$attrval = $post_data['attrval'];
+			unset($post_data['attrval']);
 			$attrunit = $post_data['attrunit'];
+			unset($post_data['attrunit']);
 			$product_id = $post_data['product_id'];
 			$prd_entity = $post_data['entity_id'];
 			$color = $post_data['color'];
 			if(isset($post_data['tag'])){
 				$tags = $post_data['tag'];
+			}
+			if(isset($post_data['fabric'])){
+				$fabrics = $post_data['fabric'];
+			}
+			if(isset($post_data['occassion'])){
+				$occassions = $post_data['occassion'];
 			}
 			
 			$this->session->unset_userdata($post_data);
@@ -275,9 +338,6 @@
 				
 				redirect($this->agent->referrer());
 			}else{
-				unset($post_data['attrname']);
-				unset($post_data['attrval']);
-				unset($post_data['attrunit']);
 				unset($post_data['old_name']);
 				unset($post_data['product_id']);
 				unset($post_data['upload_image']);
@@ -285,6 +345,12 @@
 				unset($post_data['color']);
 				if(isset($post_data['tag'])){
 					unset($post_data['tag']);
+				}
+				if(isset($post_data['fabric'])){
+					unset($post_data['fabric']);
+				}
+				if(isset($post_data['occassion'])){
+					unset($post_data['occassion']);
 				}
 				unset($post_data['rad']);
 
@@ -368,6 +434,26 @@
 				if(isset($tags) && !empty($tags)){
 					foreach ($tags as $key => $value) {
 						$this->productdata->insert_product_tag(array("product_id" => $product_id, "tag_id" =>$value));
+					}
+				}
+
+				// delete product fabric
+				$this->productdata->delete_product_fabric(array("product_id" => $product_id));
+
+				// add product fabric
+				if(isset($fabrics) && !empty($fabrics)){
+					foreach ($fabrics as $key => $value) {
+						$this->productdata->insert_product_fabric(array("product_id" => $product_id, "fabric_id" =>$value));
+					}
+				}
+
+				// delete product occassion
+				$this->productdata->delete_product_occassion(array("product_id" => $product_id));
+
+				// add product occassion
+				if(isset($occassions) && !empty($occassions)){
+					foreach ($occassions as $key => $value) {
+						$this->productdata->insert_product_occassion(array("product_id" => $product_id, "occassion_id" =>$value));
 					}
 				}
 				
