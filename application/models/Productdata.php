@@ -195,7 +195,7 @@ class Productdata extends CI_Model {
 			$start = max(0, ( $offset -1 ) * $per_page);
 			$this->db->limit($per_page, $start);
 		}
-		$this->db->order_by('is_featured','desc');		
+		$this->db->order_by('is_featured','asc');		
 		$query = $this->db->get(TABLE_PRODUCT_IMAGES);
 		
 		return $query->result();
