@@ -9,6 +9,7 @@ class Entity extends CI_Controller{
 		parent::__construct();
 		
 		$this->load->model('entitydata');
+		$this->load->model('productdata');
 			
 		$this->data = $this->defaultdata->getBackendDefaultData();
 		
@@ -99,7 +100,7 @@ class Entity extends CI_Controller{
 		$this->form_validation->set_rules('entity_id', 'Parent', 'required');
 		
 		if($_FILES['image_path']['name']){
-			$this->form_validation->set_rules('image_path', 'Imaage', 'callback_file_check');	
+			$this->form_validation->set_rules('image_path', 'Image', 'callback_file_check');	
 		}
 		
 		$this->session->unset_userdata($post_data);
@@ -178,7 +179,7 @@ class Entity extends CI_Controller{
 		$this->form_validation->set_rules('name', 'Entity Name', 'trim|required'.$is_unique);	
 		$this->form_validation->set_rules('entity_id', 'Parent', 'required');	
 		if($_FILES['image_path']['name']){
-			$this->form_validation->set_rules('image_path', 'Imaage', 'callback_file_check');	
+			$this->form_validation->set_rules('image_path', 'Image', 'callback_file_check');	
 		}
 		
 		$this->session->unset_userdata($post_data);
@@ -248,6 +249,23 @@ class Entity extends CI_Controller{
 				"date_modified" => time()
 			);
 			$this->entitydata->update_entity($cond, $data);
+
+			if(isset($post_data['prd_dic_chk']) && ($post_data['prd_dic_chk'] == "Y")){
+				if($post_data['prd_dis_amt']){
+					$primary_key = $post_data['primary_key'];
+					$prd_entity = $this->productdata->grab_product_entity_rel(array("entity_id" => $primary_key));
+
+					if(!empty($prd_entity)){
+						foreach ($prd_entity as $key => $value) {
+							if($post_data['prd_dis_mode'] == "flat"){
+								$this->db->query("UPDATE ".TABLE_PRODUCT." SET discounted_price=CASE WHEN ".$post_data['prd_dis_amt']." > price THEN 0 ELSE price - ".$post_data['prd_dis_amt']." END, prd_dic_chk = 'Y', prd_dis_mode = '".$post_data['prd_dis_mode']."', prd_dis_amt=".$post_data['prd_dis_amt'].", date_modified = ".time()." WHERE product_id='".$value->product_id."' ");
+							}else{
+								$this->db->query("UPDATE ".TABLE_PRODUCT." SET discounted_price=price - (price*".$post_data['prd_dis_amt']."/100), prd_dic_chk = 'Y', prd_dis_mode = '".$post_data['prd_dis_mode']."', prd_dis_amt=".$post_data['prd_dis_amt'].", date_modified = ".time()." WHERE product_id='".$value->product_id."' ");
+							}
+						}
+					}					
+				}				
+			}
 			
 			redirect(base_url('admin/entity-list'));
 		}

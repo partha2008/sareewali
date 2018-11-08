@@ -25,6 +25,7 @@
 					<?php } 
 					$this->session->unset_userdata('has_error');
 					$this->session->unset_userdata('catedit_notification');
+					$this->session->unset_userdata('prd_dic_chk');
 					?>					
 					<div class="panel panel-default">
 						<div class="panel-body">
@@ -63,6 +64,20 @@
 											</select>
 											<p class="text-danger">*Adding Entity by selecting parent will go under the selected parent. Selecting Root as parent will make the entity as main.</p>[<a id="view_relation" href="javscript:void(0);">View Relation</a>]
 										</div>
+										<div class="form-inline">
+											<div class="checkbox">
+											    <label><input <?php if(isset($cat_details->prd_dic_chk) && ($cat_details->prd_dic_chk == "Y")){echo 'checked';}?> type="checkbox" id="prd_dic_chk" name="prd_dic_chk" value="Y"> Discount</label>
+											</div>
+										    <div class="form-group">
+										    	<select class="form-control" id="prd_dis_mode" name="prd_dis_mode">
+										    		<option value="flat" <?php if(isset($cat_details->prd_dis_mode) && ($cat_details->prd_dis_mode == 'flat')){echo 'selected';};?>>Flat</option>
+										    		<option value="per" <?php if(isset($cat_details->prd_dis_mode) && ($cat_details->prd_dis_mode == 'per')){echo 'selected';};?>>Percentage</option>
+										    	</select>
+										    </div>
+										  <div class="form-group">
+										    <input type="text" class="form-control" placeholder="Enter Amount" id="prd_dis_amt" name="prd_dis_amt" value="<?php if(isset($cat_details->prd_dis_amt)){echo $cat_details->prd_dis_amt;}?>">
+										  </div>
+										</div>
 										<div class="form-group">
 											<label class="control-label">Sort Order</label>
 											<input class="form-control" type="text" name="sort_order" placeholder="Enter Sort Order" value="<?php if(isset($cat_details->sort_order) && $cat_details->sort_order){echo $cat_details->sort_order;}?>">
@@ -87,6 +102,7 @@
 										</div>
 										<input type="hidden" name="old_categoryname" value="<?php echo $cat_details->name;?>">
 										<input type="hidden" name="slug" value="<?php echo $cat_details->slug;?>">
+										<input type="hidden" name="primary_key" value="<?php echo $cat_details->entity_id;?>">
 										<input type="hidden" name="hidden_image_path" value="<?php echo $cat_details->image_path;?>">
 										
 										<button type="submit" class="btn btn-primary">Save Changes</button>
