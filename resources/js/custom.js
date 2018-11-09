@@ -271,7 +271,17 @@
 	        });
 		}else if(PAGENAME == 'product-list'){
 			$(".scroll-color").mCustomScrollbar({
-				setHeight:300,
+				setHeight:150,
+				theme:"dark-3"
+			});
+
+			$(".scroll-fabric").mCustomScrollbar({
+				setHeight:150,
+				theme:"dark-3"
+			});
+
+			$(".scroll-occassion").mCustomScrollbar({
+				setHeight:150,
 				theme:"dark-3"
 			});
 			

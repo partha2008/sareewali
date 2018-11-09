@@ -41,6 +41,8 @@ class Productdata extends CI_Model {
 			." INNER JOIN ".TABLE_ENTITY." ON ".TABLE_PRODUCT_ENTITY.".entity_id = ".TABLE_ENTITY.".entity_id"
 			." LEFT JOIN ".TABLE_PRODUCT_TAG." ON ".TABLE_PRODUCT.".product_id = ".TABLE_PRODUCT_TAG.".product_id"
 			." LEFT JOIN ".TABLE_PRODUCT_COLOR." ON ".TABLE_PRODUCT.".product_id = ".TABLE_PRODUCT_COLOR.".product_id"
+			." LEFT JOIN ".TABLE_PRODUCT_FABRIC." ON ".TABLE_PRODUCT.".product_id = ".TABLE_PRODUCT_FABRIC.".product_id"
+			." LEFT JOIN ".TABLE_PRODUCT_OCCASSION." ON ".TABLE_PRODUCT.".product_id = ".TABLE_PRODUCT_OCCASSION.".product_id"
 			." WHERE ".TABLE_PRODUCT.".status='Y'"
 			." AND ".TABLE_PRODUCT_IMAGES.".status='Y'"
 			." AND ".TABLE_PRODUCT_IMAGES.".is_featured='Y'"

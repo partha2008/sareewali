@@ -3935,3 +3935,13 @@ font-family: 'MontserratRegular';}
 .prorightcart .out-of-stock_button{background-color:#666; color: #fff;display: block;font-size: 16px;font-weight: 400;
 height: auto;margin-right: 0px;line-height: 32px;margin-top: 0px;border-radius: 3px;padding: 4px 50px;
 text-align: center;transition: all 0.3s linear 0s;text-transform: uppercase; margin:10px 0;}
+
+.no-prd{
+    color: #e4097f;
+    background-color: #f5eef2;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #f3e4ec;
+    border-radius: 4px;
+    text-align: center;
+}

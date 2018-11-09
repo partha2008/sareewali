@@ -240,10 +240,26 @@ function load_products(page, view){
         colors = colors.replace(/,+$/,'');
     }
 
+    var fabrics = '';
+    $("input:checkbox[class=filter_fabric]:checked").each(function () {        
+        fabrics += $(this).val()+',';
+    });
+    if(fabrics){
+        fabrics = fabrics.replace(/,+$/,'');
+    }
+
+    var occassions = '';
+    $("input:checkbox[class=filter_occassion]:checked").each(function () {        
+        occassions += $(this).val()+',';
+    });
+    if(occassions){
+        occassions = occassions.replace(/,+$/,'');
+    }
+
     if(mode){
-        var url = BASEPATH+"product/load_products?page="+page+"&view="+view+"&mode="+mode+"&min_price="+min_price+"&max_price="+max_price+"&colors="+colors;
+        var url = BASEPATH+"product/load_products?page="+page+"&view="+view+"&mode="+mode+"&min_price="+min_price+"&max_price="+max_price+"&colors="+colors+"&fabrics="+fabrics+"&occassions="+occassions;
     }else{
-        var url = BASEPATH+"product/load_products?page="+page+"&view="+view+"&min_price="+min_price+"&max_price="+max_price+"&colors="+colors;
+        var url = BASEPATH+"product/load_products?page="+page+"&view="+view+"&min_price="+min_price+"&max_price="+max_price+"&colors="+colors+"&fabrics="+fabrics+"&occassions="+occassions;
     }
     $.ajax({
         url: url,
@@ -283,11 +299,27 @@ function search_by_attr(page){
     if(colors){
         colors = colors.replace(/,+$/,'');
     }
+
+    var fabrics = '';
+    $("input:checkbox[class=filter_fabric]:checked").each(function () {        
+        fabrics += $(this).val()+',';
+    });
+    if(fabrics){
+        fabrics = fabrics.replace(/,+$/,'');
+    }
+
+    var occassions = '';
+    $("input:checkbox[class=filter_occassion]:checked").each(function () {        
+        occassions += $(this).val()+',';
+    });
+    if(occassions){
+        occassions = occassions.replace(/,+$/,'');
+    }
     
     if(mode){
-        var url = BASEPATH+"product/load_products?page="+page+"&view="+VIEW+"&mode="+mode+"&min_price="+min_price+"&max_price="+max_price+"&colors="+colors;
+        var url = BASEPATH+"product/load_products?page="+page+"&view="+VIEW+"&mode="+mode+"&min_price="+min_price+"&max_price="+max_price+"&colors="+colors+"&fabrics="+fabrics+"&occassions="+occassions;
     }else{
-        var url = BASEPATH+"product/load_products?page="+page+"&view="+VIEW+"&min_price="+min_price+"&max_price="+max_price+"&colors="+colors;
+        var url = BASEPATH+"product/load_products?page="+page+"&view="+VIEW+"&min_price="+min_price+"&max_price="+max_price+"&colors="+colors+"&fabrics="+fabrics+"&occassions="+occassions;
     }
 
     $.ajax({
@@ -301,8 +333,12 @@ function search_by_attr(page){
     .done(function(data)
     {
         $('#loading').hide();
-        $("#load_products").html(data);
-        $(".lazy").unveil(300);
+        if(data.trim() != ""){
+            $("#load_products").html(data);
+            $(".lazy").unveil(300);
+        }else{
+            $("#load_products").html('<div class="no-prd"> Oops, Sorry no item(s) found for the criteria </div>');
+        }
     })
     .fail(function(jqXHR, ajaxOptions, thrownError)
     {

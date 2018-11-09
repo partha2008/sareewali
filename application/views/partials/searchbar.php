@@ -24,6 +24,44 @@
       </div>
 
       <div class="filterBox">
+        <h2><i class="fa fa-caret-down" aria-hidden="true"></i>Fabric </h2>
+        <div class="scroll-fabric">
+          <ul class="filterItems">
+            <?php
+              $fabrics = $this->config->item("fabric");
+              foreach ($fabrics as $key => $value) {               
+            ?>
+            <li>
+              <input class="filter_fabric" type="checkbox" id="<?php echo $value;?>" name="fabric[]" value="<?php echo $key;?>"  onclick="search_by_attr(0);" />
+              <label for="<?php echo $value;?>"> <span ></span><?php echo $value;?> </label>
+            </li>
+            <?php
+              }
+            ?>
+          </ul>
+        </div>
+      </div>
+
+      <div class="filterBox">
+        <h2><i class="fa fa-caret-down" aria-hidden="true"></i>Occassion </h2>
+        <div class="scroll-occassion">
+          <ul class="filterItems">
+            <?php
+              $occassions = $this->config->item("occassion");
+              foreach ($occassions as $key => $value) {               
+            ?>
+            <li>
+              <input class="filter_occassion" type="checkbox" id="<?php echo $value;?>" name="occassion[]" value="<?php echo $key;?>"  onclick="search_by_attr(0);" />
+              <label for="<?php echo $value;?>"> <span ></span><?php echo $value;?> </label>
+            </li>
+            <?php
+              }
+            ?>
+          </ul>
+        </div>
+      </div>
+
+      <div class="filterBox">
         <h2><i class="fa fa-caret-down" aria-hidden="true"></i>Select Price range</h2>
         <div class="price-range-block">
           <div id="slider-range" class="price-filter-range" name="rangeInput"></div>

@@ -129,6 +129,8 @@
 			$min_price = $this->input->get("min_price");
 			$max_price = $this->input->get("max_price");
 			$colors = $this->input->get("colors");
+			$fabrics = $this->input->get("fabrics");
+			$occassions = $this->input->get("occassions");
 			$where = '';
 			$order_by = '';
 
@@ -151,6 +153,12 @@
 			$where .= " AND ".TABLE_PRODUCT.".price BETWEEN ".$min_price." AND ".$max_price;
 			if($colors){
 				$where .= " AND ".TABLE_PRODUCT_COLOR.".color_id IN (".$colors.")";
+			}
+			if($fabrics){
+				$where .= " AND ".TABLE_PRODUCT_FABRIC.".fabric_id IN (".$fabrics.")";
+			}
+			if($occassions){
+				$where .= " AND ".TABLE_PRODUCT_OCCASSION.".occassion_id IN (".$occassions.")";
 			}
 
 			$this->data['product_list'] = $this->productdata->grab_product_list_all($entity, $start, $this->perPage, $order_by, $where);
