@@ -137,3 +137,4 @@ define('TABLE_PRODUCT_TAG', TABLE_PREFIX.'product_tags');
 define('TABLE_PRODUCT_FABRIC', TABLE_PREFIX.'product_fabric');
 define('TABLE_PRODUCT_OCCASSION', TABLE_PREFIX.'product_occassion');
 define('TABLE_REVIEW', TABLE_PREFIX.'review');
+define('TABLE_CART', TABLE_PREFIX.'cart');

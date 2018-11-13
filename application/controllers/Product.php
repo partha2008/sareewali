@@ -16,6 +16,7 @@
 			$this->load->model('productdata');
 			$this->load->model('adsdata');
 			$this->load->model('reviewdata');
+			$this->load->model('cartdata');
 
 			$this->data = $this->defaultdata->getFrontendDefaultData();
 		}

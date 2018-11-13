@@ -349,3 +349,35 @@ function search_by_attr(page){
 function load_unveil(){
     $(".lazy").unveil(300);
 }
+
+function addToWishList(slug, is_logged_in){
+    if(is_logged_in != "1"){
+        openModal('login');
+        return false;
+    }
+}
+
+function addToCart(slug, is_logged_in, redirect){
+    if(is_logged_in != "1"){
+        openModal('login');
+        return false;
+    }
+
+    $.post(BASEPATH+"cart/add_to_cart", {data: slug}, function(data){
+        var response = JSON.parse(data);
+        if(response.status){
+            $(".topCart").html(response.html);
+            swal({
+                title: response.data,
+                text: "is added to cart !",
+                icon: "success",
+                closeOnClickOutside: false,
+                closeOnEsc: false
+            }).then((willDelete) => {
+                if(redirect){
+                    window.location.href = BASEPATH+"cart";
+                }
+            });
+        }
+    });
+}

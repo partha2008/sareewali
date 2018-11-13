@@ -40,7 +40,7 @@
         $('.menu-container').slideToggle(300);
     });
 
-	$('.tb_right li a').click(function (e) {
+	$(document).on("click", ".tb_right li a", function(e){
 		e.stopPropagation();
 		if(false == $(this).next('ul').is(':visible')) {
 			$('.tb_right li ul').slideUp(300);

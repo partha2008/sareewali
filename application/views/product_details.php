@@ -271,18 +271,15 @@
             </div>
           </div>
           <div class="clearall"></div>
-          <input type="hidden" name="product_id" size="2" value="7547">
           <?php
             if($product->out_of_stock == 'N'){
           ?>
           <div class="addtocartbuttonholder"> 
-            <!--// Change for New Measurement--> 
-            <a class="add_to_cart_button  quick_cart" onclick="validateLoginRequireField(0);" title="Login" href="javascript:void('0');">
-            <div class="add_cart_block ">Add to Cart</div>
-            </a> 
-            <!--// ------------------> 
+            <a class="add_to_cart_button quick_cart" onclick="addToCart('<?php echo $product->slug;?>', '<?php echo $this->defaultdata->is_user_session_active();?>', false);" title="Add to Cart" href="javascript:void(0);">
+              <div class="add_cart_block ">Add to Cart</div>
+            </a>
           </div>
-          <a onclick="QuickBuyNow('');" title="Buy Now" class="button quick_buy_button ">Buy Now</a> 
+          <a onclick="addToCart('<?php echo $product->slug;?>', '<?php echo $this->defaultdata->is_user_session_active();?>', true);" title="Buy Now" class="button quick_buy_button ">Buy Now</a> 
           <?php
             }else{
           ?>
@@ -295,7 +292,7 @@
           <!--   <div class="moretitle">More Options</div> 
  <a href="#reviews_box" title="Write a Review" class="reviews_inline"><i class="fa fa-commenting-o" aria-hidden="true"></i> Write a Review</a> --> 
           
-          <a onclick="addToWishList('7547');" title="Add to Wish List" class="add_to_wishlist"> <i class="fa fa-heart-o" aria-hidden="true"></i> Add to Wishlist</a> <!--<a href="#tab-inquire" class="inquire_now inline_inquire cboxElement" title="Inquire for 7547"> <i class="fa fa-envelope-o" aria-hidden="true"></i> Inquire Now </a>--> </span>
+          <a onclick="addToWishList('<?php echo $product->slug;?>', '<?php echo $this->defaultdata->is_user_session_active();?>');" title="Add to Wish List" class="add_to_wishlist"> <i class="fa fa-heart-o" aria-hidden="true"></i> Add to Wishlist</a> <!--<a href="#tab-inquire" class="inquire_now inline_inquire cboxElement" title="Inquire for 7547"> <i class="fa fa-envelope-o" aria-hidden="true"></i> Inquire Now </a>--> </span>
           <div class="clearall"></div>
           
           <div class="clearfix"></div>

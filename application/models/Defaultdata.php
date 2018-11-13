@@ -34,6 +34,23 @@ class Defaultdata extends CI_Model {
 		$this->mydata['prd_cat'] = $this->entitydata->grab_entity(array("level" => "1", "status" => "Y"));		
 		$this->data = $this->mydata;
 		$this->headerdata = $this->mydata;
+		$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
+		$count = 0;
+		$total_price = 0;
+		if(!empty($cart_data)){
+			foreach ($cart_data as $key => $value) {
+				if((int)$value->prd_discounted_price > 0){
+					$total_price = $total_price + $value->prd_discounted_price*$value->prd_count;
+				}else{
+					$total_price = $total_price + $value->prd_price*$value->prd_count;
+				}
+				$count++;
+			}
+		}
+
+		$this->headerdata['total_price'] = number_format($total_price, 2);
+		$this->headerdata['count'] = $count;
+		$this->headerdata['cart'] = $this->load->view('partials/cart', $this->headerdata, true);
 		$this->data["header"] = $this->load->view('partials/header', $this->headerdata, true);			
 		$this->data["head"] = $this->load->view('partials/head', null, true);
 		$this->data["upper_footer"] = $this->load->view('partials/upper_footer', $this->headerdata, true);

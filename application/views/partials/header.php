@@ -70,41 +70,16 @@
                   }
                 ?>
               </ul>
-
             </li>
-
-            <li class="topCart"><a href="javascript:void(0)"><i class="fa fa-shopping-cart" aria-hidden="true"></i> My Cart (0)</a>
-
-              <ul class="myCartBox">
-
-                <h6 class="subtitle">Recently added item(s) <span class="cartCloe"><i class="fa fa-times-circle" aria-hidden="true"></i></span></h6>
-
-                <p class="cardEmpty">You have no items in your shopping cart.</p>
-
-                <div class="cartAddedBox">
-
-                  <div class="cartTotalPrice"> Total : <span><i class="fa fa-inr"></i>0</span> </div>
-
-                  <div class="buttons"> <a rel="nofollow" title="View my shopping cart" href="#" class="websiteBtn">View cart</a> <a rel="nofollow" title="View my shopping cart" href="#" class="websiteBtn" id="button_goto_cart">Checkout</a> </div>
-
-                </div>
-
-                <!-- cartAddedBox End -->
-
-                
-
-              </ul>
-
+            <li class="topCart">
+            <?php
+              echo $cart;
+            ?>
             </li>
-
           </ul>
-
         </div>
-
       </div>
-
     </div>
-
   </div>
 
   <div class="header-area">
@@ -168,7 +143,7 @@
 
             </div>
 
-            </span> <span class="offer"><a href="products.html">Offers</a></span> </div>
+            </span> <span class="offer"><a href="javascript:void(0);">Offers</a></span> </div>
 
           <div class="clearfix"></div>
 
