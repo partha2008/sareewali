@@ -1,7 +1,7 @@
 <?php echo $head; ?>
 <?php echo $header; ?>
 
-<section class="box-content">
+<!--<section class="box-content">
   <div class="container">
     <div class="flickity-slider">
       <div class="carousel-promo-strip"> <strong><span style="color:#ffffff;">Flat 20% Off on Everything</span></strong></div>
@@ -9,7 +9,7 @@
       <div class="carousel-promo-strip"> <strong><span style="color:#ffffff;">World Wide Express Shipping</span></strong></div>
     </div>
   </div>
-</section>
+</section>-->
 
 <section class="breadcrumbs">
   <div class="container">

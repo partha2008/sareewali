@@ -4564,6 +4564,10 @@ color: #fff;
 
 }
 
+.add_to_cart_button:hover{
+    text-decoration: none;
+}
+
  .add_to_cart_button span:hover{
 
     background-color:#F36100
