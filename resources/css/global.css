@@ -177,9 +177,7 @@ a:focus{outline:none;text-decoration:none;}
 
 @font-face {
 
-
-
-    font-family: 'MontserratRegular';
+    font-family: 'MontserratLight';
 
 
 
@@ -397,9 +395,7 @@ a:focus{outline:none;text-decoration:none;}
 
 .header-top .tb_right{float:right; list-style:none; margin:0; padding:0; text-align:right}
 
-
-
-.header-top .tb_right li{border-right:solid 1px #dcdcdc; display:inline-block;text-transform:uppercase;font-size:13px;transition:all 0.35s ease 0s; position:relative;font-family: 'MontserratRegular';}
+.header-top .tb_right li{border-right:solid 1px #dcdcdc; display:inline-block;text-transform:uppercase;font-size:13px;transition:all 0.35s ease 0s; position:relative;font-family: 'MontserratLight';}
 
 
 
@@ -525,9 +521,7 @@ a:focus{outline:none;text-decoration:none;}
 
 .cartRight h4{overflow:hidden;margin:0px;position:relative;}
 
-
-
-.cartRight h4 a{font-size:15px !important;color:#000 !important;text-transform:capitalize;font-family: 'MontserratRegular';margin-right:20px;display:inline-block;}
+.cartRight h4 a{font-size:15px !important;color:#000 !important;text-transform:capitalize;font-family: 'MontserratLight';margin-right:20px;display:inline-block;}
 
 
 
@@ -541,9 +535,7 @@ a:focus{outline:none;text-decoration:none;}
 
 .cartRight h4 a:hover{color:#cf4141 !important;}
 
-
-
-.cartPrice{font-size:18px;color:#000;font-family: 'MontserratRegular';margin:5px 0px;}
+.cartPrice{font-size:18px;color:#000;font-family: 'MontserratLight';margin:5px 0px;}
 
 
 
@@ -553,9 +545,7 @@ a:focus{outline:none;text-decoration:none;}
 
 .quantity-formated span{border:1px solid #ebebeb;border-radius:3px;display:inline-block;height:25px;line-height:23px;margin:0 5px;width:40px;text-align:center;}
 
-
-
-.cartTotalPrice{overflow:hidden;font-family: 'MontserratRegular';font-size:15px;border-top:1px solid #e9e9e9;margin-top:20px;padding-top:5px;text-transform:none;}
+.cartTotalPrice{overflow:hidden;font-family: 'MontserratLight';font-size:15px;border-top:1px solid #e9e9e9;margin-top:20px;padding-top:5px;text-transform:none;}
 
 
 
@@ -625,9 +615,7 @@ a:focus{outline:none;text-decoration:none;}
 
 .sticky .menu-right{padding:10px 0px;}
 
-
-
-.sticky .form-box{top:-15px;}
+.sticky .form-box{top:42px;}
 
 
 
@@ -693,9 +681,7 @@ a:focus{outline:none;text-decoration:none;}
 
 /* -- Navigation Start -- */
 
-
-
-.menu-container {float:left; width:64%;}
+.menu-container {float:left; width:87%;}
 
 
 
@@ -797,9 +783,7 @@ a:focus{outline:none;text-decoration:none;}
 
 .menu > ul > li > ul > li > ul:after {clear:both;}
 
-
-
-.menu > ul > li > ul > li > ul > li {float:left;width:100%;padding:3px 0;margin:0;font-size: .8em;font-family: 'MontserratRegular';}
+.menu > ul > li > ul > li > ul > li {float:left;width:100%;padding:3px 0;margin:0;font-size: .8em;font-family: 'MontserratLight';}
 
 
 
@@ -823,11 +807,7 @@ a:focus{outline:none;text-decoration:none;}
 
 
 
-
-
-
-
-.menu ul .normal-sub li a{font-family: 'MontserratRegular';padding:5px 0px !important;font-size:14px;}
+.menu ul .normal-sub li a{font-family: 'MontserratLight';padding:5px 0px !important;font-size:14px;}
 
 
 
@@ -889,9 +869,7 @@ a:focus{outline:none;text-decoration:none;}
 
 .skip-container-mobile ul li:first-child{margin-left:0px;}
 
-
-
-.skip-container-mobile ul li a{color:#fff;font-family: 'MontserratRegular';display:block;font-size:15px;}
+.skip-container-mobile ul li a{color:#fff;font-family: 'MontserratLight';display:block;font-size:15px;}
 
 
 
@@ -917,9 +895,9 @@ a:focus{outline:none;text-decoration:none;}
 
 .menu-right .search i{color:#231f20;transition:all 0.3s ease 0s;}
 
-.form-box{position:absolute;top: 48px;right: -11px;background: #fff;padding: 12px 10px;z-index:4;box-shadow:0 3px 4px rgba(0, 0, 0, 0.2);width:360px;display:none;}
+.form-box{position:absolute;top: 59px;right: -11px;background: #fff;padding: 12px 10px;z-index:4;box-shadow:0 3px 4px rgba(0, 0, 0, 0.2);width:360px;display:none;}
 
-.form-box input[type="search"]{width:100%;border:1px solid #f1f1f1;padding:12px 54px 12px 10px;float:left;text-align:left;font-family: 'MontserratRegular'; height:auto;}
+.form-box input[type="search"]{width:100%;border:1px solid #f1f1f1;padding:12px 54px 12px 10px;float:left;text-align:left;font-family: 'MontserratLight';}
 
 .form-box button{background:none;border:medium none;color:#087fe0;float:right;font-size:18px;padding:13px 0;position:absolute;right:0;text-align:center;text-transform:uppercase;width:17%;outline:none;}
 
@@ -1077,9 +1055,7 @@ a:focus{outline:none;text-decoration:none;}
 
 .cat-item:hover .deskContainerTableCell{padding-top:0px;}
 
-
-
-.cat-item .des-container .disc{display:block;transition:all 0.35s 0s;font-family: 'MontserratRegular';margin-bottom:0px;}
+.cat-item .des-container .disc{display:block;transition:all 0.35s 0s;font-family: 'MontserratLight';margin-bottom:0px;}
 
 
 
@@ -1137,17 +1113,13 @@ a:focus{outline:none;text-decoration:none;}
 
 .banner-center .text-center {position:absolute;top:32%;left:0px;width:100%;height:100%;}
 
-
-
-.banner-center .text-center h2 {font-family: 'MontserratRegular';font-size:28px; color: #252525; margin: 0 0 25px; padding: 0; text-transform: uppercase;}
+.banner-center .text-center h2 {font-family: 'MontserratLight';font-size:28px; color: #252525; margin: 0 0 25px; padding: 0; text-transform: uppercase;}
 
 
 
 .banner-center .text-center h2 span {font-weight: 900; margin-left: 5px;}
 
-
-
-.banner-center .text-center h3 {font-family: 'MontserratRegular';font-size:47px;color:#252525;margin:8px 0 0;padding:0;text-transform:uppercase;}
+.banner-center .text-center h3 {font-family: 'MontserratLight';font-size:47px;color:#252525;margin:8px 0 0;padding:0;text-transform:uppercase;}
 
 
 
@@ -1223,7 +1195,8 @@ background: url(../images/bg-title.png); background-repeat:no-repeat !important;
 
 
 
-.featured-product .title h2, .new-arrival .title h2{padding: 0 35px; background: #fff; display: inline-block;font-family: 'MontserratRegular';font-size:24px; font-weight:bold; padding-bottom:16px; color: #535353; text-transform: uppercase; margin: 0; position: relative;}
+
+.featured-product .title h2, .new-arrival .title h2{padding: 0 35px; background: #fff; display: inline-block;font-family: 'MontserratLight';font-size:24px; font-weight:bold; padding-bottom:16px; color: #535353; text-transform: uppercase; margin: 0; position: relative;}
 
 
 
@@ -1351,11 +1324,7 @@ border:4px solid #ffffff;}
 
 
 
-
-
-
-
-.productDetailsBtn{position:absolute;z-index:4;bottom:10%;width:120px;left:50%;margin-left:-60px;transition:all 0.7s ease 0s;transform:translateY(230%);opacity:0;text-align:center;font-family: 'MontserratRegular';}
+.productDetailsBtn{position:absolute;z-index:4;bottom:10%;width:120px;left:50%;margin-left:-60px;transition:all 0.7s ease 0s;transform:translateY(230%);opacity:0;text-align:center;font-family: 'MontserratLight';}
 
 
 
@@ -1401,17 +1370,13 @@ border:4px solid #ffffff;}
 
 .testimonial .title{text-align:center}
 
-
-
-.testimonial .title h2{display:inline-block;font-size:30px;border-bottom:solid 1px #535353;margin:0 0 40px;font-family: 'MontserratRegular';color:#535353;padding-bottom:5px;}
+.testimonial .title h2{display:inline-block;font-size:30px;border-bottom:solid 1px #535353;margin:0 0 40px;font-family: 'MontserratLight';color:#535353;padding-bottom:5px;}
 
 
 
 .testimonial .title h2 span{font-family: 'MontserratBold';}
 
-
-
-.testimonial .owl-item{font-size:18px;font-family: 'MontserratRegular';font-style:italic; line-height:32px; padding:0 100px; text-align:center;}
+.testimonial .owl-item{font-size:18px;font-family: 'MontserratLight';font-style:italic; line-height:32px; padding:0 100px; text-align:center;}
 
 
 
@@ -1437,17 +1402,13 @@ border:4px solid #ffffff;}
 
 .news-letter .title{text-align:center}
 
-
-
-.news-letter .title h2{color:#dbdbdb; display:inline-block; font-size:30px; border-bottom:solid 1px #eaeaea; margin:0 0 20px;padding-bottom:10px;font-family: 'MontserratRegular';}
+.news-letter .title h2{color:#dbdbdb; display:inline-block; font-size:30px; border-bottom:solid 1px #eaeaea; margin:0 0 20px;padding-bottom:10px;font-family: 'MontserratLight';}
 
 
 
 .news-letter .title h2 span{font-family: 'MontserratBold';}
 
-
-
-.news-letter-content{color:#dbdbdb;text-align:center;font-family: 'MontserratRegular'; margin-bottom:28px;}
+.news-letter-content{color:#dbdbdb;text-align:center;font-family: 'MontserratLight'; margin-bottom:28px;}
 
 
 
@@ -1461,9 +1422,7 @@ border:4px solid #ffffff;}
 
 .subscribeEmail{width:82%;float:left;}
 
-
-
-.newleter-content input  {width:100%;height:60px; padding:0 20px;  border:1px solid #fff!important; background:none;color:#b8b7b7;font-family: 'MontserratRegular';}
+.newleter-content input  {width:100%;height:60px; padding:0 20px;  border:1px solid #fff!important; background:none;color:#b8b7b7;font-family: 'MontserratLight';}
 
 
 
@@ -1553,9 +1512,7 @@ border-radius:100%; margin-bottom:15px;}
 
 .footer-title{color:#5d5d5d; font-size:18px; margin-bottom:10px; text-transform:uppercase}
 
-
-
-.footer .footer-content{color:#777777;font-family: 'MontserratRegular'; line-height:24px;}
+.footer .footer-content{color:#777777;font-family: 'MontserratLight'; line-height:24px;}
 
 
 
@@ -1569,9 +1526,7 @@ border-radius:100%; margin-bottom:15px;}
 
 .footer .footer-content li{line-height:30px;}
 
-
-
-.footer .footer-content li a {color:#777777;padding:0;text-transform: capitalize; transition:padding .5s;font-family: 'MontserratRegular';}
+.footer .footer-content li a {color:#777777;padding:0;text-transform: capitalize; transition:padding .5s;font-family: 'MontserratLight';}
 
 
 
@@ -1601,9 +1556,7 @@ border-radius:100%; margin-bottom:15px;}
 
 .footer-bottom .footer-content li {display:inline-block; list-style:none; margin:20px 0 0;}
 
-
-
-.footer-bottom .footer-content li a{line-height:30px;font-family: 'MontserratRegular';font-size:14px;margin-right:10px;padding-right:10px;color:#777777;position:relative;display:inline; padding-bottom:3px;}
+.footer-bottom .footer-content li a{line-height:30px;font-family: 'MontserratLight';font-size:14px;margin-right:10px;padding-right:10px;color:#777777;position:relative;display:inline; padding-bottom:3px;}
 
 
 
@@ -1621,9 +1574,7 @@ border-radius:100%; margin-bottom:15px;}
 
 .footer-bottom .footer-content li a:hover {color:#e4097f;text-decoration:none;}
 
-
-
-.copyright{background:#f7f7f7;font-family: 'MontserratRegular';padding:15px 0;font-size:13px;}
+.copyright{background:#f7f7f7;font-family: 'MontserratLight';padding:15px 0;font-size:13px;}
 
 
 
@@ -1685,9 +1636,7 @@ border-radius:100%;}
 
 /* -- Login Popup Css Start -- */
 
-
-
-.logpopup{font-family: 'MontserratRegular';}
+.logpopup{font-family: 'MontserratLight';}
 
 
 
@@ -1797,9 +1746,7 @@ border-radius:100%;}
 
 .forgotPasswordBox p a:hover{color:#000;}
 
-
-
-.specifyMeasur{color:#343434; padding-top:10px;font-family: 'MontserratRegular';}
+.specifyMeasur{color:#343434; padding-top:10px;font-family: 'MontserratLight';}
 
 
 
@@ -1873,9 +1820,7 @@ border-radius:100%;}
 
 .signUpPopupBox .acceptTerms input[type="checkbox"]:checked + label span {background: url(../images/check.jpg) no-repeat center center;width:17px;height:17px;vertical-align: middle;}
 
-
-
-.signUpPopupBox .acceptTerms label{color:#343434;font-size:14px;font-family: 'MontserratRegular';transition:all 0.3s ease 0s;font-weight:300;cursor:pointer;}
+.signUpPopupBox .acceptTerms label{color:#343434;font-size:14px;font-family: 'MontserratLight';transition:all 0.3s ease 0s;font-weight:300;cursor:pointer;}
 
 
 
@@ -1891,11 +1836,7 @@ border-radius:100%;}
 
 
 
-
-
-
-
-.enteEmailTxt{color:#909090;font-size:12px;font-family: 'MontserratRegular';line-height:14px;font-style:italic;}
+.enteEmailTxt{color:#909090;font-size:12px;font-family: 'MontserratLight';line-height:14px;font-style:italic;}
 
 
 
@@ -1931,7 +1872,7 @@ p.enteEmailTxt{margin-bottom:10px;}
 
 
 
-.breadcrumbs{margin:15px 0;color:#010101;font-size:12px;font-family: 'MontserratRegular';}
+.breadcrumbs{margin:15px 0;color:#010101;font-size:12px;font-family: 'MontserratLight';}
 
 
 
@@ -1993,9 +1934,7 @@ p.enteEmailTxt{margin-bottom:10px;}
 
 .filterItems input[type="checkbox"]:checked + label span {background: url(../images/check.jpg) no-repeat center center;width:17px;height:17px;vertical-align: middle;}
 
-
-
-.filterItems li label{color:#000000;font-size:15px;font-family: 'MontserratRegular';transition:all 0.3s ease 0s;font-weight:300;cursor:pointer;}
+.filterItems li label{color:#000000;font-size:15px;font-family: 'MontserratLight';transition:all 0.3s ease 0s;font-weight:300;cursor:pointer;}
 
 
 
@@ -2019,11 +1958,7 @@ p.enteEmailTxt{margin-bottom:10px;}
 
 
 
-
-
-
-
-.innerRight h1.page-title{colro:#010101;font-size:30px;font-family: 'MontserratRegular';text-transform:uppercase;}
+.innerRight h1.page-title{colro:#010101;font-size:30px;font-family: 'MontserratLight';text-transform:uppercase;}
 
 
 
@@ -2045,17 +1980,11 @@ p.enteEmailTxt{margin-bottom:10px;}
 
 .coutureBannerBtmTxt h5{font-size:16px;}
 
-
-
-.coutureBannerBtmTxt p{font-size:14px;font-family: 'MontserratRegular';line-height:20px;}
-
+.coutureBannerBtmTxt p{font-size:14px;font-family: 'MontserratLight';line-height:20px;}
 
 
 
-
-
-
-.filterRow{width:100%;color:#010101;font-family: 'MontserratRegular';text-align:right;margin-bottom:20px;}
+.filterRow{width:100%;color:#010101;font-family: 'MontserratLight';text-align:right;margin-bottom:20px;}
 
 
 
@@ -2085,9 +2014,7 @@ p.enteEmailTxt{margin-bottom:10px;}
 
 .shortByDropDown ul li:last-child{border-bottom:0;}
 
-
-
-.shortByDropDown ul li a{color:#333;display:block;font-size: 12px;padding:2px 10px;text-transform:none;font-family: 'MontserratRegular';}
+.shortByDropDown ul li a{color:#333;display:block;font-size: 12px;padding:2px 10px;text-transform:none;font-family: 'MontserratLight';}
 
 
 
@@ -2145,9 +2072,7 @@ p.enteEmailTxt{margin-bottom:10px;}
 
 .orderDiscription{width:50%;float:left;}
 
-
-
-.orderDiscription p{color:#343434;font-size:15px;font-family: 'MontserratRegular';margin-bottom:15px;}
+.orderDiscription p{color:#343434;font-size:15px;font-family: 'MontserratLight';margin-bottom:15px;}
 
 
 
@@ -2161,9 +2086,7 @@ p.enteEmailTxt{margin-bottom:10px;}
 
 .selectColorBox span{float:left;line-height:38px;width:58px;}
 
-
-
-.selectColorBox .shortByBox{font-family: 'MontserratRegular';color:#646464;font-size:12px;border:1px solid #dfdfdf;}
+.selectColorBox .shortByBox{font-family: 'MontserratLight';color:#646464;font-size:12px;border:1px solid #dfdfdf;}
 
 
 
@@ -2189,9 +2112,7 @@ p.enteEmailTxt{margin-bottom:10px;}
 
 .sizeBox{float:left;width:33.3%;height:39px;text-align:center;line-height:35px;}
 
-
-
-.sizeBox a{color:#646464;font-family: 'MontserratRegular';font-size:12px;display:block;margin-right:5px;background:#f7f7f7;border:1px solid #dfdfdf;}
+.sizeBox a{color:#646464;font-family: 'MontserratLight';font-size:12px;display:block;margin-right:5px;background:#f7f7f7;border:1px solid #dfdfdf;}
 
 
 
@@ -2213,9 +2134,7 @@ p.enteEmailTxt{margin-bottom:10px;}
 
 .selectSizeRight span:first-child{width:40%;}
 
-
-
-.selectSizeRight span a{color:#313131;text-transform:uppercase;font-size:11px;font-family: 'MontserratRegular';}
+.selectSizeRight span a{color:#313131;text-transform:uppercase;font-size:11px;font-family: 'MontserratLight';}
 
 
 
@@ -2245,9 +2164,7 @@ p.enteEmailTxt{margin-bottom:10px;}
 
 .ViewReview{width:100%;padding-right:10%;margin-top:15px;}
 
-
-
-.ViewReview a{color:#e4097f;font-family:14px;font-family: 'MontserratRegular';text-transform:uppercase;}
+.ViewReview a{color:#e4097f;font-family:14px;font-family: 'MontserratLight';text-transform:uppercase;}
 
 
 
@@ -2265,9 +2182,7 @@ p.enteEmailTxt{margin-bottom:10px;}
 
 .orderRatingAmt .buyNowBtn:hover{text-decoration:none; background:#555;color:#fff;border:1px solid #666666;}
 
-
-
-.codBox{width:85%;padding-top:25px;font-family: 'MontserratRegular';margin-left:15%;position:relative;}
+.codBox{width:85%;padding-top:25px;font-family: 'MontserratLight';margin-left:15%;position:relative;}
 
 
 
@@ -2341,9 +2256,7 @@ p.enteEmailTxt{margin-bottom:10px;}
 
 .productDetailRight h3{color:#343434;font-size:18px;font-family: 'MontserratRegular';margin:10px 0px 20px;text-transform:uppercase;border-bottom:2px solid #f1f1f1;padding-bottom:10px;padding-right:25px;}
 
-
-
-.productDetailRight h3 span{color:#cf4141;font-size:14px;font-weight:300;text-transform:none;font-family: 'MontserratRegular';}
+.productDetailRight h3 span{color:#cf4141;font-size:14px;font-weight:300;text-transform:none;font-family: 'MontserratLight';}
 
 
 
@@ -2369,17 +2282,13 @@ p.enteEmailTxt{margin-bottom:10px;}
 
 .productOption input[type="radio"]:checked + label span {background: url(../images/checkRadio.png) no-repeat center center;width:18px;height:18px;vertical-align: middle;}
 
-
-
-.productOption li label{color:#343434;font-size:15px;font-family: 'MontserratRegular';transition:all 0.3s ease 0s;font-weight:300;cursor:pointer;}
+.productOption li label{color:#343434;font-size:15px;font-family: 'MontserratLight';transition:all 0.3s ease 0s;font-weight:300;cursor:pointer;}
 
 
 
 .productOption li label:hover{color:#e4097f;}
 
-
-
-.productOption li .noExtraCharg{color:#cf4141;font-size:15px;font-family: 'MontserratRegular'; padding-left:18px;}
+.productOption li .noExtraCharg{color:#cf4141;font-size:15px;font-family: 'MontserratLight'; padding-left:18px;}
 
 
 
@@ -2441,9 +2350,7 @@ p.enteEmailTxt{margin-bottom:10px;}
 
 .tabSection{padding-top:30px;padding-bottom:30px;}
 
-
-
-.tabSection p{margin-bottom:15px;font-family: 'MontserratRegular';line-height:25px;}
+.tabSection p{margin-bottom:15px;font-family: 'MontserratLight';line-height:25px;}
 
 
 
@@ -2567,7 +2474,7 @@ div.required .control-label::before {color: #f00; content: "* ";}
 
 
 
-.rTableHead{background-color:#f4f4f4;color:#333;font-size:16px;text-transform:uppercase;font-family: "MontserratLight";width:20%;}
+.rTableHead{background-color:#f4f4f4;color:#333;font-size:16px;text-transform:uppercase;font-family: "MontserratLight";width:16%;}
 
 
 
@@ -2817,9 +2724,7 @@ p.required{width:100%;color:#ee372a;text-align:right;margin-bottom:0px;}
 
 .myAccountLeft ul li:last-child{border-bottom:0px;}
 
-
-
-.myAccountLeft ul li a{color:#000000;font-size:15px;font-family: 'MontserratRegular';transition:all 0.3s ease 0s;font-weight:300;display:block;}
+.myAccountLeft ul li a{color:#000000;font-size:15px;font-family: 'MontserratLight';transition:all 0.3s ease 0s;font-weight:300;display:block;}
 
 
 
@@ -3069,9 +2974,7 @@ p.required{width:100%;color:#ee372a;text-align:right;margin-bottom:0px;}
 
 #store-area h3{font-size:16px;margin-top:10px;color:#343434;font-family: 'MontserratRegular';margin-bottom:5px;}
 
-
-
-#store-area .item-inner{color:#777777;font-family: 'MontserratRegular';font-size:14px;margin-bottom:10px;}
+#store-area .item-inner{color:#777777;font-family: 'MontserratLight';font-size:14px;margin-bottom:10px;}
 
 
 
@@ -3129,9 +3032,7 @@ p.required{width:100%;color:#ee372a;text-align:right;margin-bottom:0px;}
 
 .address-box{background:#f9f9f9;margin-left:-15px;min-height:300px; padding:20px;}
 
-
-
-.address-box p{font-family: 'MontserratRegular';}
+.address-box p{font-family: 'MontserratLight';}
 
 
 
@@ -3187,11 +3088,7 @@ p.required{width:100%;color:#ee372a;text-align:right;margin-bottom:0px;}
 
 
 
-
-
-
-
-.contactPage{font-family: 'MontserratRegular';}
+.contactPage{font-family: 'MontserratLight';}
 
 
 
@@ -3277,9 +3174,7 @@ p.required{width:100%;color:#ee372a;text-align:right;margin-bottom:0px;}
 
 .siteMapPage li{}
 
-
-
-.siteMapPage li a{color:#777777;line-height:24px;font-family: 'MontserratRegular';position:relative;padding-left:15px;display:block;}
+.siteMapPage li a{color:#777777;line-height:24px;font-family: 'MontserratLight';position:relative;padding-left:15px;display:block;}
 
 
 

@@ -9,10 +9,10 @@
     }else{
   ?>
   <div class="cartAddedBox">
-    <div class="cartTotalPrice"> Total : <span><i class="fa fa-inr"></i><?php echo $total_price;?></span> </div>
+    <div class="cartTotalPrice"> Total : <span><i class="fa fa-inr"></i> <?php echo $total_price;?></span> </div>
     <div class="buttons"> 
       <a rel="nofollow" title="View my shopping cart" href="<?php echo base_url("cart");?>" class="websiteBtn">View cart</a> 
-      <a rel="nofollow" title="View my shopping cart" href="#" class="websiteBtn" id="button_goto_cart">Checkout</a> 
+      <a rel="nofollow" title="View my shopping cart" href="<?php echo base_url("checkout");?>" class="websiteBtn" id="button_goto_cart">Checkout</a> 
     </div>
   </div>
   <?php

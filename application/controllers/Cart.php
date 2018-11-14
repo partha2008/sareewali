@@ -4,6 +4,7 @@
 	class Cart extends CI_Controller {
 		
 		public $data = array();
+		public $loggedin_method_arr = array('index');
 		
 		public function __construct(){
 			parent::__construct();
@@ -17,7 +18,34 @@
 			$this->load->model('cartdata');
 
 			$this->data = $this->defaultdata->getFrontendDefaultData();
+
+			if(in_array($this->data['tot_segments'][2], $this->loggedin_method_arr))
+			{
+				if($this->defaultdata->is_user_session_active() == 0)
+				{
+					redirect(base_url());
+				}
+			}
 		}	
+
+		public function index(){
+			$this->load->library('breadcrumb');
+
+			$this->breadcrumb->add('Home', base_url());
+			$this->breadcrumb->add('Cart', base_url());		
+			$this->data['breadcrumb'] = $this->breadcrumb->output();
+
+			$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
+
+			$prd_image = $this->productdata->grab_product_image(array("product_id" => $cart_data[0]->product_id, "is_featured" => "Y"));
+
+			$this->data['prd_image'] = $prd_image;
+			$this->data['cart_data'] = $cart_data;
+			$this->data['sub_total'] = $this->get_cart_sub_total();
+			$this->data['basket'] = $this->load->view('partials/basket', $this->data, true);
+
+			$this->load->view('cart', $this->data); 
+		}
 
 		public function add_to_cart(){
 			$post_data = $this->input->post();
@@ -25,10 +53,10 @@
 			$slug = $post_data['data'];
 
 			$product_data = $this->productdata->grab_product(array("slug" => $slug));
-			$cart_data = $this->cartdata->grab_cart(array("prd_name" => $product_data[0]->name, "user_id" => $this->session->userdata('user_id'), "status" => "N"));
+			$cart_data = $this->cartdata->grab_cart(array("prd_slug" => $product_data[0]->slug, "user_id" => $this->session->userdata('user_id'), "status" => "N"));
 
 			if(!empty($cart_data)){
-				$this->cartdata->update_cart(array("prd_name" => $product_data[0]->name, "user_id" => $this->session->userdata('user_id'), "status" => "N"));
+				$this->cartdata->update_cart(array("prd_slug" => $product_data[0]->slug, "user_id" => $this->session->userdata('user_id'), "status" => "N"));
 
 				$response['status'] = true;
 				$response['data'] = $product_data[0]->name;
@@ -36,10 +64,12 @@
 			}else{
 				$insert_data = array(
 					"prd_name" => $product_data[0]->name,
+					"prd_slug" => $product_data[0]->slug,
 					"prd_price" => $product_data[0]->price,
 					"prd_discounted_price" => $product_data[0]->discounted_price,
 					"prd_count" => 1,
-					"user_id" => $this->session->userdata('user_id')
+					"user_id" => $this->session->userdata('user_id'),
+					"product_id" => $product_data[0]->product_id
 				);
 				$this->cartdata->insert_cart($insert_data);
 
@@ -70,6 +100,44 @@
 			$response['html'] = $this->load->view('partials/cart', $this->data, true);
 
 			echo json_encode($response);			
-		}	
+		}
+
+		public function get_cart_sub_total(){
+			$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
+
+			$sub_total = 0;
+			if(!empty($cart_data)){
+				foreach ($cart_data as $key => $value) {
+					if((int)$value->prd_discounted_price > 0){
+		              	$total_price = $value->prd_discounted_price*$value->prd_count;
+		            }else{
+		              	$total_price = $value->prd_price*$value->prd_count;
+		            }
+					$sub_total += $total_price;
+				}
+			}
+
+			return number_format($sub_total, 2);
+		}
+
+		public function update_cart(){
+			// operation
+
+
+
+			$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
+
+			$prd_image = $this->productdata->grab_product_image(array("product_id" => $cart_data[0]->product_id, "is_featured" => "Y"));
+
+			$this->data['prd_image'] = $prd_image;
+			$this->data['cart_data'] = $cart_data;
+			$this->data['sub_total'] = $this->get_cart_sub_total();
+			
+			$response['status'] = true;
+			$response['msg'] = 'Your cart updated successfully.';
+			$response['data'] = $this->load->view('partials/basket', $this->data, true);
+
+			echo json_encode($response);
+		}
 	}
 ?>

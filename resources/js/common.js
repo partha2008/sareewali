@@ -381,3 +381,12 @@ function addToCart(slug, is_logged_in, redirect){
         }
     });
 }
+
+function update_cart(mode, cart_id){
+    $.post(BASEPATH+"cart/update_cart", {mode: mode, cart_id: cart_id}, function(data){
+        var response = JSON.parse(data);
+        if(response.status){
+            $(".page-content").html(response.data);
+        }
+    });
+}
