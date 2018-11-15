@@ -47,6 +47,10 @@
       </div>
       <?php
         }
+      }else{
+      ?>
+      <div class="rTableRow"><div class="rTableCell">You cart is empty</div></div>
+      <?php
       }
       ?>            
     </div>

@@ -7,6 +7,11 @@
   <p class="cardEmpty">You have no items in your shopping cart.</p>
   <?php
     }else{
+      if($total_price == 0){
+  ?>
+  <p class="cardEmpty">You have no items in your shopping cart.</p>
+  <?php
+      }else{
   ?>
   <div class="cartAddedBox">
     <div class="cartTotalPrice"> Total : <span><i class="fa fa-inr"></i> <?php echo $total_price;?></span> </div>
@@ -16,6 +21,7 @@
     </div>
   </div>
   <?php
+      }
     }
   ?>
 </ul>

@@ -386,6 +386,7 @@ function update_cart(mode, cart_id){
     $.post(BASEPATH+"cart/update_cart", {mode: mode, cart_id: cart_id}, function(data){
         var response = JSON.parse(data);
         if(response.status){
+            $(".topCart").html(response.html);
             $(".page-content").html(response.data);
         }
     });

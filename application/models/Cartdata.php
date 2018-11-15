@@ -35,6 +35,14 @@ class Cartdata extends CI_Model {
 		
 		return true;
 	}
+
+	public function update_cart_decrease($cond = array()){
+		$this->db->set('prd_count', 'prd_count-1', FALSE);
+		$this->db->where($cond);
+		$this->db->update(TABLE_CART);
+		
+		return true;
+	}
 	
 	public function delete_cart($cond = array()){
 		$this->db->where($cond);
