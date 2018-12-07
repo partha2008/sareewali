@@ -391,3 +391,9 @@ function update_cart(mode, cart_id){
         }
     });
 }
+
+function populateStateByCountry(country_id){
+    $.post(BASEPATH+"home/get_state_by_country", {country_id: country_id}, function(data){
+        $("#state").html(data);
+    });
+}

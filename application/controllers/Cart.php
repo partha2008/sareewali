@@ -60,6 +60,15 @@
 			$this->breadcrumb->add('Checkout', base_url());		
 			$this->data['breadcrumb'] = $this->breadcrumb->output();
 
+			$user = $this->userdata->grab_user_details(array("user_id" => $this->session->userdata('user_id')));
+			$this->data['user'] = $user[0];
+
+			$country = $this->defaultdata->grabCountryData();
+			$this->data['country'] = $country;
+
+			$this->data['sub_total'] = $this->get_cart_sub_total();
+			$this->data['grand_total'] = $this->get_cart_grand_total();
+
 			$this->load->view('checkout', $this->data); 
 		}
 
@@ -103,6 +112,24 @@
 		}
 
 		public function get_cart_sub_total(){
+			$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
+
+			$sub_total = 0;
+			if(!empty($cart_data)){
+				foreach ($cart_data as $key => $value) {
+					if((int)$value->prd_discounted_price > 0){
+		              	$total_price = $value->prd_discounted_price*$value->prd_count;
+		            }else{
+		              	$total_price = $value->prd_price*$value->prd_count;
+		            }
+					$sub_total += $total_price;
+				}
+			}
+
+			return number_format($sub_total, 2);
+		}
+
+		public function get_cart_grand_total(){
 			$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
 
 			$sub_total = 0;

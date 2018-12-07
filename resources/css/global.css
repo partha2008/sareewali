@@ -3851,3 +3851,26 @@ text-align: center;transition: all 0.3s linear 0s;text-transform: uppercase; mar
 .swal-button:active{
     background-color: #e4097f;
 }
+
+.register-bottom-block {
+    width: 100%;
+    display: inline-block;
+    clear: both;
+    padding: 40px 15px;
+    margin: 40px 0 20px 0;
+    max-width: 100%;
+    clear: both;
+    background: #f8f8f8;
+}
+
+.register-main-block .control-label {
+    width: 100%;
+    text-align: left;
+    font-weight: bold;
+}
+
+.register-main-block .form-control {
+    width: 100%;
+    text-align: left;
+    max-width: 100%;
+}
