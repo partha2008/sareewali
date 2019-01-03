@@ -95,6 +95,10 @@ $route['admin/banner-list'] = 'admin/banner/banner_list';
 $route['admin/banner-add'] = 'admin/banner/banner_add';
 $route['admin/banner-edit/(:num)'] = 'admin/banner/banner_edit/$1';
 
+$route['admin/coupon-list'] = 'admin/coupon/coupon_list';
+$route['admin/coupon-add'] = 'admin/coupon/coupon_add';
+$route['admin/coupon-edit/(:num)'] = 'admin/coupon/coupon_edit/$1';
+
 $route['admin/review-list'] = 'admin/review/review_list';
 $route['admin/review-add'] = 'admin/review/review_add';
 $route['admin/review-edit/(:num)'] = 'admin/review/review_edit/$1';

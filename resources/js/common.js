@@ -397,3 +397,14 @@ function populateStateByCountry(country_id){
         $("#state").html(data);
     });
 }
+
+function applyCoupon(){
+    var coupon = $("#coupon_code").val();
+    $.post(BASEPATH+"cart/get_discount", {coupon: coupon}, function(data){
+        var response = JSON.parse(data);
+
+        if(!response.status){
+            $("#coupon_err").html(response.msgText);
+        }        
+    });
+}

@@ -69,18 +69,7 @@
 <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
 <div class="row">
   <div class="col-md-5 col-md-offset-7">
-    <div class="rTable itemTotaleBox">
-      <div class="rTableBody">
-        <div class="rTableRow subTotalRow">
-          <div class="rTableCell"> Sub-Total </div>
-          <div class="rTableCell text-right"> <span><i class="fa fa-inr"></i><?php echo $sub_total;?></span> </div>
-        </div>
-        <div class="rTableRow grandTotatlRow">
-          <div class="rTableCell"> Grand Total </div>
-          <div class="rTableCell text-right"> <span><i class="fa fa-inr"></i><?php echo $sub_total;?></span> </div>
-        </div>
-      </div>
-    </div>
+    <?php echo $price_chart;?>
     <div class="pull-right"> <a class="websiteBtn" href="<?php echo base_url("checkout");?>"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Checkout</a> </div>
   </div>
 </div>

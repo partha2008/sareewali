@@ -16,6 +16,7 @@
 			$this->load->model('adsdata');
 			$this->load->model('reviewdata');
 			$this->load->model('cartdata');
+			$this->load->model('coupondata');
 
 			$this->data = $this->defaultdata->getFrontendDefaultData();
 
@@ -48,6 +49,9 @@
 			}			
 			$this->data['cart_data'] = $cart_data;
 			$this->data['sub_total'] = $this->get_cart_sub_total();
+			$this->data['discount'] = $this->get_discount_amount();
+			$this->data['grand_total'] = $this->get_cart_grand_total();
+			$this->data['price_chart'] = $this->load->view('partials/price_chart', $this->data, true);
 			$this->data['basket'] = $this->load->view('partials/basket', $this->data, true);
 
 			$this->load->view('cart', $this->data); 
@@ -67,7 +71,9 @@
 			$this->data['country'] = $country;
 
 			$this->data['sub_total'] = $this->get_cart_sub_total();
+			$this->data['discount'] = $this->get_discount_amount();
 			$this->data['grand_total'] = $this->get_cart_grand_total();
+			$this->data['price_chart'] = $this->load->view('partials/price_chart', $this->data, true);
 
 			$this->load->view('checkout', $this->data); 
 		}
@@ -126,7 +132,7 @@
 				}
 			}
 
-			return number_format($sub_total, 2);
+			return $sub_total;
 		}
 
 		public function get_cart_grand_total(){
@@ -144,7 +150,9 @@
 				}
 			}
 
-			return number_format($sub_total, 2);
+			$result = $sub_total - $this->get_discount_amount();
+
+			return number_format($result, 2);
 		}
 
 		public function get_cart_item_count(){
@@ -189,6 +197,37 @@
 			$response['msg'] = 'Your cart updated successfully.';
 			$response['data'] = $this->load->view('partials/basket', $this->data, true);
 			$response['html'] = $this->load->view('partials/cart', $this->data, true);
+
+			echo json_encode($response);
+		}
+
+		public function get_discount_amount(){
+			$coupon_discount = $this->session->userdata('active_coupon');
+			
+			$coupon_discount_amount = $this->get_cart_sub_total()*$coupon_discount/100;
+
+			return $coupon_discount_amount;
+		}
+
+		public function get_discount(){
+			$coupon = $this->input->post('coupon');
+
+			$coupon_data = $this->coupondata->grab_coupon(array("code" => $coupon));
+
+			if(!empty($coupon_data)){
+				$this->session->set_userdata('active_coupon', $coupon_data[0]->discount);
+
+				$this->data['sub_total'] = $this->get_cart_sub_total();
+				$this->data['grand_total'] = $this->get_cart_grand_total();
+				$this->data['discount'] = $this->get_discount_amount();
+				$this->data['price_chart'] = $this->load->view('partials/price_chart', $this->data, true);
+
+				$response["status"] = true;
+				$response["msgText"] = "The given Coupon exists";
+			}else{
+				$response["status"] = false;
+				$response["msgText"] = "The given Coupon does not exists";
+			}
 
 			echo json_encode($response);
 		}

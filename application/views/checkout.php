@@ -179,46 +179,18 @@
       
 
                   <div class="register-bottom-block clearfix">
-
                     <div class="col-sm-6">
-
                         <div class="couponCodeBox"> 
-
-                          <span class="success"></span> <span class="error"></span>
-
-                          <input id="coupon_code" name="coupon_code" value="" type="text" placeholder="Apply coupons">
-
-                          <button id="btn-apply-coupon">Apply</button>
-
+                          <input id="coupon_code" type="text" placeholder="Apply coupons">
+                          <button type="button" id="btn-apply-coupon" onclick="applyCoupon();">Apply</button>
                           <div class="clearfix"></div>
-
                         </div>
-
+                        <span class="error" id="coupon_err"></span>
             
 
-                        <div class="rTable itemTotaleBox">
-
-                            <div class="rTableBody">
-
-                              <div class="rTableRow subTotalRow">
-
-                                <div class="rTableCell"> Sub-Total </div>
-
-                                <div class="rTableCell text-right"> <span><i class="fa fa-inr"></i> <?php echo $sub_total;?></span> </div>
-
-                              </div>
-
-                              <div class="rTableRow grandTotatlRow">
-
-                                <div class="rTableCell"> Grand Total </div>
-
-                                <div class="rTableCell text-right"> <span><i class="fa fa-inr"></i> <?php echo $grand_total;?></span> </div>
-
-                              </div>
-
-                            </div>
-
-                          </div>
+                        <?php
+                          echo $price_chart;
+                        ?>
 
                   </div>
 
