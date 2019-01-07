@@ -188,7 +188,7 @@ class Defaultdata extends CI_Model {
 	}
 	public function setFrontendLoginSession($user_data = array())
 	{
-		if(count($user_data) > 0)
+		if(count((array)$user_data) > 0)
 		{
 			$this->session->set_userdata('user_id', $user_data->user_id);
 			$this->session->set_userdata('user_email', $user_data->email);
