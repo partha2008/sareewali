@@ -183,6 +183,7 @@
                         <div class="couponCodeBox"> 
                           <input id="coupon_code" type="text" placeholder="Apply coupons">
                           <button type="button" id="btn-apply-coupon" onclick="applyCoupon();">Apply</button>
+                          <a href="javascript:void(0)" class="remove_coupon_cls"><i class="fa fa-search fa-times" aria-hidden="true"></i></a>
                           <div class="clearfix"></div>
                         </div>
                         <span class="error" id="coupon_err"></span>

@@ -3874,3 +3874,21 @@ text-align: center;transition: all 0.3s linear 0s;text-transform: uppercase; mar
     text-align: left;
     max-width: 100%;
 }
+
+.remove_coupon_cls{
+    display: inline-block;
+    float: left;
+    margin: 4px 30px;
+    background: #505050;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    text-align: center;
+    color: #fff;
+    line-height: 30px;
+}
+
+.remove_coupon_cls:hover{
+    color: #fff;
+    background: #000000;
+}
