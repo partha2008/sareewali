@@ -399,12 +399,29 @@ function populateStateByCountry(country_id){
 }
 
 function applyCoupon(){
+    $("#btn-apply-coupon").prop('disabled', true); 
+    $("#price_chart").append('<div id="loading_spinner" class="loading">Loading&#8230;</div>');
+
     var coupon = $("#coupon_code").val();
     $.post(BASEPATH+"cart/get_discount", {coupon: coupon}, function(data){
         var response = JSON.parse(data);
+        
+        $("#btn-apply-coupon").prop('disabled', false);  
 
-        if(!response.status){
+        if(response.status){       
+            $("#coupon_err").html('');
+        }else{
             $("#coupon_err").html(response.msgText);
-        }        
+        }    
+        $("#price_chart").html(response.data);    
+    });
+}
+
+function cancelCoupon(){
+    $("#price_chart").append('<div id="loading_spinner" class="loading">Loading&#8230;</div>');
+    $.post(BASEPATH+"cart/cancel_discount", function(data){
+        var response = JSON.parse(data);
+        $("#price_chart").html(response.data);
+        $("#coupon_code").val("");
     });
 }

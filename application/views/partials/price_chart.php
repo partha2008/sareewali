@@ -9,7 +9,7 @@
       ?>
       <div class="rTableRow subTotalRow">
         <div class="rTableCell"> Discount (<?php echo $this->session->userdata('active_coupon').'%';?>)</div>
-        <div class="rTableCell text-right"> <span><i class="fa fa-inr"></i> <?php echo $discount;?></span> </div>
+        <div class="rTableCell text-right"> <span><i class="fa fa-inr"></i> <?php echo number_format($discount, 2);?></span> </div>
       </div>
       <?php
         }

@@ -181,18 +181,18 @@
                   <div class="register-bottom-block clearfix">
                     <div class="col-sm-6">
                         <div class="couponCodeBox"> 
-                          <input id="coupon_code" type="text" placeholder="Apply coupons">
+                          <input id="coupon_code" type="text" value="<?php echo $this->session->userdata('active_coupon_code');?>" placeholder="Apply coupons">
                           <button type="button" id="btn-apply-coupon" onclick="applyCoupon();">Apply</button>
-                          <a href="javascript:void(0)" class="remove_coupon_cls"><i class="fa fa-search fa-times" aria-hidden="true"></i></a>
+                          <a href="javascript:void(0)" onclick="cancelCoupon();" class="remove_coupon_cls"><i class="fa fa-search fa-times" aria-hidden="true"></i></a>
                           <div class="clearfix"></div>
                         </div>
                         <span class="error" id="coupon_err"></span>
             
-
+                        <span id="price_chart">
                         <?php
                           echo $price_chart;
                         ?>
-
+                      </span>
                   </div>
 
                     <div class="col-sm-6">

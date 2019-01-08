@@ -215,19 +215,44 @@
 			$coupon_data = $this->coupondata->grab_coupon(array("code" => $coupon));
 
 			if(!empty($coupon_data)){
+				$this->session->set_userdata('active_coupon_code', $coupon);
 				$this->session->set_userdata('active_coupon', $coupon_data[0]->discount);
 
 				$this->data['sub_total'] = $this->get_cart_sub_total();
 				$this->data['grand_total'] = $this->get_cart_grand_total();
 				$this->data['discount'] = $this->get_discount_amount();
-				$this->data['price_chart'] = $this->load->view('partials/price_chart', $this->data, true);
+				$this->data['price_chart'] = $price_chart = $this->load->view('partials/price_chart', $this->data, true);
 
 				$response["status"] = true;
+				$response["data"] = $price_chart;
 				$response["msgText"] = "The given Coupon exists";
 			}else{
+				$this->data['sub_total'] = $this->get_cart_sub_total();
+				$this->data['grand_total'] = $this->get_cart_grand_total();
+				$this->data['discount'] = $this->get_discount_amount();
+				$this->data['price_chart'] = $price_chart = $this->load->view('partials/price_chart', $this->data, true);
+
+
 				$response["status"] = false;
+				$response["data"] = $price_chart;
 				$response["msgText"] = "The given Coupon does not exists";
 			}
+
+			echo json_encode($response);
+		}
+
+		public function cancel_discount(){
+			$this->session->unset_userdata('active_coupon');
+			$this->session->unset_userdata('active_coupon_code');
+
+			$this->data['sub_total'] = $this->get_cart_sub_total();
+			$this->data['grand_total'] = $this->get_cart_grand_total();
+			$this->data['discount'] = $this->get_discount_amount();
+			$this->data['price_chart'] = $price_chart = $this->load->view('partials/price_chart', $this->data, true);
+
+			$response["status"] = true;
+			$response["data"] = $price_chart;
+			$response["msgText"] = "The given Coupon cancelled";
 
 			echo json_encode($response);
 		}
