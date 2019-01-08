@@ -58,9 +58,11 @@
 </div>
 <div class="continueShopSection">
   <div class="col-sm-6 couponCodeBox"> <span class="success"></span> <span class="error"></span>
-    <input id="coupon_code" name="coupon_code" value="" type="text" placeholder="Apply coupons" autocomplete="off">
-    <button id="btn-apply-coupon">Apply</button>
+    <input id="coupon_code" name="coupon_code" value="<?php echo $this->session->userdata('active_coupon_code');?>" type="text" placeholder="Apply coupons" autocomplete="off">
+    <button id="btn-apply-coupon" onclick="applyCoupon();">Apply</button>
+    <a href="javascript:void(0)" onclick="cancelCoupon();" class="remove_coupon_cls"><i class="fa fa-search fa-times" aria-hidden="true"></i></a>
     <div class="clearfix"></div>
+    <span class="error" id="coupon_err"></span>
   </div>
   <div class="col-sm-6 text-right"> <a class="websiteBtn" href="<?php echo base_url();?>"> Continue Shopping <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a> </div>
   <div class="clearfix"></div>
@@ -69,7 +71,9 @@
 <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
 <div class="row">
   <div class="col-md-5 col-md-offset-7">
+    <span id="price_chart">
     <?php echo $price_chart;?>
+  </span>
     <div class="pull-right"> <a class="websiteBtn" href="<?php echo base_url("checkout");?>"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Checkout</a> </div>
   </div>
 </div>

@@ -120,7 +120,7 @@
 
                         <div class="form-group required">
 
-                          <label for="input-postcode" class="col-sm-2 control-label">Post Code</label>
+                          <label for="input-postcode" class="col-sm-2 control-label">Post Code <span class="" style="border:0;color:#3B5998;background:transparent;"><i class="fa fa-exclamation-circle fa-lg" data-toggle="tooltip" title="Please provide a valid pin code to ship the product. You can check the pin code for availability before adding the product to cart." data-placement="top"></i></span></label>
 
                           <div class="col-sm-12">
 
