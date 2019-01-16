@@ -149,7 +149,10 @@ class Defaultdata extends CI_Model {
 		
 		return $query->row();
 	}
-	public function grabCountryData(){
+	public function grabCountryData($cond = array()){
+		if(!empty($cond)){
+			$this->db->where($cond);			
+		}
 		$query = $this->db->get(TABLE_COUNTRY);
 		
 		return $query->result();

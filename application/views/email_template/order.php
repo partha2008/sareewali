@@ -17,12 +17,12 @@
 
 
 <div style=" display:block; max-width:80%; clear:both; padding:15px 0px 0px 0px; margin:0px auto;">
-<h1 style="width:100%; padding:0px 0px 30px 0px; margin:0px; color:#e4097f; font-size:30px; font-weight:bold; clear:both;">Thanks for order!</h1>
+  <h1 style="width:100%; padding:0px 0px 30px 0px; margin:0px; color:#e4097f; font-size:30px; font-weight:bold; clear:both;">Thanks for order!</h1>
 
-<h2  style="width:100%; padding:0px 0px 20px 0px; margin:0px; color:#615e5e; font-size:20px; font-weight:normal; clear:both;">Alexandre, please find details of your order below:</h2>
-<div style="clear:both"></div>
+  <h2  style="width:100%; padding:0px 0px 20px 0px; margin:0px; color:#615e5e; font-size:20px; font-weight:normal; clear:both;"><?php echo $name;?>, please find details of your order below:</h2>
+  <div style="clear:both"></div>
 
-<table class="purchase" width="100%" cellpadding="0" cellspacing="0" style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; margin: 0; padding: 35px 0; width: 100%;">
+  <table class="purchase" width="100%" cellpadding="0" cellspacing="0" style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; margin: 0; padding: 35px 0; width: 100%;">
                         <tr>
                           <td colspan="2" style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; word-break: break-word;">
                             <table class="purchase_content" width="100%" cellpadding="0" cellspacing="0" style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; margin: 0; padding: 25px 0 0; width: 100%;">
@@ -63,63 +63,81 @@
                               <?php
                                 }
                               ?>
-                            </table>
+                              <tr>
+                                <td colspan="4" class="align-right" width="20%" style="box-sizing: border-box; color: #000000; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 15px; line-height: 18px; padding: 10px 0; word-break: break-word;font-weight: bold;" align="right">Sub Total</td>
+                                <td class="align-right" width="20%" style="box-sizing: border-box; color: #000000; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 15px; line-height: 18px; padding: 10px 0; word-break: break-word;" align="right"><i class="fa fa-inr"></i> <?php echo $response->sub_total;?></td>
+                              </tr>
+                              <tr>
+                                <td colspan="4" class="align-right" width="20%" style="box-sizing: border-box; color: #000000; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 15px; line-height: 18px; padding: 10px 0; word-break: break-word;font-weight: bold;" align="right">Discount</td>
+                                <td class="align-right" width="20%" style="box-sizing: border-box; color: #000000; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 15px; line-height: 18px; padding: 10px 0; word-break: break-word;" align="right"><i class="fa fa-inr"></i> <?php echo $response->discount;?></td>
+                              </tr>
+                              <tr>
+                                <td colspan="4" class="align-right" width="20%" style="box-sizing: border-box; color: #000000; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 15px; line-height: 18px; padding: 10px 0; word-break: break-word;font-weight: bold;" align="right">Grand Total</td>
+                                <td class="align-right" width="20%" style="box-sizing: border-box; color: #000000; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 15px; line-height: 18px; padding: 10px 0; word-break: break-word;" align="right"><i class="fa fa-inr"></i> <?php echo $response->grand_total;?></td>
+                              </tr>
+                            </table>                            
                           </td>
                         </tr>
                       </table>
+                      <div style=" width:100%; display:block;max-width:80%; clear:both; padding:0 0px 32px 0px; margin:0 auto; background:url(<?php echo $boder;?>) no-repeat top center;">
+</div>
 
-<div style="clear:both"></div>
-<!----invoice-------->
-<!--<table class="purchase" width="100%" cellpadding="0" cellspacing="0" style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; margin: 0; padding: 35px 0; width: 100%;">
+<table class="purchase" width="100%" cellpadding="0" cellspacing="0" style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; margin: 0; padding: 35px 0; width: 100%;">
                         <tr>
                           <td colspan="2" style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; word-break: break-word;">
                             <table class="purchase_content" width="100%" cellpadding="0" cellspacing="0" style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; margin: 0; padding: 25px 0 0; width: 100%;">
                               <tr>
                                 <th class="purchase_heading" style="border-bottom-color: #EDEFF2; border-bottom-style: solid; border-bottom-width: 1px; box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; padding-bottom: 8px;">
-                                  <p style="box-sizing: border-box; color: #9BA2AB; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 12px; line-height: 1.5em; margin: 0;" align="left">Full Name</p>
+                                  <p style="box-sizing: border-box; color: #9BA2AB; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 12px; line-height: 1.5em; margin: 0;" align="left">Name</p>
+                                </th>
+                                <th class="purchase_heading" style="border-bottom-color: #EDEFF2; border-bottom-style: solid; border-bottom-width: 1px; box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; padding-bottom: 8px;">
+                                  <p class="align-right" style="box-sizing: border-box; color: #9BA2AB; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 12px; line-height: 1.5em; margin: 0;" align="right">Email</p>
                                 </th>
                                 <th class="purchase_heading" style="border-bottom-color: #EDEFF2; border-bottom-style: solid; border-bottom-width: 1px; box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; padding-bottom: 8px;">
                                   <p class="align-right" style="box-sizing: border-box; color: #9BA2AB; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 12px; line-height: 1.5em; margin: 0;" align="right">Phone Number</p>
                                 </th>
                               </tr>
                               <tr>
-                                <td width="60%" class="purchase_item" style="box-sizing: border-box; color: #74787E; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 15px; line-height: 18px; padding: 10px 0; word-break: break-word;"><?php echo $fullname;?></td>
-                                <td class="align-right" width="40%" style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; word-break: break-word;" align="right"><?php echo $phonenumber;?></td>
+                                <td width="30%" class="purchase_item" style="box-sizing: border-box; color: #74787E; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 15px; line-height: 18px; padding: 10px 0; word-break: break-word;"><?php echo $response->first_name.' '.$response->last_name;?></td>
+                                <td width="40%" class="purchase_item" style="box-sizing: border-box; color: #74787E; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 15px; line-height: 18px; padding: 10px 0; word-break: break-word;"><?php echo $response->email;?></td>
+                                <td class="align-right" width="30%" style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; word-break: break-word;" align="right"><?php echo $response->phone;?></td>
                               </tr>
                             </table>
                             <table class="purchase_content" width="100%" cellpadding="0" cellspacing="0" style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; margin: 0; padding: 25px 0 0; width: 100%;">
                               <tr>
                                 <th class="purchase_heading" style="border-bottom-color: #EDEFF2; border-bottom-style: solid; border-bottom-width: 1px; box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; padding-bottom: 8px;">
-                                  <p class="align-right" style="box-sizing: border-box; color: #9BA2AB; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 12px; line-height: 1.5em; margin: 0;" align="left">Message</p>
+                                  <p style="box-sizing: border-box; color: #9BA2AB; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 12px; line-height: 1.5em; margin: 0;" align="left">Address</p>
+                                </th>
+                              </tr>
+                              <tr>
+                                <td width="100%" class="purchase_item" style="box-sizing: border-box; color: #74787E; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 15px; line-height: 18px; padding: 10px 0; word-break: break-word;"><?php echo $response->address1.' '.$response->address2;?></td>
+                              </tr>
+                            </table>
+                            <table class="purchase_content" width="100%" cellpadding="0" cellspacing="0" style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; margin: 0; padding: 25px 0 0; width: 100%;">
+                              <tr>
+                                <th class="purchase_heading" style="border-bottom-color: #EDEFF2; border-bottom-style: solid; border-bottom-width: 1px; box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; padding-bottom: 8px;">
+                                  <p style="box-sizing: border-box; color: #9BA2AB; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 12px; line-height: 1.5em; margin: 0;" align="left">City</p>
                                 </th>
                                 <th class="purchase_heading" style="border-bottom-color: #EDEFF2; border-bottom-style: solid; border-bottom-width: 1px; box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; padding-bottom: 8px;">
-                                  <p style="box-sizing: border-box; color: #9BA2AB; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 12px; line-height: 1.5em; margin: 0;" align="right">Email Address</p>
+                                  <p style="box-sizing: border-box; color: #9BA2AB; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 12px; line-height: 1.5em; margin: 0;" align="left">Postcode</p>
+                                </th>
+                                <th class="purchase_heading" style="border-bottom-color: #EDEFF2; border-bottom-style: solid; border-bottom-width: 1px; box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; padding-bottom: 8px;">
+                                  <p style="box-sizing: border-box; color: #9BA2AB; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 12px; line-height: 1.5em; margin: 0;" align="left">State</p>
+                                </th>
+                                <th class="purchase_heading" style="border-bottom-color: #EDEFF2; border-bottom-style: solid; border-bottom-width: 1px; box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; padding-bottom: 8px;">
+                                  <p style="box-sizing: border-box; color: #9BA2AB; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 12px; line-height: 1.5em; margin: 0;" align="left">Country</p>
                                 </th>                                
                               </tr>
                               <tr>
-                                <td class="align-right" width="60%" style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; word-break: break-word;" align="left"><?php echo $message;?></td>
-                                <td width="40%" class="purchase_item" style="box-sizing: border-box; color: #74787E; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 15px; line-height: 18px; padding: 10px 0; word-break: break-word;vertical-align: top;"><?php echo $email;?></td>                                
+                              <td width="25%" class="purchase_item" style="box-sizing: border-box; color: #74787E; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 15px; line-height: 18px; padding: 10px 0; word-break: break-word;"><?php echo $response->city;?></td>
+                              <td width="25%" class="purchase_item" style="box-sizing: border-box; color: #74787E; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 15px; line-height: 18px; padding: 10px 0; word-break: break-word;"><?php echo $response->post_code;?></td>
+                              <td width="25%" class="purchase_item" style="box-sizing: border-box; color: #74787E; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 15px; line-height: 18px; padding: 10px 0; word-break: break-word;"><?php $state = $this->defaultdata->grabStateData(array("state_id" => $response->state_id));echo $state[0]->name;?></td>
+                              <td width="25%" class="purchase_item" style="box-sizing: border-box; color: #74787E; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 15px; line-height: 18px; padding: 10px 0; word-break: break-word;"><?php $country = $this->defaultdata->grabCountryData(array("country_id" => $response->country_id));echo $country[0]->name;?></td>
                               </tr>
                             </table>
                           </td>
                         </tr>
-                      </table>-->
-
-<!----invoice----[end]---->
-
-
-<div style="clear:both"></div>
-</div>
-<div style="clear:both"></div>
-
-
-
-
-
-
-<div style="clear:both"></div>
-<div style=" width:100%; display:block;max-width:80%; clear:both; padding:55px 0px 32px 0px; margin:0 auto; background:url(<?php echo $boder;?>) no-repeat top center;">
-<div style="clear:both"></div>
+                      </table>
 </div>
 <div style="clear:both"></div>
 <div style="width:100%; padding:0px 0px 30px 0px; margin:0; border:none; outline:none; text-align:center; max-width:100%">

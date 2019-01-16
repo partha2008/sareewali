@@ -26,6 +26,10 @@
 <script src="<?php echo base_url(); ?>resources/js/price_range_script.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>resources/js/jquery.unveil.js" type="text/javascript"></script> 
 <?php
+	}elseif($tot_segments[1] == 'checkout'){
+?>
+<script src="<?php echo base_url(); ?>resources/js/jquery.validate.min.js" type="text/javascript"></script>
+<?php
 	}else{
 ?>
 <!-- responsiveslides.js --> 

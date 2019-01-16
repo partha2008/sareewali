@@ -181,39 +181,68 @@ $(document).ready(function() {
         return false;
     });
 
-    // place order
-    $("#frmCheckout").submit(function(e){
-        $.post(BASEPATH+"cart/make_order", {data: $(this).serialize()}, function(data){
-            var response = JSON.parse(data);
-
-            if(response.status){
-                swal({
-                    title: response.msgTxt,
-                    text: "Transaction ID: "+response.text,
-                    icon: "success",
-                    closeOnClickOutside: false,
-                    closeOnEsc: false
-                }).then((willDelete) => {
-                    window.location.href = BASEPATH;
-                });
-            }else{
-                swal({
-                    title: response.msgTxt,
-                    text: "Please try again",
-                    icon: "error",
-                    closeOnClickOutside: false,
-                    closeOnEsc: false
-                }).then((willDelete) => {
-
-                });
-            }
-        });
-        e.preventDefault();
-    });
-
     $(".payment_mode_cls").click(function(){
         $(".payment_mode_cls").find("input:radio").removeAttr("checked");
         $(this).find("input:radio").prop('checked', true);
+    });
+
+    $('#frmCheckout').validate({ 
+        rules: {
+            first_name: {
+                required: true
+            },
+            last_name: {
+                required: true
+            },
+            email: {
+                required: true
+            },
+            phone: {
+                required: true
+            },
+            address1: {
+                required: true
+            },
+            city: {
+                required: true
+            },
+            country_id: {
+                required: true
+            },
+            state_id: {
+                required: true
+            }
+        },
+        submitHandler: function (form) { 
+            $("#place_order_btn").prop("disabled", true);
+            $.post(BASEPATH+"cart/make_order", {data: $(form).serialize()}, function(data){
+                var response = JSON.parse(data);
+                $("#place_order_btn").prop("disabled", false);
+                if(response.status){
+                    swal({
+                        title: response.msgTxt,
+                        text: "Transaction ID: "+response.text,
+                        icon: "success",
+                        closeOnClickOutside: false,
+                        closeOnEsc: false
+                    }).then((willDelete) => {
+                        window.location.href = BASEPATH;
+                    });
+                }else{
+                    swal({
+                        title: response.msgTxt,
+                        text: "Please try again",
+                        icon: "error",
+                        closeOnClickOutside: false,
+                        closeOnEsc: false
+                    }).then((willDelete) => {
+
+                    });
+                }
+            });
+            
+            return false;
+        }
     });
 
 });

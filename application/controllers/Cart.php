@@ -272,7 +272,8 @@
 
 			$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
 
-			// send mail to user		
+			$user = $this->userdata->grab_user_details(array("user_id" => $this->session->userdata('user_id')));
+				
 			$this->data['site_title'] = rtrim(preg_replace("(^https?://www.)", "",$general_settings->siteaddress), '/');
 			$this->data['site_logo'] = UPLOAD_LOGO_PATH.$general_settings->logoname;
 			$this->data['site_url'] = $general_settings->siteaddress;
@@ -284,11 +285,11 @@
 			$this->data['email_banner'] = base_url('resources/images/email-banner.jpg');
 			$this->data['boder'] = base_url('resources/images/boder.jpg');				
 			
+			$this->data['name'] = $user[0]->first_name;
 			$this->data['cart_data'] = $cart_data;
+			$this->data['response'] = (object)$response;
 			
 			$message = $this->load->view('email_template/order', $this->data, true);
-
-			die($message);
 			
 			$transaction_id = $this->defaultdata->generatedRandString(8);		
 			$data = array(
@@ -332,25 +333,11 @@
 					$this->session->unset_userdata('active_coupon_code');					
 				}
 
-				// send mail to user		
-				$this->data['site_title'] = rtrim(preg_replace("(^https?://www.)", "",$general_settings->siteaddress), '/');
-				$this->data['site_logo'] = UPLOAD_LOGO_PATH.$general_settings->logoname;
-				$this->data['site_url'] = $general_settings->siteaddress;
-				$this->data['site_name'] = $general_settings->sitename;					
-				$this->data['fb_img'] = base_url('resources/images/facebook.jpg'); 
-				$this->data['fb_link'] = $general_settings->facebook_page_url; 
-				$this->data['tw_img'] = base_url('resources/images/twitter.jpg');
-				$this->data['tw_link'] = ''; 
-				$this->data['email_banner'] = base_url('resources/images/email-banner.jpg');
-				$this->data['boder'] = base_url('resources/images/boder.jpg');				
-				
-				$this->data['cart_data'] = ucfirst($admin_profile->username);
-				
-				$message = $this->load->view('email_template/order', $this->data, true);
+				// send mail to user	
 				$mail_config = array(
 					"from" => $admin_profile->email,
-					"to" => array($admin_profile->email),
-					"subject" => $general_settings->sitename.": Contact Us",
+					"to" => array($user[0]->email),
+					"subject" => $general_settings->sitename.": New Order",
 					"message" => $message
 				);
 				

@@ -209,7 +209,7 @@
                             </li>
                         </ul>
                         <div class="pull-right">                          
-                          <button class="websiteBtn" type="submit"><i class="fa fa-sign-in" aria-hidden="true"></i> Place Order</button>
+                          <button id="place_order_btn" class="websiteBtn" type="submit"><i class="fa fa-sign-in" aria-hidden="true"></i> Place Order</button>
                         </div>
                     </div>
                    </div>    
