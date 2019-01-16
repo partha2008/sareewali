@@ -197,7 +197,9 @@ class Defaultdata extends CI_Model {
 	public function unsetFrontendLoginSession()
 	{
 		$this->session->unset_userdata('user_id');
-		$this->session->unset_userdata('user_email');	
+		$this->session->unset_userdata('user_email');
+		$this->session->unset_userdata('active_coupon_code');
+		$this->session->unset_userdata('active_coupon');	
 	}
 	public function getSha256Base64Hash($s) {
 		return base64_encode(hash("sha256", $s, True));

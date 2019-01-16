@@ -38,10 +38,10 @@
           }
         ?>
         <div class="rTableCell">          
-          <div class="cartPageAmt"><i class="fa fa-inr"></i><?php echo $unit_price;?></div>
+          <div class="cartPageAmt"><i class="fa fa-inr"></i> <?php echo $unit_price;?></div>
         </div>
         <div class="rTableCell">
-          <div class="cartPageAmt"><i class="fa fa-inr"></i><?php echo $total_price;?></div>
+          <div class="cartPageAmt"><i class="fa fa-inr"></i> <?php echo $total_price;?></div>
         </div>
         <div class="rTableCell"><button class="btn btn-danger" title="Delete" onclick="update_cart('delete', '<?php echo $value->cart_id;?>');"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></div>
       </div>

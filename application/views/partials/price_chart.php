@@ -20,3 +20,6 @@
       </div>
     </div>
   </div>
+  <input type="hidden" name="sub_total" value="<?php echo number_format($sub_total, 2);?>">
+  <input type="hidden" name="discount" value="<?php echo number_format($discount, 2);?>">
+  <input type="hidden" name="grand_total" value="<?php echo $grand_total;?>">

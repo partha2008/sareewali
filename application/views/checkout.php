@@ -20,7 +20,7 @@
 
 
 
-          <form class="form-horizontal" id="frmSignup">
+          <form class="form-horizontal" id="frmCheckout">
 
                    <span class="error"></span>
 
@@ -181,7 +181,7 @@
                   <div class="register-bottom-block clearfix">
                     <div class="col-sm-6">
                         <div class="couponCodeBox"> 
-                          <input id="coupon_code" type="text" value="<?php echo $this->session->userdata('active_coupon_code');?>" placeholder="Apply coupons">
+                          <input id="coupon_code" type="text" value="<?php echo $this->session->userdata('active_coupon_code');?>" placeholder="Apply coupons" autocomplete="off">
                           <button type="button" id="btn-apply-coupon" onclick="applyCoupon();">Apply</button>
                           <a href="javascript:void(0)" onclick="cancelCoupon();" class="remove_coupon_cls"><i class="fa fa-search fa-times" aria-hidden="true"></i></a>
                           <div class="clearfix"></div>
@@ -199,16 +199,16 @@
                         <h2 class="title"> Payment with </h2>
                         <p class="enteEmailTxt">Please select the payment type</p>
                         <ul class="productOption">
-                            <li>
-                                <input type="radio" name="payment_type" value="cod" checked="">
+                            <li class="payment_mode_cls">
+                                <input type="radio" name="payment_type" value="cod" checked>
                                 <label for="blouseFabri"> <span></span>Cash on Delivery</label>
                             </li>
-                            <li>
+                            <li class="payment_mode_cls">
                                 <input type="radio" name="payment_type" value="online">
                                 <label for="customTailoring"> <span></span>CCAvenue</label>
                             </li>
                         </ul>
-                        <div class="pull-right">
+                        <div class="pull-right">                          
                           <button class="websiteBtn" type="submit"><i class="fa fa-sign-in" aria-hidden="true"></i> Place Order</button>
                         </div>
                     </div>

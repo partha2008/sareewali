@@ -110,8 +110,6 @@ $(document).ready(function() {
         }
     });
 
-    //swal('xxx', "is added to cart !", "success");
-
     // Call login API on a click event
     $("#google-login-button").on('click', function() {
         // API call for Google login
@@ -181,6 +179,41 @@ $(document).ready(function() {
             },
         });
         return false;
+    });
+
+    // place order
+    $("#frmCheckout").submit(function(e){
+        $.post(BASEPATH+"cart/make_order", {data: $(this).serialize()}, function(data){
+            var response = JSON.parse(data);
+
+            if(response.status){
+                swal({
+                    title: response.msgTxt,
+                    text: "Transaction ID: "+response.text,
+                    icon: "success",
+                    closeOnClickOutside: false,
+                    closeOnEsc: false
+                }).then((willDelete) => {
+                    window.location.href = BASEPATH;
+                });
+            }else{
+                swal({
+                    title: response.msgTxt,
+                    text: "Please try again",
+                    icon: "error",
+                    closeOnClickOutside: false,
+                    closeOnEsc: false
+                }).then((willDelete) => {
+
+                });
+            }
+        });
+        e.preventDefault();
+    });
+
+    $(".payment_mode_cls").click(function(){
+        $(".payment_mode_cls").find("input:radio").removeAttr("checked");
+        $(this).find("input:radio").prop('checked', true);
     });
 
 });

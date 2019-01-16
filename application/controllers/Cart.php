@@ -17,6 +17,7 @@
 			$this->load->model('reviewdata');
 			$this->load->model('cartdata');
 			$this->load->model('coupondata');
+			$this->load->model('orderdata');
 
 			$this->data = $this->defaultdata->getFrontendDefaultData();
 
@@ -192,6 +193,10 @@
 			$this->data['cart_data'] = $cart_data;
 			$this->data['total_price'] = $this->data['sub_total'] = $this->get_cart_sub_total();
 			$this->data['count'] = $this->get_cart_item_count();
+			$this->data['sub_total'] = $this->get_cart_sub_total();
+			$this->data['grand_total'] = $this->get_cart_grand_total();
+			$this->data['discount'] = $this->get_discount_amount();
+			$this->data['price_chart'] = $price_chart = $this->load->view('partials/price_chart', $this->data, true);
 			
 			$response['status'] = true;
 			$response['msg'] = 'Your cart updated successfully.';
@@ -255,6 +260,111 @@
 			$response["msgText"] = "The given Coupon cancelled";
 
 			echo json_encode($response);
+		}
+
+		public function make_order(){
+			$data = $this->input->post('data');
+			$general_settings = $this->data['general_settings'];
+			$admin_profile = $this->data['admin_profile'];
+
+			$response = array();
+			parse_str($data, $response);
+
+			$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
+
+			// send mail to user		
+			$this->data['site_title'] = rtrim(preg_replace("(^https?://www.)", "",$general_settings->siteaddress), '/');
+			$this->data['site_logo'] = UPLOAD_LOGO_PATH.$general_settings->logoname;
+			$this->data['site_url'] = $general_settings->siteaddress;
+			$this->data['site_name'] = $general_settings->sitename;					
+			$this->data['fb_img'] = base_url('resources/images/facebook.jpg'); 
+			$this->data['fb_link'] = $general_settings->facebook_page_url; 
+			$this->data['tw_img'] = base_url('resources/images/twitter.jpg');
+			$this->data['tw_link'] = ''; 
+			$this->data['email_banner'] = base_url('resources/images/email-banner.jpg');
+			$this->data['boder'] = base_url('resources/images/boder.jpg');				
+			
+			$this->data['cart_data'] = $cart_data;
+			
+			$message = $this->load->view('email_template/order', $this->data, true);
+
+			die($message);
+			
+			$transaction_id = $this->defaultdata->generatedRandString(8);		
+			$data = array(
+				"transaction_id" => $transaction_id,
+				"first_name" => $response['first_name'],
+				"last_name" => $response['last_name'],
+				"email" => $response['email'],
+				"phone" => $response['phone'],
+				"address1" => $response['address1'],
+				"address2" => $response['address2'],
+				"city" => $response['city'],
+				"post_code" => $response['post_code'],
+				"country_id" => $response['country_id'],
+				"state_id" => $response['state_id'],
+				"sub_total" => $response['sub_total'],
+				"discount" => $response['discount'],
+				"grand_total" => $response['grand_total'],
+				"payment_type" => $response['payment_type'],
+				"status" => 1,
+				"date_added" => time()
+			);
+			$last_order_id = $this->orderdata->insert_order($data);
+
+			if($last_order_id){
+				$orderid = "SW-".sprintf('%03d', $last_order_id);
+				$this->orderdata->update_order(array("order_id" => $last_order_id), array("orderid" => $orderid));
+				$data = array(
+					"order_id" => $last_order_id,
+					"order_data" => json_encode(serialize($cart_data))
+				);
+				$last_order_details_id = $this->orderdata->insert_order_details($data);
+
+				// empty cart table after successful transaction
+				if($last_order_details_id){
+					if(!empty($cart_data)){
+						foreach ($cart_data as $key => $value) {
+							$this->cartdata->delete_cart(array("cart_id" => $value->cart_id));
+						}
+					}
+					$this->session->unset_userdata('active_coupon');
+					$this->session->unset_userdata('active_coupon_code');					
+				}
+
+				// send mail to user		
+				$this->data['site_title'] = rtrim(preg_replace("(^https?://www.)", "",$general_settings->siteaddress), '/');
+				$this->data['site_logo'] = UPLOAD_LOGO_PATH.$general_settings->logoname;
+				$this->data['site_url'] = $general_settings->siteaddress;
+				$this->data['site_name'] = $general_settings->sitename;					
+				$this->data['fb_img'] = base_url('resources/images/facebook.jpg'); 
+				$this->data['fb_link'] = $general_settings->facebook_page_url; 
+				$this->data['tw_img'] = base_url('resources/images/twitter.jpg');
+				$this->data['tw_link'] = ''; 
+				$this->data['email_banner'] = base_url('resources/images/email-banner.jpg');
+				$this->data['boder'] = base_url('resources/images/boder.jpg');				
+				
+				$this->data['cart_data'] = ucfirst($admin_profile->username);
+				
+				$message = $this->load->view('email_template/order', $this->data, true);
+				$mail_config = array(
+					"from" => $admin_profile->email,
+					"to" => array($admin_profile->email),
+					"subject" => $general_settings->sitename.": Contact Us",
+					"message" => $message
+				);
+				
+				$this->defaultdata->_send_mail($mail_config);
+
+				$res['status'] = true;
+				$res['msgTxt'] = "Order made successfully";
+				$res['text'] = $transaction_id;
+			}else{
+				$res['status'] = false;
+				$res['msgTxt'] = "Order can not be made !";
+			}
+
+			echo json_encode($res);
 		}
 	}
 ?>
