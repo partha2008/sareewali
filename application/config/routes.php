@@ -122,3 +122,5 @@ $route['admin/order-edit/(:any)'] = 'admin/order/order_edit/$1';
 $route['admin/coupon-list'] = 'admin/coupon/coupon_list';
 $route['admin/coupon-add'] = 'admin/coupon/coupon_add';
 $route['admin/coupon-edit/(:num)'] = 'admin/coupon/coupon_edit/$1';
+
+$route['admin/order-list'] = 'admin/order/order_list';

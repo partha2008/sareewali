@@ -308,7 +308,6 @@
 				"discount" => $response['discount'],
 				"grand_total" => $response['grand_total'],
 				"payment_type" => $response['payment_type'],
-				"status" => 1,
 				"date_added" => time()
 			);
 			$last_order_id = $this->orderdata->insert_order($data);

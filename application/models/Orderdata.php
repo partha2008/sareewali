@@ -6,7 +6,7 @@ class Orderdata extends CI_Model {
 			$this->db->where($cond);			
 		}	
 		if(!empty($like)){
-			$this->db->like($like);
+			$this->db->or_like($like);
 		}
 		if(!empty($limit)){
 			$per_page = $limit[0];
