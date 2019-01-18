@@ -291,7 +291,7 @@
 			
 			$message = $this->load->view('email_template/order', $this->data, true);
 			
-			$transaction_id = $this->defaultdata->generatedRandString(8);		
+			$transaction_id = $this->defaultdata->generatedRandString(12);		
 			$data = array(
 				"transaction_id" => $transaction_id,
 				"first_name" => $response['first_name'],
@@ -308,6 +308,7 @@
 				"discount" => $response['discount'],
 				"grand_total" => $response['grand_total'],
 				"payment_type" => $response['payment_type'],
+				"user_id" => $this->session->userdata('user_id'),
 				"date_added" => time()
 			);
 			$last_order_id = $this->orderdata->insert_order($data);

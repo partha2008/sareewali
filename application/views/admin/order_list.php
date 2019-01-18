@@ -14,6 +14,18 @@
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
+                	<?php 
+                		$sess_notify = $this->session->userdata('order_mail_notification');
+						if($sess_notify){
+					?>
+							<div class="alert alert-success alert-dismissable">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+								<?php echo $this->session->userdata('order_mail_notification');?>
+							</div>
+					<?php 
+						}
+						$this->session->unset_userdata('order_mail_notification');
+					?>
                     <div class="panel panel-default">
                         
 						<div class="panel-body">
@@ -64,7 +76,7 @@
 												<?php
 													}
 												?>
-												<a href="javascript:void(0);" class="btn btn-sm btn-primary" title="Resend Order Email">Resend Order Email</a>&nbsp;
+												<a href="<?php echo base_url('admin/order/resend_mail/'.$detail->order_id.'/'.$detail->user_id);?>" class="btn btn-sm btn-primary" title="Resend Order Email">Resend Order Email</a>&nbsp;
 												<a href="javascript:void(0);" class="btn btn-sm btn-primary" title="View">View</a>
 											</td>
 										  </tr>
