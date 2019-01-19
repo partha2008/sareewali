@@ -124,3 +124,4 @@ $route['admin/coupon-add'] = 'admin/coupon/coupon_add';
 $route['admin/coupon-edit/(:num)'] = 'admin/coupon/coupon_edit/$1';
 
 $route['admin/order-list'] = 'admin/order/order_list';
+$route['admin/order-details/(:num)'] = 'admin/order/order_details/$1';

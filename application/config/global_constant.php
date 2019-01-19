@@ -111,4 +111,5 @@
 	$config['order_status'][1] = array("text" => "Received", "class" => "text-primary"); 
 	$config['order_status'][2] = array("text" => "Processed", "class" => "text-success"); 
 	$config['order_status'][3] = array("text" => "Dispatched", "class" => "text-warning"); 
-	$config['order_status'][4] = array("text" => "Delivered", "class" => "text-danger"); 
+	$config['order_status'][4] = array("text" => "Delivered", "class" => "text-danger");
+	$config['order_status'][5] = array("text" => "Cancelled", "class" => "text-danger");  

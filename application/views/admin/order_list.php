@@ -77,7 +77,7 @@
 													}
 												?>
 												<a href="<?php echo base_url('admin/order/resend_mail/'.$detail->order_id.'/'.$detail->user_id);?>" class="btn btn-sm btn-primary" title="Resend Order Email">Resend Order Email</a>&nbsp;
-												<a href="javascript:void(0);" class="btn btn-sm btn-primary" title="View">View</a>
+												<a href="<?php echo base_url('admin/order-details/'.$detail->order_id);?>" class="btn btn-sm btn-primary" title="View">View</a>
 											</td>
 										  </tr>
 										  <?php } ?>

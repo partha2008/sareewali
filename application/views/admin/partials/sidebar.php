@@ -55,10 +55,7 @@
 					<a href="#"><i class="fa fa-shopping-cart fa-fw"></i> Order Management<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a href="<?php echo base_url('admin/order-list');?>" style="color:green;"><i class="fa fa-th-list fa-fw"></i> Order List</a>
-						</li>
-						<li>
-							<a href="<?php echo base_url('admin/failed-order-list');?>" style="color:red;"><i class="fa fa-th-list fa-fw"></i> Failed Order List</a>
+							<a href="<?php echo base_url('admin/order-list');?>"><i class="fa fa-th-list fa-fw"></i> Order List</a>
 						</li>
 					</ul>
 				</li>
