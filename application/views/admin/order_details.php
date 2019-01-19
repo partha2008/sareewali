@@ -39,7 +39,7 @@
 											$product_image = $this->productdata->grab_product_image(array("status" => "Y", "product_id" => $detail->product_id, "is_featured" => "Y"));
 										?>
 										  <tr class="gradeA odd" role="row">
-										  	 <td><img src="<?php echo UPLOAD_PRODUCT_PATH.$product_image[0]->name;?>"></td>
+										  	 <td><a target="_blank" href="<?php echo base_url("product-details/".$detail->prd_slug);?>"><img width="100" src="<?php echo UPLOAD_PRODUCT_PATH.$product_image[0]->name;?>"></a></td>
 											 <td><?php echo $detail->prd_name;?></td>
 											 <td><i class="fa fa-inr"></i> <?php echo $detail->prd_price;?></td>	
 											 <td><i class="fa fa-inr"></i> <?php echo $detail->prd_discounted_price;?></td>	
