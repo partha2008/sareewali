@@ -68,7 +68,7 @@
 											 	<?php
 											 		if($detail->invoice_generated == "N"){
 											 	?>
-												<a href="javascript:void(0);" class="btn btn-sm btn-primary" title="Generate Invoice">Generate Invoice</a>&nbsp;
+												<a href="<?php echo base_url('admin/order/generate_invoice/'.$detail->order_id);?>" class="btn btn-sm btn-primary" title="Generate Invoice">Generate Invoice</a>&nbsp;
 												<?php
 													}else{
 												?>
