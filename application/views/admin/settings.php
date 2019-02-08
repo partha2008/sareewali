@@ -60,6 +60,10 @@
 												<label class="control-label">Facebook Page URL <span style="color:#a94442;">*</span></label>
 												<input class="form-control" type="text" name="facebook_page_url" placeholder="Enter Site Address" value="<?php if(isset($settings_data->facebook_page_url)){echo $settings_data->facebook_page_url;}?>">
 											</div>
+											<div class="form-group">
+												<label class="control-label">GST Reg No <span style="color:#a94442;">*</span></label>
+												<input class="form-control" type="text" name="gst_no" placeholder="Enter GST Reg No" value="<?php if(isset($settings_data->gst_no)){echo $settings_data->gst_no;}?>">
+											</div>
 											<input type="hidden" name="settings_id" value="<?php if(isset($settings_data->settings_id)){echo $settings_data->settings_id;}?>">
 											<input type="hidden" name="logopathname" value="<?php if(isset($settings_data->logopathname)){echo $settings_data->logopathname;}?>">
 											<input type="hidden" name="logoname" value="<?php if(isset($settings_data->logoname)){echo $settings_data->logoname;}?>">

@@ -244,7 +244,8 @@
 			
 			$this->form_validation->set_rules('sitename', 'Sitename', 'trim|required');
 			$this->form_validation->set_rules('siteaddress', 'Siteaddress', 'trim|required');
-			$this->form_validation->set_rules('facebook_page_url', 'Faceebook Page URL', 'trim|required');
+			$this->form_validation->set_rules('facebook_page_url', 'Facebook Page URL', 'trim|required');
+			$this->form_validation->set_rules('gst_no', 'GST Reg No', 'trim|required');
 
 			$this->session->unset_userdata($post_data);
 			if($this->form_validation->run() == FALSE)
@@ -257,6 +258,7 @@
 					"sitename" => $post_data['sitename'],
 					"siteaddress" => $post_data['siteaddress'],
 					"facebook_page_url" => $post_data['facebook_page_url'],
+					"gst_no" => $post_data['gst_no'],
 					"date_added" => time()
 				);
 				

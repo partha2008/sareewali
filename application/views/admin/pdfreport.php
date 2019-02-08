@@ -3,7 +3,6 @@
 
 	// Extend the TCPDF class to create custom Header and Footer
 	class MYPDF extends TCPDF {
-
 		//Page header
 		public function Header() {
 			// Logo
@@ -11,10 +10,16 @@
 			$this->Image($image_file, 10, 5, 25, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
 
 			// Set font
-			$this->SetFont('helvetica', '', 10);
+			$this->SetFont('helvetica', '', 12);
 
-			// Title
-			$this->Cell(0, 15, '81(40/3/1) Shibtala Road, Kheleghar Garden, Barrackpore', 0, false, 'C', 0, '', 0, false, 'M', 'M');
+			$this->writeHTMLCell(80, '', $this->getX()+20, $this->getY(), $this->address, 0, 0, 0, true, 'R', true);
+
+			$this->setCellPadding(1);
+			$this->SetFont('helvetica', '', 11);
+
+			$invoice = "Invoice No. - SW10972\nInvoice Date - 12-02-2019\nGST - ".$this->gst_no;
+
+			$this->writeHTMLCell(50, '', $this->getX()+10, $this->getY(), $invoice, 1, 0, 0, true, 'J', true);
 		}
 
 		// Page footer
@@ -30,6 +35,9 @@
 
 	// create new PDF document
 	$pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+	$pdf->address = $admin_profile->address;
+	$pdf->gst_no = $general_settings->gst_no;
 
 	// set document information
 	$pdf->SetCreator(PDF_CREATOR);
@@ -66,11 +74,11 @@
 	$pdf->AddPage();
 
 	// set some text to print
-	$txt = <<<EOD
+	$txt = "<<<EOD
 	TCPDF Example 003
 
 	Custom page header and footer are defined by extending the TCPDF class and overriding the Header() and Footer() methods.
-	EOD;
+	EOD";
 
 	// print a block of text using Write()
 	$pdf->Write(0, $txt, '', 0, 'C', true, 0, false, false, 0);
