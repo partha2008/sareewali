@@ -116,7 +116,7 @@ class Order extends CI_Controller{
 		redirect(base_url('admin/order-list'));
 	}
 
-	public function generate_invoice(){
+	public function generate_invoice($order_id){
 		$general_settings = $this->data['general_settings'];
 		
 		$this->data['general_settings'] = $general_settings;
