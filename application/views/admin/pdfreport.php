@@ -20,10 +20,13 @@
 			$invoice = "Invoice No. - SW10972\nInvoice Date - 12-02-2019\nGST - ".$this->gst_no;
 
 			$this->writeHTMLCell(50, '', $this->getX()+10, $this->getY(), $invoice, 1, 0, 0, true, 'J', true);
+
+			$this->Line(10, $this->y+20, $this->w - 10, $this->y+20);
 		}
 
 		// Page footer
 		public function Footer() {
+			$this->Line(10, $this->y-5, $this->w - 10, $this->y-5);
 			// Position at 15 mm from bottom
 			$this->SetY(-15);
 			// Set font
@@ -73,17 +76,65 @@
 	// add a page
 	$pdf->AddPage();
 
-	// set some text to print
-	$txt = "<<<EOD
-	TCPDF Example 003
+	$delivery_to = "DELIVERY TO:<br><br>Mr. Partha Chowdhury";
 
-	Custom page header and footer are defined by extending the TCPDF class and overriding the Header() and Footer() methods.
-	EOD";
+	$pdf->writeHTMLCell(80, '', $pdf->getX(), $pdf->getY()+10, $delivery_to, 0, 0, 0, true, 'J', true);
 
-	// print a block of text using Write()
-	$pdf->Write(0, $txt, '', 0, 'C', true, 0, false, false, 0);
+	$style = array(
+		'position' => '',
+		'align' => 'C',
+		'stretch' => false,
+		'fitwidth' => true,
+		'cellfitalign' => '',
+		'border' => true,
+		'hpadding' => 'auto',
+		'vpadding' => 'auto',
+		'fgcolor' => array(0,0,0),
+		'bgcolor' => false, //array(255,255,255),
+		'text' => true,
+		'font' => 'helvetica',
+		'fontsize' => 8,
+		'stretchtext' => 4
+	);
 
-	// ---------------------------------------------------------
+	$pdf->write1DBarcode('CODE 39', 'C39', $pdf->getX()+20, '', '', 18, 0.4, $style, 'N');
+
+	$pdf->Ln(10);
+
+	$pdf->SetFont('helvetica', 'B', 10);
+
+	$cart_data_html = '<table cellspacing="0" cellpadding="1" border="1">';
+	$cart_data_html .= '<thead>';
+	$cart_data_html .= '<tr><th align="center">Sl. No.</th><th align="center">Name</th><th align="center">Price</th><th align="center">Quantity</th><th align="center">Amount</th></tr>';
+	$cart_data_html .= '</thead>';
+	$cart_data_html .= '<tbody>';
+
+	if(!empty($order_details_data)){
+		$sub_total = 0;
+		foreach ($order_details_data as $key => $value) {
+			if((int)$value->prd_discounted_price > 0){
+              	$price = $value->prd_discounted_price;
+              	$total_price = $value->prd_discounted_price*$value->prd_count;
+            }else{
+              	$price = $value->prd_price;
+              	$total_price = $value->prd_price*$value->prd_count;
+            }
+            $sub_total = $sub_total+$total_price;
+
+			$cart_data_html .= '<tr><td align="center">'.($key+1).'</td><td align="center">'.$value->prd_name.'</td><td align="center">'.$price.'</td><td align="center">'.$value->prd_count.'</td><td align="center">'.$total_price.'</td></tr>';
+		}
+
+		$cart_data_html .= '<tr><td colspan="5">&nbsp;</td></tr>';
+
+		$cart_data_html .= '<tr><td colspan="3">&nbsp;</td><td align="center">Sub Total</td><td align="center">'.$sub_total.'</td></tr>';	
+		$cart_data_html .= '<tr><td colspan="3">&nbsp;</td><td align="center">Discount</td><td align="center">'.$sub_total.'</td></tr>';
+		$cart_data_html .= '<tr><td colspan="3">&nbsp;</td><td align="center">Grand Total</td><td align="center">'.$sub_total.'</td></tr>';		
+	}	
+
+	$cart_data_html .= '</tbody>';
+	$cart_data_html .= '</table>';
+
+	$pdf->writeHTML($cart_data_html, true, false, false, false, 'C');
 
 	//Close and output PDF document
 	$pdf->Output('example_003.pdf', 'I');

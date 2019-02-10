@@ -111,13 +111,19 @@ class Order extends CI_Controller{
 	public function update_order(){
 		$post_data = $this->input->post();
 
-		$this->orderdata->update_order(array("order_id" => $post_data['order_id']), array("order_status" => $post_data['order_status']));
+		$this->orderdata->update_order(array("order_id" => $post_data['order_id']), array("order_status" => $post_data['order_status'], "date_modified" => time()));
 
 		redirect(base_url('admin/order-list'));
 	}
 
 	public function generate_invoice($order_id){
 		$this->load->helper('pdf_helper');
+
+		$order_data = $this->orderdata->grab_order(array("order_id" => $order_id));
+		$order_details_data = $this->orderdata->grab_order_details(array("order_id" => $order_id));
+
+		$this->data['order_data'] = $order_data[0];
+		$this->data['order_details_data'] = unserialize(json_decode($order_details_data[0]->order_data));
 
 		$this->load->view('admin/pdfreport', $this->data);
 	}
