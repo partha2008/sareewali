@@ -17,7 +17,7 @@
 			$this->setCellPadding(1);
 			$this->SetFont('helvetica', '', 11);
 
-			$invoice = "Invoice No. - SW10972\nInvoice Date - 12-02-2019\nGST - ".$this->gst_no;
+			$invoice = "Invoice No. - ".$this->invoice_name."\nInvoice Date - ".date("d-m-Y", $this->invoice_date)."\nGST - ".$this->gst_no;
 
 			$this->writeHTMLCell(50, '', $this->getX()+10, $this->getY(), $invoice, 1, 0, 0, true, 'J', true);
 
@@ -41,6 +41,8 @@
 
 	$pdf->address = $admin_profile->address;
 	$pdf->gst_no = $general_settings->gst_no;
+	$pdf->invoice_name = $invoice_name;
+	$pdf->invoice_date = $invoice_date;
 
 	// set document information
 	$pdf->SetCreator(PDF_CREATOR);
@@ -76,7 +78,14 @@
 	// add a page
 	$pdf->AddPage();
 
-	$delivery_to = "DELIVERY TO:<br><br>Mr. Partha Chowdhury";
+	$state = $this->defaultdata->grabStateData(array("state_id" => $order_data->state_id));
+	$country = $this->defaultdata->grabStateData(array("country_id" => $order_data->country_id));
+
+	if($order_data->address2){
+		$delivery_to = "DELIVERY TO:<br><br>Mr./Mrs. ".$order_data->first_name." ".$order_data->last_name."<br><br>".$order_data->address1."<br>".$order_data->address2."<br>".$order_data->city.", ".$state[0]->name.", ".$country[0]->name."<br>Pin: ".$order_data->post_code."<br>Contact: ".$order_data->phone;
+	}else{
+		$delivery_to = "DELIVERY TO:<br><br>Mr./Mrs. ".$order_data->first_name." ".$order_data->last_name."<br><br>".$order_data->address1."<br>".$order_data->city.", ".$state[0]->name.", ".$country[0]->name."<br>Pin: ".$order_data->post_code."<br>Contact: ".$order_data->phone;
+	}
 
 	$pdf->writeHTMLCell(80, '', $pdf->getX(), $pdf->getY()+10, $delivery_to, 0, 0, 0, true, 'J', true);
 
@@ -97,11 +106,11 @@
 		'stretchtext' => 4
 	);
 
-	$pdf->write1DBarcode('CODE 39', 'C39', $pdf->getX()+20, '', '', 18, 0.4, $style, 'N');
+	$pdf->write1DBarcode($order_data->orderid, 'C39', $pdf->getX()+20, '', '', 18, 0.4, $style, 'N');
 
-	$pdf->Ln(10);
+	$pdf->Ln(70);
 
-	$pdf->SetFont('helvetica', 'B', 10);
+	$pdf->SetFont('helvetica', '', 11);
 
 	$cart_data_html = '<table cellspacing="0" cellpadding="1" border="1">';
 	$cart_data_html .= '<thead>';
@@ -110,32 +119,34 @@
 	$cart_data_html .= '<tbody>';
 
 	if(!empty($order_details_data)){
-		$sub_total = 0;
 		foreach ($order_details_data as $key => $value) {
 			if((int)$value->prd_discounted_price > 0){
-              	$price = $value->prd_discounted_price;
-              	$total_price = $value->prd_discounted_price*$value->prd_count;
+              	$price = $value->prd_discounted_price;              	
             }else{
               	$price = $value->prd_price;
-              	$total_price = $value->prd_price*$value->prd_count;
             }
-            $sub_total = $sub_total+$total_price;
+            $total_price = $price*$value->prd_count;
 
-			$cart_data_html .= '<tr><td align="center">'.($key+1).'</td><td align="center">'.$value->prd_name.'</td><td align="center">'.$price.'</td><td align="center">'.$value->prd_count.'</td><td align="center">'.$total_price.'</td></tr>';
+			$cart_data_html .= '<tr><td align="center">'.($key+1).'</td><td align="center">'.$value->prd_name.'</td><td align="center">Rs. '.number_format($price, 2).'</td><td align="center">'.$value->prd_count.'</td><td align="center">Rs. '.number_format($total_price, 2).'</td></tr>';
 		}
-
-		$cart_data_html .= '<tr><td colspan="5">&nbsp;</td></tr>';
-
-		$cart_data_html .= '<tr><td colspan="3">&nbsp;</td><td align="center">Sub Total</td><td align="center">'.$sub_total.'</td></tr>';	
-		$cart_data_html .= '<tr><td colspan="3">&nbsp;</td><td align="center">Discount</td><td align="center">'.$sub_total.'</td></tr>';
-		$cart_data_html .= '<tr><td colspan="3">&nbsp;</td><td align="center">Grand Total</td><td align="center">'.$sub_total.'</td></tr>';		
 	}	
+	$cart_data_html .= '</tbody>';
+	$cart_data_html .= '</table>';
 
+	$pdf->writeHTML($cart_data_html, true, false, false, false, 'C');
+
+	$pdf->SetFont('helvetica', 'B', 12);
+
+	$cart_data_html = '<table cellspacing="0" cellpadding="1" border="0">';
+	$cart_data_html .= '<tbody>';
+	$cart_data_html .= '<tr><td colspan="3">&nbsp;</td><td align="center">Sub Total</td><td align="center">Rs. '.$order_data->sub_total.'</td></tr>';	
+	$cart_data_html .= '<tr><td colspan="3">&nbsp;</td><td align="center">Discount</td><td align="center">Rs. '.$order_data->discount.'</td></tr>';
+	$cart_data_html .= '<tr><td colspan="3">&nbsp;</td><td align="center">Grand Total</td><td align="center">Rs. '.$order_data->grand_total.'</td></tr>';
 	$cart_data_html .= '</tbody>';
 	$cart_data_html .= '</table>';
 
 	$pdf->writeHTML($cart_data_html, true, false, false, false, 'C');
 
 	//Close and output PDF document
-	$pdf->Output('example_003.pdf', 'I');
+	$pdf->Output(__DIR__.'\../../../'.UPLOAD_RELATIVE_INVOICE_PATH.$invoice_name, 'F');
 ?>

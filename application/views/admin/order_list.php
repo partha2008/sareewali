@@ -45,7 +45,8 @@
 									<table width="100%" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" id="dataTables-example" role="grid" aria-describedby="dataTables-example_info" style="width: 100%;">
 									   <thead>
 										  <tr role="row">
-											 <th>Name</th>								 
+											 <th>Name</th>	
+											 <th>Order Id</th>							 
 											 <th>Transaction Id</th>
 											 <th>Total</th>
 											 <th>Payment Type</th>
@@ -59,6 +60,7 @@
 										<?php foreach($order_details AS $detail) {?>
 										  <tr class="gradeA odd" role="row">
 											 <td><?php echo $detail->first_name.' '.$detail->last_name ;?></td>	
+											 <td><?php echo $detail->orderid;?></td>	
 											 <td><?php echo $detail->transaction_id;?></td>	
 											 <td><i class="fa fa-inr"></i><?php echo $detail->grand_total;?></td>	
 											 <td><?php echo $detail->payment_type;?></td>	
@@ -72,7 +74,7 @@
 												<?php
 													}else{
 												?>
-												<a href="javascript:void(0);" class="btn btn-sm btn-primary" title="Generate Invoice">Send Invoice</a>&nbsp;
+												<a href="<?php echo base_url('admin/order/send_invoice/'.$detail->order_id.'/'.$detail->user_id);?>" class="btn btn-sm btn-primary" title="Generate Invoice">Send Invoice</a>&nbsp;<a target="_blank" href="<?php echo base_url('uploads/invoice/'.$detail->invoice_name);?>" class="btn btn-sm btn-primary" title="Generate Invoice">View Invoice</a>&nbsp;
 												<?php
 													}
 												?>

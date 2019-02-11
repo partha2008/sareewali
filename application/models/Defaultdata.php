@@ -298,6 +298,10 @@ class Defaultdata extends CI_Model {
 		$this->email->subject($config['subject']);
 		$this->email->message($config['message']);
 
+		if(isset($config['attachment']) && $config['attachment']){
+			$this->email->attach($config['attachment']);
+		}
+
 		if($this->email->send()){
 			return true;
 		}else{
