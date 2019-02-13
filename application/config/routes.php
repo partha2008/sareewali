@@ -115,10 +115,6 @@ $route['admin/product-list'] = 'admin/product/product_list';
 $route['admin/product-add'] = 'admin/product/product_add';
 $route['admin/product-edit/(:any)'] = 'admin/product/product_edit/$1';
 
-$route['admin/order-list'] = 'admin/order/order_list';
-$route['admin/failed-order-list'] = 'admin/order/failed_order_list';
-$route['admin/order-edit/(:any)'] = 'admin/order/order_edit/$1';
-
 $route['admin/coupon-list'] = 'admin/coupon/coupon_list';
 $route['admin/coupon-add'] = 'admin/coupon/coupon_add';
 $route['admin/coupon-edit/(:num)'] = 'admin/coupon/coupon_edit/$1';

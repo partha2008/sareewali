@@ -148,5 +148,5 @@
 	$pdf->writeHTML($cart_data_html, true, false, false, false, 'C');
 
 	//Close and output PDF document
-	$pdf->Output(__DIR__.'\../../../'.UPLOAD_RELATIVE_INVOICE_PATH.$invoice_name, 'F');
+	$pdf->Output($_SERVER['DOCUMENT_ROOT'].UPLOAD_RELATIVE_INVOICE_PATH.$invoice_name, 'F');
 ?>
