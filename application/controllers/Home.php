@@ -381,25 +381,31 @@
 			$this->breadcrumb->add('Home', base_url());
 			$this->breadcrumb->add('Order History', base_url('orderhistory')); 
 
-			$where = "user_id='".$this->session->userdata('user_id')."' AND (order_status=4 OR order_status=5)";
+			$order_data = $this->orderdata->fetch_order_list();
 
-			$order_data = $this->orderdata->grab_order(array(), array(), array(), $where);
-			//$order_details_data = $this->orderdata->grab_order_details(array("order_id" => $order_id));
+			if(!empty($order_data)){
+				$count = 0;
+				foreach ($order_data as $key => $value) {
+					$order_details = unserialize(json_decode($value->order_data));
 
-			//pagination settings
-			$config['base_url'] = site_url('orderhistory');
-			$config['total_rows'] = count($order_data);
-			
-			$pagination = $this->config->item('pagination');			
-			$pagination = array_merge($config, $pagination);
+					if(!empty($order_details)){
+						foreach ($order_details as $key1 => $value1) {
+							$order_result[$count]['orderid'] = $value->orderid;
+							$order_result[$count]['date_added'] = $value->date_added;
+							$order_result[$count]['order_status'] = $value->order_status;
+							$order_result[$count]['name'] = $value1->prd_name;
+							$order_result[$count]['sub_total'] = $value1->prd_price;
 
-			$this->pagination->initialize($pagination);
-			$this->data['page'] = ($this->input->get('page')) ? $this->input->get('page') : 0;
-			$this->data['pagination'] = $this->pagination->create_links();
+							$prd_img = $this->productdata->grab_product_image(array("product_id" => $value1->product_id, "is_featured" => 'Y'));
+							$order_result[$count]['prd_name'] = $prd_img[0]->name;
 
-			$order_paginated_data = $this->orderdata->grab_order(array(), array(), array(PAGINATION_PER_PAGE, $this->data['page']), $where);
+							$count++;
+						}
+					}
+				}
+			}
 
-			$this->data['order_data'] = $order_paginated_data;
+			$this->data['order_data'] = $order_result;
 			$this->data['breadcrumb'] = $this->breadcrumb->output();
 			$this->data['sidebar'] = $this->load->view('partials/sidebar', null, true);
 			

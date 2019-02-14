@@ -1,12 +1,9 @@
 <?php
 class Orderdata extends CI_Model {
 
-	public function grab_order($cond = array(), $like = array(), $limit = array(), $or_where = null){
+	public function grab_order($cond = array(), $like = array(), $limit = array()){
 		if(!empty($cond)){
 			$this->db->where($cond);			
-		}	
-		if($or_where){
-			$this->db->where($or_where);				
 		}
 		if(!empty($like)){
 			$this->db->or_like($like);
@@ -68,6 +65,14 @@ class Orderdata extends CI_Model {
 			$this->db->limit($per_page, $start);
 		}
 		$query = $this->db->get(TABLE_ORDER_DETAILS);
+		
+		return $query->result();
+	}
+
+	public function fetch_order_list(){
+		$sql = "SELECT ".TABLE_ORDER.".orderid, ".TABLE_ORDER.".order_status, ".TABLE_ORDER.".date_added, ".TABLE_ORDER_DETAILS.".order_data FROM ".TABLE_ORDER." INNER JOIN ".TABLE_ORDER_DETAILS." ON ".TABLE_ORDER.".order_id = ".TABLE_ORDER_DETAILS.".order_id WHERE ".TABLE_ORDER.".user_id='".$this->session->userdata('user_id')."' ORDER BY ".TABLE_ORDER.".order_id DESC LIMIT 0, 10";
+		
+		$query = $this->db->query($sql);
 		
 		return $query->result();
 	}

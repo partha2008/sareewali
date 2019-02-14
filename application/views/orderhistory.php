@@ -19,36 +19,29 @@
               <div style="overflow-x:auto">
                 <div class="rTable">
                   <div class="rTableHeading">
+                    <div class="rTableHead"> &nbsp; </div>
+                    <div class="rTableHead"> Product </div>
                     <div class="rTableHead"> Order Number </div>
                     <div class="rTableHead"> Price </div>
                     <div class="rTableHead"> Order Date </div>
-                    <div class="rTableHead"> Status </div>
-                    <div class="rTableHead"> Order Summary </div>
+                    <div class="rTableHead"> Status </div>                    
                   </div>
                   <?php
                     if(!empty($order_data)){
-                      foreach ($order_data as $key => $value) { 
-                        if($value->order_status == 4){
-                          $status = 'Completed';
-                        }elseif($value->order_status == 5){
-                          $status = 'Cancelled';
-                        }
-                                            
+                      foreach ($order_data as $key => $value) {  
                   ?>
                   <div class="rTableBody">
-                    <div class="rTableCell">#<?php echo $value->orderid;?></div>
-                    <div class="rTableCell"> <i class="fa fa-inr" aria-hidden="true"></i><?php echo $value->sub_total;?> </div>
-                    <div class="rTableCell"> <?php echo date("d-m-Y", $value->date_added);?> </div>
-                    <div class="rTableCell"> <?php echo $status;?> </div>
-                    <div class="rTableCell">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text </div>
+                    <div class="rTableCell"><img src="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($value['prd_name'], PATHINFO_FILENAME).'_s.'.pathinfo($value['prd_name'], PATHINFO_EXTENSION);?>"></div>
+                    <div class="rTableCell"><?php echo $value['name'];?></div>
+                    <div class="rTableCell">#<?php echo $value['orderid'];?></div>
+                    <div class="rTableCell"> <i class="fa fa-inr" aria-hidden="true"></i> <?php echo $value['sub_total'];?> </div>
+                    <div class="rTableCell"> <?php echo date("d-m-Y", $value['date_added']);?> </div>
+                    <div class="rTableCell"> <?php echo $this->config->item('order_status')[$value['order_status']]['text'];?> </div>
                   </div>
                   <?php
                       }
                     }
                   ?>
-                </div>
-                <div class="pagination" style="float:right;"> 
-                  <?php echo $pagination; ?>  
                 </div>
               </div>
             </div>
