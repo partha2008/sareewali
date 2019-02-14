@@ -14,6 +14,7 @@
 			$this->load->model('productdata');
 			$this->load->model('adsdata');
 			$this->load->model('cartdata');
+			$this->load->model('orderdata');
 
 			$this->data = $this->defaultdata->getFrontendDefaultData();
 		}
@@ -380,6 +381,25 @@
 			$this->breadcrumb->add('Home', base_url());
 			$this->breadcrumb->add('Order History', base_url('orderhistory')); 
 
+			$where = "user_id='".$this->session->userdata('user_id')."' AND (order_status=4 OR order_status=5)";
+
+			$order_data = $this->orderdata->grab_order(array(), array(), array(), $where);
+			//$order_details_data = $this->orderdata->grab_order_details(array("order_id" => $order_id));
+
+			//pagination settings
+			$config['base_url'] = site_url('orderhistory');
+			$config['total_rows'] = count($order_data);
+			
+			$pagination = $this->config->item('pagination');			
+			$pagination = array_merge($config, $pagination);
+
+			$this->pagination->initialize($pagination);
+			$this->data['page'] = ($this->input->get('page')) ? $this->input->get('page') : 0;
+			$this->data['pagination'] = $this->pagination->create_links();
+
+			$order_paginated_data = $this->orderdata->grab_order(array(), array(), array(PAGINATION_PER_PAGE, $this->data['page']), $where);
+
+			$this->data['order_data'] = $order_paginated_data;
 			$this->data['breadcrumb'] = $this->breadcrumb->output();
 			$this->data['sidebar'] = $this->load->view('partials/sidebar', null, true);
 			

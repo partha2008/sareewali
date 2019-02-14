@@ -1,10 +1,13 @@
 <?php
 class Orderdata extends CI_Model {
 
-	public function grab_order($cond = array(), $like = array(), $limit = array()){
+	public function grab_order($cond = array(), $like = array(), $limit = array(), $or_where = null){
 		if(!empty($cond)){
 			$this->db->where($cond);			
 		}	
+		if($or_where){
+			$this->db->where($or_where);				
+		}
 		if(!empty($like)){
 			$this->db->or_like($like);
 		}
