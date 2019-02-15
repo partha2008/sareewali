@@ -4,6 +4,7 @@
 	class Home extends CI_Controller {
 		
 		public $data = array();
+		private $perPage = 6;
 		
 		public function __construct(){
 			parent::__construct();
@@ -438,7 +439,7 @@
 			}else{
 				if($this->userdata->insert_wishlist(array("product_id" => $product_id, "user_id" => $this->session->userdata('user_id'), "date_added" => time()))){
 					$response['status'] = true;
-					$response['msgText'] = "Item added to wishlist successfully";
+					$response['msgText'] = "Item added to wishlist";
 				}else{
 					$response['status'] = false;
 					$response['msgText'] = "Something went wrong";
@@ -449,7 +450,8 @@
 		}
 
 		public function load_wishlist(){
-			$this->data['wishlist_data'] = $this->userdata->grab_product_wishlist_list();
+			$start = ceil($this->input->get("page") * $this->perPage);
+			$this->data['wishlist_data'] = $this->userdata->grab_product_wishlist_list($start, $this->perPage);
 
 			echo $this->load->view('partials/wishlist', $this->data, true);
 		}

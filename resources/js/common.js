@@ -414,14 +414,32 @@ function load_unveil(){
     $(".lazy").unveil(300);
 }
 
-function loadWishList(){
-    $.get(BASEPATH+"home/load_wishlist", function(data){
-        if(data){
-            $("#wishlist_html").html(data);
-            $('[data-toggle="tooltip"]').tooltip();
-        }else{
-            $("#wishlist_html").html('<div class="no-prd"> Oops, Sorry no item(s) found in your wishlist </div>');
+function loadWishList(page){
+    $.ajax({
+        url: BASEPATH+"home/load_wishlist?page="+page,
+        type: "get",
+        beforeSend: function()
+        {
+            $('.ajax-load').show();
         }
+    })
+    .done(function(data)
+    {     
+        $('.ajax-load').hide();
+        if(data.trim() == ""){
+            if(page == 0){
+                $("#wishlist_html").html('<div class="no-prd"> Oops, Sorry no item(s) found in your wishlist </div>');
+            }
+            sessionStorage.setItem("page_end", true);
+            return false;
+        }
+        $("#wishlist_html").append(data);
+        $('[data-toggle="tooltip"]').tooltip();
+        $(".lazy").unveil(300);
+    })
+    .fail(function(jqXHR, ajaxOptions, thrownError)
+    {
+        alert('server not responding...');
     });
 }
 
@@ -468,7 +486,10 @@ function remove_from_wishlist(product_id, is_logged_in){
                 closeOnClickOutside: false,
                 closeOnEsc: false
             }).then((willDelete) => {
-                loadWishList();
+                sessionStorage.setItem("page", 0);
+                sessionStorage.setItem("page_end", false);
+                $("#wishlist_html").html('');
+                loadWishList(sessionStorage.getItem("page"));
             });
         }
     });

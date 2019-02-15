@@ -170,8 +170,8 @@ class Userdata extends CI_Model {
 		return $query->result();
 	}
 
-	public function grab_product_wishlist_list(){	
-		$sql = "SELECT ".TABLE_PRODUCT.".product_id, ".TABLE_PRODUCT.".prd_dic_chk, ".TABLE_PRODUCT.".discounted_price, ".TABLE_PRODUCT.".slug, ".TABLE_PRODUCT.".name as prd_name, ".TABLE_PRODUCT.".price, ".TABLE_PRODUCT_IMAGES.".name as prd_img_name FROM ".TABLE_PRODUCT." INNER JOIN ".TABLE_PRODUCT_IMAGES." ON ".TABLE_PRODUCT.".product_id = ".TABLE_PRODUCT_IMAGES.".product_id INNER JOIN ".TABLE_WISHLIST." ON ".TABLE_PRODUCT.".product_id = ".TABLE_WISHLIST.".product_id  WHERE ".TABLE_WISHLIST.".user_id='".$this->session->userdata('user_id')."' AND ".TABLE_PRODUCT_IMAGES.".status='Y' AND ".TABLE_PRODUCT_IMAGES.".is_featured='Y' ORDER BY ".TABLE_WISHLIST.".date_added LIMIT 0, 10";
+	public function grab_product_wishlist_list($start, $perpage){	
+		$sql = "SELECT ".TABLE_PRODUCT.".product_id, ".TABLE_PRODUCT.".prd_dic_chk, ".TABLE_PRODUCT.".discounted_price, ".TABLE_PRODUCT.".slug, ".TABLE_PRODUCT.".name as prd_name, ".TABLE_PRODUCT.".price, ".TABLE_PRODUCT_IMAGES.".name as prd_img_name FROM ".TABLE_PRODUCT." INNER JOIN ".TABLE_PRODUCT_IMAGES." ON ".TABLE_PRODUCT.".product_id = ".TABLE_PRODUCT_IMAGES.".product_id INNER JOIN ".TABLE_WISHLIST." ON ".TABLE_PRODUCT.".product_id = ".TABLE_WISHLIST.".product_id  WHERE ".TABLE_WISHLIST.".user_id='".$this->session->userdata('user_id')."' AND ".TABLE_PRODUCT_IMAGES.".status='Y' AND ".TABLE_PRODUCT_IMAGES.".is_featured='Y' ORDER BY ".TABLE_WISHLIST.".date_added LIMIT ".$start.", ".$perpage;
 		
 		$query = $this->db->query($sql);
 		

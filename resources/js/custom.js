@@ -319,7 +319,22 @@
 		    });
 
 		}else if(PAGENAME == 'mywishlist'){
-			loadWishList();
+			$(function() {
+		        $(".lazy").unveil(300);
+		    });
+		    sessionStorage.setItem("page", 0);
+			sessionStorage.setItem("page_end", false);
+			
+			loadWishList(sessionStorage.getItem("page"));
+
+			$(window).scroll(function() {
+			    if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+			    	if(sessionStorage.getItem("page_end") === 'false'){
+			    		sessionStorage.setItem("page", parseInt(sessionStorage.getItem("page"))+1);
+				        loadWishList(sessionStorage.getItem("page"));
+				    }
+			    }
+			});
 		}else{
 		    $('#btnFeatures').on('click', function() {
 		        $('html, body').animate({
