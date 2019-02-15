@@ -334,7 +334,7 @@ function load_products(page, view){
         }
     })
     .done(function(data)
-    {        
+    {     alert("1111")   ;
         $('.ajax-load').hide();
         if(data.trim() == ""){
             sessionStorage.setItem("page_end", true);
@@ -414,11 +414,62 @@ function load_unveil(){
     $(".lazy").unveil(300);
 }
 
-function addToWishList(slug, is_logged_in){
+function addToWishList(product_id, is_logged_in){
     if(is_logged_in != "1"){
         openModal('login');
+
         return false;
     }
+
+    $.post(BASEPATH+"home/add_to_wishlist", {data: product_id}, function(data){
+        var response = JSON.parse(data);
+        if(response.status){
+            swal({
+                text: response.msgText,
+                icon: "success",
+                closeOnClickOutside: false,
+                closeOnEsc: false
+            });
+        }else{
+            swal({
+                text: response.msgText,
+                icon: "error",
+                closeOnClickOutside: false,
+                closeOnEsc: false
+            });
+        }
+    });
+}
+
+function remove_from_wishlist(product_id, is_logged_in){
+    if(is_logged_in != "1"){
+        openModal('login');
+
+        return false;
+    }
+
+    $.post(BASEPATH+"home/remove_from_wishlist", {data: product_id}, function(data){
+        var response = JSON.parse(data);
+        if(response.status){
+            swal({
+                text: response.msgText,
+                icon: "success",
+                closeOnClickOutside: false,
+                closeOnEsc: false
+            }).then((willDelete) => {
+                if(redirect){
+                    location.reload();
+                }
+            });
+        }else{
+            swal({
+                text: response.msgText,
+                icon: "error",
+                closeOnClickOutside: false,
+                closeOnEsc: false
+            });
+        }
+    });
 }
 
 function addToCart(slug, is_logged_in, redirect){

@@ -196,7 +196,7 @@
               <div class="item-inner">
                 <div class="productIconBox"> 
                   <a href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Add To Cart" ><i aria-hidden="true" class="fa fa-shopping-cart"></i></a> 
-                  <a href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Add To Wishlist" ><i aria-hidden="true" class="fa fa-heart-o"></i></a> 
+                  <a onclick="addToWishList('<?php echo $product->product_id;?>', '<?php echo $this->defaultdata->is_user_session_active();?>');" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Add To Wishlist" ><i aria-hidden="true" class="fa fa-heart-o"></i></a> 
                 </div>
                 <div class="new-off">
                   <div class="new-percent">New</div>

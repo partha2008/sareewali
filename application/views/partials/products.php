@@ -8,7 +8,7 @@
                 <div class="productIconBox"> 
                   <a href="javascript:void(0);" onclick="add_to_cart('<?php echo $list->slug;?>')" data-toggle="tooltip" data-placement="left" title="Add To Cart" ><i aria-hidden="true" class="fa fa-shopping-cart"></i>
                   </a> 
-                  <a href="javascript:void(0);" onclick="add_to_wishlist('<?php echo $list->slug;?>')" data-toggle="tooltip" data-placement="left" title="Add To Wishlist" ><i aria-hidden="true" class="fa fa-heart-o"></i>
+                  <a href="javascript:void(0);" onclick="addToWishList('<?php echo $list->product_id;?>', '<?php echo $this->defaultdata->is_user_session_active();?>');" data-toggle="tooltip" data-placement="left" title="Add To Wishlist" ><i aria-hidden="true" class="fa fa-heart-o"></i>
                   </a> 
                 </div>
                 <div class="productDetailsBtn"><a href="<?php echo base_url('product-details/'.$list->slug);?>" title="">View Details</a></div>

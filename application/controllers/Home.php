@@ -412,6 +412,42 @@
 			$this->load->view('orderhistory', $this->data);
 		}
 
+		public function remove_from_wishlist(){
+			$post_data = $this->input->post();
+
+			$product_id = $post_data['data'];
+
+			$this->userdata->delete_wishlist(array("product_id" => $product_id, "user_id" => $this->session->userdata('user_id')));
+
+			$response['status'] = true;
+			$response['msgText'] = "Item added to wishlist successfully";
+
+			echo json_encode($response);
+		}
+
+		public function add_to_wishlist(){
+			$post_data = $this->input->post();
+
+			$product_id = $post_data['data'];
+
+			$wishlist_data = $this->userdata->grab_wishlist(array("product_id" => $product_id, "user_id" => $this->session->userdata('user_id')));
+
+			if(!empty($wishlist_data)){
+				$response['status'] = false;
+				$response['msgText'] = "Item already added to wishlist";
+			}else{
+				if($this->userdata->insert_wishlist(array("product_id" => $product_id, "user_id" => $this->session->userdata('user_id'), "date_added" => time()))){
+					$response['status'] = true;
+					$response['msgText'] = "Item added to wishlist successfully";
+				}else{
+					$response['status'] = false;
+					$response['msgText'] = "Something went wrong";
+				}
+			}
+
+			echo json_encode($response);
+		}
+
 		public function mywishlist(){
 			$this->load->library('breadcrumb');
 
@@ -420,6 +456,10 @@
 
 			$this->data['breadcrumb'] = $this->breadcrumb->output();
 			$this->data['sidebar'] = $this->load->view('partials/sidebar', null, true);
+
+			$wishlist_data = $this->userdata->grab_product_wishlist_list();
+
+			$this->data['wishlist_data'] = $wishlist_data;
 			
 			$this->load->view('mywishlist', $this->data);
 		}

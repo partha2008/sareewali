@@ -292,7 +292,7 @@
           <!--   <div class="moretitle">More Options</div> 
  <a href="#reviews_box" title="Write a Review" class="reviews_inline"><i class="fa fa-commenting-o" aria-hidden="true"></i> Write a Review</a> --> 
           
-          <a onclick="addToWishList('<?php echo $product->slug;?>', '<?php echo $this->defaultdata->is_user_session_active();?>');" title="Add to Wish List" class="add_to_wishlist"> <i class="fa fa-heart-o" aria-hidden="true"></i> Add to Wishlist</a> <!--<a href="#tab-inquire" class="inquire_now inline_inquire cboxElement" title="Inquire for 7547"> <i class="fa fa-envelope-o" aria-hidden="true"></i> Inquire Now </a>--> </span>
+          <a onclick="addToWishList('<?php echo $product->product_id;?>', '<?php echo $this->defaultdata->is_user_session_active();?>');" title="Add to Wish List" class="add_to_wishlist"> <i class="fa fa-heart-o" aria-hidden="true"></i> Add to Wishlist</a> <!--<a href="#tab-inquire" class="inquire_now inline_inquire cboxElement" title="Inquire for 7547"> <i class="fa fa-envelope-o" aria-hidden="true"></i> Inquire Now </a>--> </span>
           <div class="clearall"></div>
           
           <div class="clearfix"></div>
@@ -613,7 +613,7 @@
           ?>
           <div class="item">
             <div class="item-inner">
-              <div class="productIconBox"> <a href="javascript:void(0)" onclick="add_cart('')" data-toggle="tooltip" data-placement="left" title="Add To Cart" ><i aria-hidden="true" class="fa fa-shopping-cart"></i></a> <a href="javascript:void(0)" onclick="add_wishlist('')" data-toggle="tooltip" data-placement="left" title="Add To Wishlist" ><i aria-hidden="true" class="fa fa-heart-o"></i></a> </div>
+              <div class="productIconBox"> <a href="javascript:void(0)" onclick="add_cart('')" data-toggle="tooltip" data-placement="left" title="Add To Cart" ><i aria-hidden="true" class="fa fa-shopping-cart"></i></a> <a href="javascript:void(0)" onclick="addToWishList('<?php echo $value->product_id;?>', '<?php echo $this->defaultdata->is_user_session_active();?>');" data-toggle="tooltip" data-placement="left" title="Add To Wishlist" ><i aria-hidden="true" class="fa fa-heart-o"></i></a> </div>
               <div class="images-container"><a href="<?php echo base_url('product-details/'.$value->slug);?>"><img src="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($value->prd_img_name, PATHINFO_FILENAME).'_l.'.pathinfo($value->prd_img_name, PATHINFO_EXTENSION);?>" alt="<?php echo $value->prd_name;?>"></a></div>
               <div class="productDetailsBtn"><a href="<?php echo base_url('product-details/'.$value->slug);?>" title="<?php echo $value->prd_name;?>">View Details</a></div>
             </div>
@@ -655,7 +655,7 @@
           ?>
           <div class="item">
             <div class="item-inner">
-              <div class="productIconBox"> <a href="javascript:void(0)" onclick="add_cart('')" data-toggle="tooltip" data-placement="left" title="Add To Cart" ><i aria-hidden="true" class="fa fa-shopping-cart"></i></a> <a href="javascript:void(0)" onclick="add_wishlist('')" data-toggle="tooltip" data-placement="left" title="Add To Wishlist" ><i aria-hidden="true" class="fa fa-heart-o"></i></a> </div>
+              <div class="productIconBox"> <a href="javascript:void(0)" onclick="add_cart('')" data-toggle="tooltip" data-placement="left" title="Add To Cart" ><i aria-hidden="true" class="fa fa-shopping-cart"></i></a> <a href="javascript:void(0)" onclick="addToWishList('<?php echo $value->product_id;?>', '<?php echo $this->defaultdata->is_user_session_active();?>');" data-toggle="tooltip" data-placement="left" title="Add To Wishlist" ><i aria-hidden="true" class="fa fa-heart-o"></i></a> </div>
               <div class="images-container"><a href="<?php echo base_url('product-details/'.$value->slug);?>"><img src="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($value->prd_img_name, PATHINFO_FILENAME).'_l.'.pathinfo($value->prd_img_name, PATHINFO_EXTENSION);?>" alt="<?php echo $value->prd_name;?>"></a></div>
               <div class="productDetailsBtn"><a href="<?php echo base_url('product-details/'.$value->slug);?>" title="<?php echo $value->prd_name;?>">View Details</a></div>
             </div>
