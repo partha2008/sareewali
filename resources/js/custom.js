@@ -317,6 +317,9 @@
 		        $('.pintitle').toggleClass('show_me');
 		        $('.pincode').slideToggle(500);
 		    });
+
+		}else if(PAGENAME == 'mywishlist'){
+			loadWishList();
 		}else{
 		    $('#btnFeatures').on('click', function() {
 		        $('html, body').animate({

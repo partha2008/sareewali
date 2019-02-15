@@ -334,7 +334,7 @@ function load_products(page, view){
         }
     })
     .done(function(data)
-    {     alert("1111")   ;
+    {     
         $('.ajax-load').hide();
         if(data.trim() == ""){
             sessionStorage.setItem("page_end", true);
@@ -414,6 +414,17 @@ function load_unveil(){
     $(".lazy").unveil(300);
 }
 
+function loadWishList(){
+    $.get(BASEPATH+"home/load_wishlist", function(data){
+        if(data){
+            $("#wishlist_html").html(data);
+            $('[data-toggle="tooltip"]').tooltip();
+        }else{
+            $("#wishlist_html").html('<div class="no-prd"> Oops, Sorry no item(s) found in your wishlist </div>');
+        }
+    });
+}
+
 function addToWishList(product_id, is_logged_in){
     if(is_logged_in != "1"){
         openModal('login');
@@ -457,16 +468,7 @@ function remove_from_wishlist(product_id, is_logged_in){
                 closeOnClickOutside: false,
                 closeOnEsc: false
             }).then((willDelete) => {
-                if(redirect){
-                    location.reload();
-                }
-            });
-        }else{
-            swal({
-                text: response.msgText,
-                icon: "error",
-                closeOnClickOutside: false,
-                closeOnEsc: false
+                loadWishList();
             });
         }
     });

@@ -420,7 +420,7 @@
 			$this->userdata->delete_wishlist(array("product_id" => $product_id, "user_id" => $this->session->userdata('user_id')));
 
 			$response['status'] = true;
-			$response['msgText'] = "Item added to wishlist successfully";
+			$response['msgText'] = "Selected item deleted from wishlist";
 
 			echo json_encode($response);
 		}
@@ -448,6 +448,12 @@
 			echo json_encode($response);
 		}
 
+		public function load_wishlist(){
+			$this->data['wishlist_data'] = $this->userdata->grab_product_wishlist_list();
+
+			echo $this->load->view('partials/wishlist', $this->data, true);
+		}
+
 		public function mywishlist(){
 			$this->load->library('breadcrumb');
 
@@ -456,10 +462,6 @@
 
 			$this->data['breadcrumb'] = $this->breadcrumb->output();
 			$this->data['sidebar'] = $this->load->view('partials/sidebar', null, true);
-
-			$wishlist_data = $this->userdata->grab_product_wishlist_list();
-
-			$this->data['wishlist_data'] = $wishlist_data;
 			
 			$this->load->view('mywishlist', $this->data);
 		}
