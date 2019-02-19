@@ -26,6 +26,7 @@
 						$this->session->unset_userdata('has_error');
 						$this->session->unset_userdata('productedit_notification');
 						$this->session->unset_userdata('color');
+						$this->session->unset_userdata('fabric');
 						$this->session->unset_userdata('prd_dic_chk');
 					?>
 					<div class="panel panel-default">
@@ -121,22 +122,23 @@
 											</select>
 										</div>
 										<div class="form-group">
-											<label class="control-label">Fabric</label>
-											<select name="fabric[]" class="form-control" multiple="multiple">
+											<label class="control-label">Fabric <span style="color:#a94442;">*</span></label>
+											<select class="form-control js-example-tags" multiple="multiple" name="fabric[]">
 												<?php
-													$fabric = $this->config->item('fabric');
-													foreach ($fabric as $key => $value) {	
-												?>
-												<option value="<?php echo $key;?>"
-												<?php
-													if(isset($fabrics) && !empty($fabrics)){
-														if(in_array($key, $fabrics)){
-															echo 'selected';
+													$sess_fabric = $product_details->fabric;
+													if(!empty($fabrics)){
+														foreach ($fabrics as $key => $value) {
+															if(in_array($value->fabric_id, $selected_fabrics)){
+																echo '<option selected="selected">'.$value->name.'</option>';
+															}else{
+																echo '<option>'.$value->name.'</option>';
+															}			
 														}
-													}
-												?>
-												><?php echo $value;?></option>
-												<?php
+														if(!empty($sess_fabric)){
+															foreach($sess_fabric as $fabric){
+																echo '<option selected="selected">'.$fabric.'</option>';
+															}
+														}
 													}
 												?>
 											</select>

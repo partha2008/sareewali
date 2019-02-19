@@ -133,6 +133,7 @@ define('TABLE_STATE', TABLE_PREFIX.'state');
 define('TABLE_ADS', TABLE_PREFIX.'ads');
 define('TABLE_ADS_SECTION', TABLE_PREFIX.'ads_section');
 define('TABLE_COLOR', TABLE_PREFIX.'color');
+define('TABLE_FABRIC', TABLE_PREFIX.'fabric');
 define('TABLE_PRODUCT_COLOR', TABLE_PREFIX.'product_color');
 define('TABLE_PRODUCT_TAG', TABLE_PREFIX.'product_tags');
 define('TABLE_PRODUCT_FABRIC', TABLE_PREFIX.'product_fabric');

@@ -28,11 +28,16 @@
 			$random_entity_id = $this->entitydata->grab_random_product_entity(array("product_id" => $product[0]->product_id), array(1,1));
 			$product_color = $this->productdata->grab_product_color_rel(array(TABLE_PRODUCT.".product_id" => $product[0]->product_id));
 			$product_fabric = $this->productdata->grab_product_fabric(array("product_id" => $product[0]->product_id));
+			$fabrics = $this->productdata->grab_fabric();
+			if(!empty($fabrics)){
+				foreach ($fabrics as $key => $value) {
+					$fabric_arr[$value->fabric_id] = $value->name;
+				}
+			}
 
 			$fabric_str = "";
 			if(!empty($product_fabric)){
 				foreach ($product_fabric as $key => $value) {
-					$fabric_arr = $this->config->item("fabric");
 					$fabric_str .= $fabric_arr[$value->fabric_id].", ";
 				}
 			}
@@ -116,6 +121,9 @@
 
 			$colors = $this->productdata->grab_color();
 			$this->data['colors'] = $colors;
+
+			$fabrics = $this->productdata->grab_fabric();
+			$this->data['fabrics'] = $fabrics;
 
 			$searchbar = $this->load->view('partials/searchbar', $this->data, true); 
 			$this->data['searchbar'] = $searchbar;

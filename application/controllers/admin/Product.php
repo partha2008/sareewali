@@ -60,6 +60,9 @@
 
 			$colors = $this->productdata->grab_color();
 			$this->data['colors'] = $colors;
+
+			$fabrics = $this->productdata->grab_fabric();
+			$this->data['fabrics'] = $fabrics;
 			
 			$this->load->view('admin/product_add', $this->data); 
 		}
@@ -102,6 +105,9 @@
 			$this->form_validation->set_rules('content', 'Content', 'trim|required');
 			if(empty($color)){
 				$this->form_validation->set_rules('color[]', 'Color', 'trim|required');
+			}
+			if(empty($fabrics)){
+				$this->form_validation->set_rules('fabric[]', 'Fabric', 'trim|required');
 			}
 			$this->form_validation->set_rules('upload_image', 'Upload Images', 'required');			
 			
@@ -201,7 +207,13 @@
 				// add product fabric
 				if(isset($fabrics) && !empty($fabrics)){
 					foreach ($fabrics as $key => $value) {
-						$this->productdata->insert_product_fabric(array("product_id" => $prd_last_id, "fabric_id" =>$value));
+						$fabrics = $this->productdata->grab_fabric(array("name" => $value));
+						if(empty($fabrics)){
+							$last_id = $this->productdata->insert_fabric(array("name" => $value));
+						}else{
+							$last_id = $fabrics[0]->fabric_id;
+						}
+						$this->productdata->insert_product_fabric(array("product_id" => $prd_last_id, "fabric_id" =>$last_id));
 					}
 				}
 
@@ -226,7 +238,6 @@
 				if(isset($product_details->tag)){
 					$this->data['tags_sess'] = $product_details->tag;
 				}
-				$this->data['fabrics'] = $product_details->fabric;
 				$this->data['occassions'] = $product_details->occassion;
 			}else{
 				$cond['slug'] = $code;
@@ -255,14 +266,13 @@
 				$tags = $this->productdata->grab_product_tag(array("product_id" => $product_details->product_id));
 				$this->data['tags'] = $tags;
 
-				$fabric = array();
 				$fabrics = $this->productdata->grab_product_fabric(array("product_id" => $product_details->product_id));
 				if(!empty($fabrics)){
 					foreach ($fabrics as $key => $value) {
-						$fabric[] = $value->fabric_id;
+						$selected_fabrics[] = $value->fabric_id;
 					}
 				}
-				$this->data['fabrics'] = $fabric;
+				$this->data['selected_fabrics'] = $selected_fabrics;
 
 				$occassion = array();
 				$occassions = $this->productdata->grab_product_occassion(array("product_id" => $product_details->product_id));
@@ -284,6 +294,9 @@
 
 			$colors = $this->productdata->grab_color();
 			$this->data['colors'] = $colors;
+
+			$fabrics = $this->productdata->grab_fabric();
+			$this->data['fabrics'] = $fabrics;
 			
 			$this->load->view('admin/product_edit', $this->data); 
 		}
@@ -305,6 +318,9 @@
 			$this->form_validation->set_rules('sku', 'SKU', 'trim|required');
 			if(empty($color)){
 				$this->form_validation->set_rules('color[]', 'Color', 'trim|required');
+			}
+			if(empty($fabrics)){
+				$this->form_validation->set_rules('fabric[]', 'Fabric', 'trim|required');
 			}
 			$this->form_validation->set_rules('content', 'Content', 'trim|required');
 			$this->form_validation->set_rules('upload_image', 'Upload Images', 'required');
@@ -443,7 +459,13 @@
 				// add product fabric
 				if(isset($fabrics) && !empty($fabrics)){
 					foreach ($fabrics as $key => $value) {
-						$this->productdata->insert_product_fabric(array("product_id" => $product_id, "fabric_id" =>$value));
+						$fabric_tot = $this->productdata->grab_fabric(array("name" => $value));
+						if(empty($fabric_tot)){
+							$last_id = $this->productdata->insert_fabric(array("name" => $value));
+						}else{
+							$last_id = $fabric_tot[0]->fabric_id;
+						}
+						$this->productdata->insert_product_fabric(array("product_id" => $product_id, "fabric_id" =>$last_id));
 					}
 				}
 

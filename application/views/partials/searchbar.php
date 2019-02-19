@@ -28,15 +28,16 @@
         <div class="scroll-fabric">
           <ul class="filterItems">
             <?php
-              $fabrics = $this->config->item("fabric");
-              foreach ($fabrics as $key => $value) {               
+            if(!empty($fabrics)){
+              foreach ($fabrics as $key => $value) {         
             ?>
             <li>
-              <input class="filter_fabric" type="checkbox" id="<?php echo $value;?>" name="fabric[]" value="<?php echo $key;?>"  onclick="search_by_attr(0);" />
-              <label for="<?php echo $value;?>"> <span ></span><?php echo $value;?> </label>
+              <input class="filter_fabric" type="checkbox" id="<?php echo $value->name;?>" name="fabric[]" value="<?php echo $value->fabric_id;?>"  onclick="search_by_attr(0);" />
+              <label for="<?php echo $value->name;?>"> <span ></span><?php echo $value->name;?> </label>
             </li>
             <?php
               }
+            }
             ?>
           </ul>
         </div>
