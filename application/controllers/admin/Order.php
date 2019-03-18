@@ -41,7 +41,7 @@ class Order extends CI_Controller{
 		$order_data = $this->orderdata->grab_order(array(), $like, array());
 		
 		//pagination settings
-		$config['base_url'] = site_url('order-list');
+		$config['base_url'] = base_url('admin/order-list');
 		$config['total_rows'] = count($order_data);
 		
 		$pagination = $this->config->item('pagination');

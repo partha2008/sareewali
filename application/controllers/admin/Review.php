@@ -37,7 +37,7 @@ class Review extends CI_Controller{
 		$review_data = $this->reviewdata->grab_review(array(), $like, array());
 		
 		//pagination settings
-		$config['base_url'] = site_url('review-list');
+		$config['base_url'] = base_url('admin/review-list');
 		$config['total_rows'] = count($review_data);
 		
 		$pagination = $this->config->item('pagination');
