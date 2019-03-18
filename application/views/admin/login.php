@@ -32,7 +32,7 @@
 							$this->session->unset_userdata('login_error');
 							$this->session->unset_userdata('login_error_msg'); 
 						?>
-						<form action="<?php echo site_url('admin/user/process_login');?>" method="POST" role="form">
+						<form action="<?php echo base_url('admin/user/process_login');?>" method="POST" role="form">
 							<fieldset>
 								<div class="form-group">
 									<input class="form-control" placeholder="Username" name="username" type="text" autofocus>
