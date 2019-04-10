@@ -37,7 +37,7 @@
 							$this->session->unset_userdata('has_error');
 							$this->session->unset_userdata('forget_notification');
 						?>
-						<form action="<?php echo site_url('admin/user/process_forget');?>" method="POST" role="form" novalidate>
+						<form action="<?php echo base_url('admin/user/process_forget');?>" method="POST" role="form" novalidate>
 							<fieldset>
 								<div class="form-group">
 									<input class="form-control" placeholder="Enter Email Address" name="email" type="email" value="<?php if(isset($forget_details->email) && $forget_details->email){echo $forget_details->email;}?>" autofocus>

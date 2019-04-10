@@ -37,7 +37,7 @@ class Entity extends CI_Controller{
 		$entity_data = $this->entitydata->grab_entity(array("parent_id !=" => "0"), $like, array());
 		
 		//pagination settings
-		$config['base_url'] = site_url('entity-list');
+		$config['base_url'] = base_url('admin/entity-list');
 		$config['total_rows'] = count($entity_data);
 		
 		$pagination = $this->config->item('pagination');

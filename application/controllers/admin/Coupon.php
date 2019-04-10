@@ -36,7 +36,7 @@ class Coupon extends CI_Controller{
 		$coupon_data = $this->coupondata->grab_coupon(array(), $like, array());
 		
 		//pagination settings
-		$config['base_url'] = site_url('coupon-list');
+		$config['base_url'] = base_url('admin/coupon-list');
 		$config['total_rows'] = count($coupon_data);
 		
 		$pagination = $this->config->item('pagination');

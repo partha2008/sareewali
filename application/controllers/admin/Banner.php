@@ -36,7 +36,7 @@ class Banner extends CI_Controller{
 		$banner_data = $this->bannerdata->grab_banner(array(), $like, array());
 		
 		//pagination settings
-		$config['base_url'] = site_url('banner-list');
+		$config['base_url'] = base_url('admin/banner-list');
 		$config['total_rows'] = count($banner_data);
 		
 		$pagination = $this->config->item('pagination');

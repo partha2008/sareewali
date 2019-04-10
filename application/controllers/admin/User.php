@@ -350,7 +350,7 @@
 			$user_data = $this->userdata->grab_user_details(array(), array(), $like); 
 			
 			//pagination settings
-			$config['base_url'] = site_url('admin/user-list');
+			$config['base_url'] = base_url('admin/user-list');
 			$config['total_rows'] = count($user_data);
 			
 			$pagination = $this->config->item('pagination');
@@ -545,7 +545,7 @@
 			$list = $this->userdata->get_newsletter();
 			
 			//pagination settings
-			$config['base_url'] = site_url('admin/newsletter');
+			$config['base_url'] = base_url('admin/newsletter');
 			$config['total_rows'] = count($list);
 			
 			$pagination = $this->config->item('pagination');
