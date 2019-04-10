@@ -218,17 +218,22 @@ $(document).ready(function() {
                 $("#place_order_btn").prop("disabled", true);
                 $.post(BASEPATH+"cart/make_order", {data: $(form).serialize()}, function(data){
                     var response = JSON.parse(data);
+
                     $("#place_order_btn").prop("disabled", false);
-                    if(response.status){
-                        swal({
-                            title: response.msgTxt,
-                            text: "Transaction ID: "+response.text,
-                            icon: "success",
-                            closeOnClickOutside: false,
-                            closeOnEsc: false
-                        }).then((willDelete) => {
-                            window.location.href = BASEPATH;
-                        });
+                    if(response.status){                        
+                        if(response.hasOwnProperty('redirect')){
+                            window.location.href = response.redirect;
+                        }else{
+                            swal({
+                                title: response.msgTxt,
+                                text: "Transaction ID: "+response.text,
+                                icon: "success",
+                                closeOnClickOutside: false,
+                                closeOnEsc: false
+                            }).then((willDelete) => {
+                                window.location.href = BASEPATH;
+                            });
+                        }
                     }else{
                         swal({
                             title: response.msgTxt,

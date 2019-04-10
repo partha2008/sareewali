@@ -263,12 +263,127 @@
 		}
 
 		public function make_order(){
-			$data = $this->input->post('data');
-			$general_settings = $this->data['general_settings'];
-			$admin_profile = $this->data['admin_profile'];
+			$data = $this->input->post('data');			
 
 			$response = array();
 			parse_str($data, $response);
+			
+			$transaction_id = $this->defaultdata->generatedRandString(12);	
+			if($response['payment_type'] == "cod"){
+				$status = 1;
+			}else{
+				$status = 0;
+			}
+			$data = array(
+				"transaction_id" => $transaction_id,
+				"first_name" => $response['first_name'],
+				"last_name" => $response['last_name'],
+				"email" => $response['email'],
+				"phone" => $response['phone'],
+				"address1" => $response['address1'],
+				"address2" => $response['address2'],
+				"city" => $response['city'],
+				"post_code" => $response['post_code'],
+				"country_id" => $response['country_id'],
+				"state_id" => $response['state_id'],
+				"sub_total" => $response['sub_total'],
+				"discount" => $response['discount'],
+				"grand_total" => $response['grand_total'],
+				"payment_type" => $response['payment_type'],
+				"user_id" => $this->session->userdata('user_id'),
+				"status" => $status,
+				"date_added" => time()
+			);
+			$last_order_id = $this->orderdata->insert_order($data);
+
+			if($last_order_id){
+				$orderid = "SW-".sprintf('%03d', $last_order_id);
+				$this->orderdata->update_order(array("order_id" => $last_order_id), array("orderid" => $orderid));
+
+				$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
+
+				$data = array(
+					"order_id" => $last_order_id,
+					"order_data" => json_encode(serialize($cart_data))
+				);
+				$last_order_details_id = $this->orderdata->insert_order_details($data);
+
+				if($response['payment_type'] == "cod"){
+					$this->order_email($transaction_id);
+				}else{
+					$this->make_payment($response, $last_order_id, $transaction_id);
+				}
+			}else{
+				$res['status'] = false;
+				$res['msgTxt'] = "Order can not be made !";
+
+				echo json_encode($res);
+			}			
+		}
+
+		public function make_payment($data, $order_id, $transaction_id){
+			$params = array();
+
+		    $params['order_id'] = $order_id;
+		    $params['amount'] = $this->defaultdata->parse_number($data['grand_total']);
+		    $params['return_url'] = base_url("checkout");
+		    $params['billing_address_first_name'] = $data['first_name'];
+		    $params['billing_address_last_name'] = $data['last_name'];
+			$params['customer_phone'] = $data['phone'];
+			$params['customer_email'] = $data['email'];	
+
+		    $mg_api = '117CEDE6DED4148885BC81FF3CC8E9';
+			$curl_post_url = "https://sandbox.juspay.in/orders";
+
+			$ch = curl_init();
+
+			curl_setopt ($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+			curl_setopt ($ch, CURLOPT_MAXREDIRS, 3);
+			curl_setopt ($ch, CURLOPT_FOLLOWLOCATION, false);
+			curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt ($ch, CURLOPT_VERBOSE, 0);
+			curl_setopt ($ch, CURLOPT_HEADER, 1);
+			curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, 10);
+			curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, 0);
+			curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 0);
+			curl_setopt ($ch, CURLOPT_USERPWD, $mg_api . ":");
+			curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt ($ch, CURLOPT_POST, true);
+			curl_setopt ($ch, CURLOPT_HEADER, false);
+			curl_setopt ($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+			curl_setopt ($ch, CURLOPT_URL, $curl_post_url);
+			curl_setopt ($ch, CURLOPT_POSTFIELDS, $params);
+			curl_setopt ($ch, CURLOPT_TIMEOUT, 0);
+			
+			$result = curl_exec($ch);
+
+			if(curl_errno($ch))
+			{
+			    $res['status'] = false;
+				$res['msgTxt'] = "Order can not be made !";
+			}else{
+				$response = json_decode($result, true);	
+				if($response['status'] == "CREATED"){
+					$weburl = $response['payment_links']['web'];
+
+					$res['status'] = true;
+					$res['msgTxt'] = "Order made successfully";
+					$res['text'] = $transaction_id;
+					$res['redirect'] = $weburl;
+				}else{
+					$res['status'] = false;
+					$res['msgTxt'] = "Order can not be made !";
+				}
+			}	
+
+			echo json_encode($res);
+
+			curl_close($ch);
+		}
+
+		public function order_email($transaction_id){
+			$general_settings = $this->data['general_settings'];
+			$admin_profile = $this->data['admin_profile'];
 
 			$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
 
@@ -290,66 +405,31 @@
 			$this->data['response'] = (object)$response;
 			
 			$message = $this->load->view('email_template/order', $this->data, true);
-			
-			$transaction_id = $this->defaultdata->generatedRandString(12);		
-			$data = array(
-				"transaction_id" => $transaction_id,
-				"first_name" => $response['first_name'],
-				"last_name" => $response['last_name'],
-				"email" => $response['email'],
-				"phone" => $response['phone'],
-				"address1" => $response['address1'],
-				"address2" => $response['address2'],
-				"city" => $response['city'],
-				"post_code" => $response['post_code'],
-				"country_id" => $response['country_id'],
-				"state_id" => $response['state_id'],
-				"sub_total" => $response['sub_total'],
-				"discount" => $response['discount'],
-				"grand_total" => $response['grand_total'],
-				"payment_type" => $response['payment_type'],
-				"user_id" => $this->session->userdata('user_id'),
-				"date_added" => time()
-			);
-			$last_order_id = $this->orderdata->insert_order($data);
 
-			if($last_order_id){
-				$orderid = "SW-".sprintf('%03d', $last_order_id);
-				$this->orderdata->update_order(array("order_id" => $last_order_id), array("orderid" => $orderid));
-				$data = array(
-					"order_id" => $last_order_id,
-					"order_data" => json_encode(serialize($cart_data))
-				);
-				$last_order_details_id = $this->orderdata->insert_order_details($data);
-
-				// empty cart table after successful transaction
-				if($last_order_details_id){
-					if(!empty($cart_data)){
-						foreach ($cart_data as $key => $value) {
-							$this->cartdata->delete_cart(array("cart_id" => $value->cart_id));
-						}
+			// empty cart table after successful transaction
+			if($last_order_details_id){
+				if(!empty($cart_data)){
+					foreach ($cart_data as $key => $value) {
+						$this->cartdata->delete_cart(array("cart_id" => $value->cart_id));
 					}
-					$this->session->unset_userdata('active_coupon');
-					$this->session->unset_userdata('active_coupon_code');					
 				}
-
-				// send mail to user	
-				$mail_config = array(
-					"from" => $admin_profile->email,
-					"to" => array($user[0]->email),
-					"subject" => $general_settings->sitename.": New Order",
-					"message" => $message
-				);
-				
-				$this->defaultdata->_send_mail($mail_config);
-
-				$res['status'] = true;
-				$res['msgTxt'] = "Order made successfully";
-				$res['text'] = $transaction_id;
-			}else{
-				$res['status'] = false;
-				$res['msgTxt'] = "Order can not be made !";
+				$this->session->unset_userdata('active_coupon');
+				$this->session->unset_userdata('active_coupon_code');					
 			}
+
+			// send mail to user	
+			$mail_config = array(
+				"from" => $admin_profile->email,
+				"to" => array($user[0]->email),
+				"subject" => $general_settings->sitename.": New Order",
+				"message" => $message
+			);
+			
+			$this->defaultdata->_send_mail($mail_config);
+
+			$res['status'] = true;
+			$res['msgTxt'] = "Order made successfully";
+			$res['text'] = $transaction_id;
 
 			echo json_encode($res);
 		}

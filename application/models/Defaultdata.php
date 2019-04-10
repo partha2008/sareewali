@@ -384,5 +384,14 @@ class Defaultdata extends CI_Model {
 	    if (!$full) $string = array_slice($string, 0, 1);
 	    return $string ? implode(', ', $string) . ' ago' : 'just now';
 	}
+
+	public function parse_number($number, $dec_point=null) {
+	    if (empty($dec_point)) {
+	        $locale = localeconv();
+	        $dec_point = $locale['decimal_point'];
+	    }
+
+	    return floatval(str_replace($dec_point, '.', preg_replace('/[^\d'.preg_quote($dec_point).']/', '', $number)));
+	}
 }
 ?>
