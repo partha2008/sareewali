@@ -205,7 +205,7 @@
                             </li>
                             <li class="payment_mode_cls">
                                 <input type="radio" name="payment_type" value="online">
-                                <label for="customTailoring"> <span></span>CCAvenue</label>
+                                <label for="customTailoring"> <span></span>Online</label>
                             </li>
                         </ul>
                         <div class="pull-right">                          
