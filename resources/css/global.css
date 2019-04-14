@@ -3841,6 +3841,34 @@ text-align: center;transition: all 0.3s linear 0s;text-transform: uppercase; mar
     text-align: center;
 }
 
+.no-prd.pay-notify-success{
+    width: 50%;
+    margin: 0 auto;
+    background-color: transparent;
+    color: #3c763d;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.no-prd.pay-notify-failure{
+    width: 50%;
+    margin: 0 auto;
+    background-color: transparent;
+    color: #da504d;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.no-prd .sm{
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 40px;
+}
+
+.no-prd a {
+    margin-top: 20px;
+}
+
 .swal-button{
     background: #e4097f;
     font-weight: normal;

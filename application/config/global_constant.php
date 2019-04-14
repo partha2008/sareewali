@@ -5,7 +5,11 @@
 		"email_smtp_host" => "localhost",
 		"email_smtp_port" => "25",
 		"smtp_email" => "",
-		"smtp_password" => ""
+		"smtp_password" => "",
+		"payment_api_key" => "117CEDE6DED4148885BC81FF3CC8E9",
+		"payment_order_api" => "https://axisbank.juspay.in/orders",
+		"payment_order_status_api" => "https://axisbank.juspay.in/order_status",
+		"merchantId" => "SAREEAK_test" 
 	);
 	
 	// Bootstrap Pagination Configuration

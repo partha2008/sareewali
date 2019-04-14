@@ -58,7 +58,60 @@
 			$this->load->view('cart', $this->data); 
 		}
 
-		public function checkout(){
+		public function success(){
+			$orderId = $this->input->get('order_id');
+			if(isset($orderId) && $orderId){
+				$order_data = $this->orderdata->grab_order(array("orderid" => $orderId));
+				if(!empty($order_data)){
+					if($order_data[0]->status == 0){
+						$site_info = $this->config->item('site_info');
+
+					    $mg_api = $site_info['payment_api_key'];
+						$curl_post_url = $site_info['payment_order_status_api'];			
+						$merchantId = $site_info['merchantId'];
+
+						$ch = curl_init($curl_post_url);
+
+						curl_setopt($ch, CURLOPT_POSTFIELDS, array('orderId' => $orderId , 'merchantId' => $merchantId ));
+						curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+					    curl_setopt($ch, CURLOPT_USERPWD, $mg_api);
+
+						$result =  curl_exec($ch); 
+
+						if(curl_error($ch))
+						{
+						    $this->data['payment_status'] = false;
+							$this->data['msgTxt'] = curl_error($ch);
+						}else{
+							$response = json_decode($result, true);	
+							if($response['status'] == "CHARGED"){
+								$this->orderdata->update_order(array("orderid" => $orderId), array("status" => 1));
+
+								$this->order_email($order_data[0]->transaction_id);
+
+								$this->data['payment_status'] = true;
+								$this->data['msgTxt'] = "Order made successfully";
+								$this->data['transaction_id'] = $order_data[0]->transaction_id;
+							}else{
+								$this->data['payment_status'] = false;
+								$this->data['msgTxt'] = "Payment not successful";
+							}
+						}	
+						curl_close($ch);
+
+						$this->load->view('success', $this->data); 
+					}else{
+						redirect(base_url());
+					}
+				}else{
+					redirect(base_url());
+				}
+			}else{
+				redirect(base_url());
+			}
+		}
+
+		public function checkout(){	
 			$this->load->library('breadcrumb');
 
 			$this->breadcrumb->add('Home', base_url());
@@ -311,7 +364,7 @@
 				if($response['payment_type'] == "cod"){
 					$this->order_email($transaction_id);
 				}else{
-					$this->make_payment($response, $last_order_id, $transaction_id);
+					$this->make_payment($response, $orderid, $transaction_id);
 				}
 			}else{
 				$res['status'] = false;
@@ -326,14 +379,15 @@
 
 		    $params['order_id'] = $order_id;
 		    $params['amount'] = $this->defaultdata->parse_number($data['grand_total']);
-		    $params['return_url'] = base_url("checkout");
+		    $params['return_url'] = base_url("success");
 		    $params['billing_address_first_name'] = $data['first_name'];
 		    $params['billing_address_last_name'] = $data['last_name'];
 			$params['customer_phone'] = $data['phone'];
 			$params['customer_email'] = $data['email'];	
 
-		    $mg_api = '117CEDE6DED4148885BC81FF3CC8E9';
-			$curl_post_url = "https://sandbox.juspay.in/orders";
+			$site_info = $this->config->item('site_info');
+		    $mg_api = $site_info['payment_api_key'];
+			$curl_post_url = $site_info['payment_order_api'];
 
 			$ch = curl_init();
 
@@ -357,10 +411,10 @@
 			
 			$result = curl_exec($ch);
 
-			if(curl_errno($ch))
+			if(curl_error($ch))
 			{
 			    $res['status'] = false;
-				$res['msgTxt'] = "Order can not be made !";
+				$res['msgTxt'] = curl_error($ch);
 			}else{
 				$response = json_decode($result, true);	
 				if($response['status'] == "CREATED"){

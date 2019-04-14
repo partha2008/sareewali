@@ -34,6 +34,10 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>resources/css/CustomScrollbar.css" />
 <link rel="stylesheet" href="<?php echo base_url(); ?>resources/css/jquery-ui.css" />
 <?php
+}elseif($tot_segments[1] == 'success'){
+?>
+<link rel="stylesheet" href="<?php echo base_url(); ?>resources/css/swal.css" />
+<?php
 }else{
 ?>
 <link rel="stylesheet" href="<?php echo base_url(); ?>resources/css/animate.css" />

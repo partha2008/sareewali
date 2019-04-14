@@ -73,6 +73,7 @@ $route['product-list/(:any)/(:any)'] = 'product/product_list/$1/$2';
 
 $route['cart'] = 'cart/index';
 $route['checkout'] = 'cart/checkout';
+$route['success'] = 'cart/success';
 
 $route['admin'] = 'admin/user/index';
 
