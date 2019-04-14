@@ -361,7 +361,8 @@
 				);
 				$last_order_details_id = $this->orderdata->insert_order_details($data);
 
-				if($response['payment_type'] == "cod"){
+				$this->create_email_template($response);
+				if($response['payment_type'] == "cod"){					
 					$this->order_email($transaction_id);
 				}else{
 					$this->make_payment($response, $orderid, $transaction_id);
@@ -435,14 +436,11 @@
 			curl_close($ch);
 		}
 
-		public function order_email($transaction_id){
+		public function create_email_template($response){
 			$general_settings = $this->data['general_settings'];
-			$admin_profile = $this->data['admin_profile'];
-
 			$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
-
 			$user = $this->userdata->grab_user_details(array("user_id" => $this->session->userdata('user_id')));
-				
+
 			$this->data['site_title'] = rtrim(preg_replace("(^https?://www.)", "",$general_settings->siteaddress), '/');
 			$this->data['site_logo'] = UPLOAD_LOGO_PATH.$general_settings->logoname;
 			$this->data['site_url'] = $general_settings->siteaddress;
@@ -460,26 +458,37 @@
 			
 			$message = $this->load->view('email_template/order', $this->data, true);
 
+			$this->session->set_userdata('current_order_email', $message);
+		}
+
+		public function order_email($transaction_id){
+			$general_settings = $this->data['general_settings'];
+			$admin_profile = $this->data['admin_profile'];
+
+			$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
+
+			$user = $this->userdata->grab_user_details(array("user_id" => $this->session->userdata('user_id')));
+
 			// empty cart table after successful transaction
-			if($last_order_details_id){
-				if(!empty($cart_data)){
-					foreach ($cart_data as $key => $value) {
-						$this->cartdata->delete_cart(array("cart_id" => $value->cart_id));
-					}
+			if(!empty($cart_data)){
+				foreach ($cart_data as $key => $value) {
+					$this->cartdata->delete_cart(array("cart_id" => $value->cart_id));
 				}
-				$this->session->unset_userdata('active_coupon');
-				$this->session->unset_userdata('active_coupon_code');					
 			}
+			$this->session->unset_userdata('active_coupon');
+			$this->session->unset_userdata('active_coupon_code');		
 
 			// send mail to user	
 			$mail_config = array(
 				"from" => $admin_profile->email,
 				"to" => array($user[0]->email),
 				"subject" => $general_settings->sitename.": New Order",
-				"message" => $message
+				"message" => $this->session->userdata('current_order_email')
 			);
 			
 			$this->defaultdata->_send_mail($mail_config);
+
+			$this->session->unset_userdata('current_order_email');
 
 			$res['status'] = true;
 			$res['msgTxt'] = "Order made successfully";

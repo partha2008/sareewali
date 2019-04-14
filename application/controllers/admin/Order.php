@@ -53,7 +53,7 @@ class Order extends CI_Controller{
 
 		$this->data['pagination'] = $this->pagination->create_links();
 		
-		$order_paginated_data = $this->orderdata->grab_order(array(), $like, array(PAGINATION_PER_PAGE, $this->data['page']));
+		$order_paginated_data = $this->orderdata->grab_order(array(), $like, array(PAGINATION_PER_PAGE, $this->data['page']), true);
 		$this->data['order_details'] = $order_paginated_data;
 		
 		$this->load->view('admin/order_list', $this->data); 
