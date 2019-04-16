@@ -87,7 +87,7 @@
 							if($response['status'] == "CHARGED"){
 								$this->orderdata->update_order(array("orderid" => $orderId), array("status" => 1));
 
-								$this->order_email($order_data[0]->transaction_id);
+								$this->order_email($order_data[0]->transaction_id, false);
 
 								$this->data['payment_status'] = true;
 								$this->data['msgTxt'] = "Order made successfully";
@@ -461,7 +461,7 @@
 			$this->session->set_userdata('current_order_email', $message);
 		}
 
-		public function order_email($transaction_id){
+		public function order_email($transaction_id, $return = true){
 			$general_settings = $this->data['general_settings'];
 			$admin_profile = $this->data['admin_profile'];
 
@@ -490,11 +490,13 @@
 
 			$this->session->unset_userdata('current_order_email');
 
-			$res['status'] = true;
-			$res['msgTxt'] = "Order made successfully";
-			$res['text'] = $transaction_id;
+			if($return){
+				$res['status'] = true;
+				$res['msgTxt'] = "Order made successfully";
+				$res['text'] = $transaction_id;
 
-			echo json_encode($res);
+				echo json_encode($res);
+			}
 		}
 	}
 ?>

@@ -65,9 +65,20 @@
 											 <td><i class="fa fa-inr"></i><?php echo $detail->grand_total;?></td>	
 											 <td><?php echo $detail->payment_type;?></td>	
 											 <td><?php echo date("d-m-Y", $detail->date_added);?></td>
+											 <?php
+											 	if($detail->status == 0){
+											 ?>
+											 <td><strong style="color:red;">Failed</strong></td>
+											 <?php
+											 	}else{
+											 ?>
 											 <td><strong class="<?php echo $this->config->item('order_status')[$detail->order_status]['class'];?>"><?php echo $this->config->item('order_status')[$detail->order_status]['text'];?></strong></td>
+											 <?php
+											 	}
+											 ?>
 											 <td class="center">
 											 	<?php
+											 		if($detail->status == 1){
 											 		if($detail->invoice_generated == "N"){
 											 	?>
 												<a href="<?php echo base_url('admin/order/generate_invoice/'.$detail->order_id);?>" class="btn btn-sm btn-primary" title="Generate Invoice">Generate Invoice</a>&nbsp;
@@ -79,6 +90,9 @@
 													}
 												?>
 												<a href="<?php echo base_url('admin/order/resend_mail/'.$detail->order_id.'/'.$detail->user_id);?>" class="btn btn-sm btn-primary" title="Resend Order Email">Resend Order Email</a>&nbsp;
+												<?php
+													}
+												?>
 												<a href="<?php echo base_url('admin/order-details/'.$detail->order_id);?>" class="btn btn-sm btn-primary" title="View">View</a>
 											</td>
 										  </tr>
