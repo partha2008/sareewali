@@ -12,8 +12,14 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            <div class="row">
+            <div class="row" style="margin-bottom: 5px;">
                 <div class="col-lg-12">
+                    <a href="<?php echo base_url('admin/order-list');?>" class="btn btn-primary pull-right">Go Back</a>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <div class="row">
+                <div class="col-lg-12">                	
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                         	<h4 class="panel-title">Cart Data</h4>
@@ -159,6 +165,9 @@
 						</div>
                     </div>
                     <!-- /.panel -->
+                    <?php
+                    	if($order_data->status == 1){
+                    ?>
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                         	<h4 class="panel-title">Shipping Status</h4>
@@ -187,14 +196,17 @@
 							  </div>
 							</div>
 						</div>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            
-        </div>
+	                </div>
+	                <!-- /.col-lg-12 -->
+	                <?php
+	                	}
+	                ?>
+	            </div>
+	            <!-- /.row -->
+	            
+	        </div>
 
-		</div>
-		<!-- /#wrapper -->
-		
-		<?php echo $footer; ?>
+			</div>
+			<!-- /#wrapper -->
+			
+			<?php echo $footer; ?>
