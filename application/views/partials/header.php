@@ -84,7 +84,7 @@
 
   <div class="header-area">
 
-    <div class="container">
+    <div class="container hide-mobile-version">
 
       <div class="row">
 
@@ -164,10 +164,18 @@
           <li class="mobileList mobielMenu"><a href="javascript:void(0)" title=""><i class="fa fa-bars" aria-hidden="true"></i> <span>Menu</span></a></li>
 
           <li class="mobileList mobileSearch"><a href="javascript:void(0)" title=""><i class="fa fa-search" aria-hidden="true"></i> <span>Search</span></a></li>
+          
+          
+          
+          <li class="mobileList mobile-logo">
+          	<a href="<?php echo base_url(); ?>" title=""><img src="<?php echo base_url(); ?>uploads/logo/mobile-logo.png" /></a>
+          </li>
+          
+          
 
-          <li class="mobileList mobileAccount"><a href="javascript:void(0)" title=""><i class="fa fa-list-ul" aria-hidden="true"></i> <span>Account</span></a></li>
+          <li class="mobileList mobileAccount"><a href="javascript:void(0)" title=""><i class="fa fa-user" aria-hidden="true"></i> <span>Account</span></a></li>
 
-          <li class="mobileList mobileCart"><a href="javascript:void(0)" title=""><i class="fa fa-shopping-bag" aria-hidden="true"></i> <span>Cart</span></a></li>
+          <li class="mobileList mobileCart"><a href="javascript:void(0)" title=""><i class="fa fa-shopping-cart" aria-hidden="true"></i> <span>Cart</span></a></li>
 
         </ul>
 

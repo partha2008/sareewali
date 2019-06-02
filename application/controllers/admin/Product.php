@@ -137,6 +137,11 @@
 				// product
 				$post_data['slug'] = $this->defaultdata->slugify($post_data['name']);
 				$post_data['date_added'] = time();
+				if(isset($post_data['prd_dic_chk'])){
+					$post_data['prd_dic_chk'] = "Y";
+				}else{
+					$post_data['prd_dic_chk'] = "N";
+				}
 
 				$prd_last_id = $this->productdata->insert_product($post_data);
 
@@ -374,6 +379,11 @@
 				$slug = $post_data['slug'];
 				unset($post_data['slug'])	;
 				$post_data['date_modified'] = time();	
+				if(isset($post_data['prd_dic_chk'])){
+					$post_data['prd_dic_chk'] = "Y";
+				}else{
+					$post_data['prd_dic_chk'] = "N";
+				}
 				$cond = array("slug" => $slug);
 
 				$this->productdata->update_product($cond, $post_data);

@@ -68,7 +68,7 @@
 										</div>
 										<div class="form-inline">
 											<div class="checkbox">
-											    <label><input <?php if(isset($product_details->prd_dic_chk) && ($product_details->prd_dic_chk == "Y")){echo 'checked';}?> type="checkbox" id="prd_dic_chk" name="prd_dic_chk" value="1"> Discount</label>
+											    <label><input <?php if(isset($product_details->prd_dic_chk) && ($product_details->prd_dic_chk == "Y")){echo 'checked';}?> type="checkbox" id="prd_dic_chk" name="prd_dic_chk"> Discount</label>
 											</div>
 										    <div class="form-group">
 										    	<select class="form-control" id="prd_dis_mode" name="prd_dis_mode">

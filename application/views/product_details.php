@@ -79,7 +79,19 @@
             <?php
               }
             ?>
-            <br>
+            <?php
+              if($product->prd_dic_chk == "Y"){
+                if($product->prd_dis_mode == "per"){
+            ?>
+            <span class="price-dis"><?php echo (int)$product->prd_dis_amt;?>% OFF</span>
+            <?php
+                }elseif($product->prd_dis_mode == "flat"){
+            ?>
+            <span class="price-dis"><i class="fa fa-inr"></i><?php echo $product->prd_dis_amt;?> OFF</span>
+            <?php
+                }
+              }
+            ?>
           </div>
           <?php
             if($product->out_of_stock == 'Y'){

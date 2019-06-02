@@ -12,7 +12,7 @@ ul.resp-tabs-list, p {
     list-style: none;
     cursor: pointer;
     float: left;
-	font-family: 'MontserratLight';
+	font-family: 'Roboto', sans-serif;
 	background:#f5f5f5;
 	margin-left:5px;
 	border:1px solid #e1e1e1;
