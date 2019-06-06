@@ -1,10 +1,10 @@
   <div class="footer-bottom">
     <div class="container">
-      <div class="footer-logo"><img src="<?php echo base_url(); ?>uploads/logo/logo.png" /></div>
+      <div class="footer-logo"><a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>uploads/logo/logo.png" /></a></div>
       <ul class="footer-content">
         <li><a href="<?php echo base_url('about'); ?>">About Us</a></li>
         <li><a href="<?php echo base_url('contact'); ?>">Contact Us</a></li>
-        <li><a href="<?php echo base_url('feedback'); ?>">Feedback</a></li>
+        <li><a href="<?php echo base_url('feedback'); ?>">Wholesale Inquiry</a></li>
         <li><a href="<?php echo base_url('return'); ?>">Cancellation & Returns</a></li>
         <li><a href="<?php echo base_url('term'); ?>">Terms & Conditions</a></li>
         <li><a href="<?php echo base_url('privacy'); ?>">Privacy Policy</a></li>

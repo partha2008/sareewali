@@ -328,7 +328,7 @@
           </div>
           <!--<div class="clearall"></div>
           <div class="sharebutton">
-            <div class="addthis_inline_share_toolbox_tipl" data-url="https://www.aasvaa.com/red-and-beige-color-silk-and-lycra-saree-7547" data-title="Red And Beige Color Silk And Lycra Saree" data-description="The fabulous pattern makes this saree from Aasvaa Fashion a classy number to be included in your wardrobe. Red and beige color silk fabrics and net work and lycra pattern saree. Ideal for party, festi..." style="clear: both;">
+            <div class="addthis_inline_share_toolbox_tipl" data-url="https://www.sareewali.com/red-and-beige-color-silk-and-lycra-saree-7547" data-title="Red And Beige Color Silk And Lycra Saree" data-description="The fabulous pattern makes this saree from sareewali Fashion a classy number to be included in your wardrobe. Red and beige color silk fabrics and net work and lycra pattern saree. Ideal for party, festi..." style="clear: both;">
               <div id="atstbx" class="at-resp-share-element at-style-responsive addthis-smartlayers addthis-animated at4-show" aria-labelledby="at-2761f4a0-89b6-45c2-907a-1a927e30f66c" role="region"><span id="at-2761f4a0-89b6-45c2-907a-1a927e30f66c" class="at4-visually-hidden">AddThis Sharing Buttons</span>
                 <div class="at-share-btn-elements"><a role="button" tabindex="1" class="at-icon-wrapper at-share-btn at-svc-facebook" style="background-color: rgb(238, 238, 238); border-radius: 14px;"><span class="at4-visually-hidden">Share to Facebook</span><span class="at-icon-wrapper" style="line-height: 32px; height: 32px; width: 32px;">
                   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" version="1.1" role="img" aria-labelledby="at-svg-facebook-1" class="at-icon at-icon-facebook" style="fill: rgb(102, 102, 102); width: 32px; height: 32px;">
@@ -423,7 +423,7 @@
               <div class="product_page_tabs">
                 <div id="notetabs" class="notestab"> <a href="#tab-more-details" class="selected">Product Info</a> <a href="#tab-notes">Notes</a> <a href="#tab-shipping_policy_tab">Shipping Policy</a> <a href="#tab-payment_policy_tab">Payment Policy</a> <a href="#tab-cashback_policy_tab">Cashback Policy</a> <a href="#tab-review">Reviews</a> </div>
                 <div id="tab-more-details" class="tab-content" style="display: block;">
-                  <div class="more_details"> <a href="https://www.aasvaa.com/sarees&amp;catalog=3053"></a><a href="https://www.aasvaa.com/sarees&amp;colors=orange"></a><a href="https://www.aasvaa.com/sarees&amp;colors=beige"></a><a href="https://www.aasvaa.com/sarees&amp;work=embroidered"></a><a href="https://www.aasvaa.com/sarees&amp;style=half-n-half-saree"></a><a href="https://www.aasvaa.com/sarees&amp;fabric=silk"></a><a href="https://www.aasvaa.com/sarees&amp;occasion=party"></a><a href="https://www.aasvaa.com/sarees&amp;shipping_time=2-days"></a><a href="https://www.aasvaa.com/sarees&amp;product_content=saree"></a><a href="https://www.aasvaa.com/sarees&amp;product_content=unstitched-blouse"></a>
+                  <div class="more_details">
                     <table width="100%">
                       <tbody>
                         <tr>
@@ -458,16 +458,16 @@
                 <div id="tab-shipping_policy_tab" class="tab-content" style="display: none;">
                 
                 
-                  <div><strong>Shipping Outside India / International</strong></div>
+                  <div><strong>Shipping <!--Outside India / International--></strong></div>
                   
                   <ul>
                     <li><strong>Shipping Time</strong></li>
                   </ul>
-                  <div>05 - 10 Business days for Un-Stitched product.</div>
+                  <div>5 - 10 Business days for Un-Stitched product.</div>
                   <div style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> &nbsp;</div>
-                  <div><span style="font-family:arial,helvetica,sans-serif;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # </strong>04 - 05&nbsp;</span></span><span style="font-family: arial, helvetica, sans-serif;">Extra</span><span style="font-family: arial, helvetica, sans-serif;">&nbsp;Business days for Custom Stitched product.</span></div>
+                  <!--<div><span style="font-family:arial,helvetica,sans-serif;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # </strong>04 - 05&nbsp;</span></span><span style="font-family: arial, helvetica, sans-serif;">Extra</span><span style="font-family: arial, helvetica, sans-serif;">&nbsp;Business days for Custom Stitched product.</span></div>-->
                   <ul>
-                    <li style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> <span style="font-family:georgia,serif;"><span style="font-size:12px;"><strong>Shipping Cost</strong></span></span></li>
+                   <!-- <li style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> <span style="font-family:georgia,serif;"><span style="font-size:12px;"><strong>Shipping Cost</strong></span></span></li>
                   </ul>
                   <div style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> <span style="font-size:12px;"><span style="font-family:arial,helvetica,sans-serif;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;#</strong>&nbsp;Shipping Cost is calculated on per product and Based on S</span><span style="font-family: arial, helvetica, sans-serif;">electing Your Country&nbsp;Location ,which will be reflected on your Cart &amp; checkout page.</span></span></div>
                   <div style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> &nbsp;</div>
@@ -475,11 +475,14 @@
                   <ul>
                     <li style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> <span style="font-family:georgia,serif;"><strong>Shipping Services&nbsp;</strong></span><strong style="font-family: georgia, serif;">Location</strong></li>
                   </ul>
-                  <p style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> <strong style="font-family: arial, helvetica, sans-serif;">&nbsp; &nbsp; &nbsp; &nbsp; #</strong><span style="font-family: arial, helvetica, sans-serif;">&nbsp;80 + Countries worldwide including US, UK, Canada, Australia, New Zealand and More.</span></p>
-                  <p style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> <u><strong style="font-family: georgia, serif; font-size: 14px;">Shipping Inside India</strong></u></p>
-                  <div style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> <span style="font-size:12px;"><span style="font-family:arial,helvetica,sans-serif;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; #&nbsp;</strong>Free Shipping all Location in India.</span></span></div>
+                  <p style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> <strong style="font-family: arial, helvetica, sans-serif;">&nbsp; &nbsp; &nbsp; &nbsp; #</strong><span style="font-family: arial, helvetica, sans-serif;">&nbsp;80 + Countries worldwide including US, UK, Canada, Australia, New Zealand and More.</span></p> 
+              -->
+                  <p style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> <strong style="font-family: georgia, serif; font-size: 14px;">Shipping Inside India</strong></p>
+                  <!--<div style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> <span style="font-size:12px;"><span style="font-family:arial,helvetica,sans-serif;">Free Shipping all Location in India.</span></span></div>
+                  <div style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> &nbsp;</div>-->
+                  <div>Free Shipping all Location in India.</div>
                   <div style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> &nbsp;</div>
-                  <p style="margin-top: 0px; margin-bottom: 20px; color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> <strong style="font-family: georgia, serif;">Tip - Shipping cost decreases when you buy more than two products. Buy more, Save more!</strong></p>
+                  <!--<p style="margin-top: 0px; margin-bottom: 20px; color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> <strong style="font-family: georgia, serif;">Tip - Shipping cost decreases when you buy more than two products. Buy more, Save more!</strong></p>-->
                   
                   
                   
@@ -498,25 +501,25 @@
                 
                 
                 <div id="tab-payment_policy_tab" class="tab-content" style="display: none;">
-                  <p style="margin-top: 0px; margin-bottom: 20px; color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> <span style="font-size:12px;"><strong style="font-family: georgia, serif;">You can choose from any of the following modes to make payment for your purchases on&nbsp;<a href="https://www.aasvaa.com/" style="text-decoration-line: none; color: rgb(51, 51, 51); cursor: pointer;">aasvaa.com</a></strong></span></p>
+                  <p style="margin-top: 0px; margin-bottom: 20px; color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> <span style="font-size:12px;"><strong style="font-family: georgia, serif;">You can choose from any of the following modes to make payment for your purchases on&nbsp;<a href="<?php echo base_url();?>" style="text-decoration-line: none; color: rgb(51, 51, 51); cursor: pointer;"><?php echo $this->defaultdata->getDomain(base_url());?></a></strong></span></p>
                   <ul style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;">
                     <li> <span style="font-size:12px;"><span style="font-family:arial,helvetica,sans-serif;"><span style="font-family:georgia,serif;"><strong>COD :</strong></span>&nbsp;Cash on Delivery, where you can pay by Cash on receipt of product.<span style="color:#a9a9a9;"> (India Only.)</span></span></span></li>
                   </ul>
                   <ul style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;">
-                    <li> <span style="font-size:12px;"><span style="font-family: arial, helvetica, sans-serif;"><span style="font-family: georgia, serif;"><strong>Direct Bank Transfer :</strong></span>&nbsp;Pay via Bank Transfer.&nbsp;</span><span style="color:#a9a9a9;">(India &amp; International.)</span></span></li>
+                    <li> <span style="font-size:12px;"><span style="font-family: arial, helvetica, sans-serif;"><span style="font-family: georgia, serif;"><strong>Direct Bank Transfer :</strong></span>&nbsp;Pay via Bank Transfer.&nbsp;</span><span style="color:#a9a9a9;">(India <!--&amp; International.-->)</span></span></li>
                   </ul>
                   <ul style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;">
                     <li> <span style="font-size:12px;"><span style="font-family:arial,helvetica,sans-serif;"><span style="font-family:georgia,serif;"><strong>Net banking :</strong></span>&nbsp;All the major banks. Details available at Checkout.</span></span></li>
                   </ul>
                   <ul style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;">
-                    <li> <span style="font-size:12px;"><span style="font-family:arial,helvetica,sans-serif;"><span style="font-family:georgia,serif;"><strong>Domestic Payment Gateway :</strong></span>&nbsp;EBS, Ccavenue(All Mesure Card Accepted).&nbsp;</span><span style="color:#a9a9a9;">(India Only.)</span></span></li>
+                    <li> <span style="font-size:12px;"><span style="font-family:arial,helvetica,sans-serif;"><span style="font-family:georgia,serif;"><strong>Domestic Payment Gateway :</strong></span>&nbsp;CC Avenue(All Mesure Card Accepted).&nbsp;</span><span style="color:#a9a9a9;">(India Only.)</span></span></li>
                   </ul>
-                  <ul style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;">
+                  <!--<ul style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;">
                     <li> <span style="font-size:12px;"><span style="font-family:arial,helvetica,sans-serif;"><span style="font-family:georgia,serif;"><strong>EBS International Gateway :</strong></span>&nbsp;Credir Card, Debit Card, Master card, Visa Card, Discover, JCB, American Express, Diners Club cards and Maestro cards.&nbsp;</span><span style="color:#a9a9a9;">(International Only.)</span></span></li>
                   </ul>
                   <ul style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;">
                     <li> <span style="font-size:12px;"><span style="font-family:arial,helvetica,sans-serif;"><span style="font-family:georgia,serif;"><strong>PayPal&nbsp;<strong>International Gateway&nbsp;</strong>:&nbsp;</strong></span>(Transfer from PayPal Account or pay Via Credit Card/ Debit Card using PayPal) ( PayPal is only for international Payments)&nbsp;</span><span style="color:#a9a9a9;">(International Only.)</span></span></li>
-                  </ul>
+                  </ul>-->
                 </div>
                 <div id="tab-cashback_policy_tab" class="tab-content" style="display: none;">
                   <ul>
@@ -561,7 +564,7 @@
                                   <div class="card-body">
                                       <div class="row">
                                           <div class="col-sm-1">
-                                              <img src="https://www.sareewali.com/resources/images/def_face.jpg" class="img img-rounded img-fluid"/>
+                                              <img src="<?php echo base_url('resources/images/def_face.jpg');?>" class="img img-rounded img-fluid"/>
                                           </div>
                                           <div class="col-sm-10">
                                               <p><a href="#"><strong><?php echo $value->reviewer;?></strong></a>
@@ -697,12 +700,9 @@
   </div>
 
 </div>
-
- <!-- Modal -->
-  <div class="modal fade" id="how_to_measure_tbl" role="dialog">
+ 
+  <!--<div class="modal fade" id="how_to_measure_tbl" role="dialog">
     <div class="modal-dialog">
-    
-      <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -712,7 +712,7 @@
                 <div class="images-box scroll-box" style="height: 450px; overflow-y: scroll; padding: 10px 5px; max-width: 100%; text-align: center; color: rgb(68, 68, 68); font-family: Lato, Arial, Helvetica, sans-serif; font-size: 13px;">
                   <div class="img-responsive">
                     <p align="center" style="margin-top: 0px; margin-bottom: 20px;"> <strong><span style="font-family:georgia,serif;"><span style="font-size:18px;"><span style="color:#ffa500;"><span style="background-color:#ffffff;">How to Measure Saree Blouse</span></span></span></span></strong></p>
-                    <p align="center" style="margin-top: 0px; margin-bottom: 20px;"> <strong><img alt="" src="http://www.aasvaa.com/image/data/measurement/blouse-measure-tips-how-to-measure.jpg" style="width: 400px; height: 368px;"></strong></p>
+                    <p align="center" style="margin-top: 0px; margin-bottom: 20px;"> <strong><img alt="" src="http://www.sareewali.com/image/data/measurement/blouse-measure-tips-how-to-measure.jpg" style="width: 400px; height: 368px;"></strong></p>
                     <div class="content">
                       <h4 style="font-size: 18px; margin: 0px 0px 10px;"> <u>Important Notes while taking measurement:</u></h4>
                       <p style="margin-top: 0px; margin-bottom: 10px; color: rgb(102, 102, 102); font-size: 14px; line-height: 23px; text-align: justify;"> 1. Please follow the instructions below to get your exact body size and then compare it to our body measurement chart to see which size fits you best.</p>
@@ -730,26 +730,22 @@
       </div>
       
     </div>
-  </div>
+  </div>-->
 
-    <!-- Modal -->
-  <div class="modal fade" id="size_chart_tbl" role="dialog">
-    <div class="modal-dialog">
     
-      <!-- Modal content-->
+  <!--<div class="modal fade" id="size_chart_tbl" role="dialog">
+    <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          <p><img alt="" src="https://www.aasvaa.com/image/data/sizechart/sizes-002.jpg" style="width: 634px; height: 585px;"></p>
+          <p><img alt="" src="https://www.sareewali.com/image/data/sizechart/sizes-002.jpg" style="width: 634px; height: 585px;"></p>
         </div>
       </div>
       
     </div>
-  </div>
-
-  <!-- Modal -->
+  </div>-->
 
   <div class="modal fade" id="reviews_box" role="dialog">
     <script src='https://www.google.com/recaptcha/api.js'></script>
