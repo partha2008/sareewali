@@ -376,6 +376,37 @@
 		}
 
 		public function make_payment($data, $order_id, $transaction_id){
+			$site_info = $this->config->item('site_info');
+			if($data['address2']){
+				$address = $data['address1'].', '.$data['address2'];
+			}else{
+				$address = $data['address1'];
+			}
+
+			$params = array();
+
+		    $params['tid'] = time();
+		    $params['merchant_id'] = $site_info['ccavenue_merchant_id'];
+		    $params['order_id'] = $order_id;
+		    $params['currency'] = 'INR';
+		    $params['redirect_url'] = base_url("success");
+		    $params['cancel_url'] = base_url("success");
+		    $params['billing_name'] = $data['first_name'].' '.$data['last_name'];
+		    $params['billing_email'] = $data['email'];
+		    $params['billing_tel'] = $data['phone'];
+		    $params['billing_address'] = $address;
+		    $params['billing_country'] = $data['email'];
+		    $params['billing_state'] = $data['email'];
+		    $params['billing_city'] = $data['city'];
+		    $params['billing_zip'] = $data['post_code'];
+		    $params['amount'] = $this->defaultdata->parse_number($data['grand_total']);
+
+		    echo "<pre>";
+		    print_r($params);
+		    die();
+		}
+
+		/*public function make_payment($data, $order_id, $transaction_id){
 			$params = array();
 
 		    $params['order_id'] = $order_id;
@@ -434,7 +465,7 @@
 			echo json_encode($res);
 
 			curl_close($ch);
-		}
+		}*/
 
 		public function create_email_template($response){
 			$general_settings = $this->data['general_settings'];
