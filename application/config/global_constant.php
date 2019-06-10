@@ -10,7 +10,11 @@
 		"payment_order_api" => "https://axisbank.juspay.in/orders",
 		"payment_order_status_api" => "https://axisbank.juspay.in/order_status",
 		"merchantId" => "SAREEAK_test",
-		"ccavenue_merchant_id" => "221104"
+		"ccavenue_merchant_id" => "221104",
+		"ccavenue_access_code" => "AVXT85GF75AF06TXFA",
+		"ccavenue_working_key" => "FC60017733D91CA00B74D3A9CDE6E058",
+		"ccavenue_test_url" => "https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction",
+		"ccavenue_live_url" => "https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction"
 	);
 	
 	// Bootstrap Pagination Configuration

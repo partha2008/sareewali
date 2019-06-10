@@ -4,7 +4,7 @@
 	class Cart extends CI_Controller {
 		
 		public $data = array();
-		public $loggedin_method_arr = array('index', 'checkout');
+		public $loggedin_method_arr = array('index', 'checkout', 'checkout_request');
 		
 		public function __construct(){
 			parent::__construct();
@@ -384,26 +384,35 @@
 			}
 
 			$params = array();
+			$country = $this->defaultdata->grabCountryData(array("country_id" => $data['country_id']));
+			$state = $this->defaultdata->grabStateData(array("state_id" => $data['state_id']));
 
-		    $params['tid'] = time();
-		    $params['merchant_id'] = $site_info['ccavenue_merchant_id'];
-		    $params['order_id'] = $order_id;
-		    $params['currency'] = 'INR';
-		    $params['redirect_url'] = base_url("success");
-		    $params['cancel_url'] = base_url("success");
-		    $params['billing_name'] = $data['first_name'].' '.$data['last_name'];
-		    $params['billing_email'] = $data['email'];
-		    $params['billing_tel'] = $data['phone'];
-		    $params['billing_address'] = $address;
-		    $params['billing_country'] = $data['email'];
-		    $params['billing_state'] = $data['email'];
-		    $params['billing_city'] = $data['city'];
-		    $params['billing_zip'] = $data['post_code'];
-		    $params['amount'] = $this->defaultdata->parse_number($data['grand_total']);
+		    $params['checkout']['tid'] = time();
+		    $params['checkout']['merchant_id'] = $site_info['ccavenue_merchant_id'];
+		    $params['checkout']['order_id'] = $order_id;
+		    $params['checkout']['currency'] = 'INR';
+		    $params['checkout']['redirect_url'] = base_url("success");
+		    $params['checkout']['cancel_url'] = base_url("success");
+		    $params['checkout']['billing_name'] = $data['first_name'].' '.$data['last_name'];
+		    $params['checkout']['billing_email'] = $data['email'];
+		    $params['checkout']['billing_tel'] = $data['phone'];
+		    $params['checkout']['billing_address'] = $address;
+		    $params['checkout']['billing_country'] = $country[0]->name;
+		    $params['checkout']['billing_state'] = $state[0]->name;
+		    $params['checkout']['billing_city'] = $data['city'];
+		    $params['checkout']['billing_zip'] = $data['post_code'];
+		    $params['checkout']['amount'] = $this->defaultdata->parse_number($data['grand_total']);
 
-		    echo "<pre>";
-		    print_r($params);
-		    die();
+		    $this->session->set_userdata($params);
+
+		    $res['status'] = true;
+			$res['redirect'] = base_url('checkout-request');
+
+			echo json_encode($res);
+		}
+
+		public function checkout_request(){
+			$this->load->view('checkout_request', $this->data);
 		}
 
 		/*public function make_payment($data, $order_id, $transaction_id){
