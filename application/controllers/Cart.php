@@ -58,6 +58,60 @@
 			$this->load->view('cart', $this->data); 
 		}
 
+		public function success(){			
+			$encResponse = $this->input->post('encResp');
+
+			if($encResponse){
+				$workingKey = $this->config->item('site_info')['ccavenue_working_key'];
+				$rcvdString = $this->defaultdata->decrypt($encResponse,$workingKey);		
+				$order_status = "";
+				$decryptValues = explode('&', $rcvdString);
+				$dataSize = sizeof($decryptValues);
+
+				for($i = 0; $i < $dataSize; $i++) 
+				{
+					$information = explode('=', $decryptValues[$i]);
+					$arr[] = $information[1];	
+				}
+
+				$order_id = $arr[0];
+	            $order_trans_id = $arr[1];
+	            $order_status = $arr[3];
+
+	            if(isset($order_id) && $order_id){
+	            	$order_data = $this->orderdata->grab_order(array("orderid" => $order_id));
+
+	            	if(!empty($order_data)){
+	            		if($order_data[0]->status == 0){
+	            			if($order_status == "Success"){
+								$this->orderdata->update_order(array("orderid" => $order_id), array("status" => 1));
+
+								$this->order_email($order_data[0]->transaction_id, false);
+
+								$this->data['payment_status'] = true;
+								$this->data['msgTxt'] = "Order made successfully";
+								$this->data['transaction_id'] = $order_data[0]->transaction_id;
+							}else{
+								$this->data['payment_status'] = false;
+								$this->data['msgTxt'] = "Payment not successful";
+							}
+
+							$this->load->view('success', $this->data); 
+	            		}else{
+	            			redirect(base_url());
+	            		}
+	            	}else{
+	            		redirect(base_url());
+	            	}
+	            }else{
+	            	redirect(base_url());
+	            }
+			}else{
+            	redirect(base_url());
+            }
+		}
+
+		/*
 		public function success(){
 			$orderId = $this->input->get('order_id');
 			if(isset($orderId) && $orderId){
@@ -109,7 +163,7 @@
 			}else{
 				redirect(base_url());
 			}
-		}
+		}*/
 
 		public function checkout(){	
 			$this->load->library('breadcrumb');

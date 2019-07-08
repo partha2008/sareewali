@@ -185,6 +185,10 @@
             tags: true
         });
 
+        $("#label_price").blur(function(){
+            $("#prd_dis_btn").trigger('click');
+        });
+
         $("#prd_dis_btn").click(function(){
             if($("#prd_dic_chk").is(':checked')){ 
                 var prd_dis_amt = $("#prd_dis_amt").val();
