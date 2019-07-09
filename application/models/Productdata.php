@@ -26,7 +26,7 @@ class Productdata extends CI_Model {
 			$order_by = "RAND()";
 		}
 
-		$sql = "SELECT  ".TABLE_PRODUCT.".product_id, ".TABLE_PRODUCT.".prd_dic_chk, ".TABLE_PRODUCT.".discounted_price, ".TABLE_PRODUCT.".slug, ".TABLE_PRODUCT.".name as prd_name, ".TABLE_PRODUCT.".price, ".TABLE_PRODUCT_IMAGES.".name as prd_img_name,"
+		$sql = "SELECT  ".TABLE_PRODUCT.".prd_dis_amt, ".TABLE_PRODUCT.".prd_dis_mode, ".TABLE_PRODUCT.".product_id, ".TABLE_PRODUCT.".prd_dic_chk, ".TABLE_PRODUCT.".discounted_price, ".TABLE_PRODUCT.".slug, ".TABLE_PRODUCT.".name as prd_name, ".TABLE_PRODUCT.".price, ".TABLE_PRODUCT_IMAGES.".name as prd_img_name,"
 			."(CASE WHEN ".TABLE_PRODUCT.".product_id IN (
 				SELECT ".TABLE_PRODUCT.".product_id from ".TABLE_PRODUCT."
 				INNER JOIN ".TABLE_PRODUCT_ENTITY." ON ".TABLE_PRODUCT.".product_id = ".TABLE_PRODUCT_ENTITY.".product_id 
@@ -78,7 +78,7 @@ class Productdata extends CI_Model {
 	}
 
 	public function grab_product_list(){	
-		$sql = "SELECT ".TABLE_PRODUCT.".product_id, ".TABLE_PRODUCT.".slug, ".TABLE_PRODUCT.".name as prd_name, ".TABLE_PRODUCT.".price, ".TABLE_PRODUCT_IMAGES.".name as prd_img_name FROM ".TABLE_PRODUCT." INNER JOIN ".TABLE_PRODUCT_IMAGES." ON ".TABLE_PRODUCT.".product_id = ".TABLE_PRODUCT_IMAGES.".product_id INNER JOIN ".TABLE_PRODUCT_ENTITY." ON ".TABLE_PRODUCT.".product_id = ".TABLE_PRODUCT_ENTITY.".product_id INNER JOIN ".TABLE_ENTITY." ON ".TABLE_PRODUCT_ENTITY.".entity_id = ".TABLE_ENTITY.".entity_id WHERE ".TABLE_PRODUCT.".status='Y' AND ".TABLE_PRODUCT_IMAGES.".status='Y' AND ".TABLE_PRODUCT_IMAGES.".is_featured='Y' AND ".TABLE_ENTITY.".name = 'New' ORDER BY RAND() DESC LIMIT 0, 10";
+		$sql = "SELECT ".TABLE_PRODUCT.".prd_dic_chk, ".TABLE_PRODUCT.".prd_dis_amt, ".TABLE_PRODUCT.".prd_dis_mode, ".TABLE_PRODUCT.".product_id, ".TABLE_PRODUCT.".slug, ".TABLE_PRODUCT.".name as prd_name, ".TABLE_PRODUCT.".price, ".TABLE_PRODUCT_IMAGES.".name as prd_img_name FROM ".TABLE_PRODUCT." INNER JOIN ".TABLE_PRODUCT_IMAGES." ON ".TABLE_PRODUCT.".product_id = ".TABLE_PRODUCT_IMAGES.".product_id INNER JOIN ".TABLE_PRODUCT_ENTITY." ON ".TABLE_PRODUCT.".product_id = ".TABLE_PRODUCT_ENTITY.".product_id INNER JOIN ".TABLE_ENTITY." ON ".TABLE_PRODUCT_ENTITY.".entity_id = ".TABLE_ENTITY.".entity_id WHERE ".TABLE_PRODUCT.".status='Y' AND ".TABLE_PRODUCT_IMAGES.".status='Y' AND ".TABLE_PRODUCT_IMAGES.".is_featured='Y' AND ".TABLE_ENTITY.".name = 'New' ORDER BY RAND() DESC LIMIT 0, 10";
 		
 		$query = $this->db->query($sql);
 		

@@ -30,11 +30,32 @@
 
               <div class="des-container">
                 <div class="name">
-                  <a href="product-details.html"><?php echo $list->prd_name;?></a>
+                  <a href="<?php echo base_url('product-details/'.$list->slug);?>"><?php echo $list->prd_name;?></a>
                 </div>
-                <div class="price"> 
-                  <!--<span class="old-price"><strike><i class="fa fa-inr"></i>8,700</strike></span>--> 
+                <div class="price">
+                  <?php
+                    if($list->prd_dic_chk == "Y"){
+                  ?> 
+                  <span class="old-price"><strike><i class="fa fa-inr"></i><?php echo $list->price;?></strike></span>
+                  <span><i class="fa fa-inr"></i><?php echo $list->discounted_price;?></span>
+                  <?php
+                    if($list->prd_dis_mode == "per"){
+                  ?>
+                  <span class="price-dis"><?php echo (int)$list->prd_dis_amt;?>% OFF</span>
+                  <?php 
+                    }else{
+                  ?>
+                  <span class="price-dis"><i class="fa fa-inr"></i><?php echo $list->prd_dis_amt;?> OFF</span>
+                  <?php
+                    }
+                  ?>
+                  <?php
+                    }else{
+                  ?>
                   <span><i class="fa fa-inr"></i> <?php echo $list->price;?></span>
+                  <?php
+                    }
+                  ?>
                 </div>
                 <div class="productDetailsBtn"><a href="<?php echo base_url('product-details/'.$list->slug);?>" title="">View Details</a></div>
               </div>

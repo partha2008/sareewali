@@ -10,7 +10,7 @@
                 foreach($banner_list AS $list){
                     ?>
                     <li> 
-                        <a href="#">
+                        <a href="javascript:void(0);">
                             <img src="<?php echo $list->path;?>" alt="<?php echo $list->title;?>" border="0"/>
                         </a>
                         <p class="wow bounceInDown caption"> <span></span> </p>
@@ -34,7 +34,7 @@
             $file_with_ext = $file_name_.'_l.'.$file_ext_;
           ?>
           <div class="col-md-6"> 
-            <a href="products.html">
+            <a href="<?php echo base_url('product-list/'.$enity_list[0]->slug);?>">
               <div class="cat-item">
                 <div class="images-container">
                   <img class="img-responsive" src="<?php echo UPLOAD_ENTITY_PATH. $file_with_ext;?>" />
@@ -61,7 +61,7 @@
       <div class="col-md-6">
         <div class="row">
           <div class="col-xs-6 col-sm-6 col-md-6 desContainerSmallBox"> 
-            <a href="products.html">
+            <a href="<?php echo base_url('product-list/'.$enity_list[0]->slug);?>">
               <div class="cat-item banner2">
                 <div class="images-container">
                   <img class="img-responsive" src="<?php echo UPLOAD_ENTITY_PATH. $file_with_ext;?>" />
@@ -86,7 +86,7 @@
             $file_with_ext = $file_name_.'_s.'.$file_ext_;
           ?>
           <div class="col-xs-6 col-sm-6 col-md-6 desContainerSmallBox"> 
-            <a href="products">
+            <a href="<?php echo base_url('product-list/'.$enity_list[0]->slug);?>">
               <div class="cat-item banner3">
                 <div class="images-container">
                   <img class="img-responsive" src="<?php echo UPLOAD_ENTITY_PATH. $file_with_ext;?>" />
@@ -113,7 +113,7 @@
           ?>
         <div class="row">
           <div class="col-md-12"> 
-            <a href="products.html">
+            <a href="<?php echo base_url('product-list/'.$enity_list[0]->slug);?>">
               <div class="cat-item banner4">
                 <div class="images-container">
                   <img class="img-responsive" src="<?php echo UPLOAD_ENTITY_PATH. $file_with_ext;?>" />
@@ -153,13 +153,13 @@
 
           <div class="col-xs-12 col-md-6">
 
-            <a href="theme-1"><img alt="EOSS: Bestseller items at Flat 20% Off. Shop!" class="img-responsive lazyloaded" src="<?php echo base_url(); ?>resources/images/bestsellers.jpg" title="EOSS: Bestseller items at Flat 20% Off. Shop!" data-src="<?php echo base_url(); ?>resources/images/bestsellers.jpg"></a>
+            <a href="javascript:void(0);"><img alt="EOSS: Bestseller items at Flat 20% Off. Shop!" class="img-responsive lazyloaded" src="<?php echo base_url(); ?>resources/images/bestsellers.jpg" title="EOSS: Bestseller items at Flat 20% Off. Shop!" data-src="<?php echo base_url(); ?>resources/images/bestsellers.jpg"></a>
 
         </div>
 
         <div class="col-xs-12 col-md-6">
 
-            <a href="theme-4"><img alt="EOSS: Clearance Sale of min. 50 - 70% Off. Shop!" class="img-responsive lazyloaded" src="<?php echo base_url(); ?>resources/images/clearance-sale-newupd.jpg" title="EOSS: Clearance Sale of min. 50 - 70% Off. Shop!" data-src="<?php echo base_url(); ?>resources/images/clearance-sale-newupd.jpg"></a>
+            <a href="javascript:void(0);"><img alt="EOSS: Clearance Sale of min. 50 - 70% Off. Shop!" class="img-responsive lazyloaded" src="<?php echo base_url(); ?>resources/images/clearance-sale-newupd.jpg" title="EOSS: Clearance Sale of min. 50 - 70% Off. Shop!" data-src="<?php echo base_url(); ?>resources/images/clearance-sale-newupd.jpg"></a>
 
         </div>
 
@@ -212,7 +212,7 @@
           </div>
           <div class="des-container">
             <div class="name"><a href="<?php echo base_url('product-details/'.$product->slug);?>"><?php echo $product->prd_name;?></a></div>
-            <div class="price"> <span><i class="fa fa-inr"></i> <?php echo $product->price;?></span> </div>
+            <div class="price"> <span><i class="fa fa-inr"></i><?php echo $product->price;?></span> </div>
             <div class="productDetailsBtn"><a href="<?php echo base_url('product-details/'.$product->slug);?>" title="">View Details</a></div>
         </div>
     </div>
