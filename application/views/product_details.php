@@ -265,7 +265,7 @@
           <div class="more_details right">
             <h3>Product Highlights</h3>
             <div class="description comment more show-read-more">
-              <p><?php echo $product->description;?></p>
+              <?php echo $product->description;?>
             </div>
           </div>
           <a class="add_to_compare_icon  " title="Add to Compare" onclick="addToCompare('7547');">Add to Compare</a> </div>

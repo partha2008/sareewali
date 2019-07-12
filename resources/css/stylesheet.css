@@ -5416,7 +5416,7 @@ table.radio tr.highlight:hover td {
 }
 .product-info .details_box .more_details {
 	float: left;
-	margin-top: 15px;
+	/*margin-top: 15px;*/
 	clear: both
 }
 .product .product_information.cen {
@@ -5542,6 +5542,13 @@ table.radio tr.highlight:hover td {
 	float: left;
 	margin-top: 0px;
 	text-align: justify
+}
+.details_box .description li{
+	list-style: initial;
+	margin-bottom: 5px;
+}
+.details_box .description li:last-child {
+ 	margin-bottom: 0px;
 }
 .product-info .social_share {
 	clear: both;
@@ -13242,7 +13249,7 @@ p.connect-text {
 	margin-left: 10px;
 }
 .more_details h3 {
-	font-size: 16px;
+	font-size: 20px;
 	font-family: 'Roboto', sans-serif;
 	text-transform: capitalize;
 	border-bottom: 1px solid #ddd;
