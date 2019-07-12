@@ -1986,7 +1986,7 @@ label {
 	margin-top: 6px;
 }
 .new_arrival_label {
-	background: #E81E36;
+	background: #e4097f;
 	border-radius: 0;
 	color: #ffffff;
 	left: 5px;
@@ -2143,7 +2143,7 @@ label {
 	text-transform: uppercase;
 	top: -3px;
 	font-weight: normal;
-	background: #E81E36;
+	background: #e4097f;
 	color: #fff;
 }
 .quick-search {
@@ -5680,7 +5680,7 @@ table.radio tr.highlight:hover td {
 	font-weight: normal;
 	margin-bottom: 5px;
 	margin-top: 0;
-	color: #E81E36;
+	color: #e4097f;
 	padding: 15px 0 10px;
 	text-align: left;
 	width: 100%;
@@ -5784,7 +5784,7 @@ table.radio tr.highlight:hover td {
 	border: 0
 }
 .button.quick_buy_button:hover {
-	background: #e4097f
+	background: #0470af;
 }
 .button.quick_buy_button:before {
 /*content:"\f045";
@@ -5797,7 +5797,7 @@ table.radio tr.highlight:hover td {
 
 }
 .button.quick_buy_button {
-	background: #000 none repeat scroll 0 0;
+	background: #0470af none repeat scroll 0 0;
 	margin-left: 0px;
 	font-size: 16px !important;
 	margin-top: 0;
@@ -6177,14 +6177,22 @@ table.radio tr.highlight:hover td {
 	display: inline-block;
 	margin-right: 5px;
 	font-weight: normal;
-	width: 175px;
-	text-transform: uppercase
+	width: 120px;
+	text-transform: uppercase;
+	font-family: 'Roboto', sans-serif;
+	float: left;
 }
+.tab_prd_val{
+	font-family: 'Roboto', sans-serif;
+	float: left;
+}
+.variation_td b{ padding: 0 5px; float: left; }
+
 .product-info .pincode {
 	clear: both;
 	color: #4D4D4D;
 	margin-bottom: 15px;
-	overflow: auto
+	overflow: auto;
 }
 .product-info .pincode #zip_code {
 	border: 1px solid #CCC;

@@ -203,7 +203,7 @@
               </div>
               <div class="images-container">
                 <a href="<?php echo base_url('product-details/'.$product->slug);?>">
-                  <img src="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($product->prd_img_name, PATHINFO_FILENAME).'_s.'.pathinfo($product->prd_img_name, PATHINFO_EXTENSION);?>" alt="<?php echo $product->prd_name;?>">
+                  <img src="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($product->prd_img_name, PATHINFO_FILENAME).'_xl.'.pathinfo($product->prd_img_name, PATHINFO_EXTENSION);?>" alt="<?php echo $product->prd_name;?>">
                 </a>
               </div>
               <div class="productDetailsBtn">

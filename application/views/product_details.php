@@ -427,19 +427,19 @@
                     <table width="100%">
                       <tbody>
                         <tr>
-                          <td class="variation_td"><div> <span class="variation_name">Product Code</span>: <?php echo $product->sku;?></div></td>
+                          <td class="variation_td"><div> <span class="variation_name">Product Code</span><b>:</b><span class="tab_prd_val"><?php echo $product->sku;?></span></div></td>
                         </tr>
                         <tr>
-                          <td class="variation_td"><div><span class="variation_name">Colors</span>: <?php echo $product_color;?> </div></td>
+                          <td class="variation_td"><div><span class="variation_name">Colors</span><b>:</b><span class="tab_prd_val"><?php echo $product_color;?></span></div></td>
                         </tr>
                         <tr>
-                          <td class="variation_td"><div><span class="variation_name">Fabric</span>: <?php echo $product_fabric;?> </div></td>
+                          <td class="variation_td"><div><span class="variation_name">Fabric</span><b>:</b><span class="tab_prd_val"><?php echo $product_fabric;?></span></div></td>
                         </tr>
                         <tr>
-                          <td class="variation_td"><div><span class="variation_name">Occasion</span>: <?php echo $product_occassion;?> </div></td>
+                          <td class="variation_td"><div><span class="variation_name">Occasion</span><b>:</b><span class="tab_prd_val"><?php echo $product_occassion;?></span></div></td>
                         </tr>
                         <tr>
-                          <td class="variation_td"><div><span class="variation_name">Content</span>: <?php echo $product->content;?> </div></td>
+                          <td class="variation_td"><div><span class="variation_name">Content</span><b>:</b> <span class="tab_prd_val"><?php echo $product->content;?></span></div></td>
                         </tr>
                       </tbody>
                     </table>
