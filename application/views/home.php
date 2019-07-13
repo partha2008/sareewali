@@ -103,7 +103,47 @@
               </div>
             </a> 
           </div>
+          
+          <div class="col-xs-6 col-sm-6 col-md-6 desContainerSmallBox margintop-15"> 
+            <a href="<?php echo base_url('product-list/'.$enity_list[0]->slug);?>">
+              <div class="cat-item banner3">
+                <div class="images-container">
+                  <img class="img-responsive" src="<?php echo UPLOAD_ENTITY_PATH. $file_with_ext;?>" />
+                </div>
+                <div class="des-container">
+                  <div class="desk-container-Table">
+                    <div class="deskContainerTableCell"> 
+                      <span class="name"><?php echo ucfirst($enity_list[2]->name);?></span> 
+                      <span class="disc"><?php echo $enity_list[2]->description;?></span> 
+                      <span class="btn-collection">Explore Collection <i aria-hidden="true" class="fa fa-long-arrow-right"></i></span> 
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a> 
+          </div>
+          
+          <div class="col-xs-6 col-sm-6 col-md-6 desContainerSmallBox margintop-15"> 
+            <a href="<?php echo base_url('product-list/'.$enity_list[0]->slug);?>">
+              <div class="cat-item banner3">
+                <div class="images-container">
+                  <img class="img-responsive" src="<?php echo UPLOAD_ENTITY_PATH. $file_with_ext;?>" />
+                </div>
+                <div class="des-container">
+                  <div class="desk-container-Table">
+                    <div class="deskContainerTableCell"> 
+                      <span class="name"><?php echo ucfirst($enity_list[2]->name);?></span> 
+                      <span class="disc"><?php echo $enity_list[2]->description;?></span> 
+                      <span class="btn-collection">Explore Collection <i aria-hidden="true" class="fa fa-long-arrow-right"></i></span> 
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a> 
+          </div>
+          
         </div>
+        
         <?php
         }
         if(isset($enity_list[3])){
@@ -111,7 +151,7 @@
             $file_name_ = basename($enity_list[3]->image_path, '.'.$file_ext_);
             $file_with_ext = $file_name_.'_m.'.$file_ext_;
           ?>
-        <div class="row">
+        <!--<div class="row">
           <div class="col-md-12"> 
             <a href="<?php echo base_url('product-list/'.$enity_list[0]->slug);?>">
               <div class="cat-item banner4">
@@ -130,7 +170,7 @@
               </div>
             </a> 
           </div>
-        </div>
+        </div>-->
         <?php
         }
         ?>

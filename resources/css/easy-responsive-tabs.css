@@ -22,7 +22,7 @@ ul.resp-tabs-list, p {
 
 .resp-tabs-list li:first-child{margin-left:0px;}
 
-.resp-tabs-list li.resp-tab-active{background:#fff;box-shadow:1px -3px 6px -1px rgba(0, 0, 0, 0.15);border-top:5px solid #e4097f;border-radius:3px 3px 0px 0px;}
+.resp-tabs-list li.resp-tab-active{background:#fff;box-shadow:1px -3px 6px -1px rgba(0, 0, 0, 0.15);border-top:5px solid #eb1c35;border-radius:3px 3px 0px 0px;}
 
 .resp-tabs-container {
     padding: 0px;

@@ -79,7 +79,7 @@ class Defaultdata extends CI_Model {
 			}
 		}	
 
-		return $this->defaultdata->parseTree($final_tree);
+		return $this->parseTree($final_tree);
 	}
 	public function is_session_active()
 	{

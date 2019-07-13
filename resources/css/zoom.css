@@ -412,7 +412,7 @@
 }
 .gc-thumbs-area-next .gc-icon-next-vt {
 	font-size:33px !important;
-	color:#e4097f !important;
+	color:#eb1c35 !important;
 }
 .gc-overlay-area .gc-icon-next {
 	position:relative;
@@ -450,7 +450,7 @@
 }
 .gc-thumbs-area-prev .gc-icon-prev-vt {
 	font-size:33px !important;
-	color:#e4097f !important;
+	color:#eb1c35 !important;
 }
 .gc-overlay-area .gc-icon-prev {
 	position:relative;
@@ -539,7 +539,7 @@
 	height:30px
 }
 
-.gc-icon-prev:hover, .gc-icon-next:hover, .gc-icon-download:hover{color:#e4097f !important;}
+.gc-icon-prev:hover, .gc-icon-next:hover, .gc-icon-download:hover{color:#eb1c35 !important;}
 
 @-webkit-keyframes loadGC {
 0% {
