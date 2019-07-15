@@ -100,27 +100,24 @@
                     if(!is_null($tree) && count($tree) > 0) {
                             echo '<ul>';
                             foreach($tree as $node) {
-                                $name = explode("_", $node['name']);
-                                if(!empty($node['children'])){
-                                  if($name[1] == 'Y'){
-                                    echo '<li><a class="coutreNav" href="'.base_url('product-list/'.$name[2]).'">'.$name[0].'</a>';
+                                if($node->status == "Y"){
+                                  if($node->is_special == "Y"){
+                                    echo '<li><a class="coutreNav" href="'.base_url('product-list/'.$node->slug).'">'.$node->name.'</a>';
                                   }else{
-                                    echo '<li><a href="'.base_url('product-list/'.$name[2]).'">'.$name[0].'</a>';
-                                  }                                  
-                                }else{
-                                  if($name[1] == 'Y'){
-                                    echo '<li><a class="coutreNav" href="'.base_url('product-list/'.$name[2]).'">'.$name[0].'</a>';
-                                  }else{
-                                    echo '<li><a href="'.base_url('product-list/'.$name[2]).'">'.$name[0].'</a>';
+                                    echo '<li><a href="'.base_url('product-list/'.$node->slug).'">'.$node->name.'</a>';
+                                  }
+                                  
+                                  if(isset($node->children)){
+                                    printTree($node->children);
                                   }
                                 }
-                                printTree($node['children']);
+                                
                                 echo '</li>';
                             }
                             echo '</ul>';
                         }
                     }
-                    printTree($final_tree);
+                    printTree($final_tree[0]->children);
                 ?>
             </div>
 

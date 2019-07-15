@@ -60,26 +60,9 @@ class Defaultdata extends CI_Model {
 		return $this->data;
 	}
 	public function grabTree(){
-		$tree = $this->entitydata->grab_entity(array("level !=" => "0", "status" => "Y"), array(), array(), array("sort_order" => "asc"));
-		$recArr = array();
+		$tree = $this->entitydata->grab_entity(array(), array(), array(), array("entity_id" => "asc"));
 
-		if(!empty($tree)){
-			foreach($tree as $tr){
-				$recArr[$tr->entity_id] = $tr;
-			}
-		}
-
-		if(!empty($tree)){
-			foreach($tree as $tr){
-				if(isset($recArr[$tr->parent_id])){
-					$final_tree[$tr->name.'_'.$tr->is_special.'_'.$tr->slug] = $recArr[$tr->parent_id]->name.'_'.$tr->is_special.'_'.$tr->slug;
-				}else{
-					$final_tree[$tr->name.'_'.$tr->is_special.'_'.$tr->slug] = null;
-				}
-			}
-		}	
-
-		return $this->parseTree($final_tree);
+		return $this->buildTree($tree);
 	}
 	public function is_session_active()
 	{
@@ -309,23 +292,21 @@ class Defaultdata extends CI_Model {
 		}
 	}
 
-	public function parseTree($tree, $root = null) {
-        $return = array();
-        # Traverse the tree and search for direct children of the root
-        foreach($tree as $child => $parent) {
-            # A direct child is found
-            if($parent == $root) {
-                # Remove item from tree (we don't need to traverse this again)
-                unset($tree[$child]);
-                # Append the child into result array and parse its children
-                $return[] = array(
-                    'name' => $child,
-                    'children' => $this->parseTree($tree, $child)
-                );
-            }
-        }
-        return empty($return) ? null : $return;    
-    }
+	public function buildTree(array $elements, $parentId = 0) {
+	    $branch = array();
+
+	    foreach ($elements as $element) {
+	        if ($element->parent_id == $parentId) {
+	            $children = $this->buildTree($elements, $element->entity_id);
+	            if ($children) {
+	                $element->children = $children;
+	            }
+	            $branch[] = $element;
+	        }
+	    }
+
+	    return $branch;
+	}
 
     public function create_thumb($file_path, $marker, $width, $height){
 		$config['image_library'] = 'gd2';  
