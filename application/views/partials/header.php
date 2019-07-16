@@ -51,7 +51,7 @@
 
               <ul class="myAccountDrop">
 
-                <li class="currencyMyAccount"><a href="#" title=""><i class="fa fa-angle-down" aria-hidden="true"></i> INR</a></li>
+                <!--<li class="currencyMyAccount"><a href="#" title=""><i class="fa fa-angle-down" aria-hidden="true"></i> INR</a></li>-->
 
                 <?php
                   if($this->defaultdata->is_user_session_active() == 1){
