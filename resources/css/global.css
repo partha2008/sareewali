@@ -4636,3 +4636,7 @@ img.lazy {
 .margintop-15{
 	margin-top:15px;
 }
+
+.fa-angle-down.fa-angle-up:before {
+    content: "\f106";
+}

@@ -30,18 +30,18 @@
         </div>
         <?php
           if((int)$value->prd_discounted_price > 0){
-              $unit_price = number_format($value->prd_discounted_price, 2);
-              $total_price = number_format($value->prd_discounted_price*$value->prd_count, 2);
+              $unit_price = $value->prd_discounted_price;
+              $total_price = $value->prd_discounted_price*$value->prd_count;
           }else{
-              $unit_price = number_format($value->prd_price, 2);
-              $total_price = number_format($value->prd_price*$value->prd_count, 2);
+              $unit_price = $value->prd_price;
+              $total_price = $value->prd_price*$value->prd_count;
           }
         ?>
         <div class="rTableCell">          
-          <div class="cartPageAmt"><i class="fa fa-inr"></i> <?php echo $unit_price;?></div>
+          <div class="cartPageAmt"><i class="fa fa-inr"></i><?php echo $unit_price;?></div>
         </div>
         <div class="rTableCell">
-          <div class="cartPageAmt"><i class="fa fa-inr"></i> <?php echo $total_price;?></div>
+          <div class="cartPageAmt"><i class="fa fa-inr"></i><?php echo $total_price;?></div>
         </div>
         <div class="rTableCell"><button class="btn btn-danger" title="Delete" onclick="update_cart('delete', '<?php echo $value->cart_id;?>');"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></div>
       </div>

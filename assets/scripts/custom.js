@@ -195,14 +195,9 @@
                 var prd_amt = $("#label_price").val();  
                 if(prd_dis_amt && prd_amt){
                     var mode = $("#prd_dis_mode option:selected").val();
-                    if(mode == "flat"){
-                        var discounted_price = parseFloat(prd_amt)-parseFloat(prd_dis_amt);
-                    }else{
-                        var dis = (parseFloat(prd_amt)*parseFloat(prd_dis_amt))/100;
-                        var discounted_price = (parseFloat(prd_amt))-dis;
-                    }
-
-                    $("#prd_dis_price").val(discounted_price);
+                    $.post(BASEPATH+"admin/product/modify_product_price", {prd_dis_amt: prd_dis_amt, prd_amt: prd_amt, mode: mode}, function(price){
+                        $("#prd_dis_price").val(price.trim());
+                    });  
                 }                
             }
         });

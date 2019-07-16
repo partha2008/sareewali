@@ -231,7 +231,7 @@
 			$sub_total = 0;
 			if(!empty($cart_data)){
 				foreach ($cart_data as $key => $value) {
-					if((int)$value->prd_discounted_price > 0){
+					if($value->prd_discounted_price > 0){
 		              	$total_price = $value->prd_discounted_price*$value->prd_count;
 		            }else{
 		              	$total_price = $value->prd_price*$value->prd_count;
@@ -249,7 +249,7 @@
 			$sub_total = 0;
 			if(!empty($cart_data)){
 				foreach ($cart_data as $key => $value) {
-					if((int)$value->prd_discounted_price > 0){
+					if($value->prd_discounted_price > 0){
 		              	$total_price = $value->prd_discounted_price*$value->prd_count;
 		            }else{
 		              	$total_price = $value->prd_price*$value->prd_count;
@@ -260,7 +260,7 @@
 
 			$result = $sub_total - $this->get_discount_amount();
 
-			return number_format($result, 2);
+			return $result;
 		}
 
 		public function get_cart_item_count(){

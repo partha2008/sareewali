@@ -640,4 +640,17 @@
 			$this->remove_images($images);
 		}
 
+		public function modify_product_price(){
+			$post_data = $this->input->post();
+
+			if($post_data['mode'] == "flat"){
+                $discounted_price = $post_data['prd_amt']-$post_data['prd_dis_amt'];
+            }else{
+                $dis = $post_data['prd_amt']*$post_data['prd_dis_amt']/100;
+                $discounted_price = $post_data['prd_amt']-$dis;
+            }
+
+			echo number_format($discounted_price, 0, '', '');
+		}
+
 	}
