@@ -18,6 +18,17 @@ class Cartdata extends CI_Model {
 		
 		return $query->result();
 	}
+
+	public function grab_cart_image_list($cond = array()){	
+		$this->db->select('*')
+        	->from(TABLE_CART)
+         	->join(TABLE_PRODUCT_IMAGES, TABLE_CART.'.product_id = '.TABLE_PRODUCT_IMAGES.'.product_id')
+         	->where($cond);
+		
+		$query = $this->db->get();
+		
+		return $query->result();
+	}
 	
 	public function insert_cart($data = array()){
 

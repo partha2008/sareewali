@@ -17,7 +17,9 @@
       ?>
       <div class="rTableRow">
         <div class="rTableCell">
-          <a href="<?php echo base_url('product-details/'.$value->prd_slug);?>"><img class="img-thumbnail" title="<?php echo $prd_image[0]->name;?>" alt="<?php echo $prd_image[0]->name;?>" src="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($prd_image[0]->name, PATHINFO_FILENAME).'_s.'.pathinfo($prd_image[0]->name, PATHINFO_EXTENSION);?>"> </a>
+          <a href="<?php echo base_url('product-details/'.$value->prd_slug);?>">
+            <img class="img-thumbnail" title="<?php echo $value->name;?>" alt="<?php echo $value->name;?>" src="<?php echo UPLOAD_PRODUCT_PATH.pathinfo($value->name, PATHINFO_FILENAME).'_s.'.pathinfo($value->name, PATHINFO_EXTENSION);?>"> 
+          </a>
         </div>
         <div class="rTableCell"><?php echo $value->prd_name;?></div>
         <div class="rTableCell"> <?php echo $value->prd_slug;?> </div>

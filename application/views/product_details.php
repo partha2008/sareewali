@@ -56,11 +56,11 @@
         <div class="product_column details_boxC">
           <div class="clearall"></div>
           <h1><span><?php echo $product->name;?></span></h1>
-          <div class="model_block"> SKU : <span><?php echo $product->sku;?> </span></div>
+          <div class="model_block">SKU: <span><?php echo $product->sku;?> </span></div>
           <div class="time_to_ship"> Availability: Ship in <span> 2 Days </span> </div>
           <!--<div class="stichnote">Stitching will take 4 to 5 working days extra (if required). </div>-->
           <div class="price">
-            <div class="pricetitle"> Price : </div>
+            <div class="pricetitle">Price: </div>
             <?php
               if($product->prd_dic_chk == "Y"){
             ?>

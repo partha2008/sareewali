@@ -41,7 +41,7 @@
                   <?php
                     if($list->prd_dis_mode == "per"){
                   ?>
-                  <span class="price-dis"><?php echo (int)$list->prd_dis_amt;?>% OFF</span>
+                  <span class="price-dis"><?php echo $list->prd_dis_amt;?>% OFF</span>
                   <?php 
                     }else{
                   ?>
