@@ -25,6 +25,10 @@
         if($("#term").length > 0){
             CKEDITOR.replace('term');
         }
+
+        if($("#prd_notes").length > 0){
+            CKEDITOR.replace('prd_notes');
+        }
         
         // jQuery Datepicker
         $('#created_date').datepicker({ dateFormat: 'mm-dd-yy' });

@@ -99,6 +99,7 @@
 			}			
 			$this->form_validation->set_rules('name', 'Name', 'trim|required|is_unique['.TABLE_PRODUCT.'.name]');
 			$this->form_validation->set_rules('description', 'Description', 'trim|required');
+			$this->form_validation->set_rules('note', 'Notes', 'trim|required');
 			$this->form_validation->set_rules('price', 'Price', 'trim|required');
 			$this->form_validation->set_rules('quantity', 'Quantity', 'trim|required');
 			$this->form_validation->set_rules('sku', 'SKU', 'trim|required|is_unique['.TABLE_PRODUCT.'.sku]');
@@ -318,6 +319,7 @@
 				$this->form_validation->set_rules('name', 'Name', 'trim|required|is_unique['.TABLE_PRODUCT.'.name]');  
 			}
 			$this->form_validation->set_rules('description', 'Description', 'trim|required');
+			$this->form_validation->set_rules('note', 'Notes', 'trim|required');
 			$this->form_validation->set_rules('price', 'Price', 'trim|required');
 			$this->form_validation->set_rules('quantity', 'Quantity', 'trim|required');
 			$this->form_validation->set_rules('sku', 'SKU', 'trim|required');

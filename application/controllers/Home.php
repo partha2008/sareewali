@@ -363,9 +363,47 @@
 				$this->session->set_userdata('has_error', true);
 				$this->session->set_userdata('myaccount_notification', validation_errors());
 			}else{
+				// image upload
+				if (!empty($_FILES['user_image']['name'])) {
+					$this->load->library('image_lib');
+
+					$config = array(
+						'upload_path' => UPLOAD_RELATIVE_PROFILE_IMAGE_PATH,
+						'allowed_types' => "jpg|png|jpeg",
+						'overwrite' => TRUE,
+						'file_ext_tolower' => TRUE,
+						'encrypt_name' => TRUE
+					);
+					$this->load->library('upload', $config);
+					if($this->upload->do_upload('user_image'))
+				    {
+			            $image_data = $this->upload->data();
+
+			            $file_name = $image_data['file_name'];
+			            $full_path = $image_data['full_path'];
+
+			            $configer = array(
+							'image_library'   => 'gd2',
+							'source_image'    =>  $full_path,
+							'maintain_ratio'  =>  TRUE,
+							'width'           =>  100,
+							'height'          =>  100,
+			            );
+			            $this->image_lib->clear();
+			            $this->image_lib->initialize($configer);
+			            $this->image_lib->resize();
+
+			            $post_data['file_name'] = $file_name;
+				    }else{			    	
+				    	$this->session->set_userdata('has_error', true);
+						$this->session->set_userdata('myaccount_notification', $this->upload->display_errors());
+
+						redirect($this->agent->referrer());
+				    }
+				}
 				unset($post_data['old_email']);
 				unset($post_data['old_phone']);
-
+				
 				$post_data['date_modified'] = time();
 				
 				$this->userdata->update_user_details(array("user_id" => $this->session->userdata('user_id')), $post_data);

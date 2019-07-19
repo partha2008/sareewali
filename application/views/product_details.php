@@ -446,12 +446,7 @@
                   </div>
                 </div>
                 <div id="tab-notes" class="tab-content" style="display: none;">
-                  <ul>
-                    <li><span>The first wash of the garment should always be Dry-Cleaned.</span></li>
-                    <li> <span>The shades may vary slightly from the colors displayed on your screen.</span></li>
-                    <li> <span>There might be slight color variation due to lightings &amp; flash while photo shoot.</span></li>
-                    <li> <span>The bright shade seen is the best closer view of fabric's color</span></li>
-                  </ul>
+                  <?php echo $product->note;?> 
                 </div>
                 
                 
@@ -483,23 +478,7 @@
                   <div>Free Shipping all Location in India.</div>
                   <div style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> &nbsp;</div>
                   <!--<p style="margin-top: 0px; margin-bottom: 20px; color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> <strong style="font-family: georgia, serif;">Tip - Shipping cost decreases when you buy more than two products. Buy more, Save more!</strong></p>-->
-                  
-                  
-                  
-                  
-                  
-                  
                 </div>
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
                 <div id="tab-payment_policy_tab" class="tab-content" style="display: none;">
                   <p style="margin-top: 0px; margin-bottom: 20px; color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;"> <span style="font-size:12px;"><strong style="font-family: georgia, serif;">You can choose from any of the following modes to make payment for your purchases on&nbsp;<a href="<?php echo base_url();?>" style="text-decoration-line: none; color: rgb(51, 51, 51); cursor: pointer;"><?php echo $this->defaultdata->getDomain(base_url());?></a></strong></span></p>
                   <ul style="color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif;">

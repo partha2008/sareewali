@@ -285,13 +285,8 @@
 				$this->cartdata->delete_cart(array("cart_id" => $cart_id));
 			}
 
-			$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
-
-			if(!empty($cart_data)){
-				$prd_image = $this->productdata->grab_product_image(array("product_id" => $cart_data[0]->product_id, "is_featured" => "Y"));
-
-				$this->data['prd_image'] = $prd_image;
-			}
+			$cart_data = $this->cartdata->grab_cart_image_list(array(TABLE_CART.".user_id" => $this->session->userdata('user_id'), TABLE_CART.".status" => "N", TABLE_PRODUCT_IMAGES.".is_featured" => "Y"));
+			
 			$this->data['cart_data'] = $cart_data;
 			$this->data['total_price'] = $this->data['sub_total'] = $this->get_cart_sub_total();
 			$this->data['count'] = $this->get_cart_item_count();

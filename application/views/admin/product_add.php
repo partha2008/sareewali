@@ -61,7 +61,11 @@
 										<div class="form-group">
 											<label class="control-label">Description <span style="color:#a94442;">*</span></label>
 											<textarea id="term" name="description" class="form-control" placeholder="Enter Description"><?php echo (isset($product_details->description) && $product_details->description) ? $product_details->description : '';?></textarea>
-										</div>									
+										</div>		
+										<div class="form-group">
+											<label class="control-label">Notes <span style="color:#a94442;">*</span></label>
+											<textarea id="prd_notes" name="note" class="form-control" placeholder="Enter Description"><?php echo (isset($product_details->note) && $product_details->note) ? $product_details->note : '';?></textarea>
+										</div>							
 										<div class="form-group">
 											<label class="control-label">Label Price <span style="color:#a94442;">*</span></label>
 											<input id="label_price" class="form-control" type="text" name="price" value="<?php echo (isset($product_details->price) && $product_details->price) ? $product_details->price : '';?>">

@@ -33,7 +33,7 @@
 
                 <div class="col-md-9">
 
-                  <form id="frmProfile" class="form-horizontal" method="post" action="<?php echo base_url('home/update_account');?>" novalidate>
+                  <form id="frmProfile" class="form-horizontal" method="post" action="<?php echo base_url('home/update_account');?>" enctype="multipart/form-data" novalidate>
                     <?php $sess_notify = $this->session->userdata('has_error');
             if(isset($sess_notify) & $sess_notify){?>
               <div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert">&times;</a><span class="error"><?php echo $this->session->userdata('myaccount_notification');?></span></div>
@@ -178,7 +178,7 @@
                         }
                       ?>                  
 
-                                         </select>
+                    </select>
 
                   </div>
 
@@ -207,10 +207,29 @@
                   </div>
 
                 </div>
+              </fieldset>
 
-                
-
-                 <div class="form-group">
+              <fieldset id="account">
+                <legend>Upload Your Image</legend>
+                <div class="form-group">
+                  <label class="col-sm-2" for="input-telephone">
+                    <?php
+                      if($user->file_name){
+                    ?>
+                    <img src="<?php echo UPLOAD_PROFILE_IMAGE_PATH.$user->file_name;?>" class="img img-thumbnail img-fluid" alt="<?php echo $user->file_name;?>" title="<?php echo $user->file_name;?>">
+                    <?php
+                      }else{
+                    ?>
+                    <img src="<?php echo base_url('resources/images/def_face1.jpg');?>" class="img img-thumbnail img-fluid" alt="no image" title="no image" />
+                    <?php
+                      }
+                    ?>
+                  </label>
+                  <div class="col-sm-10">
+                    <input type="file" class="form-control" name="user_image">
+                  </div>
+                </div>
+                <div class="form-group">
 
                   <label class="col-sm-2 control-label" for="input-email"></label>
 
@@ -221,13 +240,7 @@
                   </div>
 
                 </div>
-
-                
-
               </fieldset>
-
-              
-
             </form>
 
                 </div>
