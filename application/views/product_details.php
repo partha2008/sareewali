@@ -543,7 +543,17 @@
                                   <div class="card-body">
                                       <div class="row">
                                           <div class="col-sm-1">
-                                              <img src="<?php echo base_url('resources/images/def_face.jpg');?>" class="img img-rounded img-fluid"/>
+                                              <?php
+                                                if($value->file_name){
+                                              ?>
+                                              <img src="<?php echo UPLOAD_PROFILE_IMAGE_PATH.$value->file_name;?>" class="img img-rounded img-fluid"/>
+                                              <?php
+                                                }else{
+                                              ?>
+                                              <img src="<?php echo base_url('resources/images/def_face1.jpg');?>" class="img img-rounded img-fluid"/>
+                                              <?php
+                                                }
+                                              ?>
                                           </div>
                                           <div class="col-sm-10">
                                               <p><a href="#"><strong><?php echo $value->reviewer;?></strong></a>

@@ -18,6 +18,17 @@ class Reviewdata extends CI_Model {
 		
 		return $query->result();
 	}
+
+	public function grab_review_user_list($cond = array()){	
+		$this->db->select('*')
+        	->from(TABLE_REVIEW)
+         	->join(TABLE_USER, TABLE_REVIEW.'.email = '.TABLE_USER.'.email')
+         	->where($cond);
+		
+		$query = $this->db->get();
+		
+		return $query->result();
+	}
 	
 	public function insert_review($data = array()){
 
