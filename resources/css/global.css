@@ -17,8 +17,8 @@ ul, ol {
 li {
 	list-style: none;
 }
- <style>  @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
- </style>  body {
+ <style> @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+ </style> body {
  background-color: #fff;
  color: #777777;
  font-family: 'Roboto', sans-serif;
@@ -128,7 +128,7 @@ a:focus {
 	display: block;
 	font-size: 14px;
 	font-family: 'Roboto', sans-serif;
-	font-weight:bold;
+	font-weight: bold;
 }
 .header-top .tb_right li i {
 	padding-left: 7px;
@@ -148,6 +148,22 @@ a:focus {
 	background: #e4e4e4;
 }
 /*.header-top .tb_right li.topCart:hover a{color:#eb1c35;}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -219,6 +235,14 @@ a:focus {
 .header-top .tb_right li ul:hover {
 }
 /* -- Cart Box Start -- */
+
+
+
+
+
+
+
+
 
 
 
@@ -345,7 +369,7 @@ a:focus {
 	color: #fff;
 }
 .cartAddedBox #button_goto_cart {
-	background:#0470af;
+	background: #0470af;
 	border: none !important;
 	float: right;
 }
@@ -360,7 +384,23 @@ a:focus {
 
 
 
+
+
+
+
+
+
+
+
 	
+
+
+
+
+
+
+
+
 
 
 
@@ -396,10 +436,26 @@ a:focus {
 
 
 
+
+
+
+
+
+
+
+
 .sticky .header-area {
 	padding: 8px 0px;
 }
 /*.sticky .menu > ul > li a{padding:10px 12px;}*/
+
+
+
+
+
+
+
+
 
 
 
@@ -443,6 +499,10 @@ a:focus {
 }
 }
 /* -- Navigation Start -- */
+
+
+
+
 
 
 
@@ -506,6 +566,14 @@ a:focus {
 
 
 
+
+
+
+
+
+
+
+
 .menu > ul > li a:after {
 	position: absolute;
 	content: "";
@@ -542,7 +610,7 @@ a:focus {
 }
 .menu > ul > li a:hover {
 	color: #ff2827;
-	opacity:1;
+	opacity: 1;
 }
 .menu > ul > li > ul {
 	display: none;
@@ -645,10 +713,9 @@ a:focus {
 }
 .menu-right .offer a {
 	color: #eb1c35;
-	font-weight:bold;
+	font-weight: bold;
 	font-family: 'Roboto', sans-serif;
-	font-size:16px;
-	
+	font-size: 16px;
 }
 .menu-right .offer {
 	border-left: solid 1px #cccccc;
@@ -714,7 +781,6 @@ a:focus {
 	line-height: 38px;
 }
 .skip-container-mobile ul li a:hover, .skip-container-mobile ul li a:active {
-	background: #ff2827;
 	text-decoration: none;
 	color: #fff;
 }
@@ -737,7 +803,27 @@ a:focus {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* -- Search Box Css Start -- */
+
+
+
+
 
 
 
@@ -812,7 +898,35 @@ a:focus {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* -- Slider Start -- */
+
+
+
+
+
+
+
+
 
 
 
@@ -899,7 +1013,23 @@ a:focus {
 
 
 
+
+
+
+
+
+
+
+
 /*.callbacks_nav.next {left:auto;right:20px;background:url(../images/arrowRight.png) no-repeat scroll center center;}*/
+
+
+
+
+
+
+
+
 
 
 
@@ -976,7 +1106,31 @@ a:focus {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* -- Category banner Start -- */
+
+
+
+
+
+
+
+
 
 
 
@@ -1109,6 +1263,14 @@ a:focus {
 
 
 
+
+
+
+
+
+
+
+
 .cat-item.banner2 .name, .cat-item.banner3 .name, .cat-item.banner4 .name {
 	font-size: 19px;
 	padding: 10px 25px
@@ -1132,7 +1294,31 @@ a:focus {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* -- Collection Banner Start-- */
+
+
+
+
+
+
+
+
 
 
 
@@ -1239,7 +1425,31 @@ a:focus {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* -- Featured Product & New Arrival Start-- */
+
+
+
+
+
+
+
+
 
 
 
@@ -1301,6 +1511,14 @@ a:focus {
 
 
 
+
+
+
+
+
+
+
+
 .featured-product .owl-item, .new-arrival .owl-item {
 	padding: 0;
 	height: 385px;
@@ -1310,6 +1528,14 @@ a:focus {
 	text-align: center;
 }
 /*.des-container .name{font-size:18px; text-align:center; padding:10px 0; min-height:60px;}*/
+
+
+
+
+
+
+
+
 
 
 
@@ -1527,11 +1753,9 @@ a:focus {
 	transform: translateY(0);
 	opacity: 1;
 }
-
-.fa.fa-inr{
-	padding-right:3px;
+.fa.fa-inr {
+	padding-right: 3px;
 }
-
 .productDetailsBtn a:hover {
 	text-decoration: none;
 }
@@ -1554,7 +1778,31 @@ a:focus {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* -- Testimonial Section Start-- */
+
+
+
+
+
+
+
+
 
 
 
@@ -1609,7 +1857,31 @@ a:focus {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* -- Newsletter Section Start-- */
+
+
+
+
+
+
+
+
 
 
 
@@ -1740,7 +2012,31 @@ a:focus {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* -- Policy Section Start-- */
+
+
+
+
+
+
+
+
 
 
 
@@ -1795,7 +2091,31 @@ a:focus {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* -- Footer Start -- */
+
+
+
+
+
+
+
+
 
 
 
@@ -1856,7 +2176,31 @@ a:focus {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* -- Footer Bot Start -- */
+
+
+
+
+
+
+
+
 
 
 
@@ -1938,6 +2282,14 @@ a:focus {
 
 
 
+
+
+
+
+
+
+
+
 .go-top {
 	width: 45px;
 	height: 45px;/*background:#424b4d;*/
@@ -1989,7 +2341,27 @@ a:focus {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* -- Login Popup Css Start -- */
+
+
+
+
 
 
 
@@ -2201,7 +2573,23 @@ a:focus {
 
 
 
+
+
+
+
+
+
+
+
 /* -- Sign Up Box Css Start -- */
+
+
+
+
+
+
+
+
 
 
 
@@ -2277,6 +2665,22 @@ p.enteEmailTxt {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .customTailoringHead {
 	font-family: 'Roboto', sans-serif;
 	color: #000;
@@ -2290,6 +2694,22 @@ p.enteEmailTxt {
 	transition: all 0.35s ea 0s;
 }
 /* ============================== Inner Page Css Start ============================== */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2319,6 +2739,14 @@ p.enteEmailTxt {
 	text-decoration: underline;
 }
 /* -- Left Filter Css Start -- */
+
+
+
+
+
+
+
+
 
 
 
@@ -2422,6 +2850,14 @@ p.enteEmailTxt {
 
 
 
+
+
+
+
+
+
+
+
 .innerRight h1.page-title {
 	colro: #010101;
 	font-size: 30px;
@@ -2513,6 +2949,14 @@ p.enteEmailTxt {
 	margin-bottom: 45px;
 }
 /* -- Details Page Css Start -- */
+
+
+
+
+
+
+
+
 
 
 
@@ -3027,7 +3471,39 @@ p.enteEmailTxt {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* -- Page Css Start -- */
+
+
+
+
+
+
+
+
 
 
 
@@ -3142,7 +3618,39 @@ legend {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* -- Checkout Css Start -- */
+
+
+
+
+
+
+
+
 
 
 
@@ -3262,6 +3770,14 @@ p.required {
 .page-content p {
 }
 /*.cartPageAmt{color:#333;font-size:24px;font-family: 'Roboto', sans-serif;}*/
+
+
+
+
+
+
+
+
 
 
 
@@ -3424,6 +3940,14 @@ p.required {
 
 
 
+
+
+
+
+
+
+
+
 #loading {
 	display: none;
 	position: fixed;
@@ -3524,6 +4048,22 @@ p.required {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ========== Store Page Css Start ========== */
 
 
@@ -3532,7 +4072,23 @@ p.required {
 
 
 
+
+
+
+
+
+
+
+
 /*.storePge{padding-bottom:50px;}*/
+
+
+
+
+
+
+
+
 
 
 
@@ -3681,6 +4237,14 @@ p.required {
 
 
 
+
+
+
+
+
+
+
+
 #viewBlouseStyle h2 {
 	position: relative !important;
 	top: 0px !important;
@@ -3726,7 +4290,31 @@ p.required {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* == Site map Css Start == */
+
+
+
+
+
+
+
+
 
 
 
@@ -3777,6 +4365,22 @@ p.required {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #frmOrder .error {
 	color: red;
 }
@@ -3805,6 +4409,14 @@ p.required {
 
 
 
+
+
+
+
+
+
+
+
 /*Updated on 16.2.18*/
 
 
@@ -3813,7 +4425,23 @@ p.required {
 
 
 
+
+
+
+
+
+
+
+
 /*old style on line:183*/
+
+
+
+
+
+
+
+
 
 
 
@@ -3830,9 +4458,17 @@ p.required {
 	text-transform: uppercase;
 	position: relative;
 	font-family: 'Roboto', sans-serif;
-	font-weight:bold;
+	font-weight: bold;
 }
 /*old style on line:156*/
+
+
+
+
+
+
+
+
 
 
 
@@ -3901,7 +4537,39 @@ p.required {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .carousel-indicators li {
+
+
+
+
+
+
+
+
 
 
 
@@ -3917,7 +4585,23 @@ p.required {
 
 
 
+
+
+
+
+
+
+
+
     width: 8px;
+
+
+
+
+
+
+
+
 
 
 
@@ -3933,7 +4617,23 @@ p.required {
 
 
 
+
+
+
+
+
+
+
+
     margin: 1px;
+
+
+
+
+
+
+
+
 
 
 
@@ -3949,7 +4649,23 @@ p.required {
 
 
 
+
+
+
+
+
+
+
+
     cursor: pointer;
+
+
+
+
+
+
+
+
 
 
 
@@ -3965,6 +4681,14 @@ p.required {
 
 
 
+
+
+
+
+
+
+
+
     background:url(../../../images/dot.png);
 
 
@@ -3973,7 +4697,23 @@ p.required {
 
 
 
+
+
+
+
+
+
+
+
     background-repeat:no-repeat;
+
+
+
+
+
+
+
+
 
 
 
@@ -3989,7 +4729,23 @@ p.required {
 
 
 
+
+
+
+
+
+
+
+
 .carousel-indicators .active {
+
+
+
+
+
+
+
+
 
 
 
@@ -4005,7 +4761,23 @@ p.required {
 
 
 
+
+
+
+
+
+
+
+
     height: 12px;
+
+
+
+
+
+
+
+
 
 
 
@@ -4021,7 +4793,23 @@ p.required {
 
 
 
+
+
+
+
+
+
+
+
     background-color: transparent;
+
+
+
+
+
+
+
+
 
 
 
@@ -4037,6 +4825,14 @@ p.required {
 
 
 
+
+
+
+
+
+
+
+
     background-repeat:no-repeat;
 
 
@@ -4045,7 +4841,31 @@ p.required {
 
 
 
+
+
+
+
+
+
+
+
 }*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4138,6 +4958,18 @@ p.required {
 	font-size: 14px;
 }
 /*/////////new-add2018.08.31/////////*/
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4259,6 +5091,14 @@ p.required {
 	color: #FF0004 !important;
 }
 /*//////details-pages////////*/
+
+
+
+
+
+
+
+
 
 
 
@@ -4472,7 +5312,11 @@ img.lazy {
 }
 /* partha Chowdhury (loader with overlay)*/
 
+
+
 /* Absolute Center Spinner */
+
+
 
 .loading {
 	position: fixed;
@@ -4488,6 +5332,8 @@ img.lazy {
 }
 /* Transparent Overlay */
 
+
+
 .loading:before {
 	content: '';
 	display: block;
@@ -4500,8 +5346,12 @@ img.lazy {
 }
 /* :not(:required) hides these rules from IE9 and below */
 
+
+
 .loading:not(:required) {
 	/* hide "loading..." text */
+
+
 
 	font: 0/0 a;
 	color: transparent;
@@ -4528,7 +5378,15 @@ img.lazy {
 
 
 
+
+
+
+
 /* Animation */
+
+
+
+
 
 
 
@@ -4604,6 +5462,14 @@ img.lazy {
 
 
 
+
+
+
+
+
+
+
+
 .modal {
 	z-index: 99999;
 }
@@ -4631,14 +5497,12 @@ img.lazy {
 .product-info li {
 	list-style: initial;
 }
-
-
-.margintop-15{
-	margin-top:15px;
+.margintop-15 {
+	margin-top: 15px;
 }
-
 .fa-angle-down.fa-angle-up:before {
-    content: "\f106";
+	content: "\f106";
 }
-
-section.page-container{ min-height:80vh;}
+section.page-container {
+	min-height: 80vh;
+}
