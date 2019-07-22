@@ -58,9 +58,13 @@
 		}
 	});
 
-	$(".menu-container ul li").click(function(){
-		if($(this).find("ul").length > 0){
+	$(".menu-container ul li").click(function(event){
+		event.stopPropagation();
+		if($(this).hasClass('menu-dropdown-icon')){
+			$(this).toggleClass("fa-angle-up");
 			return false;
+		}else{
+			return true;
 		}		
 	});
 
