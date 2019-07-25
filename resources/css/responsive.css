@@ -1091,4 +1091,47 @@ img.lazy {
 	margin-top: 0 !important;
 }
 
+
+.productIconBox {
+	right: 5px !important;
+    top: 28px;
+}
+
+.price-dis{
+	min-width:50px;
+    background: #eb1c35;
+	font-size:11px;
+	color:#ffffff;
+	text-align:center;
+	padding:2px 5px;
+	margin:0 0 0 8px;
+}
+
+
+.categoryProduct .price-dis, .moreThisCollection .item .price-dis{
+    position: absolute;
+	min-width:50px;
+    top: 15px;
+    right: 15px;
+    background: #eb1c35;
+	font-size:11px;
+	color:#ffffff;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	text-align:center;
+	padding:2px 5px;
+	margin:0;
+}
+
+.product_column .price{
+	position:relative;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+}
+
+
+
+
 }

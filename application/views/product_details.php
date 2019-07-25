@@ -441,6 +441,17 @@
                         <tr>
                           <td class="variation_td"><div><span class="variation_name">Content</span><b>:</b> <span class="tab_prd_val"><?php echo $product->content;?></span></div></td>
                         </tr>
+                        <?php
+                          if(!empty($product_attr)){
+                            foreach ($product_attr as $key => $value) {
+                        ?>
+                          <tr>
+                            <td class="variation_td"><div><span class="variation_name"><?php echo $value->name;?></span><b>:</b> <span class="tab_prd_val"><?php echo $value->value.'&nbsp;'.$value->unit;?></span></div></td>
+                          </tr>
+                        <?php
+                            }
+                          }
+                        ?>
                       </tbody>
                     </table>
                   </div>

@@ -5541,6 +5541,7 @@ table.radio tr.highlight:hover td {
 	clear: both;
 	float: left;
 	margin-top: 0px;
+	margin-left: 20px;
 	text-align: justify
 }
 .details_box .description li{
