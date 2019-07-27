@@ -637,11 +637,25 @@
               <?php
                 if($value->prd_dic_chk == "Y"){
               ?>
-              <div class="price"> <span><i class="fa fa-inr"></i> <?php echo $value->discounted_price;?></span> </div>
+              <div class="price"> 
+                <span class="old-price"><strike class="sm"><i class="fa fa-inr"></i><?php echo $value->price;?></strike></span>
+                <span><i class="fa fa-inr"></i><?php echo $value->discounted_price;?></span> 
+                 <?php
+                    if($value->prd_dis_mode == "per"){
+                  ?>
+                  <span class="price-dis"><?php echo $value->prd_dis_amt;?>% OFF</span>
+                  <?php 
+                    }else{
+                  ?>
+                  <span class="price-dis"><i class="fa fa-inr"></i><?php echo $value->prd_dis_amt;?> OFF</span>
+                  <?php
+                    }
+                  ?>
+              </div>
               <?php
                 }else{
               ?>
-              <div class="price"> <span><i class="fa fa-inr"></i> <?php echo $value->price;?></span> </div>
+              <div class="price"> <span><i class="fa fa-inr"></i><?php echo $value->price;?></span> </div>
               <?php
                 }
               ?>

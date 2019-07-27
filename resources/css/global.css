@@ -9908,6 +9908,11 @@ p.required {
 
 }
 
+.old-price .sm{
+	font-size: 14px;
+	margin-right: 5px;
+}
+
 .price-dis {
 
 	color: #ffffff;
