@@ -252,7 +252,31 @@
           </div>
           <div class="des-container">
             <div class="name"><a href="<?php echo base_url('product-details/'.$product->slug);?>"><?php echo $product->prd_name;?></a></div>
-            <div class="price"> <span><i class="fa fa-inr"></i><?php echo $product->price;?></span> </div>
+            <div class="price"> 
+              <?php
+                  if($product->prd_dic_chk == "Y"){
+                ?> 
+                <span class="old-price"><strike class="sm"><i class="fa fa-inr"></i><?php echo $product->price;?></strike></span>
+                <span><i class="fa fa-inr"></i><?php echo $product->discounted_price;?></span>
+                <?php
+                  if($product->prd_dis_mode == "per"){
+                ?>
+                <span class="price-dis"><?php echo $product->prd_dis_amt;?>% OFF</span>
+                <?php 
+                  }else{
+                ?>
+                <span class="price-dis"><i class="fa fa-inr"></i><?php echo $product->prd_dis_amt;?> OFF</span>
+                <?php
+                  }
+                ?>
+                <?php
+                  }else{
+                ?>
+              <span><i class="fa fa-inr"></i><?php echo $product->price;?></span> 
+              <?php
+                    }
+                  ?>
+            </div>
             <div class="productDetailsBtn"><a href="<?php echo base_url('product-details/'.$product->slug);?>" title="">View Details</a></div>
         </div>
     </div>
