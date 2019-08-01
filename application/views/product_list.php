@@ -22,7 +22,7 @@
             <div class="col-md-9 innerRight">
               <h1 class="page-title"><?php echo $entity;?></h1>
               <div class="innerBanner"><img src="<?php echo base_url('resources/images/7_web_banner_915X270-01.jpg');?>" class="img-responsive" /></div>
-              <div class="coutureBannerBtmTxt"><?php echo $entity;?></div>
+              <!--<div class="coutureBannerBtmTxt"><?php echo $entity;?></div>-->
               <div class="filterRow"> <span>Sort by : </span>
                 <div class="shortByBox"><span id="changed_txt">Trending</span>
                   <div class="shortByDropDown">
