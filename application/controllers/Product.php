@@ -105,14 +105,17 @@
 
 			$this->breadcrumb->add('Home', base_url());
 			$this->breadcrumb->add($entity_data[0]->name, base_url('product-list/'.$entity));
+
+			$order_by = TABLE_PRODUCT.".date_added DESC";
+
 			if($sub_entity){
 				$sub_entity_data = $this->entitydata->grab_entity(array("slug" => $sub_entity));
 				$this->breadcrumb->add($sub_entity_data[0]->name, base_url('product-list/'.$entity));
-				$product_list = $this->productdata->grab_product_list_all($sub_entity, 0, $this->perPage);
+				$product_list = $this->productdata->grab_product_list_all($sub_entity, 0, $this->perPage, $order_by);
 
 				$this->data['entity'] = $sub_entity_data[0]->name;
 			}else{
-				$product_list = $this->productdata->grab_product_list_all($entity, 0 , $this->perPage);
+				$product_list = $this->productdata->grab_product_list_all($entity, 0 , $this->perPage, $order_by);
 				$this->data['entity'] = $entity_data[0]->name;
 			}	
 			$this->data['product_list'] = $product_list;
@@ -157,6 +160,8 @@
 				}elseif($mode == "high"){
 					$order_by = TABLE_PRODUCT.".price DESC";
 				}
+			}else{
+				$order_by = TABLE_PRODUCT.".date_added DESC";
 			}
 
 			$where .= " AND ".TABLE_PRODUCT.".price BETWEEN ".$min_price." AND ".$max_price;
