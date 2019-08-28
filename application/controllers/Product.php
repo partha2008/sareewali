@@ -242,5 +242,22 @@
 
 			echo json_encode($response);
 		}
+
+		public function check_availability(){
+			$post_data = $this->input->post();
+			$admin_profile = $this->data['admin_profile'];
+
+			$pin_data = $this->productdata->grab_pincode(array("pincode" => $post_data['pincode']));
+
+			if(!empty($pin_data)){
+				$response['status'] = true;
+				$response['msg'] = "The given Pincode is serviceable";
+			}else{
+				$response['status'] = false;
+				$response['msg'] = "Please contact to ".$admin_profile->email." / ".$admin_profile->contact_no." for shipment";
+			}
+
+			echo json_encode($response);
+		}
 	}
 ?>

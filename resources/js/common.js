@@ -567,4 +567,15 @@ function cancelCoupon(){
         $("#price_chart").html(response.data);
         $("#coupon_code").val("");
     });
+}$('[data-toggle="tooltip"]').tooltip();
+
+function checkAvailability(){
+    if(!$("#pin_code").val())
+        return false;
+
+    $.post(BASEPATH+"product/check_availability", {pincode: $("#pin_code").val()}, function(data){
+        var response = JSON.parse(data);
+
+        $("#txt_avl").html(response.msg);
+    });
 }

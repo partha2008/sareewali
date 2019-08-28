@@ -124,8 +124,8 @@
 
                           <div class="col-sm-12">
 
-                            <input type="text" class="form-control" placeholder="Post Code" value="<?php echo $user->post_code;?>" name="post_code">
-
+                            <input id="pin_code" type="text" class="form-control" placeholder="Post Code" value="<?php echo $user->post_code;?>" name="post_code" onkeyup="checkAvailability();">
+                            <small class="text-success" id="txt_avl"></small>
                           </div>
 
                         </div>

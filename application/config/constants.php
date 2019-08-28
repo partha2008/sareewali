@@ -145,3 +145,4 @@ define('TABLE_CART', TABLE_PREFIX.'cart');
 define('TABLE_ORDER', TABLE_PREFIX.'order');
 define('TABLE_ORDER_DETAILS', TABLE_PREFIX.'order_details');
 define('TABLE_WISHLIST', TABLE_PREFIX.'wishlist');
+define('TABLE_PINCODE', TABLE_PREFIX.'pincode');

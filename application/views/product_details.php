@@ -309,12 +309,9 @@
           
           <div class="clearfix"></div>
             <div class="codBox"> <span>Check COD available</span>
-              <div id="pin-panel">
-                <div class="errors"></div>
-                <div class="successs"></div>
-              </div>
               <input id="pin_code" name="pin_code" type="text" placeholder="Enter Pincode">
-              <button id="btn-pin" onClick="return available_post_code($('#pin_code').val())">Check</button>
+              <button id="btn-pin" onClick="checkAvailability();">Check</button>
+              <small class="text-success" id="txt_avl"></small>
             </div>
             <div class="clearfix"></div>
 
