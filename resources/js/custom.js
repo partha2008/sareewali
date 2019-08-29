@@ -324,22 +324,12 @@
 			
 			sessionStorage.setItem("page", 0);
 			sessionStorage.setItem("page_end", false);
-			/*$(window).scroll(function() {alert(($(window).scrollTop() + $(window).height())+"||"+$(win).height());
-			    if($(window).scrollTop() + $(window).height() >= $(document).height()) {
-			    	if(sessionStorage.getItem("page_end") === 'false'){
-			    		sessionStorage.setItem("page", parseInt(sessionStorage.getItem("page"))+1);
-				        load_products(sessionStorage.getItem("page"), VIEW);
-				    }
-			    }
-			});*/
 			
 			window.onscroll = function() {
 				var d = document.documentElement;
 				var offset = d.scrollTop + window.innerHeight;
 				var height = d.offsetHeight;
-				console.log('offset = ' + offset);
-				console.log('height = ' + height);
-				if (offset >= height) {
+				if (offset >= height-100) {
 					if(sessionStorage.getItem("page_end") === 'false'){
 			    		sessionStorage.setItem("page", parseInt(sessionStorage.getItem("page"))+1);
 				        load_products(sessionStorage.getItem("page"), VIEW);
