@@ -292,6 +292,24 @@ class Defaultdata extends CI_Model {
 		}
 	}
 
+	public function parseTree($tree, $root = null) {
+        $return = array();
+        # Traverse the tree and search for direct children of the root
+        foreach($tree as $child => $parent) {
+            # A direct child is found
+            if($parent == $root) {
+                # Remove item from tree (we don't need to traverse this again)
+                unset($tree[$child]);
+                # Append the child into result array and parse its children
+                $return[] = array(
+                    'name' => $child,
+                    'children' => $this->parseTree($tree, $child)
+                );
+            }
+        }
+        return empty($return) ? null : $return;    
+    }
+
 	public function buildTree(array $elements, $parentId = 0) {
 	    $branch = array();
 
