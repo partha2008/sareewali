@@ -187,19 +187,20 @@ class Entity extends CI_Controller{
 	}
 	
 	public function entity_edit($code){
-		if($this->session->userdata('has_error')){
+		if($this->session->userdata('has_error')){			
 			$this->data['cat_details'] = (object)$this->session->userdata;
+			$this->data['ent_attr'] = $this->data['cat_details']->attr;
 		}else{
 			$cond['slug'] = $code;
 			$cat_details = $this->entitydata->grab_entity($cond);
 			$this->data['cat_details'] = $cat_details[0];
+
+			$ent_attr = $this->entitydata->grab_entity_attribute($cat_details[0]->entity_id);
+			echo "<pre>";print_r(array_values($ent_attr));die();
+			$this->data['ent_attr'] = array_values($ent_attr);
 		}
 
 		$entity_data = $this->entitydata->grab_entity(array("slug !=" => $code));
-
-		echo "<pre>";
-		print_r($cat_details);
-		die();
 		$this->data['entity_data'] = $entity_data;
 		
 		$this->load->view('admin/entity_edit', $this->data); 
@@ -207,6 +208,10 @@ class Entity extends CI_Controller{
 	
 	public function edit_entity(){
 		$post_data = $this->input->post();
+
+		if(isset($post_data['attr'])){
+			$attr = $post_data['attr'];
+		}
 			
 		$this->load->library('form_validation');
 		
@@ -219,6 +224,10 @@ class Entity extends CI_Controller{
 		$this->form_validation->set_rules('entity_id', 'Parent', 'required');	
 		if($_FILES['image_path']['name']){
 			$this->form_validation->set_rules('image_path', 'Image', 'callback_file_check');	
+		}
+
+		if(empty($attr)){
+			$this->form_validation->set_rules('attr[]', 'Attribute', 'trim|required');
 		}
 		
 		$this->session->unset_userdata($post_data);
@@ -304,6 +313,34 @@ class Entity extends CI_Controller{
 						}
 					}					
 				}				
+			}
+
+			if(!empty($post_data['attr'])){
+				$this->entitydata->delete_entity_attribute(array("entity_id" => $post_data['ent_id']));
+				foreach ($post_data['attr'] as $key => $value) {
+					// create table(s) with attribute(s) & relational table with product
+					$sql = "CREATE TABLE IF NOT EXISTS `".TABLE_PREFIX.strtolower($value)."` (
+						".strtolower($value)."_id INT(11) AUTO_INCREMENT PRIMARY KEY,
+						name VARCHAR(255) NOT NULL
+					)";
+				
+					$query = $this->db->query($sql);
+
+					$sql1 = "CREATE TABLE IF NOT EXISTS `".TABLE_PREFIX.'product_'.strtolower($value)."` (product_".strtolower($value)."_id INT(11) AUTO_INCREMENT PRIMARY KEY,
+						".strtolower($value)."_id INT(11) NOT NULL, product_id INT(11) NOT NULL)";
+				
+					$query = $this->db->query($sql1);
+
+					$attr_data = $this->entitydata->grab_attr(array("name" => strtolower($value)));
+					if(!empty($attr_data)){						
+						$last_attr_id = $attr_data[0]->attr_id;
+					}else{
+						$last_attr_id = $this->entitydata->insert_attr(array("name" => strtolower($value)));
+					}
+
+					$this->entitydata->insert_entity_attribute(array("entity_id" => $post_data['ent_id'], "attr_id" => $last_attr_id));
+					
+				}
 			}
 			
 			redirect(base_url('admin/entity-list'));

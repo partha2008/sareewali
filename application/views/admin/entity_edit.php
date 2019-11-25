@@ -67,7 +67,13 @@
 										<div class="form-group">
 											<label class="control-label">Attribute <span style="color:#a94442;">*</span></label>
 											<select class="form-control js-example-tags" multiple="multiple" name="attr[]">
-												
+												<?php												
+													if(!empty($ent_attr)){
+														foreach ($ent_attr as $key => $value) {
+															echo '<option selected="selected">'.$value.'</option>';
+														}
+													}
+												?>												
 											</select>
 										</div>
 										<div class="form-inline">
@@ -110,6 +116,8 @@
 										<input type="hidden" name="slug" value="<?php echo $cat_details->slug;?>">
 										<input type="hidden" name="primary_key" value="<?php echo $cat_details->entity_id;?>">
 										<input type="hidden" name="hidden_image_path" value="<?php echo $cat_details->image_path;?>">
+
+										<input type="hidden" name="ent_id" value="<?php echo $cat_details->entity_id;?>">
 										
 										<button type="submit" class="btn btn-primary">Save Changes</button>
 									</form>
