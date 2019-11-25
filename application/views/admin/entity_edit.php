@@ -64,6 +64,12 @@
 											</select>
 											<p class="text-danger">*Adding Entity by selecting parent will go under the selected parent. Selecting Root as parent will make the entity as main.</p>[<a id="view_relation" href="javscript:void(0);">View Relation</a>]
 										</div>
+										<div class="form-group">
+											<label class="control-label">Attribute <span style="color:#a94442;">*</span></label>
+											<select class="form-control js-example-tags" multiple="multiple" name="attr[]">
+												
+											</select>
+										</div>
 										<div class="form-inline">
 											<div class="checkbox">
 											    <label><input <?php if(isset($cat_details->prd_dic_chk) && ($cat_details->prd_dic_chk == "Y")){echo 'checked';}?> type="checkbox" id="prd_dic_chk" name="prd_dic_chk" value="Y"> Discount</label>

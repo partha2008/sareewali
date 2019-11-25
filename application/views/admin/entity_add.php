@@ -57,6 +57,12 @@
 											<p class="text-danger">*Adding Entity by selecting parent will go under the selected parent. Selecting Root as parent will make the entity as main.</p>[<a id="view_relation" href="javscript:void(0);">View Relation</a>]
 										</div>
 										<div class="form-group">
+											<label class="control-label">Attribute <span style="color:#a94442;">*</span></label>
+											<select class="form-control js-example-tags" multiple="multiple" name="attr[]">
+												
+											</select>
+										</div>
+										<div class="form-group">
 											<label class="control-label">Sort Order</label>
 											<input class="form-control" type="text" name="sort_order" placeholder="Enter Sort Order" value="<?php if(isset($cat_details->sort_order) && $cat_details->sort_order){echo $cat_details->sort_order;}?>">
 										</div>

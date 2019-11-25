@@ -93,6 +93,9 @@ class Entity extends CI_Controller{
 	
 	public function add_entity(){
 		$post_data = $this->input->post();
+		if(isset($post_data['attr'])){
+			$attr = $post_data['attr'];
+		}
 			
 		$this->load->library('form_validation');
 		
@@ -101,6 +104,10 @@ class Entity extends CI_Controller{
 		
 		if($_FILES['image_path']['name']){
 			$this->form_validation->set_rules('image_path', 'Image', 'callback_file_check');	
+		}
+
+		if(empty($attr)){
+			$this->form_validation->set_rules('attr[]', 'Attribute', 'trim|required');
 		}
 		
 		$this->session->unset_userdata($post_data);
@@ -143,7 +150,35 @@ class Entity extends CI_Controller{
 				"status" => $post_data['status'],
 				"date_added" => time()
 			);
-			$this->entitydata->insert_entity($data);
+			$last_entity_id = $this->entitydata->insert_entity($data);
+
+			if(!empty($post_data['attr'])){
+				$this->entitydata->delete_entity_attribute(array("entity_id" => $last_entity_id));
+				foreach ($post_data['attr'] as $key => $value) {
+					// create table(s) with attribute(s) & relational table with product
+					$sql = "CREATE TABLE IF NOT EXISTS `".TABLE_PREFIX.strtolower($value)."` (
+						".strtolower($value)."_id INT(11) AUTO_INCREMENT PRIMARY KEY,
+						name VARCHAR(255) NOT NULL
+					)";
+				
+					$query = $this->db->query($sql);
+
+					$sql1 = "CREATE TABLE IF NOT EXISTS `".TABLE_PREFIX.'product_'.strtolower($value)."` (product_".strtolower($value)."_id INT(11) AUTO_INCREMENT PRIMARY KEY,
+						".strtolower($value)."_id INT(11) NOT NULL, product_id INT(11) NOT NULL)";
+				
+					$query = $this->db->query($sql1);
+
+					$attr_data = $this->entitydata->grab_attr(array("name" => strtolower($value)));
+					if(!empty($attr_data)){						
+						$last_attr_id = $attr_data[0]->attr_id;
+					}else{
+						$last_attr_id = $this->entitydata->insert_attr(array("name" => strtolower($value)));
+					}
+
+					$this->entitydata->insert_entity_attribute(array("entity_id" => $last_entity_id, "attr_id" => $last_attr_id));
+					
+				}
+			}
 			
 			$this->session->set_userdata('has_error', false);
 			
@@ -161,6 +196,10 @@ class Entity extends CI_Controller{
 		}
 
 		$entity_data = $this->entitydata->grab_entity(array("slug !=" => $code));
+
+		echo "<pre>";
+		print_r($cat_details);
+		die();
 		$this->data['entity_data'] = $entity_data;
 		
 		$this->load->view('admin/entity_edit', $this->data); 

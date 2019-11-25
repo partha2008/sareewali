@@ -146,3 +146,5 @@ define('TABLE_ORDER', TABLE_PREFIX.'order');
 define('TABLE_ORDER_DETAILS', TABLE_PREFIX.'order_details');
 define('TABLE_WISHLIST', TABLE_PREFIX.'wishlist');
 define('TABLE_PINCODE', TABLE_PREFIX.'pincode');
+define('TABLE_ENTITY_ATTRIBUTE', TABLE_PREFIX.'entity_attribute');
+define('TABLE_ATTR', TABLE_PREFIX.'attr');
