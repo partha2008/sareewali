@@ -59,7 +59,18 @@
 										<div class="form-group">
 											<label class="control-label">Attribute <span style="color:#a94442;">*</span></label>
 											<select class="form-control js-example-tags" multiple="multiple" name="attr[]">
-												
+												<?php												
+													if(!empty($attr_data)){
+														foreach ($attr_data as $key => $value) {
+															if(in_array($value, $cat_details->attr)){
+																echo '<option selected>'.$value.'</option>';
+															}else{
+																echo '<option>'.$value.'</option>';
+															}
+															
+														}
+													}
+												?>
 											</select>
 										</div>
 										<div class="form-group">

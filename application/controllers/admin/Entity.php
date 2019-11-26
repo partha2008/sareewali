@@ -60,6 +60,14 @@ class Entity extends CI_Controller{
 			$this->data['cat_details'] = (object)$this->session->userdata;
 		}
 
+		$attr_data = $this->entitydata->grab_attr();
+		if(!empty($attr_data)){
+			foreach ($attr_data as $key => $value) {
+				$arr[] = $value->name;
+			}
+		}
+		$this->data['attr_data'] = $arr;
+
 		$entity_data = $this->entitydata->grab_entity();
 		$this->data['entity_data'] = $entity_data;
 
@@ -188,17 +196,33 @@ class Entity extends CI_Controller{
 	
 	public function entity_edit($code){
 		if($this->session->userdata('has_error')){			
-			$this->data['cat_details'] = (object)$this->session->userdata;
-			$this->data['ent_attr'] = $this->data['cat_details']->attr;
+			$cat_details = (object)$this->session->userdata;
+			$cat_details->image_path = $cat_details->hidden_image_path;
+			$this->data['cat_details'] = $cat_details;
+			$this->data['ent_attr'] = $cat_details->attr;
+			//echo "<pre>";print_r($this->data['ent_attr']);die();
 		}else{
 			$cond['slug'] = $code;
 			$cat_details = $this->entitydata->grab_entity($cond);
 			$this->data['cat_details'] = $cat_details[0];
 
 			$ent_attr = $this->entitydata->grab_entity_attribute($cat_details[0]->entity_id);
-			echo "<pre>";print_r(array_values($ent_attr));die();
-			$this->data['ent_attr'] = array_values($ent_attr);
+
+			if(!empty($ent_attr)){
+				foreach ($ent_attr as $key => $value) {
+					$arr[] = $value->name;
+				}
+			}			
+			$this->data['ent_attr'] = $arr;
 		}
+
+		$attr_data = $this->entitydata->grab_attr();
+		if(!empty($attr_data)){
+			foreach ($attr_data as $key => $value) {
+				$arr1[] = $value->name;
+			}
+		}
+		$this->data['attr_data'] = $arr1;
 
 		$entity_data = $this->entitydata->grab_entity(array("slug !=" => $code));
 		$this->data['entity_data'] = $entity_data;

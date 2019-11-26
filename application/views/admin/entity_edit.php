@@ -20,7 +20,7 @@
 					?>
 						<div class="alert alert-danger alert-dismissable">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-							<?php echo $this->session->userdata('catadd_notification');?>
+							<?php echo $this->session->userdata('catedit_notification');?>
 						</div>
 					<?php } 
 					$this->session->unset_userdata('has_error');
@@ -68,12 +68,16 @@
 											<label class="control-label">Attribute <span style="color:#a94442;">*</span></label>
 											<select class="form-control js-example-tags" multiple="multiple" name="attr[]">
 												<?php												
-													if(!empty($ent_attr)){
-														foreach ($ent_attr as $key => $value) {
-															echo '<option selected="selected">'.$value.'</option>';
+													if(!empty($attr_data)){
+														foreach ($attr_data as $key => $value) {
+															if(in_array($value, $ent_attr)){
+																echo '<option selected>'.$value.'</option>';
+															}else{
+																echo '<option>'.$value.'</option>';
+															}						
 														}
 													}
-												?>												
+												?>											
 											</select>
 										</div>
 										<div class="form-inline">
@@ -118,6 +122,7 @@
 										<input type="hidden" name="hidden_image_path" value="<?php echo $cat_details->image_path;?>">
 
 										<input type="hidden" name="ent_id" value="<?php echo $cat_details->entity_id;?>">
+										<input type="hidden" name="parent_id" value="<?php echo $cat_details->parent_id;?>">
 										
 										<button type="submit" class="btn btn-primary">Save Changes</button>
 									</form>
