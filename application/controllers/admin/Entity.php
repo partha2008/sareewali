@@ -61,6 +61,7 @@ class Entity extends CI_Controller{
 		}
 
 		$attr_data = $this->entitydata->grab_attr();
+		$arr = array();
 		if(!empty($attr_data)){
 			foreach ($attr_data as $key => $value) {
 				$arr[] = $value->name;
@@ -199,8 +200,11 @@ class Entity extends CI_Controller{
 			$cat_details = (object)$this->session->userdata;
 			$cat_details->image_path = $cat_details->hidden_image_path;
 			$this->data['cat_details'] = $cat_details;
-			$this->data['ent_attr'] = $cat_details->attr;
-			//echo "<pre>";print_r($this->data['ent_attr']);die();
+			if(isset($cat_details->attr)){
+				$this->data['ent_attr'] = $cat_details->attr;
+			}else{
+				$this->data['ent_attr'] = array();
+			}
 		}else{
 			$cond['slug'] = $code;
 			$cat_details = $this->entitydata->grab_entity($cond);
@@ -208,6 +212,7 @@ class Entity extends CI_Controller{
 
 			$ent_attr = $this->entitydata->grab_entity_attribute($cat_details[0]->entity_id);
 
+			$arr = [];
 			if(!empty($ent_attr)){
 				foreach ($ent_attr as $key => $value) {
 					$arr[] = $value->name;
@@ -217,6 +222,7 @@ class Entity extends CI_Controller{
 		}
 
 		$attr_data = $this->entitydata->grab_attr();
+		$arr1 = array();
 		if(!empty($attr_data)){
 			foreach ($attr_data as $key => $value) {
 				$arr1[] = $value->name;
@@ -404,5 +410,13 @@ class Entity extends CI_Controller{
 		$this->data['final_tree'] = $this->defaultdata->parseTree($final_tree);
 
 		echo $this->load->view('admin/partials/relation', $this->data, true);
+	}
+
+	public function get_product_entity(){
+		$post_data = $this->input->post();
+
+		$res = $this->entitydata->grab_entity_attribute($post_data['entity']);
+
+		echo "<pre>";print_r($res);die();
 	}
 }

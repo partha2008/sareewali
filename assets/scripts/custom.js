@@ -17,7 +17,7 @@
                 }
             }
         });
-    }  
+    } 
     
     $(function(){
         // Replace the <textarea id="term"> with a CKEditor
@@ -212,6 +212,15 @@
                 $("#prd_dis_amt").val("");
                 $('#prd_dis_mode').prop('selectedIndex',0);
             }
+        });
+
+        $("#multi_select").change(function(e){
+            var selected = $(e.target).val();
+            console.dir(selected);
+
+            $.post(BASEPATH+"admin/entity/get_product_entity", {entity: selected}, function(e){
+                console.log(e);
+            });  
         });
 
     });

@@ -129,7 +129,11 @@ class Entitydata extends CI_Model {
 	}
 
 	public function grab_entity_attribute($entity_id){	
-		$sql = "SELECT ".TABLE_ATTR.".attr_id, ".TABLE_ATTR.".name FROM ".TABLE_ATTR." INNER JOIN ".TABLE_ENTITY_ATTRIBUTE." ON ".TABLE_ATTR.".attr_id = ".TABLE_ENTITY_ATTRIBUTE.".attr_id WHERE ".TABLE_ENTITY_ATTRIBUTE.".entity_id=".$entity_id;
+		if(is_array($entity_id)){
+			$sql = "SELECT ".TABLE_ATTR.".attr_id, ".TABLE_ATTR.".name FROM ".TABLE_ATTR." INNER JOIN ".TABLE_ENTITY_ATTRIBUTE." ON ".TABLE_ATTR.".attr_id = ".TABLE_ENTITY_ATTRIBUTE.".attr_id WHERE ".TABLE_ENTITY_ATTRIBUTE.".entity_id IN (".implode(",", $entity_id).")";
+		}else{
+			$sql = "SELECT ".TABLE_ATTR.".attr_id, ".TABLE_ATTR.".name FROM ".TABLE_ATTR." INNER JOIN ".TABLE_ENTITY_ATTRIBUTE." ON ".TABLE_ATTR.".attr_id = ".TABLE_ENTITY_ATTRIBUTE.".attr_id WHERE ".TABLE_ENTITY_ATTRIBUTE.".entity_id=".$entity_id;
+		}		
 		
 		$query = $this->db->query($sql);
 		
