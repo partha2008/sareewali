@@ -216,10 +216,12 @@
 
         $("#multi_select").change(function(e){
             var selected = $(e.target).val();
-            console.dir(selected);
-
-            $.post(BASEPATH+"admin/entity/get_product_entity", {entity: selected}, function(e){
-                console.log(e);
+            $.post(BASEPATH+"admin/entity/get_product_entity", {entity: selected}, function(res){
+                var response = JSON.parse(res);
+                console.log(response);
+                if(response.status){
+                    $("#attr_plc").html(response.data);
+                }
             });  
         });
 

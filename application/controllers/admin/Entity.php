@@ -416,7 +416,29 @@ class Entity extends CI_Controller{
 		$post_data = $this->input->post();
 
 		$res = $this->entitydata->grab_entity_attribute($post_data['entity']);
+		//echo "<pre>";print_r($res);die();
 
-		echo "<pre>";print_r($res);die();
+		if(!empty($res)){			
+			foreach ($res as $key => $value) {
+				$str = '<label class="control-label">Fabric <span style="color:#a94442;">*</span></label>
+				<select class="form-control js-example-tags" multiple="multiple" name="fabric[]">';
+
+				$query = $this->db->query("select * from ".TABLE_PREFIX.$value->name);		
+				$result = $query->result();
+				$str1 = "";
+				if(!empty($result)){					
+					foreach ($result as $k => $v) {
+						$str1 .= '<option>'.$v->name.'</option>';
+					}
+				}
+				$str .= $str1;
+				$str .= '</select>';
+			}			
+		}
+
+		$response["status"] = true;
+		$response["data"] = $str;
+
+		echo json_encode($response);
 	}
 }

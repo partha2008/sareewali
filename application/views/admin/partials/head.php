@@ -38,6 +38,8 @@
 			<!-- Select 2 -->
 			<link rel="stylesheet" href="<?php echo base_url(); ?>assets/styles/select2.min.css">
 
+			<link rel="stylesheet" href="<?php echo base_url(); ?>assets/styles/custom.css">
+
 			<script>
 				var BASEPATH = '<?php echo base_url();?>';
 			</script>
