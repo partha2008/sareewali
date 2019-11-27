@@ -69,6 +69,9 @@
 		
 		public function add_product(){
 			$post_data = $this->input->post();
+			echo "<pre>";
+			print_r($post_data);
+			die();
 
 			$attrname = $post_data['attrname'];
 			$attrval = $post_data['attrval'];
@@ -85,9 +88,9 @@
 			if(isset($post_data['tag'])){
 				$tags = $post_data['tag'];
 			}
-			if(isset($post_data['fabric'])){
+			/*if(isset($post_data['fabric'])){
 				$fabrics = $post_data['fabric'];
-			}
+			}*/
 			if(isset($post_data['occassion'])){
 				$occassions = $post_data['occassion'];
 			}
@@ -107,9 +110,9 @@
 			if(empty($color)){
 				$this->form_validation->set_rules('color[]', 'Color', 'trim|required');
 			}
-			if(empty($fabrics)){
+			/*if(empty($fabrics)){
 				$this->form_validation->set_rules('fabric[]', 'Fabric', 'trim|required');
-			}
+			}*/
 			$this->form_validation->set_rules('upload_image', 'Upload Images', 'required');			
 			
 			if($this->form_validation->run() == FALSE)
@@ -127,9 +130,9 @@
 				if(isset($post_data['tag'])){
 					unset($post_data['tag']);
 				}
-				if(isset($post_data['fabric'])){
+				/*if(isset($post_data['fabric'])){
 					unset($post_data['fabric']);
-				}
+				}*/
 				if(isset($post_data['occassion'])){
 					unset($post_data['occassion']);
 				}
@@ -211,7 +214,7 @@
 				}
 
 				// add product fabric
-				if(isset($fabrics) && !empty($fabrics)){
+				/*if(isset($fabrics) && !empty($fabrics)){
 					foreach ($fabrics as $key => $value) {
 						$fabrics = $this->productdata->grab_fabric(array("name" => $value));
 						if(empty($fabrics)){
@@ -221,6 +224,21 @@
 						}
 						$this->productdata->insert_product_fabric(array("product_id" => $prd_last_id, "fabric_id" =>$last_id));
 					}
+				}*/
+
+				// add product search items
+				foreach ($post_data['search_item'] as $key => $value) {
+					foreach ($variable as $k => $v) {
+						$query = $this->db->query("select * from ".TABLE_PREFIX.$value->name." where name='".$v."' ");
+						$result = $query->result();
+
+						if(!empty($result)){
+
+						}else{
+							$query1 = $this->db->query("insert into ".TABLE_PREFIX.$value->name." values ()");		
+							$result1 = $query->result();
+						}						
+					}					
 				}
 
 				// add product occassion

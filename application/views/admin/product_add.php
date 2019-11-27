@@ -134,7 +134,7 @@
 										</div>
 										<div class="form-group">
 											<fieldset class="col-md-12 scheduler-border">    	
-												<legend class="scheduler-border">Attribute</legend>
+												<legend class="scheduler-border">Search Items</legend>
 												<span id="attr_plc"></span>
 																	
 											</fieldset>	

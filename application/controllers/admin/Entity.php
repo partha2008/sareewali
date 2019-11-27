@@ -416,12 +416,11 @@ class Entity extends CI_Controller{
 		$post_data = $this->input->post();
 
 		$res = $this->entitydata->grab_entity_attribute($post_data['entity']);
-		//echo "<pre>";print_r($res);die();
-
+		$str = "";
 		if(!empty($res)){			
 			foreach ($res as $key => $value) {
-				$str = '<label class="control-label">Fabric <span style="color:#a94442;">*</span></label>
-				<select class="form-control js-example-tags" multiple="multiple" name="fabric[]">';
+				$str .= '<div class="form-group"><label class="control-label">'.strtoupper($value->name).' <span style="color:#a94442;">*</span></label>
+				<select class="form-control js-example-tags" multiple="multiple" name="search_item['.$value->name.'][]" required>';
 
 				$query = $this->db->query("select * from ".TABLE_PREFIX.$value->name);		
 				$result = $query->result();
@@ -432,7 +431,7 @@ class Entity extends CI_Controller{
 					}
 				}
 				$str .= $str1;
-				$str .= '</select>';
+				$str .= '</select></div>';
 			}			
 		}
 

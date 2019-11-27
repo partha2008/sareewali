@@ -218,9 +218,11 @@
             var selected = $(e.target).val();
             $.post(BASEPATH+"admin/entity/get_product_entity", {entity: selected}, function(res){
                 var response = JSON.parse(res);
-                console.log(response);
-                if(response.status){
+                if(response.status){                    
                     $("#attr_plc").html(response.data);
+                    $(".js-example-tags").select2({
+                        tags: true
+                    });
                 }
             });  
         });
