@@ -69,9 +69,6 @@
 		
 		public function add_product(){
 			$post_data = $this->input->post();
-			echo "<pre>";
-			print_r($post_data);
-			die();
 
 			$attrname = $post_data['attrname'];
 			$attrval = $post_data['attrval'];
@@ -123,7 +120,8 @@
 				$this->session->set_userdata('productadd_notification', validation_errors());
 				
 				redirect($this->agent->referrer());
-			}else{			
+			}else{	
+
 				unset($post_data['upload_image']);
 				unset($post_data['entity_id']);
 				unset($post_data['color']);
@@ -228,18 +226,22 @@
 
 				// add product search items
 				foreach ($post_data['search_item'] as $key => $value) {
-					foreach ($variable as $k => $v) {
-						$query = $this->db->query("select * from ".TABLE_PREFIX.$value->name." where name='".$v."' ");
+					foreach ($value as $k => $v) {
+						$query = $this->db->query("select * from ".TABLE_PREFIX.$key." where name='".$v."' ");
 						$result = $query->result();
 
 						if(!empty($result)){
-
+							$attr_vl = $result[0]->vab_id;
 						}else{
-							$query1 = $this->db->query("insert into ".TABLE_PREFIX.$value->name." values ()");		
+							$query1 = $this->db->query("insert into ".TABLE_PREFIX.$key." (name) values ('".$v."')");		
 							$result1 = $query->result();
-						}						
+							$attr_vl = $this->db->insert_id();
+						}	
+
+						$qry = $this->db->query("insert into ".TABLE_PREFIX.'product_'.$key." ('".$key."_id', 'product_id') values ('".$v."', '".$prd_last_id."')");		
+						$qry->result();					
 					}					
-				}
+				}				
 
 				// add product occassion
 				if(isset($occassions) && !empty($occassions)){
