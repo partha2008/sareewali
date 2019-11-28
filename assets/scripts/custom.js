@@ -18,6 +18,18 @@
             }
         });
     } 
+
+    function populateEntityAttr(selected, mode){
+        $.post(BASEPATH+"admin/entity/get_product_entity", {entity: selected, mode: mode}, function(res){
+            var response = JSON.parse(res);
+            if(response.status){                    
+                $("#attr_plc").html(response.data);
+                $(".js-example-tags").select2({
+                    tags: true
+                });
+            }
+        }); 
+    }
     
     $(function(){
         // Replace the <textarea id="term"> with a CKEditor
@@ -213,18 +225,4 @@
                 $('#prd_dis_mode').prop('selectedIndex',0);
             }
         });
-
-        $("#multi_select").change(function(e){
-            var selected = $(e.target).val();
-            $.post(BASEPATH+"admin/entity/get_product_entity", {entity: selected}, function(res){
-                var response = JSON.parse(res);
-                if(response.status){                    
-                    $("#attr_plc").html(response.data);
-                    $(".js-example-tags").select2({
-                        tags: true
-                    });
-                }
-            });  
-        });
-
     });

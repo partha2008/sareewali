@@ -36,7 +36,7 @@
 									<form action="<?php echo base_url('admin/product/edit_product');?>" method="POST" role="form" enctype="multipart/form-data">
 										<div class="form-group">
 											<label class="control-label">Entity <span style="color:#a94442;">*</span></label>
-											<select name="entity_id[]" class="form-control" multiple="multiple">
+											<select name="entity_id[]" class="form-control" multiple="multiple" id="multi_select">
 												<?php if(count($cat_list) > 0){ ?>
 													<?php foreach($cat_list AS $list) {?>
 														<option value="<?php echo $list->entity_id;?>" 
@@ -126,26 +126,11 @@
 											</select>
 										</div>
 										<div class="form-group">
-											<label class="control-label">Fabric <span style="color:#a94442;">*</span></label>
-											<select class="form-control js-example-tags" multiple="multiple" name="fabric[]">
-												<?php
-													$sess_fabric = $product_details->fabric;
-													if(!empty($fabrics)){
-														foreach ($fabrics as $key => $value) {
-															if(in_array($value->fabric_id, $selected_fabrics)){
-																echo '<option selected="selected">'.$value->name.'</option>';
-															}else{
-																echo '<option>'.$value->name.'</option>';
-															}			
-														}
-														if(!empty($sess_fabric)){
-															foreach($sess_fabric as $fabric){
-																echo '<option selected="selected">'.$fabric.'</option>';
-															}
-														}
-													}
-												?>
-											</select>
+											<fieldset class="col-md-12 scheduler-border">    	
+												<legend class="scheduler-border">Search Items</legend>
+												<span id="attr_plc"></span>
+																	
+											</fieldset>	
 										</div>
 										<div class="form-group">
 											<label class="control-label">Occassion</label>
@@ -297,3 +282,14 @@
 	<!-- /#wrapper -->
 	
 	<?php echo $footer; ?>
+	<script type="text/javascript">
+		$(function(){
+			var selected = $("#multi_select").val();
+			populateEntityAttr(selected, 'edit');
+
+			$("#multi_select").change(function(e){
+	            var selected = $(e.target).val();
+	            populateEntityAttr(selected, 'edit'); 
+	        });
+		})
+	</script>

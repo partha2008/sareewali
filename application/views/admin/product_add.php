@@ -138,36 +138,7 @@
 												<span id="attr_plc"></span>
 																	
 											</fieldset>	
-										</div>
-										<div class="form-group">
-											<label class="control-label">Fabric <span style="color:#a94442;">*</span></label>
-											<select class="form-control js-example-tags" multiple="multiple" name="fabric[]">
-												<?php
-													$sess_fabric = $product_details->fabric;
-													if(!empty($fabrics)){
-														foreach ($fabrics as $key => $value) {
-															if(in_array($value->name, $sess_fabric)){
-																echo '<option selected="selected">'.$value->name.'</option>';
-																if (($key = array_search($value->name, $sess_fabric)) !== false) {
-																    unset($sess_fabric[$key]);
-																}
-															}else{
-																echo '<option>'.$value->name.'</option>';
-															}			
-														}
-														if(!empty($sess_fabric)){
-															foreach($sess_fabric as $color){
-																echo '<option selected="selected">'.$color.'</option>';
-															}
-														}
-													}elseif(!empty($sess_fabric)){
-														foreach ($sess_fabric as $key => $value) {
-															echo '<option selected="selected">'.$value.'</option>';
-														}
-													}
-												?>
-											</select>
-										</div>
+										</div>										
 										<div class="form-group">
 											<label class="control-label">Occassion</label>
 											<select name="occassion[]" class="form-control" multiple="multiple">
@@ -279,3 +250,11 @@
 	<!-- /#wrapper -->
 	
 	<?php echo $footer; ?>
+	<script type="text/javascript">
+		$(function(){
+	        $("#multi_select").change(function(e){
+	            var selected = $(e.target).val();
+	            populateEntityAttr(selected, 'add'); 
+	        });
+		});
+	</script>
