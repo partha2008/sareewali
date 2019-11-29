@@ -314,12 +314,11 @@
 			if(empty($color)){
 				$this->form_validation->set_rules('color[]', 'Color', 'trim|required');
 			}
-			if(empty($fabrics)){
-				$this->form_validation->set_rules('fabric[]', 'Fabric', 'trim|required');
-			}
 			$this->form_validation->set_rules('content', 'Content', 'trim|required');
 			$this->form_validation->set_rules('upload_image', 'Upload Images', 'required');
 
+			$search_item = $post_data['search_item'];
+			unset($post_data['search_item']);
 			$attrname = $post_data['attrname'];
 			unset($post_data['attrname']);
 			$attrval = $post_data['attrval'];
@@ -331,9 +330,6 @@
 			$color = $post_data['color'];
 			if(isset($post_data['tag'])){
 				$tags = $post_data['tag'];
-			}
-			if(isset($post_data['fabric'])){
-				$fabrics = $post_data['fabric'];
 			}
 			if(isset($post_data['occassion'])){
 				$occassions = $post_data['occassion'];
@@ -356,9 +352,6 @@
 				unset($post_data['color']);
 				if(isset($post_data['tag'])){
 					unset($post_data['tag']);
-				}
-				if(isset($post_data['fabric'])){
-					unset($post_data['fabric']);
 				}
 				if(isset($post_data['occassion'])){
 					unset($post_data['occassion']);
@@ -453,21 +446,24 @@
 					}
 				}
 
-				// delete product fabric
-				$this->productdata->delete_product_fabric(array("product_id" => $product_id));
+				/*// add product search items
+				foreach ($search_item as $key => $value) {
+					foreach ($value as $k => $v) {
+						$this->db->query("delete from ".TABLE_PREFIX.'product_'.$key." where  product_id='".$prd_last_id."' ");
 
-				// add product fabric
-				if(isset($fabrics) && !empty($fabrics)){
-					foreach ($fabrics as $key => $value) {
-						$fabric_tot = $this->productdata->grab_fabric(array("name" => $value));
-						if(empty($fabric_tot)){
-							$last_id = $this->productdata->insert_fabric(array("name" => $value));
+						$query = $this->db->query("select * from ".TABLE_PREFIX.$key." where name='".$v."' ");
+						$result = $query->result();
+
+						if(!empty($result)){
+							$k1 = $key.'_id';
+							$attr_vl = $result[0]->{$k1};
 						}else{
-							$last_id = $fabric_tot[0]->fabric_id;
-						}
-						$this->productdata->insert_product_fabric(array("product_id" => $product_id, "fabric_id" =>$last_id));
-					}
-				}
+							$query1 = $this->db->query("insert into ".TABLE_PREFIX.$key." (name) values ('".$v."')");	
+							$attr_vl = $this->db->insert_id();
+						}	
+						$query2 = $this->db->query("insert into ".TABLE_PREFIX.'product_'.$key." (".$key."_id, product_id) values (".$attr_vl.", ".$prd_last_id.")");	
+					}					
+				}*/
 
 				// delete product occassion
 				$this->productdata->delete_product_occassion(array("product_id" => $product_id));
