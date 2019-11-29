@@ -281,36 +281,9 @@ class Productdata extends CI_Model {
 		return $query->result();
 	}
 
-	public function grab_fabric($cond = array(), $like = array(), $limit = array()){
-		if(!empty($cond)){
-			$this->db->where($cond);
-		}		
-		if(!empty($like)){
-			$this->db->like($like);
-		}
-		if(!empty($limit)){
-			$per_page = $limit[0];
-			$offset = $limit[1];
-			$start = max(0, ( $offset -1 ) * $per_page);
-			$this->db->limit($per_page, $start);
-		}	
-		$query = $this->db->get(TABLE_FABRIC);
-		
-		return $query->result();
-	}
-
 	public function insert_color($data = array()){
 
 		$this->db->insert(TABLE_COLOR, $data); 
-		
-		$insert_id = $this->db->insert_id();
-		
-		return $insert_id;
-	}
-
-	public function insert_fabric($data = array()){
-
-		$this->db->insert(TABLE_FABRIC, $data); 
 		
 		$insert_id = $this->db->insert_id();
 		
@@ -395,41 +368,6 @@ class Productdata extends CI_Model {
 		$this->db->where($cond);
 		
 		$this->db->delete(TABLE_PRODUCT_TAG);
-		
-		return true;
-	}
-
-	public function grab_product_fabric($cond = array(), $like = array(), $limit = array()){
-		if(!empty($cond)){
-			$this->db->where($cond);
-		}		
-		if(!empty($like)){
-			$this->db->like($like);
-		}
-		if(!empty($limit)){
-			$per_page = $limit[0];
-			$offset = $limit[1];
-			$start = max(0, ( $offset -1 ) * $per_page);
-			$this->db->limit($per_page, $start);
-		}	
-		$query = $this->db->get(TABLE_PRODUCT_FABRIC);
-		
-		return $query->result();
-	}
-
-	public function insert_product_fabric($data = array()){
-
-		$this->db->insert(TABLE_PRODUCT_FABRIC, $data); 
-		
-		$insert_id = $this->db->insert_id();
-		
-		return $insert_id;
-	}
-
-	public function delete_product_fabric($cond = array()){
-		$this->db->where($cond);
-		
-		$this->db->delete(TABLE_PRODUCT_FABRIC);
 		
 		return true;
 	}

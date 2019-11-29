@@ -19,8 +19,8 @@
         });
     } 
 
-    function populateEntityAttr(selected, mode){
-        $.post(BASEPATH+"admin/entity/get_product_entity", {entity: selected, mode: mode}, function(res){
+    function populateEntityAttr(selected, mode, product_id){
+        $.post(BASEPATH+"admin/entity/get_product_entity", {entity: selected, mode: mode, product_id: product_id}, function(res){
             var response = JSON.parse(res);
             if(response.status){                    
                 $("#attr_plc").html(response.data);

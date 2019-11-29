@@ -271,14 +271,6 @@
 				$tags = $this->productdata->grab_product_tag(array("product_id" => $product_details->product_id));
 				$this->data['tags'] = $tags;
 
-				$fabrics = $this->productdata->grab_product_fabric(array("product_id" => $product_details->product_id));
-				if(!empty($fabrics)){
-					foreach ($fabrics as $key => $value) {
-						$selected_fabrics[] = $value->fabric_id;
-					}
-				}
-				$this->data['selected_fabrics'] = $selected_fabrics;
-
 				$occassion = array();
 				$occassions = $this->productdata->grab_product_occassion(array("product_id" => $product_details->product_id));
 				if(!empty($occassions)){
@@ -299,9 +291,6 @@
 
 			$colors = $this->productdata->grab_color();
 			$this->data['colors'] = $colors;
-
-			$fabrics = $this->productdata->grab_fabric();
-			$this->data['fabrics'] = $fabrics;
 			
 			$this->load->view('admin/product_edit', $this->data); 
 		}

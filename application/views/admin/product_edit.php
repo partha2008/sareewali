@@ -284,12 +284,13 @@
 	<?php echo $footer; ?>
 	<script type="text/javascript">
 		$(function(){
+			var product_id = '<?php echo $product_details->product_id;?>';
 			var selected = $("#multi_select").val();
-			populateEntityAttr(selected, 'edit');
+			populateEntityAttr(selected, 'edit', product_id);
 
 			$("#multi_select").change(function(e){
 	            var selected = $(e.target).val();
-	            populateEntityAttr(selected, 'edit'); 
+	            populateEntityAttr(selected, 'edit', product_id); 
 	        });
 		})
 	</script>

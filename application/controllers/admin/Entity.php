@@ -415,6 +415,7 @@ class Entity extends CI_Controller{
 	public function get_product_entity(){
 		$post_data = $this->input->post();
 		$mode = $post_data['mode'];
+		$product_id = $post_data['product_id'];
 
 		$res = $this->entitydata->grab_entity_attribute($post_data['entity']);
 		$str = "";
@@ -428,7 +429,19 @@ class Entity extends CI_Controller{
 				$str1 = "";
 				if(!empty($result)){					
 					foreach ($result as $k => $v) {
-						$str1 .= '<option>'.$v->name.'</option>';
+						if($mode == "add"){
+							$str1 .= '<option>'.$v->name.'</option>';
+						}else{
+							$id = $value->name.'_id';
+							$qry = $this->db->query("select * from ".TABLE_PREFIX.'product_'.$value->name." where ".$value->name."_id='".$v->{$id}."' and product_id='".$product_id."' ");	
+							$rslt = $qry->result();
+
+							if(!empty($rslt)){
+								$str1 .= '<option selected>'.$v->name.'</option>';
+							}else{
+								$str1 .= '<option>'.$v->name.'</option>';
+							}							
+						}						
 					}
 				}
 				$str .= $str1;
