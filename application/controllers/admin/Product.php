@@ -60,9 +60,6 @@
 
 			$colors = $this->productdata->grab_color();
 			$this->data['colors'] = $colors;
-
-			$fabrics = $this->productdata->grab_fabric();
-			$this->data['fabrics'] = $fabrics;
 			
 			$this->load->view('admin/product_add', $this->data); 
 		}
@@ -446,10 +443,10 @@
 					}
 				}
 
-				/*// add product search items
+				// add product search items
 				foreach ($search_item as $key => $value) {
 					foreach ($value as $k => $v) {
-						$this->db->query("delete from ".TABLE_PREFIX.'product_'.$key." where  product_id='".$prd_last_id."' ");
+						$this->db->query("delete from ".TABLE_PREFIX.'product_'.$key." where  product_id='".$product_id."' ");
 
 						$query = $this->db->query("select * from ".TABLE_PREFIX.$key." where name='".$v."' ");
 						$result = $query->result();
@@ -461,9 +458,9 @@
 							$query1 = $this->db->query("insert into ".TABLE_PREFIX.$key." (name) values ('".$v."')");	
 							$attr_vl = $this->db->insert_id();
 						}	
-						$query2 = $this->db->query("insert into ".TABLE_PREFIX.'product_'.$key." (".$key."_id, product_id) values (".$attr_vl.", ".$prd_last_id.")");	
+						$query2 = $this->db->query("insert into ".TABLE_PREFIX.'product_'.$key." (".$key."_id, product_id) values (".$attr_vl.", ".$product_id.")");	
 					}					
-				}*/
+				}
 
 				// delete product occassion
 				$this->productdata->delete_product_occassion(array("product_id" => $product_id));
