@@ -57,9 +57,6 @@
 
 			$unit = $this->config->item('unit');
 			$this->data['unit'] = $unit;
-
-			$colors = $this->productdata->grab_color();
-			$this->data['colors'] = $colors;
 			
 			$this->load->view('admin/product_add', $this->data); 
 		}
@@ -80,14 +77,8 @@
 			if(isset($post_data['entity_id'])){
 				$prd_entity = $post_data['entity_id'];
 			}
-			if(isset($post_data['color'])){
-				$color = $post_data['color'];
-			}
 			if(isset($post_data['tag'])){
 				$tags = $post_data['tag'];
-			}
-			if(isset($post_data['occassion'])){
-				$occassions = $post_data['occassion'];
 			}
 
 			$this->load->library('form_validation');
@@ -102,9 +93,6 @@
 			$this->form_validation->set_rules('quantity', 'Quantity', 'trim|required');
 			$this->form_validation->set_rules('sku', 'SKU', 'trim|required|is_unique['.TABLE_PRODUCT.'.sku]');
 			$this->form_validation->set_rules('content', 'Content', 'trim|required');
-			if(empty($color)){
-				$this->form_validation->set_rules('color[]', 'Color', 'trim|required');
-			}
 			$this->form_validation->set_rules('upload_image', 'Upload Images', 'required');			
 			
 			if($this->form_validation->run() == FALSE)
@@ -118,12 +106,8 @@
 			}else{	
 				unset($post_data['upload_image']);
 				unset($post_data['entity_id']);
-				unset($post_data['color']);
 				if(isset($post_data['tag'])){
 					unset($post_data['tag']);
-				}
-				if(isset($post_data['occassion'])){
-					unset($post_data['occassion']);
 				}
 				unset($post_data['rad']);
 
@@ -181,20 +165,6 @@
 					}
 				}
 
-				// add product color
-				if(!empty($color)){
-					foreach ($color as $key => $value) {
-						$colors = $this->productdata->grab_color(array("name" => $value));
-						if(empty($colors)){
-							$last_id = $this->productdata->insert_color(array("name" => $value));
-						}else{
-							$last_id = $colors[0]->color_id;
-						}					
-
-						$this->productdata->insert_product_color(array("product_id" => $prd_last_id, "color_id" => $last_id));
-					}
-				}
-
 				// add product tag
 				if(isset($tags) && !empty($tags)){
 					foreach ($tags as $key => $value) {
@@ -217,13 +187,6 @@
 						}	
 						$query2 = $this->db->query("insert into ".TABLE_PREFIX.'product_'.$key." (".$key."_id, product_id) values (".$attr_vl.", ".$prd_last_id.")");	
 					}					
-				}				
-
-				// add product occassion
-				if(isset($occassions) && !empty($occassions)){
-					foreach ($occassions as $key => $value) {
-						$this->productdata->insert_product_occassion(array("product_id" => $prd_last_id, "occassion_id" =>$value));
-					}
 				}
 				
 				redirect(base_url('admin/product-list'));
@@ -240,7 +203,6 @@
 				if(isset($product_details->tag)){
 					$this->data['tags_sess'] = $product_details->tag;
 				}
-				$this->data['occassions'] = $product_details->occassion;
 			}else{
 				$cond['slug'] = $code;
 				$product_details = $this->productdata->grab_product($cond);
@@ -257,25 +219,8 @@
 
 				$this->data['entity_id'] = $entity_arr;
 
-				$product_colors = $this->productdata->grab_product_color(array("product_id" => $product_details->product_id));
-				if(!empty($product_colors)){
-					foreach ($product_colors as $key => $value) {
-						$selected_colors[] = $value->color_id;
-					}				
-				}
-				$this->data['selected_colors'] = $selected_colors;
-
 				$tags = $this->productdata->grab_product_tag(array("product_id" => $product_details->product_id));
 				$this->data['tags'] = $tags;
-
-				$occassion = array();
-				$occassions = $this->productdata->grab_product_occassion(array("product_id" => $product_details->product_id));
-				if(!empty($occassions)){
-					foreach ($occassions as $key => $value) {
-						$occassion[] = $value->occassion_id;
-					}
-				}
-				$this->data['occassions'] = $occassion;
 			}
 			$cat_data = $this->entitydata->grab_entity(array("status" => "Y", "parent_id !=" => "0"), array(), array());
 			$this->data['cat_list'] = $cat_data;
@@ -285,9 +230,6 @@
 
 			$unit = $this->config->item('unit');
 			$this->data['unit'] = $unit;
-
-			$colors = $this->productdata->grab_color();
-			$this->data['colors'] = $colors;
 			
 			$this->load->view('admin/product_edit', $this->data); 
 		}
@@ -308,9 +250,6 @@
 			$this->form_validation->set_rules('price', 'Price', 'trim|required');
 			$this->form_validation->set_rules('quantity', 'Quantity', 'trim|required');
 			$this->form_validation->set_rules('sku', 'SKU', 'trim|required');
-			if(empty($color)){
-				$this->form_validation->set_rules('color[]', 'Color', 'trim|required');
-			}
 			$this->form_validation->set_rules('content', 'Content', 'trim|required');
 			$this->form_validation->set_rules('upload_image', 'Upload Images', 'required');
 
@@ -324,12 +263,8 @@
 			unset($post_data['attrunit']);
 			$product_id = $post_data['product_id'];
 			$prd_entity = $post_data['entity_id'];
-			$color = $post_data['color'];
 			if(isset($post_data['tag'])){
 				$tags = $post_data['tag'];
-			}
-			if(isset($post_data['occassion'])){
-				$occassions = $post_data['occassion'];
 			}
 			
 			$this->session->unset_userdata($post_data);
@@ -346,18 +281,14 @@
 				unset($post_data['product_id']);
 				unset($post_data['upload_image']);
 				unset($post_data['entity_id']);
-				unset($post_data['color']);
 				if(isset($post_data['tag'])){
 					unset($post_data['tag']);
-				}
-				if(isset($post_data['occassion'])){
-					unset($post_data['occassion']);
 				}
 				unset($post_data['rad']);
 
 				// product
 				$slug = $post_data['slug'];
-				unset($post_data['slug'])	;
+				unset($post_data['slug']);
 				$post_data['date_modified'] = time();	
 				if(isset($post_data['prd_dic_chk'])){
 					$post_data['prd_dic_chk'] = "Y";
@@ -416,23 +347,6 @@
 					$this->productdata->update_product_image(array("product_image_id" => $selected_product_image_id), array("is_featured" => "Y"));
 				}
 
-				// delete product color
-				$this->productdata->delete_product_color(array("product_id" => $product_id));
-
-				// add product color
-				if(!empty($color)){
-					foreach ($color as $key => $value) {
-						$colors = $this->productdata->grab_color(array("name" => $value));
-						if(empty($colors)){
-							$last_id = $this->productdata->insert_color(array("name" => $value));
-						}else{
-							$last_id = $colors[0]->color_id;
-						}					
-
-						$this->productdata->insert_product_color(array("product_id" => $product_id, "color_id" => $last_id));
-					}
-				}
-
 				// delete product tag
 				$this->productdata->delete_product_tag(array("product_id" => $product_id));
 
@@ -445,9 +359,8 @@
 
 				// add product search items
 				foreach ($search_item as $key => $value) {
+					$this->db->query("delete from ".TABLE_PREFIX.'product_'.$key." where  product_id='".$product_id."' ");
 					foreach ($value as $k => $v) {
-						$this->db->query("delete from ".TABLE_PREFIX.'product_'.$key." where  product_id='".$product_id."' ");
-
 						$query = $this->db->query("select * from ".TABLE_PREFIX.$key." where name='".$v."' ");
 						$result = $query->result();
 
@@ -460,16 +373,6 @@
 						}	
 						$query2 = $this->db->query("insert into ".TABLE_PREFIX.'product_'.$key." (".$key."_id, product_id) values (".$attr_vl.", ".$product_id.")");	
 					}					
-				}
-
-				// delete product occassion
-				$this->productdata->delete_product_occassion(array("product_id" => $product_id));
-
-				// add product occassion
-				if(isset($occassions) && !empty($occassions)){
-					foreach ($occassions as $key => $value) {
-						$this->productdata->insert_product_occassion(array("product_id" => $product_id, "occassion_id" =>$value));
-					}
 				}
 				
 				redirect(base_url('admin/product-list'));

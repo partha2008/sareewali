@@ -122,12 +122,6 @@
 			$this->data['products'] = $this->load->view('partials/products', $this->data, true);		
 			$this->data['breadcrumb'] = $this->breadcrumb->output();
 
-			$colors = $this->productdata->grab_color();
-			$this->data['colors'] = $colors;
-
-			$fabrics = $this->productdata->grab_fabric();
-			$this->data['fabrics'] = $fabrics;
-
 			$searchbar = $this->load->view('partials/searchbar', $this->data, true); 
 			$this->data['searchbar'] = $searchbar;
 
