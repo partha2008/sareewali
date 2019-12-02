@@ -27,44 +27,10 @@
 			$product_attr = $this->productdata->grab_product_attribute(array("product_id" => $product[0]->product_id));
 			$random_entity_id = $this->entitydata->grab_random_product_entity(array("product_id" => $product[0]->product_id), array(1,1));
 			$product_color = $this->productdata->grab_product_color_rel(array(TABLE_PRODUCT.".product_id" => $product[0]->product_id));
-			$product_fabric = $this->productdata->grab_product_fabric(array("product_id" => $product[0]->product_id));
-			$fabrics = $this->productdata->grab_fabric();
-			if(!empty($fabrics)){
-				foreach ($fabrics as $key => $value) {
-					$fabric_arr[$value->fabric_id] = $value->name;
-				}
-			}
-
-			$fabric_str = "";
-			if(!empty($product_fabric)){
-				foreach ($product_fabric as $key => $value) {
-					$fabric_str .= $fabric_arr[$value->fabric_id].", ";
-				}
-			}
-
-			$product_occassion = $this->productdata->grab_product_occassion(array("product_id" => $product[0]->product_id));
-
-			$occassion_str = "";
-			if(!empty($product_occassion)){
-				foreach ($product_occassion as $key => $value) {
-					$occassion_arr = $this->config->item("occassion");
-					$occassion_str .= $occassion_arr[$value->occassion_id].", ";
-				}
-			}
-
-			$prd_color = '';
-			if(!empty($product_color)){
-				foreach ($product_color as $key => $value) {
-					$prd_color .= ucfirst($value->name).',';
-				}
-			}
 
 			$this->data['product'] = $product[0];
 			$this->data['product_image'] = $product_image;
 			$this->data['product_attr'] = $product_attr;
-			$this->data['product_color'] = rtrim($prd_color, ',');
-			$this->data['product_fabric'] = rtrim($fabric_str, ", ");
-			$this->data['product_occassion'] = rtrim($occassion_str, ", ");
 
 			$this->load->library('breadcrumb');
 			$this->breadcrumb->add('Home', base_url());
@@ -118,6 +84,17 @@
 				$product_list = $this->productdata->grab_product_list_all($entity, 0 , $this->perPage, $order_by);
 				$this->data['entity'] = $entity_data[0]->name;
 			}	
+			$ent_attr = $this->entitydata->grab_entity_attribute($entity_data[0]->entity_id);
+			if(!empty($ent_attr)){
+				foreach ($ent_attr as $key => $value) {
+					$sql = "SELECT ".TABLE_PREFIX.$value->name.".name FROM ".TABLE_PREFIX.$value->name;	
+					$query = $this->db->query($sql);
+					
+					$result = $query->result();
+					$ent_attr[$key]->ent_data = $result;
+				}
+			}
+			$this->data['ent_attr'] = $ent_attr;
 			$this->data['product_list'] = $product_list;
 			$this->data['products'] = $this->load->view('partials/products', $this->data, true);		
 			$this->data['breadcrumb'] = $this->breadcrumb->output();
@@ -134,9 +111,6 @@
 			$mode = $this->input->get("mode");
 			$min_price = $this->input->get("min_price");
 			$max_price = $this->input->get("max_price");
-			$colors = $this->input->get("colors");
-			$fabrics = $this->input->get("fabrics");
-			$occassions = $this->input->get("occassions");
 			$where = '';
 			$order_by = '';
 
@@ -159,15 +133,6 @@
 			}
 
 			$where .= " AND ".TABLE_PRODUCT.".price BETWEEN ".$min_price." AND ".$max_price;
-			if($colors){
-				$where .= " AND ".TABLE_PRODUCT_COLOR.".color_id IN (".$colors.")";
-			}
-			if($fabrics){
-				$where .= " AND ".TABLE_PRODUCT_FABRIC.".fabric_id IN (".$fabrics.")";
-			}
-			if($occassions){
-				$where .= " AND ".TABLE_PRODUCT_OCCASSION.".occassion_id IN (".$occassions.")";
-			}
 
 			$this->data['product_list'] = $this->productdata->grab_product_list_all($entity, $start, $this->perPage, $order_by, $where);
 
