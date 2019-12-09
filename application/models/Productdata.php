@@ -228,6 +228,26 @@ class Productdata extends CI_Model {
 		return true;
 	}
 
+	public function grab_product_entity_attribute($product_id)
+	{
+	    $this->db->select('c.name');
+	    $this->db->distinct('c.name');
+	    $this->db->from(TABLE_PRODUCT_ENTITY.' a'); 
+	    $this->db->join(TABLE_ENTITY_ATTRIBUTE.' b', 'b.entity_id=a.entity_id', 'inner');
+	    $this->db->join(TABLE_PREFIX.'attr c', 'c.attr_id=b.attr_id', 'inner');
+	    $this->db->where('a.product_id', $product_id);
+	    $this->db->order_by('c.name','asc');         
+	    $query = $this->db->get(); 
+	    if($query->num_rows() != 0)
+	    {
+	        return $query->result_array();
+	    }
+	    else
+	    {
+	        return false;
+	    }
+	}
+
 	public function grab_product_entity_rel($cond = array(), $like = array(), $limit = array()){
 		if(!empty($cond)){
 			$this->db->where($cond);

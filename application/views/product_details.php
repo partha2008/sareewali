@@ -426,15 +426,17 @@
                         <tr>
                           <td class="variation_td"><div> <span class="variation_name">Product Code</span><b>:</b><span class="tab_prd_val"><?php echo $product->sku;?></span></div></td>
                         </tr>
-                        <tr>
-                          <td class="variation_td"><div><span class="variation_name">Colors</span><b>:</b><span class="tab_prd_val"><?php echo $product_color;?></span></div></td>
-                        </tr>
-                        <tr>
-                          <td class="variation_td"><div><span class="variation_name">Fabric</span><b>:</b><span class="tab_prd_val"><?php echo $product_fabric;?></span></div></td>
-                        </tr>
-                        <tr>
-                          <td class="variation_td"><div><span class="variation_name">Occasion</span><b>:</b><span class="tab_prd_val"><?php echo $product_occassion;?></span></div></td>
-                        </tr>
+                        <?php
+                          if(!empty($prd_ent)){
+                            foreach ($prd_ent as $key => $value) {
+                        ?>
+                          <tr>
+                            <td class="variation_td"><div><span class="variation_name"><?php echo $value['name'];?></span><b>:</b><span class="tab_prd_val"><?php echo $value['data'];?></span></div></td>
+                          </tr>
+                        <?php
+                            }
+                          }
+                        ?>
                         <tr>
                           <td class="variation_td"><div><span class="variation_name">Content</span><b>:</b> <span class="tab_prd_val"><?php echo $product->content;?></span></div></td>
                         </tr>

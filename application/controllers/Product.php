@@ -22,18 +22,37 @@
 		}
 
 		public function product_details($slug){
+			$this->load->library('breadcrumb');
+			$this->breadcrumb->add('Home', base_url());
+
 			$product = $this->productdata->grab_product(array("slug" => $slug));
 			$product_image = $this->productdata->grab_product_image(array("status" => "Y", "product_id" => $product[0]->product_id));
 			$product_attr = $this->productdata->grab_product_attribute(array("product_id" => $product[0]->product_id));
 			$random_entity_id = $this->entitydata->grab_random_product_entity(array("product_id" => $product[0]->product_id), array(1,1));
-			$product_color = $this->productdata->grab_product_color_rel(array(TABLE_PRODUCT.".product_id" => $product[0]->product_id));
+			
+			$prd_ent = $this->productdata->grab_product_entity_attribute($product[0]->product_id);		
+			if(!empty($prd_ent)){
+				foreach ($prd_ent as $key => $value) {
+					$sql = "SELECT a.name FROM ".TABLE_PREFIX.$value['name']." a INNER JOIN ".TABLE_PREFIX.'product_'.$value['name']." b ON a.".$value['name']."_id = b. ".$value['name']."_id WHERE b.product_id='".$product[0]->product_id."' ";	
+					$query = $this->db->query($sql);					
+					$result = $query->result_array();
 
+					$str = '';
+					if(!empty($result)){
+						foreach ($result as $k => $v) {
+							$str .= $v['name'].', ';
+						}
+					}
+
+					$prd_ent[$key]['data'] = rtrim($str, ", ");
+				}
+			}
+
+			$this->data['prd_ent'] = $prd_ent;
 			$this->data['product'] = $product[0];
 			$this->data['product_image'] = $product_image;
 			$this->data['product_attr'] = $product_attr;
 
-			$this->load->library('breadcrumb');
-			$this->breadcrumb->add('Home', base_url());
 			$parent_entity = $this->productdata->grab_parent_entity($random_entity_id[0]->entity_id);
 			if(!empty($parent_entity)){
 				foreach ($parent_entity as $key => $value) {
