@@ -84,16 +84,18 @@
 				$product_list = $this->productdata->grab_product_list_all($entity, 0 , $this->perPage, $order_by);
 				$this->data['entity'] = $entity_data[0]->name;
 			}	
+
 			$ent_attr = $this->entitydata->grab_entity_attribute($entity_data[0]->entity_id);
 			if(!empty($ent_attr)){
 				foreach ($ent_attr as $key => $value) {
-					$sql = "SELECT ".TABLE_PREFIX.$value->name.".name FROM ".TABLE_PREFIX.$value->name;	
+					$sql = "SELECT * FROM ".TABLE_PREFIX.$value->name;	
 					$query = $this->db->query($sql);
 					
 					$result = $query->result();
 					$ent_attr[$key]->ent_data = $result;
 				}
 			}
+
 			$this->data['ent_attr'] = $ent_attr;
 			$this->data['product_list'] = $product_list;
 			$this->data['products'] = $this->load->view('partials/products', $this->data, true);		
@@ -111,6 +113,8 @@
 			$mode = $this->input->get("mode");
 			$min_price = $this->input->get("min_price");
 			$max_price = $this->input->get("max_price");
+			$attrs = $this->input->get("attrs");
+			$attrs_arr = explode(",", $attrs);
 			$where = '';
 			$order_by = '';
 
@@ -133,6 +137,15 @@
 			}
 
 			$where .= " AND ".TABLE_PRODUCT.".price BETWEEN ".$min_price." AND ".$max_price;
+			if(!empty($attrs_arr)){
+				foreach ($attrs_arr as $key => $value) {
+					$search = explode("_", $value);
+					$search_val = $search[0];
+					$search_field = $search[1];
+
+					$where .= " AND ".TABLE_PRODUCT_COLOR.".color_id IN (".$colors.")";
+				}
+			}
 
 			$this->data['product_list'] = $this->productdata->grab_product_list_all($entity, $start, $this->perPage, $order_by, $where);
 

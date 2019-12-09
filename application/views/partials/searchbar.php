@@ -15,8 +15,8 @@
                   foreach ($value->ent_data as $k => $v) {
               ?>
               <li>
-                <input class="filter_color" type="checkbox" id="<?php echo $v->name;?>" name="<?php echo $value->name;?>[]" value="<?php echo $v->name;?>" onclick="search_by_attr(0);" />
-                <label for="<?php echo $v->name;?>"><span></span><?php echo $v->name;?></label>
+                <input class="filter_color" type="checkbox" id="<?php echo $v->{$value->name.'_id'}.'_'.$value->name;?>" name="<?php echo $value->name;?>" value="<?php echo $value->name;?>" onclick="search_by_attr(0);" />
+                <label for="<?php echo $v->{$value->name.'_id'}.'_'.$value->name;?>"><span></span><?php echo $v->name;?></label>
               </li>
               <?php
                   }
