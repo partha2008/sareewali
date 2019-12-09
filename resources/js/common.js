@@ -301,34 +301,21 @@ function load_products(page, view){
     var mode = $(".shortByDropDown ul li").find("a.active").attr("param");
     var min_price = $("#min_price").val();
     var max_price = $("#max_price").val();
-    var colors = '';
-    $("input:checkbox[class=filter_color]:checked").each(function () {
-        colors += $(this).val()+',';
+    var attr_arr = [];
+    var key, val;
+    
+    $("input:checkbox[class=filter_color]:checked").each(function () {    
+        key = $(this).attr("name");
+        val = $(this).val();        
+        attr_arr.push({key: key, value: val});
     });
-    if(colors){
-        colors = colors.replace(/,+$/,'');
-    }
 
-    var fabrics = '';
-    $("input:checkbox[class=filter_fabric]:checked").each(function () {        
-        fabrics += $(this).val()+',';
-    });
-    if(fabrics){
-        fabrics = fabrics.replace(/,+$/,'');
-    }
-
-    var occassions = '';
-    $("input:checkbox[class=filter_occassion]:checked").each(function () {        
-        occassions += $(this).val()+',';
-    });
-    if(occassions){
-        occassions = occassions.replace(/,+$/,'');
-    }
+    var grouped = groupBy(attr_arr, 'key');
 
     if(mode){
-        var url = BASEPATH+"product/load_products?page="+page+"&view="+view+"&mode="+mode+"&min_price="+min_price+"&max_price="+max_price+"&colors="+colors+"&fabrics="+fabrics+"&occassions="+occassions;
+        var url = BASEPATH+"product/load_products?page="+page+"&view="+view+"&mode="+mode+"&min_price="+min_price+"&max_price="+max_price+"&attrs="+JSON.stringify(grouped);
     }else{
-        var url = BASEPATH+"product/load_products?page="+page+"&view="+view+"&min_price="+min_price+"&max_price="+max_price+"&colors="+colors+"&fabrics="+fabrics+"&occassions="+occassions;
+        var url = BASEPATH+"product/load_products?page="+page+"&view="+view+"&min_price="+min_price+"&max_price="+max_price+"&attrs="+JSON.stringify(grouped);
     }
     $.ajax({
         url: url,
@@ -354,6 +341,17 @@ function load_products(page, view){
     });
 }
 
+function groupBy(array, groupBy){
+    return array.reduce((acc,curr,index,array) => {
+        var  idx = curr[groupBy]; 
+        if(!acc[idx]){
+            acc[idx] = array.filter(item => item[groupBy] === idx)
+        } 
+
+        return  acc; 
+    },{})
+}
+
 function search_by_attr(page){
     sessionStorage.setItem("page", page);
     sessionStorage.setItem("page_end", false);
@@ -361,20 +359,21 @@ function search_by_attr(page){
     var mode = $(".shortByDropDown ul li").find("a.active").attr("param");    
     var min_price = $("#min_price").val();
     var max_price = $("#max_price").val();
-    var attrs = {};
+    var attr_arr = [];
     var key, val;
+
     $("input:checkbox[class=filter_color]:checked").each(function () {    
         key = $(this).attr("name");
-        val = $(this).val();
-
-        attrs.push($(this).val());
-        attrs[key] = val;
+        val = $(this).val();        
+        attr_arr.push({key: key, value: val});
     });
+
+    var grouped = groupBy(attr_arr, 'key');
     
     if(mode){
-        var url = BASEPATH+"product/load_products?page="+page+"&view="+VIEW+"&mode="+mode+"&min_price="+min_price+"&max_price="+max_price+"&attrs="+attrs;
+        var url = BASEPATH+"product/load_products?page="+page+"&view="+VIEW+"&mode="+mode+"&min_price="+min_price+"&max_price="+max_price+"&attrs="+JSON.stringify(grouped);
     }else{
-        var url = BASEPATH+"product/load_products?page="+page+"&view="+VIEW+"&min_price="+min_price+"&max_price="+max_price+"&attrs="+attrs;
+        var url = BASEPATH+"product/load_products?page="+page+"&view="+VIEW+"&min_price="+min_price+"&max_price="+max_price+"&attrs="+JSON.stringify(grouped);
     }
 
     $.ajax({

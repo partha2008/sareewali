@@ -20,7 +20,7 @@ class Productdata extends CI_Model {
 		return $query->result();
 	}
 
-	public function grab_product_list_all($entity, $start, $perpage, $order_by = null, $where=null){	
+	public function grab_product_list_all($entity, $start, $perpage, $order_by = null, $where=null, $join=null){	
 		if(!$order_by){
 			//$order_by = TABLE_PRODUCT.".date_added DESC";
 			$order_by = "RAND()";
@@ -40,6 +40,9 @@ class Productdata extends CI_Model {
 			." INNER JOIN ".TABLE_PRODUCT_ENTITY." ON ".TABLE_PRODUCT.".product_id = ".TABLE_PRODUCT_ENTITY.".product_id"
 			." INNER JOIN ".TABLE_ENTITY." ON ".TABLE_PRODUCT_ENTITY.".entity_id = ".TABLE_ENTITY.".entity_id"
 			." LEFT JOIN ".TABLE_PRODUCT_TAG." ON ".TABLE_PRODUCT.".product_id = ".TABLE_PRODUCT_TAG.".product_id"
+
+			.$join
+
 			." WHERE ".TABLE_PRODUCT.".status='Y'"
 			." AND ".TABLE_PRODUCT_IMAGES.".status='Y'"
 			." AND ".TABLE_PRODUCT_IMAGES.".is_featured='Y'"

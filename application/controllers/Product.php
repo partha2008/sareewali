@@ -113,9 +113,9 @@
 			$mode = $this->input->get("mode");
 			$min_price = $this->input->get("min_price");
 			$max_price = $this->input->get("max_price");
-			$attrs = $this->input->get("attrs");
-			$attrs_arr = explode(",", $attrs);
+			$attrs = json_decode($this->input->get("attrs"), true);
 			$where = '';
+			$join = '';
 			$order_by = '';
 
 			if(isset($mode)){				
@@ -137,17 +137,20 @@
 			}
 
 			$where .= " AND ".TABLE_PRODUCT.".price BETWEEN ".$min_price." AND ".$max_price;
-			if(!empty($attrs_arr)){
-				foreach ($attrs_arr as $key => $value) {
-					$search = explode("_", $value);
-					$search_val = $search[0];
-					$search_field = $search[1];
-
-					$where .= " AND ".TABLE_PRODUCT_COLOR.".color_id IN (".$colors.")";
+			if(!empty($attrs)){
+				foreach ($attrs as $key => $value) {
+					if(!empty($attrs[$key])){
+						$str = '';
+						foreach ($attrs[$key] as $k => $v) {
+							$str .= $v['value'].',';
+						}
+					}
+					$where .= " AND ".TABLE_PREFIX.'product_'.$key.".".$key."_id IN (".rtrim($str, ",").")";
+					$join .= " LEFT JOIN ".TABLE_PREFIX.'product_'.$key." ON ".TABLE_PRODUCT.".product_id = ".TABLE_PREFIX.'product_'.$key.".product_id";
 				}
 			}
 
-			$this->data['product_list'] = $this->productdata->grab_product_list_all($entity, $start, $this->perPage, $order_by, $where);
+			$this->data['product_list'] = $this->productdata->grab_product_list_all($entity, $start, $this->perPage, $order_by, $where, $join);
 
 			$products = $this->load->view('partials/products', $this->data, true);		
 
