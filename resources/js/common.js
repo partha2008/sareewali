@@ -564,3 +564,7 @@ function checkAvailability(){
         $("#txt_avl").html(response.msg);
     });
 }
+
+function setRedirect(me){
+    window.location.href = me.getAttribute("slug");
+}

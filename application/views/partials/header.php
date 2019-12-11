@@ -104,7 +104,7 @@
                                   if($node->is_special == "Y"){
                                     echo '<li><a class="coutreNav" href="'.base_url('product-list/'.$node->slug).'">'.$node->name.'</a>';
                                   }else{
-                                    echo '<li><a href="'.base_url('product-list/'.$node->slug).'">'.$node->name.'</a>';
+                                    echo '<li><a slug="'.base_url('product-list/'.$node->slug).'" onclick="setRedirect(this);" href="#">'.$node->name.'</a>';
                                   }
                                   
                                   if(isset($node->children)){
