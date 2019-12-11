@@ -196,12 +196,13 @@ class Entity extends CI_Controller{
 	}
 	
 	public function entity_edit($code){
-		if($this->session->userdata('has_error')){			
+		if($this->session->userdata('has_error')){		
 			$cat_details = (object)$this->session->userdata;
 			$cat_details->image_path = $cat_details->hidden_image_path;
 			$this->data['cat_details'] = $cat_details;
+			$arr = $cat_details->attr;
 			if(isset($cat_details->attr)){
-				$this->data['ent_attr'] = $cat_details->attr;
+				$this->data['ent_attr'] = $arr;
 			}else{
 				$this->data['ent_attr'] = array();
 			}
@@ -225,9 +226,18 @@ class Entity extends CI_Controller{
 		$arr1 = array();
 		if(!empty($attr_data)){
 			foreach ($attr_data as $key => $value) {
-				$arr1[] = $value->name;
+				if(!in_array($value->name, $arr)){
+					$arr1[] = $value->name;
+				}				
 			}
 		}
+
+		if(!empty($arr)){
+			foreach (array_reverse($arr) as $key => $value) {
+				array_unshift($arr1, $value);
+			}
+		}
+
 		$this->data['attr_data'] = $arr1;
 
 		$entity_data = $this->entitydata->grab_entity(array("slug !=" => $code));

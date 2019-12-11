@@ -22,16 +22,17 @@
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 							<?php echo $this->session->userdata('catedit_notification');?>
 						</div>
-					<?php } 
-					$this->session->unset_userdata('has_error');
-					$this->session->unset_userdata('catedit_notification');
-					$this->session->unset_userdata('prd_dic_chk');
+					<?php 
+						} 
+						$this->session->unset_userdata('has_error');
+						$this->session->unset_userdata('catedit_notification');
+						$this->session->unset_userdata('prd_dic_chk');
 					?>					
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-lg-12">
-									<form action="<?php echo base_url('admin/entity/edit_entity');?>" method="POST" role="form" enctype="multipart/form-data" novalidate>
+									<form action="<?php echo base_url('admin/entity/edit_entity');?>" method="POST" role="form" enctype="multipart/form-data">
 										<div class="form-group">
 											<label class="control-label">Entity Name <span style="color:#a94442;">*</span></label>
 											<input class="form-control" type="text" name="name" placeholder="Enter Entity Name" value="<?php if(isset($cat_details->name) && $cat_details->name){echo $cat_details->name;}?>">
@@ -66,7 +67,7 @@
 										</div>
 										<div class="form-group">
 											<label class="control-label">Attribute <span style="color:#a94442;">*</span></label>
-											<select class="form-control js-example-tags" multiple="multiple" name="attr[]">
+											<select class="form-control js-example-tags" multiple="multiple" name="attr[]" required>
 												<?php												
 													if(!empty($attr_data)){
 														foreach ($attr_data as $key => $value) {

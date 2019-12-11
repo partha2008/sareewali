@@ -30,7 +30,7 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-lg-12">
-									<form action="<?php echo base_url('admin/entity/add_entity');?>" method="POST" role="form" enctype="multipart/form-data" novalidate>
+									<form action="<?php echo base_url('admin/entity/add_entity');?>" method="POST" role="form" enctype="multipart/form-data">
 										<div class="form-group">
 											<label class="control-label">Entity Name <span style="color:#a94442;">*</span></label>
 											<input class="form-control" type="text" name="name" placeholder="Enter Entity Name" value="<?php if(isset($cat_details->name) && $cat_details->name){echo $cat_details->name;}?>">
@@ -58,7 +58,7 @@
 										</div>
 										<div class="form-group">
 											<label class="control-label">Attribute <span style="color:#a94442;">*</span></label>
-											<select class="form-control js-example-tags" multiple="multiple" name="attr[]">
+											<select class="form-control js-example-tags" multiple="multiple" name="attr[]" required>
 												<?php												
 													if(!empty($attr_data)){
 														foreach ($attr_data as $key => $value) {
