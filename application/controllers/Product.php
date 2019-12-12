@@ -107,7 +107,7 @@
 			$ent_attr = $this->entitydata->grab_entity_attribute($entity_data[0]->entity_id);
 			if(!empty($ent_attr)){
 				foreach ($ent_attr as $key => $value) {
-					$sql = "SELECT * FROM ".TABLE_PREFIX.$value->name;	
+					$sql = "SELECT  a.".$value->name."_id, a.name FROM ".TABLE_PREFIX.$value->name." as a INNER JOIN ".TABLE_PREFIX.'product_'.$value->name." as b ON a.".$value->name."_id = b.".$value->name."_id INNER JOIN ".TABLE_PRODUCT_ENTITY." as c ON b.product_id=c.product_id WHERE c.entity_id='".$entity_data[0]->entity_id."' ";	
 					$query = $this->db->query($sql);
 					
 					$result = $query->result();
