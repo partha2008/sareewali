@@ -426,7 +426,9 @@ class Entity extends CI_Controller{
 	public function get_product_entity(){
 		$post_data = $this->input->post();
 		$mode = $post_data['mode'];
-		$product_id = $post_data['product_id'];
+		if($mode == "edit"){
+			$product_id = $post_data['product_id'];
+		}
 
 		$res = $this->entitydata->grab_entity_attribute($post_data['entity']);
 		$str = "";

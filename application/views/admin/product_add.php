@@ -96,35 +96,7 @@
 											<label class="control-label">SKU <span style="color:#a94442;">*</span></label>
 											<input class="form-control" type="text" name="sku" value="<?php echo (isset($product_details->sku) && $product_details->sku) ? $product_details->sku : '';?>">
 										</div>
-										<div class="form-group">
-											<label class="control-label">Color <span style="color:#a94442;">*</span></label>
-											<select class="form-control js-example-tags" multiple="multiple" name="color[]">
-												<?php
-													$sess_color = $product_details->color;
-													if(!empty($colors)){
-														foreach ($colors as $key => $value) {
-															if(in_array($value->name, $sess_color)){
-																echo '<option selected="selected">'.$value->name.'</option>';
-																if (($key = array_search($value->name, $sess_color)) !== false) {
-																    unset($sess_color[$key]);
-																}
-															}else{
-																echo '<option>'.$value->name.'</option>';
-															}			
-														}
-														if(!empty($sess_color)){
-															foreach($sess_color as $color){
-																echo '<option selected="selected">'.$color.'</option>';
-															}
-														}
-													}elseif(!empty($sess_color)){
-														foreach ($sess_color as $key => $value) {
-															echo '<option selected="selected">'.$value.'</option>';
-														}
-													}
-												?>
-											</select>
-										</div>
+										
 										<div class="form-group">
 											<label class="control-label">Tag</label>
 											<select name="tag[]" class="form-control" multiple="multiple">
@@ -138,27 +110,6 @@
 												<span id="attr_plc"></span>
 																	
 											</fieldset>	
-										</div>										
-										<div class="form-group">
-											<label class="control-label">Occassion</label>
-											<select name="occassion[]" class="form-control" multiple="multiple">
-												<?php
-													$occassion = $this->config->item('occassion');
-													foreach ($occassion as $key => $value) {	
-												?>
-												<option value="<?php echo $key;?>"
-												<?php
-													if(isset($product_details) && !empty($product_details->occassion)){
-														if(in_array($key, $product_details->occassion)){
-															echo 'selected';
-														}
-													}
-												?>
-												><?php echo $value;?></option>
-												<?php
-													}
-												?>
-											</select>
 										</div>
 										<div class="form-group">
 											<label class="control-label">Content <span style="color:#a94442;">*</span></label>
