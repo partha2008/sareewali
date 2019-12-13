@@ -32,7 +32,7 @@
 <?php
 	}elseif($tot_segments[1] == 'mywishlist'){
 ?>
-<script src="<?php echo base_url(); ?>resources/js/jquery.unveil.js" type="text/javascript"></script> 
+<!--<script src="<?php echo base_url(); ?>resources/js/jquery.unveil.js" type="text/javascript"></script> -->
 <?php
 	}else{
 ?>
