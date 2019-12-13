@@ -157,7 +157,8 @@ class Entity extends CI_Controller{
 				"sort_order" => $post_data['sort_order'],
 				"is_special" => $post_data['is_special'],				
 				"status" => $post_data['status'],
-				"date_added" => time()
+				"date_added" => time(),
+				"date_modified" => time()
 			);
 			$last_entity_id = $this->entitydata->insert_entity($data);
 

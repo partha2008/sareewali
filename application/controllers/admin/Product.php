@@ -114,6 +114,7 @@
 				// product
 				$post_data['slug'] = $this->defaultdata->slugify($post_data['name']);
 				$post_data['date_added'] = time();
+				$post_data['date_modified'] = time();
 				if(isset($post_data['prd_dic_chk'])){
 					$post_data['prd_dic_chk'] = "Y";
 				}else{

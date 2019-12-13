@@ -19,7 +19,7 @@ class Entitydata extends CI_Model {
 				$this->db->order_by($key, $val);	
 			}
 		}else{
-			$this->db->order_by('date_added','desc');	
+			$this->db->order_by('date_modified','desc');	
 		}	
 
 		$query = $this->db->get(TABLE_ENTITY);
