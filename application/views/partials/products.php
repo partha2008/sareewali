@@ -63,5 +63,7 @@
           </div>
           <?php
             }
+          }else{
+            echo '<div class="no-prd">Oops, Sorry no item(s) found for the criteria</div>';
           }
           ?>
