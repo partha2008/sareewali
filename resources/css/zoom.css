@@ -339,8 +339,8 @@
 }
 @font-face {
 	font-family:linea-arrows-10;
-	src:url(http://tinycomp.net/fonts/linea-arrows-10.eot);
-	src:url(http://tinycomp.net/fonts/linea-arrows-10.eot?#iefix) format("embedded-opentype"), url(http://tinycomp.net/fonts/linea-arrows-10.woff) format("woff"), url(http://tinycomp.net/fonts/linea-arrows-10.ttf) format("truetype"), url(http://tinycomp.net/fonts/linea-arrows-10.svg#linea-arrows-10) format("svg");
+	src:url(https://tinycomp.net/fonts/linea-arrows-10.eot);
+	src:url(https://tinycomp.net/fonts/linea-arrows-10.eot?#iefix) format("embedded-opentype"), url(https://tinycomp.net/fonts/linea-arrows-10.woff) format("woff"), url(https://tinycomp.net/fonts/linea-arrows-10.ttf) format("truetype"), url(https://tinycomp.net/fonts/linea-arrows-10.svg#linea-arrows-10) format("svg");
 	font-weight:400;
 	font-style:normal
 }
