@@ -8979,6 +8979,9 @@ p.required {
 	height: 403px;
 
 	overflow: hidden;
+	    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
 
