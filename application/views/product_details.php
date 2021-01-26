@@ -94,7 +94,7 @@
             ?>
           </div>
           <?php
-            if($product->out_of_stock == 'Y'){
+            if($product->out_of_stock == 'Y' || $product->quantity == 0){
           ?>
           <p><span>Availability :</span> Out of Stock</p>
           <?php
@@ -284,7 +284,7 @@
           </div>
           <div class="clearall"></div>
           <?php
-            if($product->out_of_stock == 'N'){
+            if($product->out_of_stock == 'N' && $product->quantity > 0){
           ?>
           <div class="addtocartbuttonholder"> 
             <a class="add_to_cart_button quick_cart" onclick="addToCart('<?php echo $product->slug;?>', '<?php echo $this->defaultdata->is_user_session_active();?>', false);" title="Add to Cart" href="javascript:void(0);">

@@ -44,7 +44,7 @@
         });
     });
 
-    $(window).click(function() {
+    $(window).click(function(e) {
     	if(!$('.menu-container').is(":hidden") && menu_shown){
 			$('.menu-container').slideUp(300, function(){
 				menu_shown = false;
@@ -52,9 +52,13 @@
 		}
 
 		if(!$('.leftBox').is(":hidden") && filter_box){
-			$('.leftBox').slideUp(300, function(){
-				filter_box = false;
-			});
+			var container = $('.leftBox');
+			if (!container.is(e.target) && container.has(e.target).length === 0) 
+		    {
+		        $('.leftBox').slideUp(300, function(){
+					filter_box = false;
+				});
+		    }			
 		}
 	});
 

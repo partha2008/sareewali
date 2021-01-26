@@ -116,19 +116,19 @@ $(document).ready(function() {
         gapi.auth2.getAuthInstance().signIn().then(
             function(success) {
                 // API call to get user profile information
-                gapi.client.request({ path: 'https://www.googleapis.com/plus/v1/people/me' }).then(
+                gapi.client.request({ path: 'https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses' }).then(
                     function(success) {
                         // API call is successful
 
                         var user_info = JSON.parse(success.body);
 
                         // user profile information
-                        //console.log(user_info);
+                        // console.log(user_info);
                         var user = {};
-                        user.id = user_info.id;
-                        user.first_name = user_info.name.givenName;
-                        user.last_name = user_info.name.familyName;
-                        user.email = user_info.emails[0].value;
+                        user.id = user_info.names[0].metadata.source.id;
+                        user.first_name = user_info.names[0].givenName;
+                        user.last_name = user_info.names[0].familyName;
+                        user.email = user_info.emailAddresses[0].value;
 
                         saveUserInfo(user);
                     },
@@ -216,36 +216,48 @@ $(document).ready(function() {
             },
             submitHandler: function (form) { 
                 $("#place_order_btn").prop("disabled", true);
-                $.post(BASEPATH+"cart/make_order", {data: $(form).serialize()}, function(data){
-                    var response = JSON.parse(data);
+                $.post(BASEPATH+"cart/before_place_order", function(data){
+                    var res = JSON.parse(data);
 
-                    $("#place_order_btn").prop("disabled", false);
-                    if(response.status){                        
-                        if(response.hasOwnProperty('redirect')){
-                            window.location.href = response.redirect;
-                        }else{
-                            swal({
-                                title: response.msgTxt,
-                                text: "Transaction ID: "+response.text,
-                                icon: "success",
-                                closeOnClickOutside: false,
-                                closeOnEsc: false
-                            }).then((willDelete) => {
-                                window.location.href = BASEPATH;
-                            });
-                        }
+                    if(res.status){     
+                    return false; 
+                        $.post(BASEPATH+"cart/make_order", {data: $(form).serialize()}, function(data){
+                            var response = JSON.parse(data);
+
+                            $("#place_order_btn").prop("disabled", false);
+                            if(response.status){                        
+                                if(response.hasOwnProperty('redirect')){
+                                    window.location.href = response.redirect;
+                                }else{
+                                    swal({
+                                        title: response.msgTxt,
+                                        text: "Transaction ID: "+response.text,
+                                        icon: "success",
+                                        closeOnClickOutside: false,
+                                        closeOnEsc: false
+                                    }).then((willDelete) => {
+                                        window.location.href = BASEPATH;
+                                    });
+                                }
+                            }else{
+                                swal({
+                                    title: response.msgTxt,
+                                    text: "Please try again",
+                                    icon: "error",
+                                    closeOnClickOutside: false,
+                                    closeOnEsc: false
+                                }).then((willDelete) => {
+
+                                });
+                            }
+                        });
                     }else{
-                        swal({
-                            title: response.msgTxt,
-                            text: "Please try again",
-                            icon: "error",
-                            closeOnClickOutside: false,
-                            closeOnEsc: false
-                        }).then((willDelete) => {
-
+                        swal(res.msg)
+                        .then((value) => {
+                          window.location.href=BASEPATH+"cart";
                         });
                     }
-                });
+                });                
                 
                 return false;
             }
@@ -277,8 +289,8 @@ function HandleGoogleApiLibrary() {
         callback: function() {
             // Initialize client & auth libraries
             gapi.client.init({
-                apiKey: 'AIzaSyDmlAUQJCW8iBfXdBHBOUriDNf-EfTiWSg',
-                clientId: '1098938373816-ngpbmhrrko4dvhq1s29304pr0d9o4m4t.apps.googleusercontent.com',
+                apiKey: 'AIzaSyB1Yc5ptemGTQ23x9DAohv6KEB2SPTOoFQ',
+                clientId: '387976784900-a4hlpifu6p99esj5m3nf317ivbdg5svh.apps.googleusercontent.com',
                 scope: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me'
             }).then(
                 function(success) {
@@ -510,12 +522,21 @@ function addToCart(slug, is_logged_in, redirect){
     });
 }
 
-function update_cart(mode, cart_id){
-    $.post(BASEPATH+"cart/update_cart", {mode: mode, cart_id: cart_id}, function(data){
+function update_cart(mode, cart_id, prd_slug){
+    $.post(BASEPATH+"cart/update_cart", {mode: mode, cart_id: cart_id, prd_slug: prd_slug}, function(data){
         var response = JSON.parse(data);
         if(response.status){
             $(".topCart").html(response.html);
             $(".page-content").html(response.data);
+        }else{
+            if(response.out_of_stock){
+                swal(response.msg)
+                .then((value) => {
+                  location.reload();
+                });
+            }else{
+                swal(response.msg);
+            }            
         }
     });
 }

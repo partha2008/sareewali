@@ -3870,6 +3870,25 @@ a:focus {
 
 }
 
+.newleter-content input::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: #ffffff;
+}
+.newleter-content input:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #ffffff;
+    opacity: 1;
+}
+.newleter-content input::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #ffffff;
+    opacity: 1;
+}
+.newleter-content input:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #ffffff;
+}
+
 .newleter-content input {
 
 	width: 100%;
@@ -6624,7 +6643,7 @@ p.enteEmailTxt {
 
 	border-bottom: 1px solid #e9e8e8;
 
-	margin-bottom: 25px;
+	margin-bottom: 15px;
 
 	padding-bottom: 10px;
 

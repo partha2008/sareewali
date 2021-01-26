@@ -75,6 +75,32 @@
             ]
         });
 
+        $("#add_size_btn").click(function(){
+            var str = '<div class="row mb-12" style="margin-bottom:10px;"><div class="col-lg-4"><input type="text" class="form-control" name="size[]" placeholder="Size in cm" required></div><div class="col-lg-4"><input type="text" class="form-control" name="quantity[]" placeholder="Quantity" required></div><div class="col-lg-4"><button type="button" class="btn btn-danger btn-circle"><i class="fa fa-times"></i></button></div></div>';
+            
+            $("#container_size").append(str).find("button.btn-circle").addClass("btn-remove").attr("mode", "add");
+            $("#container_size").find("input:text").prop('required',true);
+        });
+
+        $(document).on("click", "#container_size .btn-remove", function(){
+            var me = $(this);            
+
+            if(me.attr('mode') == 'edit'){
+                $.post(BASEPATH+"admin/product/product_attribute_delete", {product_attribute_id: me.attr('key')}, function(data){
+                    if(data.trim() == 'success'){
+                        me.parent().parent().remove();
+
+                        if($("#container").html().trim() == ''){
+                            $("#attrelm").removeClass("hidden");
+                            $("#attrelm").find("input:text").prop('required',true);
+                        }
+                    }
+                });
+            }else{
+                me.parent().parent().remove();
+            }
+        });
+
         $("#add_attr_btn").click(function(){
             var str = $("#attrelm").html();
             

@@ -15,7 +15,7 @@
 
   <div class="copyright">
     <div class="container">
-      <div class="copy-left col-xs-12 col-md-5">Copyright © 2018 <?php echo ucfirst(rtrim(preg_replace("(^https?://www.)", "",$general_settings->siteaddress), '/'));?>. All rights reserved.</div>
+      <div class="copy-left col-xs-12 col-md-5">Copyright © 2021 <?php echo ucfirst(rtrim(preg_replace("(^https?://www.)", "",$general_settings->siteaddress), '/'));?>. All rights reserved.</div>
       <ul class="foot-paymen col-xs-12 col-md-5">
         <img src="<?php echo base_url(); ?>resources/images/payment-option.png" alt="" />
       </ul>
