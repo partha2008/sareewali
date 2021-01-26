@@ -10,10 +10,10 @@
 	#RewriteCond %{HTTPS} off
 	#RewriteRule ^(.*)$ https://www.sareewali.com
 
-	RewriteCond %{HTTPS} off [OR]
-	RewriteCond %{HTTP_HOST} !^www\. [OR]
-	RewriteCond %{HTTP_HOST} ^sareewali\.com$ [NC]
-	RewriteRule ^ https://www.sareewali.com%{REQUEST_URI} [R=301,L,NE]
-	RewriteCond %{THE_REQUEST} ^[A-Z]+\ /index\.php(/[^\ ]*)?\ HTTP/
-	RewriteRule ^index\.php(/(.*))?$ sareewali.com/$2/$3/$4 [R=301,L]
+	#RewriteCond %{HTTPS} off [OR]
+	#RewriteCond %{HTTP_HOST} !^www\. [OR]
+	#RewriteCond %{HTTP_HOST} ^sareewali\.com$ [NC]
+	#RewriteRule ^ https://www.sareewali.com%{REQUEST_URI} [R=301,L,NE]
+	#RewriteCond %{THE_REQUEST} ^[A-Z]+\ /index\.php(/[^\ ]*)?\ HTTP/
+	#RewriteRule ^index\.php(/(.*))?$ sareewali.com/$2/$3/$4 [R=301,L]
 </IfModule>
