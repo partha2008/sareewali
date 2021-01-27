@@ -177,17 +177,23 @@
 										  </div>
 
 										</div>
+										<div class="form-check form-check-inline" style="margin-top: 10px;">
+										  <input class="form-check-input" type="radio" name="mode_qnty" id="inlineRadio1" value="1" checked="" onclick="change_qnty_mode('1')">
+										  <label class="form-check-label" for="inlineRadio1">Quantity without Size</label>
 
-										<div class="form-group">
+										  <input class="form-check-input" type="radio" name="mode_qnty" id="inlineRadio2" value="2" onclick="change_qnty_mode('2')">
+										  <label class="form-check-label" for="inlineRadio2">Quantity over Size</label>
+										</div>
+										<div class="form-group" id="size_wth_qnty">
 
 											<label class="control-label">Quantity <span style="color:#a94442;">*</span></label>
 
 											<input class="form-control" type="number" name="quantity" min="1" value="<?php echo (isset($product_details->quantity) && $product_details->quantity) ? $product_details->quantity : '';?>">
 
 										</div>
-										<div class="form-group">
+										<div class="form-group" style="display: none;" id="size_over_qnty">
 
-											<label class="control-label">Size</label>
+											<label class="control-label">Size <span style="color:#a94442;">*</span></label>
 
 											<div class="row">
 
@@ -202,6 +208,39 @@
 
 
 											<div class="panel-body">
+
+												<span id="sizeelm">
+
+													<div class="row mb-10">
+
+														<div class="col-lg-4">
+
+															<input type="text" class="form-control" name="size[]" placeholder="Size in cm">
+
+														</div>
+
+														<div class="col-lg-4">
+
+															<input type="text" class="form-control" name="qnty[]" placeholder="Quantity">
+
+														</div>
+
+														
+
+														<div class="col-lg-4">
+
+															<button type="button" class="btn btn-danger btn-circle">
+
+																<i class="fa fa-times"></i> 
+
+															</button> 
+
+														</div>
+
+													</div>
+
+												</span>
+
 												<span id="container_size"></span>
 
 											</div>

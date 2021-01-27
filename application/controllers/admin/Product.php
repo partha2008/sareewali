@@ -63,16 +63,22 @@
 		
 		public function add_product(){
 			$post_data = $this->input->post();
+			//echo "<pre>";print_r($post_data);die();
 
 			$search_item = $post_data['search_item'];
 			$attrname = $post_data['attrname'];
 			$attrval = $post_data['attrval'];
 			$attrunit = $post_data['attrunit'];
+			$mode_qnty = $post_data['mode_qnty'];
+			$size = $post_data['size'];
+			$qnty = $post_data['qnty'];
 
 			unset($post_data['search_item']);
 			unset($post_data['attrname']);
 			unset($post_data['attrval']);
 			unset($post_data['attrunit']);
+			unset($post_data['size']);
+			unset($post_data['qnty']);
 
 			if(isset($post_data['entity_id'])){
 				$prd_entity = $post_data['entity_id'];
@@ -90,7 +96,9 @@
 			$this->form_validation->set_rules('description', 'Description', 'trim|required');
 			$this->form_validation->set_rules('note', 'Notes', 'trim|required');
 			$this->form_validation->set_rules('price', 'Price', 'trim|required');
-			$this->form_validation->set_rules('quantity', 'Quantity', 'trim|required');
+			if($mode_qnty == "1"){
+				$this->form_validation->set_rules('quantity', 'Quantity', 'trim|required');
+			}			
 			$this->form_validation->set_rules('sku', 'SKU', 'trim|required|is_unique['.TABLE_PRODUCT.'.sku]');
 			$this->form_validation->set_rules('content', 'Content', 'trim|required');
 			$this->form_validation->set_rules('upload_image', 'Upload Images', 'required');			
@@ -122,6 +130,19 @@
 				}
 
 				$prd_last_id = $this->productdata->insert_product($post_data);
+
+				// size over quantity
+				if($mode_qnty == "2"){
+					if(!empty($size)){
+						foreach ($size as $key => $value) {
+							if($value){
+								$data = array("product_id" => $prd_last_id, "size" => $size[$key], "quantity" => $qnty[$key]);
+
+								$this->productdata->insert_product_size($data);
+							}
+						}
+					}
+				}
 
 				// product entity
 				if(!empty($prd_entity)){
@@ -222,6 +243,10 @@
 
 				$tags = $this->productdata->grab_product_tag(array("product_id" => $product_details->product_id));
 				$this->data['tags'] = $tags;
+
+				$sizes = $this->productdata->grab_product_size(array("product_id" => $product_details->product_id));
+
+				$this->data['sizes'] = $sizes;
 			}
 			$cat_data = $this->entitydata->grab_entity(array("status" => "Y", "parent_id !=" => "0"), array(), array());
 			$this->data['cat_list'] = $cat_data;
@@ -249,7 +274,9 @@
 			$this->form_validation->set_rules('description', 'Description', 'trim|required');
 			$this->form_validation->set_rules('note', 'Notes', 'trim|required');
 			$this->form_validation->set_rules('price', 'Price', 'trim|required');
-			$this->form_validation->set_rules('quantity', 'Quantity', 'trim|required');
+			if($mode_qnty == "1"){
+				$this->form_validation->set_rules('quantity', 'Quantity', 'trim|required');
+			}
 			$this->form_validation->set_rules('sku', 'SKU', 'trim|required');
 			$this->form_validation->set_rules('content', 'Content', 'trim|required');
 			$this->form_validation->set_rules('upload_image', 'Upload Images', 'required');
@@ -267,6 +294,11 @@
 			if(isset($post_data['tag'])){
 				$tags = $post_data['tag'];
 			}
+			$mode_qnty = $post_data['mode_qnty'];
+			$size = $post_data['size'];
+			$qnty = $post_data['qnty'];
+			unset($post_data['size']);
+			unset($post_data['qnty']);
 			
 			$this->session->unset_userdata($post_data);
 			if($this->form_validation->run() == FALSE)
@@ -309,6 +341,19 @@
 						$data['entity_id'] = $entity;
 						
 						$this->productdata->insert_product_entity_rel($data);
+					}
+				}
+				
+				// size over quantity
+				if($mode_qnty == "2"){
+					if(!empty($size)){
+						foreach ($size as $key => $value) {
+							if($value){
+								$data = array("product_id" => $product_id, "size" => $size[$key], "quantity" => $qnty[$key]);
+
+								$this->productdata->insert_product_size($data);
+							}
+						}
 					}
 				}
 
@@ -392,6 +437,13 @@
 		public function product_attribute_delete(){		
 			$post_data = $this->input->post();
 			if($this->productdata->delete_product_attribute($post_data)){
+				echo 'success';		
+			}
+		}
+
+		public function product_size_delete(){		
+			$post_data = $this->input->post();
+			if($this->productdata->delete_product_size($post_data)){
 				echo 'success';		
 			}
 		}

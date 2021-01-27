@@ -173,12 +173,97 @@ echo 'selected';
 </div>
 
 </div>
+<div class="form-check form-check-inline" style="margin-top: 10px;">
+  <input class="form-check-input" type="radio" name="mode_qnty" id="inlineRadio1" value="1" <?php if($product_details->mode_qnty == "1"){echo "checked";}?> onclick="change_qnty_mode('1')">
+  <label class="form-check-label" for="inlineRadio1">Quantity without Size</label>
 
-<div class="form-group">
+  <input class="form-check-input" type="radio" name="mode_qnty" id="inlineRadio2" value="2" <?php if($product_details->mode_qnty == "2"){echo "checked";}?> onclick="change_qnty_mode('2')">
+  <label class="form-check-label" for="inlineRadio2">Quantity over Size</label>
+</div>
+
+<div class="form-group" id="size_wth_qnty" style="<?php if($product_details->mode_qnty == "2"){echo 'display: none;';}?>">
 
 <label class="control-label">Quantity <span style="color:#a94442;">*</span></label>
 
 <input class="form-control" type="number" name="quantity" min="1" value="<?php echo (isset($product_details->quantity) && $product_details->quantity) ? $product_details->quantity : '';?>">
+
+</div>
+
+
+
+<div class="form-group" style="<?php if($product_details->mode_qnty == "1"){echo 'display: none;';}?>" id="size_over_qnty">
+
+	<label class="control-label">Size <span style="color:#a94442;">*</span></label>
+
+	<div class="row">
+
+		<div class="col-lg-12">
+
+			<button id="add_size_btn" type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</button>
+
+		</div>
+
+	</div>
+
+	<div class="panel-body">
+
+		<span id="sizeelm" style="display: none;">
+
+			<div class="row mb-10">
+
+				<div class="col-lg-4">
+
+					<input type="text" class="form-control" name="size[]" placeholder="Size in cm">
+
+				</div>
+
+				<div class="col-lg-4">
+
+					<input type="text" class="form-control" name="qnty[]" placeholder="Quantity">
+
+				</div>
+
+				
+
+				<div class="col-lg-4">
+
+					<button type="button" class="btn btn-danger btn-circle">
+
+						<i class="fa fa-times"></i> 
+
+					</button> 
+
+				</div>
+
+			</div>
+
+		</span>
+
+		<span id="container_size">
+			<?php
+				if(!empty($sizes)){
+					foreach ($sizes as $key => $value) {
+			?>
+			<div class="row mb-10">
+				<div class="col-lg-4">
+					<input type="text" class="form-control" name="size[]" placeholder="Size in cm" value="<?php echo $value->size;?>">
+				</div>
+				<div class="col-lg-4">
+					<input type="text" class="form-control" name="qnty[]" placeholder="Quantity" value="<?php echo $value->quantity;?>">
+				</div>	
+				<div class="col-lg-4">
+					<button type="button" class="btn btn-danger btn-circle btn-remove" key="<?php echo $value->product_size_id;?>" mode="edit">
+						<i class="fa fa-times"></i> 
+					</button> 
+				</div>
+			</div>
+			<?php
+					}
+				}
+			?>
+		</span>
+
+	</div>
 
 </div>
 

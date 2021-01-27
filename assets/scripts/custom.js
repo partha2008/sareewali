@@ -30,6 +30,16 @@
             }
         }); 
     }
+
+    function change_qnty_mode(mode){
+        if(mode === "2"){
+            $("#size_over_qnty").show();
+            $("#size_wth_qnty").hide();
+        }else{
+            $("#size_over_qnty").hide();
+            $("#size_wth_qnty").show();
+        }
+    }
     
     $(function(){
         // Replace the <textarea id="term"> with a CKEditor
@@ -52,23 +62,22 @@
             "ajax": BASEPATH+"admin/product/get_products",
             "rowCallback": function(row, data, index){
                 if(data.status == 'Active')
-                    $(row).find('td:eq(5)').css({'color': '#3c763d', 'font-weight': 'bold'});
+                    $(row).find('td:eq(4)').css({'color': '#3c763d', 'font-weight': 'bold'});
                 else
-                    $(row).find('td:eq(5)').css({'color': '#a94442', 'font-weight': 'bold'});
+                    $(row).find('td:eq(4)').css({'color': '#a94442', 'font-weight': 'bold'});
 
-                $(row).find('td:eq(5) .btn-success').attr("href", BASEPATH+"admin/product-edit/"+data.slug);
+                $(row).find('td:eq(4) .btn-success').attr("href", BASEPATH+"admin/product-edit/"+data.slug);
                 
                 var del_path = BASEPATH+'admin/product/product_delete/'+data.slug;
                 if(data.status == 'Active')
-                    $(row).find('td:eq(5) .btn-danger').attr("onclick", "onDeleteConfirm('"+del_path+"')");
+                    $(row).find('td:eq(4) .btn-danger').attr("onclick", "onDeleteConfirm('"+del_path+"')");
                 else
-                    $(row).find('td:eq(5) .btn-danger').remove();
+                    $(row).find('td:eq(4) .btn-danger').remove();
             },
             "columns": [
                 { "data": "name", "visible": false }, 
                 { "data": "name" },
                 { "data": "sku" },
-                { "data": "quantity" },
                 { "data": "price" },
                 { "data": "status"},
                 { "data":null, "defaultContent":"<a href='' class='btn btn-success' title='Edit'>Edit</a>&nbsp;<a href='javscript:void(0)' class='btn btn-danger' title='Delete'>Delete</a>"}
@@ -76,7 +85,7 @@
         });
 
         $("#add_size_btn").click(function(){
-            var str = '<div class="row mb-12" style="margin-bottom:10px;"><div class="col-lg-4"><input type="text" class="form-control" name="size[]" placeholder="Size in cm" required></div><div class="col-lg-4"><input type="text" class="form-control" name="quantity[]" placeholder="Quantity" required></div><div class="col-lg-4"><button type="button" class="btn btn-danger btn-circle"><i class="fa fa-times"></i></button></div></div>';
+            var str = $("#sizeelm").html();
             
             $("#container_size").append(str).find("button.btn-circle").addClass("btn-remove").attr("mode", "add");
             $("#container_size").find("input:text").prop('required',true);
@@ -86,13 +95,12 @@
             var me = $(this);            
 
             if(me.attr('mode') == 'edit'){
-                $.post(BASEPATH+"admin/product/product_attribute_delete", {product_attribute_id: me.attr('key')}, function(data){
+                $.post(BASEPATH+"admin/product/product_size_delete", {product_size_id: me.attr('key')}, function(data){
                     if(data.trim() == 'success'){
                         me.parent().parent().remove();
 
-                        if($("#container").html().trim() == ''){
-                            $("#attrelm").removeClass("hidden");
-                            $("#attrelm").find("input:text").prop('required',true);
+                        if($("#container_size").html().trim() == ''){
+                            $("#sizeelm").show();
                         }
                     }
                 });
@@ -108,7 +116,7 @@
             $("#container").find("input:text").prop('required',true);
         });
 
-        $(document).on("click", ".btn-remove", function(){
+        $(document).on("click", "#container .btn-remove", function(){
             var me = $(this);            
 
             if(me.attr('mode') == 'edit'){
