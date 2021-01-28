@@ -215,16 +215,15 @@ $(document).ready(function() {
                 }
             },
             submitHandler: function (form) { 
-                $("#place_order_btn").prop("disabled", true);
+                $("#place_order_btn").prop("disabled", true).html('<i class="fa fa-refresh fa-spin" aria-hidden="true"></i> Processing...');
                 $.post(BASEPATH+"cart/before_place_order", function(data){
                     var res = JSON.parse(data);
 
                     if(res.status){     
-                    return false; 
                         $.post(BASEPATH+"cart/make_order", {data: $(form).serialize()}, function(data){
                             var response = JSON.parse(data);
 
-                            $("#place_order_btn").prop("disabled", false);
+                            $("#place_order_btn").prop("disabled", false).html('<i class="fa fa-sign-in" aria-hidden="true"></i> Place Order');
                             if(response.status){                        
                                 if(response.hasOwnProperty('redirect')){
                                     window.location.href = response.redirect;
@@ -264,7 +263,23 @@ $(document).ready(function() {
         });
     }
 
+    sessionStorage.setItem('selected_size', '');
+
 });
+
+function checkSize(arg, slug, logged_in) {
+    $("#select_size_warn").hide();
+    var selected = arg.options[arg.selectedIndex].getAttribute('key');
+    sessionStorage.setItem('selected_size', arg.value);
+    var opt1 = '<div class="addtocartbuttonholder"><a class="add_to_cart_button quick_cart" onclick="addToCart(\''+slug+'\', \''+logged_in+'\', false);" title="Add to Cart" href="javascript:void(0);"><div class="add_cart_block ">Add to Cart</div> </a></div><a onclick="addToCart(\''+slug+'\', \''+logged_in+'\', true);" title="Buy Now" class="button quick_buy_button">Buy Now</a>';
+    var opt2 = '<span class="button out-of-stock_button">out of stock</span>';
+
+    if(selected == "out"){
+        $("#add-to-cart-block").html(opt2);
+    }else{
+        $("#add-to-cart-block").html(opt1);
+    }
+}
 
 function openModal(mode){
 	$.post(BASEPATH+"home/open_modal", {mode: mode}, function(data){
@@ -497,13 +512,21 @@ function remove_from_wishlist(product_id, is_logged_in){
     });
 }
 
-function addToCart(slug, is_logged_in, redirect){
+function addToCart(slug, is_logged_in, redirect, mode_qnty){    
+    if(mode_qnty == "2"){
+        if(sessionStorage.getItem('selected_size') == ''){
+            $("#select_size_warn").show();
+            return false;
+        }else{
+            $("#select_size_warn").hide();
+        }
+    }
     if(is_logged_in != "1"){
         openModal('login');
         return false;
     }
 
-    $.post(BASEPATH+"cart/add_to_cart", {data: slug}, function(data){
+    $.post(BASEPATH+"cart/add_to_cart", {data: slug, prd_size: sessionStorage.getItem('selected_size')}, function(data){
         var response = JSON.parse(data);
         if(response.status){
             $(".topCart").html(response.html);

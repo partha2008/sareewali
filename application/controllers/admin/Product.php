@@ -63,7 +63,6 @@
 		
 		public function add_product(){
 			$post_data = $this->input->post();
-			//echo "<pre>";print_r($post_data);die();
 
 			$search_item = $post_data['search_item'];
 			$attrname = $post_data['attrname'];
@@ -347,6 +346,7 @@
 				// size over quantity
 				if($mode_qnty == "2"){
 					if(!empty($size)){
+						$this->productdata->delete_product_size(array("product_id" => $product_id));
 						foreach ($size as $key => $value) {
 							if($value){
 								$data = array("product_id" => $product_id, "size" => $size[$key], "quantity" => $qnty[$key]);

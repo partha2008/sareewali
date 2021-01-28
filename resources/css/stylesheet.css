@@ -13807,13 +13807,23 @@ input[type="text"]#cus_measurement_name,  .my_account input[type="password"],  .
 .editadd {
 }
 .me_size_block {
-	float: right;
-	margin-bottom: -10px;
+	float: left;
+	/*margin-bottom: -10px;*/
 	position: relative;
-	bottom: -10px;
+	/*bottom: -10px;*/
+	
+}
+.me_size_block select {
+	outline: none;
 }
 .me_size_block a {
 	margin-left: 10px;
+}
+.select-size-warn {
+	font-size: 12px;
+    position: relative;
+    color: #eb1c35;
+    display: none;
 }
 .add_to_wishlist:hover .fa-heart-o::before {
 	content: "\f004";
@@ -13911,4 +13921,41 @@ input[type="text"]#cus_measurement_name,  .my_account input[type="password"],  .
 }
 .order_by_phone .ortitle {
 	text-decoration: none;
+}
+.images-box {
+	height: 450px; 
+	overflow-y: scroll; 
+	padding: 10px 5px; 
+	max-width: 100%; 
+	text-align: center; 
+}
+
+.images-box-upper {
+	margin-top: 0px;
+    margin-bottom: 20px;
+    text-align: left;
+    color: #ffa500;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.images-box-mid {
+	text-align: center;
+	margin-top: 0px; 
+	margin-bottom: 20px;
+}
+
+.images-box-content h4 {
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+.images-box-content p {
+	color: rgb(102, 102, 102); 
+	line-height: 23px; 
+	text-align: justify;
+}
+
+.images-box-content p span{
+	font-weight: bold;
 }

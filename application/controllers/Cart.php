@@ -371,6 +371,7 @@
 
 
 			$slug = $post_data['data'];
+			$prd_size = $post_data['prd_size'];
 
 
 
@@ -397,19 +398,13 @@
 				$insert_data = array(
 
 					"prd_name" => $product_data[0]->name,
-
 					"prd_slug" => $product_data[0]->slug,
-
+					"prd_size" => $prd_size,
 					"prd_price" => $product_data[0]->price,
-
 					"prd_discounted_price" => $product_data[0]->discounted_price,
-
 					"prd_count" => 1,
-
 					"user_id" => $this->session->userdata('user_id'),
-
 					"product_id" => $product_data[0]->product_id
-
 				);
 
 				$this->cartdata->insert_cart($insert_data);
@@ -553,19 +548,38 @@
 
 					$product_data = $this->productdata->grab_product(array("slug" => $value->prd_slug));
 
-					if($product_data[0]->out_of_stock == "Y" || $product_data[0]->quantity == 0){
-						$this->cartdata->delete_cart(array("cart_id" => $value->cart_id));
+					if($product_data[0]->mode_qnty == "2"){
+						$prd_size_data = $this->productdata->grab_product_size(array("product_id" => $product_data[0]->product_id, "size" => $value->prd_size));
 
-						$msg = "The item(s) in the cart are out of stock";
-						$status = false;
-					}else{
-						if($value->prd_count > $product_data[0]->quantity){
-							$this->cartdata->update_cart_items(array("cart_id" => $value->cart_id), array("prd_count" => $product_data[0]->quantity));
+						if($product_data[0]->out_of_stock == "Y" || $prd_size_data[0]->quantity == 0){
+							$this->cartdata->delete_cart(array("cart_id" => $value->cart_id));
 
-							$msg = "The given quantity of item(s) not allowed in the cart";
+							$msg = "The item(s) in the cart are out of stock";
 							$status = false;
+						}else{
+							if($value->prd_count > $prd_size_data[0]->quantity){
+								$this->cartdata->delete_cart(array("cart_id" => $value->cart_id));
+
+								$msg = "The given quantity of item(s) not allowed in the cart";
+								$status = false;
+							}
+						}
+					}else{
+						if($product_data[0]->out_of_stock == "Y" || $product_data[0]->quantity == 0){
+							$this->cartdata->delete_cart(array("cart_id" => $value->cart_id));
+
+							$msg = "The item(s) in the cart are out of stock";
+							$status = false;
+						}else{
+							if($value->prd_count > $product_data[0]->quantity){
+								$this->cartdata->delete_cart(array("cart_id" => $value->cart_id));
+
+								$msg = "The given quantity of item(s) not allowed in the cart";
+								$status = false;
+							}
 						}
 					}
+					
 				}
 
 			}
@@ -584,11 +598,11 @@
 
 			$mode = $post_data['mode'];
 
-			$cart_id = $post_data['cart_id'];
-			$prd_slug = $post_data['prd_slug'];
+			$cart_id = $post_data['cart_id'];		
 
 
 			if($mode == "increase"){
+				$prd_slug = $post_data['prd_slug'];
 				$product_data = $this->productdata->grab_product(array("slug" => $prd_slug));
 				
 				$cart_data = $this->cartdata->grab_cart(array("cart_id" => $cart_id));
@@ -600,13 +614,25 @@
 					$response['out_of_stock'] = true;
 					$response['msg'] = 'The product is out of stock';
 				}else{
-					if($cart_data[0]->prd_count < $product_data[0]->quantity){
-						$this->cartdata->update_cart(array("cart_id" => $cart_id));
+					if($product_data[0]->mode_qnty == "2"){
+						$prd_size_data = $this->productdata->grab_product_size(array("product_id" => $product_data[0]->product_id, "size" => $cart_data[0]->prd_size));
+
+						if($cart_data[0]->prd_count < $prd_size_data[0]->quantity){
+							$this->cartdata->update_cart(array("cart_id" => $cart_id));
+						}else{
+							$cart_updated = false;
+							$response['out_of_stock'] = false;
+							$response['msg'] = 'We are sorry. Only '.$cart_data[0]->prd_count.' unit(s) allowed in each order';
+						}
 					}else{
-						$cart_updated = false;
-						$response['out_of_stock'] = false;
-						$response['msg'] = 'We are sorry. Only '.$cart_data[0]->prd_count.' unit(s) allowed in each order';
-					}
+						if($cart_data[0]->prd_count < $product_data[0]->quantity){
+							$this->cartdata->update_cart(array("cart_id" => $cart_id));
+						}else{
+							$cart_updated = false;
+							$response['out_of_stock'] = false;
+							$response['msg'] = 'We are sorry. Only '.$cart_data[0]->prd_count.' unit(s) allowed in each order';
+						}
+					}					
 				}
 			}elseif($mode == "decrease"){
 
@@ -1162,9 +1188,17 @@
 
 			if(!empty($cart_data)){
 
-				foreach ($cart_data as $key => $value) {
+				foreach ($cart_data as $key => $value) {					
+					$product_data = $this->productdata->grab_product(array("product_id" => $value->product_id));
+
 					// update product count
-					$this->db->query("UPDATE ".TABLE_PRODUCT." SET quantity=quantity-$value->prd_count WHERE product_id = " . $value->product_id );
+					if($product_data[0]->mode_qnty == "2"){
+						$prd_size_data = $this->productdata->grab_product_size(array("product_id" => $value->product_id, "size" => $value->prd_size));
+
+						$this->db->query("UPDATE ".TABLE_PRODUCT_SIZE." SET quantity=quantity-$value->prd_count WHERE product_id = " . $value->product_id . " AND size = ". $value->prd_size );
+					}else{
+						$this->db->query("UPDATE ".TABLE_PRODUCT." SET quantity=quantity-$value->prd_count WHERE product_id = " . $value->product_id );
+					}					
 
 					$this->cartdata->delete_cart(array("cart_id" => $value->cart_id));
 

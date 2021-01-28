@@ -78,7 +78,16 @@
 			$state_data = $this->defaultdata->grabStateData(array("country_id" => 101));
 			$this->data['state_data'] = $state_data;
 
+			$this->data['review_modal'] = $this->load->view('partials/review_modal', $this->data, true);
+
 			$this->data['breadcrumb'] = $this->breadcrumb->output();
+
+			$prd_sizes = $this->productdata->grab_product_size(array("product_id" => $product[0]->product_id));
+
+			$this->data['prd_sizes'] = $prd_sizes;
+
+			$this->data['how_to_measure'] = $this->load->view('partials/how_to_measure');
+			$this->data['size_chart'] = $this->load->view('partials/size_chart');
 
 			$this->load->view('product_details', $this->data); 
 		}
