@@ -104,6 +104,17 @@ class Productdata extends CI_Model {
 		return $query->result();
 	}
 
+	public function grab_selected_product_entity($cond = array()){	
+		$this->db->select(TABLE_ENTITY.'.slug')
+         ->from(TABLE_ENTITY)
+         ->join(TABLE_PRODUCT_ENTITY, TABLE_ENTITY.'.entity_id = '.TABLE_PRODUCT_ENTITY.'.entity_id')
+         ->where($cond);
+		
+		$query = $this->db->get();
+		
+		return $query->result();
+	}
+
 	public function grab_product_attribute($cond = array()){	
 		$this->db->select(TABLE_ATTRIBUTE.'.name, '.TABLE_PRODUCT_ATTRIBUTE.'.unit, '.TABLE_PRODUCT_ATTRIBUTE.'.value, '.TABLE_PRODUCT_ATTRIBUTE.'.product_attribute_id')
          ->from(TABLE_ATTRIBUTE)

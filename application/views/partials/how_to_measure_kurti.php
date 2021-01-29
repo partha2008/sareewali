@@ -15,8 +15,10 @@
                   <p>2. Keep Measurement tape firm, but not tight.</p>
                   <p>3. Ask someone to assist you while taking measurement.</p>
                   <p><span>Bust:</span> Measure the fullest part of your bust while keeping the measurement tape a bit loose.</p>
-                  <p><span>Around Above Waist:</span> Measure it between the ribcage &amp; above the navel or at 15 inches from the shoulder point.</p>
-                  <p><span>Blouse Length:</span> Measure length from the shoulder point to your desired length like shown in the image</p>
+                  <p><span>Around Waist:</span> Measure it at the natural waistline (where you normally wear bottom)</p>
+                  <p><span>Around Hips:</span> Measure it around the widest part of hips.</p>
+                  <p><span>Length:</span> Measure it from shoulder to over bust and down to as long as you want.</p>
+                  <p><span>Bottom Length:</span> Measure it from the waist (where you normally wear bottom) downwards along the side to the heel.</p>
                 </div>
             </div>
         </div>

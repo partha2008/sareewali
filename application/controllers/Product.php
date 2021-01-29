@@ -86,8 +86,23 @@
 
 			$this->data['prd_sizes'] = $prd_sizes;
 
-			$this->data['how_to_measure'] = $this->load->view('partials/how_to_measure');
-			$this->data['size_chart'] = $this->load->view('partials/size_chart');
+			$prd_entity = $this->productdata->grab_selected_product_entity(array("product_id" => $product[0]->product_id));
+			if(!empty($prd_entity)){
+				foreach ($prd_entity as $key => $value) {
+					$prd_entity_arr[] = $value->slug;
+				}
+			}
+			if(in_array('sarees', $prd_entity_arr)){
+				$this->data['how_to_measure'] = $this->load->view('partials/how_to_measure');
+			}else{
+				$this->data['how_to_measure'] = $this->load->view('partials/how_to_measure_kurti');
+			}
+			
+			$this->data['size_chart'] = $this->load->view('partials/size_chart');			
+			
+			$this->data['more_collections'] = $this->load->view('partials/more_collections', $this->data, true);
+			$this->data['best_selling_products'] = $this->load->view('partials/best_selling_products', $this->data, true);
+			$this->data['product_details_tab'] = $this->load->view('partials/product_details_tab', $this->data, true);
 
 			$this->load->view('product_details', $this->data); 
 		}

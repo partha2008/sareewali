@@ -422,6 +422,42 @@
 											</label>
 
 										</div>
+										<hr />
+										<div class="form-group">
+
+											<fieldset class="col-md-12 scheduler-border">    	
+
+												<legend class="scheduler-border">For SEO</legend>
+
+												<div class="form-group">
+
+													<label class="control-label">Title</label>
+
+													<input class="form-control" type="text" name="title" placeholder="Enter Title" value="<?php echo (isset($product_details->title) && $product_details->title) ? $product_details->title : '';?>">
+
+												</div>
+												<div class="form-group">
+
+													<label class="control-label">Meta Description</label>
+
+													<textarea class="form-control" name="meta_desc" placeholder="Enter Meta Description"><?php echo (isset($product_details->meta_desc) && $product_details->meta_desc) ? $product_details->meta_desc : '';?></textarea>
+
+												</div>
+												<div class="form-group">
+
+													<label class="control-label">Meta Keywords</label>
+
+													<textarea class="form-control" name="meta_key" placeholder="Enter Meta Keywords"><?php echo (isset($product_details->meta_key) && $product_details->meta_key) ? $product_details->meta_key : '';?></textarea>
+
+												</div>
+
+												
+
+																	
+
+											</fieldset>	
+
+										</div>
 
 										<input type="hidden" id="upload_image" name="upload_image" value="">
 

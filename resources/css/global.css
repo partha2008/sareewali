@@ -5134,6 +5134,8 @@ a:focus {
 	background-position: 10px center;
 
 	background-repeat: no-repeat;
+	width: 230px;
+    border-radius: 5px;
 
 }
 

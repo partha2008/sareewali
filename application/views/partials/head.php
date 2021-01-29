@@ -7,8 +7,15 @@
 <meta charset="utf-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
+<?php
+	if($tot_segments[1] == 'product-details'){
+?>
+<meta name="description" content="Free Web tutorials">
+<meta name="keywords" content="HTML, CSS, JavaScript">
 <title><?php echo $general_settings->sitename;?></title>
+<?php
+}
+?>
 
 <link rel="shortcut icon" href="<?php echo base_url(); ?>/favicon.ico" type="image/x-icon">
 
