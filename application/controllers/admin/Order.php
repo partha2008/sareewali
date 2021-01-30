@@ -77,8 +77,16 @@ class Order extends CI_Controller{
 		$user = $this->userdata->grab_user_details(array("user_id" => $user_id));
 		$order_data = $this->orderdata->grab_order(array("order_id" => $order_id));
 		$cart_data = $this->orderdata->grab_order_details(array("order_id" => $order_id));
+
+		if(!empty($user)){
+			$first_name = $user[0]->first_name;
+			$user_email = $user[0]->email;
+		}else{
+			$first_name = $order_data[0]->first_name;
+			$user_email = $order_data[0]->email;
+		}
 		
-		$this->data['name'] = $user[0]->first_name;
+		$this->data['name'] = $first_name;
 		$this->data['cart_data'] = unserialize(json_decode($cart_data[0]->order_data));
 		$this->data['response'] = $order_data[0];
 		
@@ -87,7 +95,7 @@ class Order extends CI_Controller{
 		// send mail to user	
 		$mail_config = array(
 			"from" => $admin_profile->email,
-			"to" => array($user[0]->email),
+			"to" => array($user_email),
 			"subject" => $general_settings->sitename.": New Order",
 			"message" => $message
 		);
@@ -156,8 +164,15 @@ class Order extends CI_Controller{
 
 		$user = $this->userdata->grab_user_details(array("user_id" => $user_id));
 		$order_data = $this->orderdata->grab_order(array("order_id" => $order_id));
+		if(!empty($user)){
+			$first_name = $user[0]->first_name;
+			$user_email = $user[0]->email;
+		}else{
+			$first_name = $order_data[0]->first_name;
+			$user_email = $order_data[0]->email;
+		}
 		
-		$this->data['user_data'] = $user[0];
+		$this->data['first_name'] = $first_name;
 		$this->data['order_data'] = $order_data[0];
 		
 		$message = $this->load->view('admin/email_template/invoice', $this->data, true);
@@ -165,7 +180,7 @@ class Order extends CI_Controller{
 		// send mail to user	
 		$mail_config = array(
 			"from" => $admin_profile->email,
-			"to" => array($user[0]->email),
+			"to" => array($user_email),
 			"subject" => $general_settings->sitename.": Invoice for Order #".$order_data[0]->orderid,
 			"message" => $message,
 			"attachment" => UPLOAD_RELATIVE_INVOICE_PATH.$order_data[0]->invoice_name

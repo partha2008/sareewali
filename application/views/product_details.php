@@ -129,11 +129,11 @@
             if($product->out_of_stock == 'N' && $product->quantity > 0){
           ?>
           <div class="addtocartbuttonholder"> 
-            <a class="add_to_cart_button quick_cart" onclick="addToCart('<?php echo $product->slug;?>', '<?php echo $this->defaultdata->is_user_session_active();?>', false, '<?php echo $product->mode_qnty;?>');" title="Add to Cart" href="javascript:void(0);">
+            <a class="add_to_cart_button quick_cart" onclick="addToCart('<?php echo $product->slug;?>', '<?php echo $this->defaultdata->is_user_session_active();?>', 'false', '<?php echo $product->mode_qnty;?>');" title="Add to Cart" href="javascript:void(0);">
               <div class="add_cart_block ">Add to Cart</div>
             </a>
           </div>
-          <a onclick="addToCart('<?php echo $product->slug;?>', '<?php echo $this->defaultdata->is_user_session_active();?>', true, '<?php echo $product->mode_qnty;?>');" title="Buy Now" class="button quick_buy_button ">Buy Now</a> 
+          <a onclick="addToCart('<?php echo $product->slug;?>', '<?php echo $this->defaultdata->is_user_session_active();?>', 'true', '<?php echo $product->mode_qnty;?>');" title="Buy Now" class="button quick_buy_button ">Buy Now</a> 
           <?php
             }else{
           ?>
@@ -170,14 +170,15 @@
   <?php echo $best_selling_products;?>
 
 </div>
- <?php
-  if($product->mode_qnty == "2" && $product->out_of_stock != 'Y' && $product->quantity != 0){
-    echo $how_to_measure;
-    echo $size_chart;
-  }
-  ?>
+ 
 
   <?php echo $review_modal;?>
       
 <?php echo $footer; ?>
 <?php echo $foot; ?>
+<?php
+  if($product->mode_qnty == "2" && $product->out_of_stock != 'Y' && $product->quantity != 0){
+    echo $how_to_measure;
+    echo $size_chart;
+  }
+  ?>

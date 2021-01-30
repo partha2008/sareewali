@@ -51,8 +51,10 @@
 				if($this->defaultdata->is_user_session_active() == 0)
 
 				{
-
-					redirect(base_url());
+					
+					if(!$this->session->userdata('guest')){
+						redirect(base_url());
+					}
 
 				}else{
 
@@ -83,8 +85,13 @@
 			$this->data['breadcrumb'] = $this->breadcrumb->output();
 
 
-
-			$cart_data = $this->cartdata->grab_cart_image_list(array(TABLE_CART.".user_id" => $this->session->userdata('user_id'), TABLE_CART.".status" => "N", TABLE_PRODUCT_IMAGES.".is_featured" => "Y"));
+			if($this->defaultdata->is_user_session_active() == 0){
+				$cart_data = $this->cartdata->grab_cart_image_list(array(TABLE_CART.".user_id" => $this->session->userdata('guest'), TABLE_CART.".status" => "N", TABLE_PRODUCT_IMAGES.".is_featured" => "Y"));
+			
+			}else{
+				$cart_data = $this->cartdata->grab_cart_image_list(array(TABLE_CART.".user_id" => $this->session->userdata('user_id'), TABLE_CART.".status" => "N", TABLE_PRODUCT_IMAGES.".is_featured" => "Y"));
+			}
+			
 
 
 
@@ -106,7 +113,206 @@
 
 		}
 
+		public function add_to_cart(){
 
+			$post_data = $this->input->post();
+
+
+
+			$slug = $post_data['data'];
+			$prd_size = $post_data['prd_size'];
+
+
+
+			$product_data = $this->productdata->grab_product(array("slug" => $slug));
+
+			if($this->session->userdata('user_id')){
+				$cart_data = $this->cartdata->grab_cart(array("prd_slug" => $product_data[0]->slug, "user_id" => $this->session->userdata('user_id'), "status" => "N"));
+			}else{
+				if($this->session->userdata('guest')){
+					$cart_data = $this->cartdata->grab_cart(array("prd_slug" => $product_data[0]->slug, "user_id" => $this->session->userdata('guest'), "status" => "N"));
+				}
+			}
+
+			if(!empty($cart_data)){
+				if($this->session->userdata('user_id')){
+					$this->cartdata->update_cart(array("prd_slug" => $product_data[0]->slug, "user_id" => $this->session->userdata('user_id'), "status" => "N"));
+				}else{
+					if($this->session->userdata('guest')){
+						$this->cartdata->update_cart(array("prd_slug" => $product_data[0]->slug, "user_id" => $this->session->userdata('guest'), "status" => "N"));
+					}
+				}
+				
+
+
+
+				$response['status'] = true;
+
+				$response['data'] = $product_data[0]->name;
+
+				$response['msg'] = "The item has been updated successfully.";
+
+			}else{
+
+				if($this->defaultdata->is_user_session_active()){
+					$user_id = $this->session->userdata('user_id');
+				}else{
+					if(!$this->session->userdata('guest')){						
+						$this->session->set_userdata('guest', $this->defaultdata->getSha256Base64Hash(12));
+					}
+					$user_id = $this->session->userdata('guest');
+				}
+
+				$insert_data = array(
+
+					"prd_name" => $product_data[0]->name,
+					"prd_slug" => $product_data[0]->slug,
+					"prd_size" => $prd_size,
+					"prd_price" => $product_data[0]->price,
+					"prd_discounted_price" => $product_data[0]->discounted_price,
+					"prd_count" => 1,
+					"user_id" => $user_id,
+					"product_id" => $product_data[0]->product_id
+				);
+
+				$this->cartdata->insert_cart($insert_data);
+
+
+
+				$response['status'] = true;
+
+				$response['data'] = $product_data[0]->name;
+
+				$response['msg'] = "The item has been added successfully.";
+
+			}
+
+
+
+			$this->data['total_price'] = $this->get_cart_sub_total();
+
+			$this->data['count'] = $this->get_cart_item_count();
+
+
+
+			$response['html'] = $this->load->view('partials/cart', $this->data, true);
+
+
+
+			echo json_encode($response);			
+
+		}
+
+
+
+		public function get_cart_sub_total(){
+			if($this->defaultdata->is_user_session_active()){
+				$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
+			}else{
+				$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('guest'), "status" => "N"));
+			}
+
+
+
+			$sub_total = 0;
+
+			if(!empty($cart_data)){
+
+				foreach ($cart_data as $key => $value) {
+
+					if($value->prd_discounted_price > 0){
+
+		              	$total_price = $value->prd_discounted_price*$value->prd_count;
+
+		            }else{
+
+		              	$total_price = $value->prd_price*$value->prd_count;
+
+		            }
+
+					$sub_total += $total_price;
+
+				}
+
+			}
+
+
+
+			return $sub_total;
+
+		}
+
+
+
+		public function get_cart_grand_total(){
+			if($this->defaultdata->is_user_session_active()){
+				$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
+			}else{
+				$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('guest'), "status" => "N"));
+			}
+
+
+
+			$sub_total = 0;
+
+			if(!empty($cart_data)){
+
+				foreach ($cart_data as $key => $value) {
+
+					if($value->prd_discounted_price > 0){
+
+		              	$total_price = $value->prd_discounted_price*$value->prd_count;
+
+		            }else{
+
+		              	$total_price = $value->prd_price*$value->prd_count;
+
+		            }
+
+					$sub_total += $total_price;
+
+				}
+
+			}
+
+
+
+			$result = $sub_total - $this->get_discount_amount();
+
+
+
+			return $result;
+
+		}
+
+
+
+		public function get_cart_item_count(){
+			if($this->defaultdata->is_user_session_active()){
+				$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
+			}else{
+				$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('guest'), "status" => "N"));
+			}
+
+
+
+			$count = 0;
+
+			if(!empty($cart_data)){
+
+				foreach ($cart_data as $key => $value) {
+
+					$count ++;
+
+				}
+
+			}
+
+
+
+			return $count;
+
+		}
 
 		public function success(){			
 
@@ -213,115 +419,6 @@
 		}
 
 
-
-		/*
-
-		public function success(){
-
-			$orderId = $this->input->get('order_id');
-
-			if(isset($orderId) && $orderId){
-
-				$order_data = $this->orderdata->grab_order(array("orderid" => $orderId));
-
-				if(!empty($order_data)){
-
-					if($order_data[0]->status == 0){
-
-						$site_info = $this->config->item('site_info');
-
-
-
-					    $mg_api = $site_info['payment_api_key'];
-
-						$curl_post_url = $site_info['payment_order_status_api'];			
-
-						$merchantId = $site_info['merchantId'];
-
-
-
-						$ch = curl_init($curl_post_url);
-
-
-
-						curl_setopt($ch, CURLOPT_POSTFIELDS, array('orderId' => $orderId , 'merchantId' => $merchantId ));
-
-						curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-
-					    curl_setopt($ch, CURLOPT_USERPWD, $mg_api);
-
-
-
-						$result =  curl_exec($ch); 
-
-
-
-						if(curl_error($ch))
-
-						{
-
-						    $this->data['payment_status'] = false;
-
-							$this->data['msgTxt'] = curl_error($ch);
-
-						}else{
-
-							$response = json_decode($result, true);	
-
-							if($response['status'] == "CHARGED"){
-
-								$this->orderdata->update_order(array("orderid" => $orderId), array("status" => 1));
-
-
-
-								$this->order_email($order_data[0]->transaction_id, false);
-
-
-
-								$this->data['payment_status'] = true;
-
-								$this->data['msgTxt'] = "Order made successfully";
-
-								$this->data['transaction_id'] = $order_data[0]->transaction_id;
-
-							}else{
-
-								$this->data['payment_status'] = false;
-
-								$this->data['msgTxt'] = "Payment not successful";
-
-							}
-
-						}	
-
-						curl_close($ch);
-
-
-
-						$this->load->view('success', $this->data); 
-
-					}else{
-
-						redirect(base_url());
-
-					}
-
-				}else{
-
-					redirect(base_url());
-
-				}
-
-			}else{
-
-				redirect(base_url());
-
-			}
-
-		}*/
-
-
-
 		public function checkout(){	
 
 			$this->load->library('breadcrumb');
@@ -334,11 +431,15 @@
 
 			$this->data['breadcrumb'] = $this->breadcrumb->output();
 
+			if($this->session->userdata('user_id')){
+				$user = $this->userdata->grab_user_details(array("user_id" => $this->session->userdata('user_id')));
 
+				$this->data['user'] = $user[0];
+			}else{
+				$this->data['user'] = new stdClass();
+			}
 
-			$user = $this->userdata->grab_user_details(array("user_id" => $this->session->userdata('user_id')));
-
-			$this->data['user'] = $user[0];
+			
 
 
 
@@ -362,185 +463,14 @@
 
 		}
 
-
-
-		public function add_to_cart(){
-
-			$post_data = $this->input->post();
-
-
-
-			$slug = $post_data['data'];
-			$prd_size = $post_data['prd_size'];
-
-
-
-			$product_data = $this->productdata->grab_product(array("slug" => $slug));
-
-			$cart_data = $this->cartdata->grab_cart(array("prd_slug" => $product_data[0]->slug, "user_id" => $this->session->userdata('user_id'), "status" => "N"));
-
-
-
-			if(!empty($cart_data)){
-
-				$this->cartdata->update_cart(array("prd_slug" => $product_data[0]->slug, "user_id" => $this->session->userdata('user_id'), "status" => "N"));
-
-
-
-				$response['status'] = true;
-
-				$response['data'] = $product_data[0]->name;
-
-				$response['msg'] = "The item has been updated successfully.";
-
-			}else{
-
-				$insert_data = array(
-
-					"prd_name" => $product_data[0]->name,
-					"prd_slug" => $product_data[0]->slug,
-					"prd_size" => $prd_size,
-					"prd_price" => $product_data[0]->price,
-					"prd_discounted_price" => $product_data[0]->discounted_price,
-					"prd_count" => 1,
-					"user_id" => $this->session->userdata('user_id'),
-					"product_id" => $product_data[0]->product_id
-				);
-
-				$this->cartdata->insert_cart($insert_data);
-
-
-
-				$response['status'] = true;
-
-				$response['data'] = $product_data[0]->name;
-
-				$response['msg'] = "The item has been added successfully.";
-
-			}
-
-
-
-			$this->data['total_price'] = $this->get_cart_sub_total();
-
-			$this->data['count'] = $this->get_cart_item_count();
-
-
-
-			$response['html'] = $this->load->view('partials/cart', $this->data, true);
-
-
-
-			echo json_encode($response);			
-
-		}
-
-
-
-		public function get_cart_sub_total(){
-
-			$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
-
-
-
-			$sub_total = 0;
-
-			if(!empty($cart_data)){
-
-				foreach ($cart_data as $key => $value) {
-
-					if($value->prd_discounted_price > 0){
-
-		              	$total_price = $value->prd_discounted_price*$value->prd_count;
-
-		            }else{
-
-		              	$total_price = $value->prd_price*$value->prd_count;
-
-		            }
-
-					$sub_total += $total_price;
-
-				}
-
-			}
-
-
-
-			return $sub_total;
-
-		}
-
-
-
-		public function get_cart_grand_total(){
-
-			$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
-
-
-
-			$sub_total = 0;
-
-			if(!empty($cart_data)){
-
-				foreach ($cart_data as $key => $value) {
-
-					if($value->prd_discounted_price > 0){
-
-		              	$total_price = $value->prd_discounted_price*$value->prd_count;
-
-		            }else{
-
-		              	$total_price = $value->prd_price*$value->prd_count;
-
-		            }
-
-					$sub_total += $total_price;
-
-				}
-
-			}
-
-
-
-			$result = $sub_total - $this->get_discount_amount();
-
-
-
-			return $result;
-
-		}
-
-
-
-		public function get_cart_item_count(){
-
-			$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
-
-
-
-			$count = 0;
-
-			if(!empty($cart_data)){
-
-				foreach ($cart_data as $key => $value) {
-
-					$count ++;
-
-				}
-
-			}
-
-
-
-			return $count;
-
-		}
-
 		public function before_place_order(){
 			$status = true;
 			$msg = '';
-			$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
+			if($this->session->userdata('user_id')){
+				$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
+			}else{
+				$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('guest'), "status" => "N"));
+			}
 
 			if(!empty($cart_data)){
 
@@ -645,7 +575,12 @@
 			}
 
 			if($cart_updated){
-				$cart_data = $this->cartdata->grab_cart_image_list(array(TABLE_CART.".user_id" => $this->session->userdata('user_id'), TABLE_CART.".status" => "N", TABLE_PRODUCT_IMAGES.".is_featured" => "Y"));
+				if($this->defaultdata->is_user_session_active() == 0){
+					$cart_data = $this->cartdata->grab_cart_image_list(array(TABLE_CART.".user_id" => $this->session->userdata('guest'), TABLE_CART.".status" => "N", TABLE_PRODUCT_IMAGES.".is_featured" => "Y"));
+				}else{
+					$cart_data = $this->cartdata->grab_cart_image_list(array(TABLE_CART.".user_id" => $this->session->userdata('user_id'), TABLE_CART.".status" => "N", TABLE_PRODUCT_IMAGES.".is_featured" => "Y"));
+				}
+				
 
 			
 
@@ -822,6 +757,12 @@
 
 			}
 
+			if($this->session->userdata('user_id')){
+				$user_id = $this->session->userdata('user_id');
+			}else{
+				$user_id = $this->session->userdata('guest');
+			}
+
 			$data = array(
 
 				"transaction_id" => $transaction_id,
@@ -854,7 +795,7 @@
 
 				"payment_type" => $response['payment_type'],
 
-				"user_id" => $this->session->userdata('user_id'),
+				"user_id" => $user_id,
 
 				"status" => $status,
 
@@ -873,8 +814,11 @@
 				$this->orderdata->update_order(array("order_id" => $last_order_id), array("orderid" => $orderid));
 
 
-
-				$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
+				if($this->session->userdata('user_id')){
+					$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
+				}else{
+					$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('guest'), "status" => "N"));
+				}
 
 
 
@@ -996,136 +940,27 @@
 		}
 
 
-
-		/*public function make_payment($data, $order_id, $transaction_id){
-
-			$params = array();
-
-
-
-		    $params['order_id'] = $order_id;
-
-		    $params['amount'] = $this->defaultdata->parse_number($data['grand_total']);
-
-		    $params['return_url'] = base_url("success");
-
-		    $params['billing_address_first_name'] = $data['first_name'];
-
-		    $params['billing_address_last_name'] = $data['last_name'];
-
-			$params['customer_phone'] = $data['phone'];
-
-			$params['customer_email'] = $data['email'];	
-
-
-
-			$site_info = $this->config->item('site_info');
-
-		    $mg_api = $site_info['payment_api_key'];
-
-			$curl_post_url = $site_info['payment_order_api'];
-
-
-
-			$ch = curl_init();
-
-
-
-			curl_setopt ($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-
-			curl_setopt ($ch, CURLOPT_MAXREDIRS, 3);
-
-			curl_setopt ($ch, CURLOPT_FOLLOWLOCATION, false);
-
-			curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
-
-			curl_setopt ($ch, CURLOPT_VERBOSE, 0);
-
-			curl_setopt ($ch, CURLOPT_HEADER, 1);
-
-			curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, 10);
-
-			curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, 0);
-
-			curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 0);
-
-			curl_setopt ($ch, CURLOPT_USERPWD, $mg_api . ":");
-
-			curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
-
-			curl_setopt ($ch, CURLOPT_POST, true);
-
-			curl_setopt ($ch, CURLOPT_HEADER, false);
-
-			curl_setopt ($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-
-			curl_setopt ($ch, CURLOPT_URL, $curl_post_url);
-
-			curl_setopt ($ch, CURLOPT_POSTFIELDS, $params);
-
-			curl_setopt ($ch, CURLOPT_TIMEOUT, 0);
-
-			
-
-			$result = curl_exec($ch);
-
-
-
-			if(curl_error($ch))
-
-			{
-
-			    $res['status'] = false;
-
-				$res['msgTxt'] = curl_error($ch);
-
-			}else{
-
-				$response = json_decode($result, true);	
-
-				if($response['status'] == "CREATED"){
-
-					$weburl = $response['payment_links']['web'];
-
-
-
-					$res['status'] = true;
-
-					$res['msgTxt'] = "Order made successfully";
-
-					$res['text'] = $transaction_id;
-
-					$res['redirect'] = $weburl;
-
-				}else{
-
-					$res['status'] = false;
-
-					$res['msgTxt'] = "Order can not be made !";
-
-				}
-
-			}	
-
-
-
-			echo json_encode($res);
-
-
-
-			curl_close($ch);
-
-		}*/
-
-
-
 		public function create_email_template($response){
 
 			$general_settings = $this->data['general_settings'];
 
-			$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
+			if($this->session->userdata('user_id')){
+				$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
+			}else{
+				$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('guest'), "status" => "N"));
+			}
 
-			$user = $this->userdata->grab_user_details(array("user_id" => $this->session->userdata('user_id')));
+			if($this->session->userdata('user_id')){
+				$user = $this->userdata->grab_user_details(array("user_id" => $this->session->userdata('user_id')));
+
+				$user_fn = $user[0]->first_name;
+			}else{
+				$order_data = $this->orderdata->grab_order(array("user_id" => $this->session->userdata('guest')));
+
+				$user_fn = $order_data[0]->first_name;
+			}
+
+			
 
 
 
@@ -1151,7 +986,7 @@
 
 			
 
-			$this->data['name'] = $user[0]->first_name;
+			$this->data['name'] = $user_fn;
 
 			$this->data['cart_data'] = $cart_data;
 
@@ -1175,13 +1010,23 @@
 
 			$admin_profile = $this->data['admin_profile'];
 
+			if($this->session->userdata('user_id')){
+				$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
+			}else{
+				$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('guest'), "status" => "N"));
+			}
+
+			
+			if($this->session->userdata('user_id')){
+				$user = $this->userdata->grab_user_details(array("user_id" => $this->session->userdata('user_id')));
+				$user_email = $user[0]->email;
+			}else{
+				$order_data = $this->orderdata->grab_order(array("user_id" => $this->session->userdata('guest')));
+				$user_email = $order_data[0]->email;
+			}
 
 
-			$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
-
-
-
-			$user = $this->userdata->grab_user_details(array("user_id" => $this->session->userdata('user_id')));
+			
 
 
 			// empty cart table after successful transaction
@@ -1218,7 +1063,7 @@
 
 				"from" => $admin_profile->email,
 
-				"to" => array($user[0]->email),
+				"to" => array($user_email),
 
 				"subject" => $general_settings->sitename.": New Order",
 
@@ -1233,6 +1078,7 @@
 
 
 			$this->session->unset_userdata('current_order_email');
+			$this->session->unset_userdata('guest');
 
 
 

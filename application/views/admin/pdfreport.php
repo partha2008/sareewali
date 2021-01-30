@@ -114,7 +114,7 @@
 
 	$cart_data_html = '<table cellspacing="0" cellpadding="1" border="1">';
 	$cart_data_html .= '<thead>';
-	$cart_data_html .= '<tr><th align="center">Sl. No.</th><th align="center">Name</th><th align="center">Price</th><th align="center">Quantity</th><th align="center">Amount</th></tr>';
+	$cart_data_html .= '<tr><th align="center">Sl. No.</th><th align="center">Name</th><th align="center">Price</th><th align="center">Size</th><th align="center">Quantity</th><th align="center">Amount</th></tr>';
 	$cart_data_html .= '</thead>';
 	$cart_data_html .= '<tbody>';
 
@@ -127,7 +127,7 @@
             }
             $total_price = $price*$value->prd_count;
 
-			$cart_data_html .= '<tr><td align="center">'.($key+1).'</td><td align="center">'.$value->prd_name.'</td><td align="center">Rs. '.number_format($price, 2).'</td><td align="center">'.$value->prd_count.'</td><td align="center">Rs. '.number_format($total_price, 2).'</td></tr>';
+			$cart_data_html .= '<tr><td align="center">'.($key+1).'</td><td align="center">'.$value->prd_name.'</td><td align="center">Rs. '.number_format($price, 2).'</td><td align="center">'.$value->prd_size.'</td><td align="center">'.$value->prd_count.'</td><td align="center">Rs. '.number_format($total_price, 2).'</td></tr>';
 		}
 	}	
 	$cart_data_html .= '</tbody>';

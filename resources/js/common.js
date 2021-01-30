@@ -17,7 +17,17 @@ $(document).ready(function() {
                     $('#frmLogin .error').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert">&times;</a>' + response.msg + '</div>');
                     $('#frmLogin .error').show();
                 } else {
-                    location.reload(true);
+                    if(sessionStorage.getItem("slug")){
+                        addToCart(sessionStorage.getItem("slug"), sessionStorage.getItem("is_logged_in"), sessionStorage.getItem("redirect"), sessionStorage.getItem("mode_qnty"));
+                        sessionStorage.removeItem("slug");
+                        sessionStorage.removeItem("is_logged_in");
+                        sessionStorage.removeItem("redirect");
+                        sessionStorage.removeItem("mode_qnty");
+
+                        $('#loginModal').modal('hide');
+                    }else{
+                        location.reload(true);
+                    }                    
                 }
             },
         });
@@ -267,6 +277,17 @@ $(document).ready(function() {
 
 });
 
+function checkoutGuest(){
+    addToCart(sessionStorage.getItem("slug"), sessionStorage.getItem("is_logged_in"), sessionStorage.getItem("redirect"), sessionStorage.getItem("mode_qnty"));
+    
+    sessionStorage.removeItem("slug");
+    sessionStorage.removeItem("is_logged_in");
+    sessionStorage.removeItem("redirect");
+    sessionStorage.removeItem("mode_qnty");
+
+    $('#loginModal').modal('hide');
+}
+
 function checkSize(arg, slug, logged_in) {
     $("#select_size_warn").hide();
     var selected = arg.options[arg.selectedIndex].getAttribute('key');
@@ -281,10 +302,13 @@ function checkSize(arg, slug, logged_in) {
     }
 }
 
-function openModal(mode){
+function openModal(mode, flag=false){
 	$.post(BASEPATH+"home/open_modal", {mode: mode}, function(data){
-		$("#loginform").html(data);
+		$("#loginform").html(data);        
 		$('#loginModal').modal('show');
+        if(flag){
+            $("#loginform #checkout_guest").show();
+        }
 	});
 }
 
@@ -512,7 +536,7 @@ function remove_from_wishlist(product_id, is_logged_in){
     });
 }
 
-function addToCart(slug, is_logged_in, redirect, mode_qnty){    
+function addToCart(slug, is_logged_in, redirect, mode_qnty){
     if(mode_qnty == "2"){
         if(sessionStorage.getItem('selected_size') == ''){
             $("#select_size_warn").show();
@@ -521,8 +545,13 @@ function addToCart(slug, is_logged_in, redirect, mode_qnty){
             $("#select_size_warn").hide();
         }
     }
-    if(is_logged_in != "1"){
-        openModal('login');
+    if(is_logged_in != "1"){      
+        sessionStorage.setItem("slug", slug);
+        sessionStorage.setItem("is_logged_in", "1");
+        sessionStorage.setItem("redirect", redirect);
+        sessionStorage.setItem("mode_qnty", mode_qnty);
+
+        openModal('login', true);
         return false;
     }
 
@@ -537,8 +566,10 @@ function addToCart(slug, is_logged_in, redirect, mode_qnty){
                 closeOnClickOutside: false,
                 closeOnEsc: false
             }).then((willDelete) => {
-                if(redirect){
+                if(redirect == "true"){
                     window.location.href = BASEPATH+"cart";
+                }else{
+                    location.reload();
                 }
             });
         }

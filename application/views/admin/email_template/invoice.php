@@ -16,7 +16,7 @@
 
 
 <div style=" display:block; max-width:80%; clear:both; padding:15px 0px 0px 0px; margin:0px auto;">
-<h1 style="width:100%; padding:0px 0px 30px 0px; margin:0px; color:#e4097f; font-size:22px; font-weight:bold; clear:both;"><?php echo $user_data->first_name;?>, please find your invoice for order #<?php echo $order_data->orderid;?></h1>
+<h1 style="width:100%; padding:0px 0px 30px 0px; margin:0px; color:#e4097f; font-size:22px; font-weight:bold; clear:both;"><?php echo $first_name;?>, please find your invoice for order #<?php echo $order_data->orderid;?></h1>
 <div style="clear:both"></div>
 <div style=" width:100%; display:block;max-width:80%; clear:both; padding:55px 0px 32px 0px; margin:0 auto; background:url(<?php echo $boder;?>) no-repeat top center;">
 <div style="clear:both"></div>

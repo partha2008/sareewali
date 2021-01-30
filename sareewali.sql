@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.9.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 30, 2021 at 11:20 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.2.28
+-- Host: localhost:3306
+-- Generation Time: Jan 30, 2021 at 01:25 PM
+-- Server version: 5.6.49-cll-lve
+-- PHP Version: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sareewali`
+-- Database: `sareewali_new`
 --
 
 -- --------------------------------------------------------
@@ -147,9 +147,7 @@ INSERT INTO `saree_attribute` (`attribute_id`, `name`) VALUES
 (12, 'top length'),
 (13, 'dupatta length'),
 (14, 'bottom'),
-(15, 'bottom length'),
-(16, '12'),
-(17, 'test');
+(15, 'bottom length');
 
 -- --------------------------------------------------------
 
@@ -217,27 +215,9 @@ CREATE TABLE `saree_cart` (
   `prd_discounted_price` int(11) NOT NULL,
   `prd_count` int(11) NOT NULL,
   `status` enum('Y','N') NOT NULL DEFAULT 'N',
-  `user_id` int(11) NOT NULL,
+  `user_id` varchar(255) NOT NULL,
   `product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `saree_cart`
---
-
-INSERT INTO `saree_cart` (`cart_id`, `prd_name`, `prd_slug`, `prd_size`, `prd_price`, `prd_discounted_price`, `prd_count`, `status`, `user_id`, `product_id`) VALUES
-(3, 'KVA00002', 'kva00002', 0, 9999, 0, 6, 'N', 5, 4),
-(6, 'Jamdani Blue Color', 'jamdani-blue-color', 0, 1800, 0, 1, 'N', 1, 11),
-(7, 'Jamdani Punch Color', 'jamdani-punch-color', 0, 1800, 0, 9, 'N', 5, 10),
-(8, 'KVA00001', 'kva00001', 0, 9999, 8999, 1, 'N', 5, 1),
-(11, 'Jamdani Blue Color', 'jamdani-blue-color', 0, 1800, 1620, 2, 'N', 5, 11),
-(18, 'Jamdani Red', 'jamdani', 0, 1800, 1602, 1, 'N', 6, 6),
-(19, 'KVA00002', 'kva00002', 0, 9999, 7999, 1, 'N', 7, 4),
-(26, 'Jamdani Sky Blue and white Color', 'jamdani-sky-blue-and-white-color', 0, 1800, 1656, 1, 'N', 5, 7),
-(29, 'Brilliant Embroidery Work Purse', 'brilliant-embroidery-work-purse', 0, 999, 749, 1, 'N', 5, 13),
-(56, 'Outstanding Embroidery Work Purse', 'outstanding-embroidery-work-purse', 0, 999, 799, 2, 'N', 10, 12),
-(58, 'Chanderi Hand Print with multi color, Unstitched Suit (SKU- KSV00017)', 'chanderi-hand-print-with-multi-color-unstitched-suit-sku-ksv00017', 0, 1299, 0, 9, 'N', 3, 88),
-(66, 'Lovely Embroidery Work Clutch Black Red', 'lovely-embroidery-work-clutch-black-red', 32, 499, 399, 1, 'N', 2, 34);
 
 -- --------------------------------------------------------
 
@@ -667,7 +647,7 @@ CREATE TABLE `saree_entity` (
 
 INSERT INTO `saree_entity` (`entity_id`, `name`, `description`, `image_path`, `slug`, `level`, `parent_id`, `sort_order`, `is_special`, `status`, `date_added`, `date_modified`) VALUES
 (1, 'Root', '', '', 'slug', 0, 0, 0, 'N', 'N', 0, 0),
-(2, 'Saree', '', '3ba8e9c1da7a3cfd6dc9dd4d2b905463.jpg', 'sarees', 1, 1, 2, 'N', 'Y', 1534599110, 1605432706),
+(2, 'Saree', '', '3ba8e9c1da7a3cfd6dc9dd4d2b905463.jpg', 'sarees', 1, 1, 2, 'N', 'Y', 1534599110, 1611944636),
 (3, 'Handloom Saree', '', '', 'occasion', 2, 2, 0, 'N', 'N', 1534599194, 1565843106),
 (4, 'New', '', '5de622dbd73af2e2502198a895d1fe20.jpg', 'new', 1, 1, 1, 'N', 'Y', 1534784575, 1595401224),
 (5, 'Salwar Kameez', '', 'f8d1b99d081d8c46df742595e124b18d.jpg', 'salwar-kameez', 1, 1, 4, 'N', 'N', 1534784652, 1565843116),
@@ -717,12 +697,12 @@ INSERT INTO `saree_entity_attribute` (`entity_attribute_id`, `entity_id`, `attr_
 (127, 16, 10),
 (128, 16, 4),
 (129, 9, 6),
-(154, 2, 5),
-(155, 2, 1),
-(156, 2, 2),
-(157, 2, 3),
-(158, 2, 4),
-(159, 2, 6);
+(166, 2, 5),
+(167, 2, 1),
+(168, 2, 2),
+(169, 2, 3),
+(170, 2, 4),
+(171, 2, 6);
 
 -- --------------------------------------------------------
 
@@ -869,147 +849,12 @@ CREATE TABLE `saree_order` (
   `invoice_generated` enum('Y','N') NOT NULL DEFAULT 'N',
   `invoice_name` varchar(255) NOT NULL,
   `invoice_generated_on` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_id` varchar(255) NOT NULL,
   `status` int(11) NOT NULL,
-  `order_status` int(11) NOT NULL DEFAULT 1 COMMENT '1: Received, 2: Processed, 3: Dispatched, 4: Delivered, 5: Cancelled',
+  `order_status` int(11) NOT NULL DEFAULT '1' COMMENT '1: Received, 2: Processed, 3: Dispatched, 4: Delivered, 5: Cancelled',
   `date_added` int(11) NOT NULL,
   `date_modified` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `saree_order`
---
-
-INSERT INTO `saree_order` (`order_id`, `orderid`, `transaction_id`, `first_name`, `last_name`, `email`, `phone`, `address1`, `address2`, `city`, `post_code`, `country_id`, `state_id`, `sub_total`, `discount`, `grand_total`, `payment_type`, `invoice_generated`, `invoice_name`, `invoice_generated_on`, `user_id`, `status`, `order_status`, `date_added`, `date_modified`) VALUES
-(1, 'SW-001', 'UA72DGmo', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '17,998.20', '1,799.82', '16,198.38', 'cod', 'Y', 'INV-001.pdf', 1550082326, 2, 0, 3, 1547758162, 1549917369),
-(2, 'SW-002', 'pPbLMB7lAzVf', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '19,998.00', '0.00', '19,998.00', 'cod', 'N', '', 0, 2, 0, 1, 1552902004, 0),
-(3, 'SW-003', 'TUB9Jcb3fRsK', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA108', 'Salt Lake', 'Kolkata', '700106', 101, 41, '2,699.10', '0.00', '2,699.10', 'cod', 'Y', 'INV-003.pdf', 1553401157, 3, 0, 1, 1553401067, 0),
-(4, 'SW-004', 'e2PANnDFCt6s', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'Kolkata', 'Salt Lake', 'Kol', '700098', 101, 41, '3,600.00', '0.00', '3,600.00', 'online', 'N', '', 0, 3, 0, 1, 1553401392, 0),
-(5, 'SW-005', 'mtszUJ6I3dwZ', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'Kolkata', 'Salt Lake', 'Kol', '700098', 101, 41, '1,800.00', '0.00', '1,800.00', 'online', 'N', '', 0, 3, 0, 1, 1553751873, 0),
-(6, 'SW-006', 'shACTziKwR8e', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '1,800.00', '0.00', '1,800.00', 'online', 'N', '', 0, 3, 0, 1, 1554594435, 0),
-(7, 'SW-007', 'VNf1I3htaeMx', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '1,800.00', '0.00', '1,800.00', 'online', 'N', '', 0, 3, 0, 1, 1555162857, 0),
-(8, 'SW-008', 'vZ7teckdWRUb', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '1,800.00', '0.00', '1,800.00', 'cod', 'N', '', 0, 2, 0, 1, 1555186143, 0),
-(9, 'SW-009', '7QgeApF2E0Lt', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '1,800.00', '0.00', '1,800.00', 'online', 'N', '', 0, 2, 0, 1, 1555271887, 0),
-(10, 'SW-010', 'UsiFze8mg3Np', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '1,800.00', '0.00', '1,800.00', 'cod', 'N', '', 0, 2, 1, 1, 1555271994, 0),
-(11, 'SW-011', '8BsexG35gMDd', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '1,800.00', '0.00', '1,800.00', 'cod', 'N', '', 0, 2, 1, 1, 1555272011, 0),
-(12, 'SW-012', '8TNDJpXsALwb', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '1,800.00', '0.00', '1,800.00', 'cod', 'N', '', 0, 2, 1, 1, 1555273037, 0),
-(13, 'SW-013', 'SFGuxylcq2s8', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '9,999.00', '0.00', '9,999.00', 'cod', 'N', '', 0, 2, 1, 1, 1555273426, 0),
-(14, 'SW-014', 'CXcW8Jab5y1d', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '1,800.00', '0.00', '1,800.00', 'cod', 'N', '', 0, 2, 1, 1, 1555274658, 0),
-(15, 'SW-015', 'XM1zGcgrpRYi', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '1,800.00', '0.00', '1,800.00', 'cod', 'N', '', 0, 2, 1, 1, 1555274702, 0),
-(16, 'SW-016', 'bILhvXjsMuUO', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '1,800.00', '0.00', '1,800.00', 'cod', 'N', '', 0, 2, 1, 1, 1555275204, 0),
-(17, 'SW-017', 'REIp8cKfTDiJ', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '1.00', '0.00', '1.00', 'online', 'N', '', 0, 3, 0, 1, 1555310278, 0),
-(18, 'SW-018', 'oCgBaxAijXfd', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '1.00', '0.00', '1.00', 'online', 'N', '', 0, 3, 0, 1, 1555310419, 0),
-(19, 'SW-019', 'J8yxDO1Zcumn', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '1.00', '0.00', '1.00', 'online', 'N', '', 0, 3, 0, 1, 1555310421, 0),
-(20, 'SW-020', 'ZPbVmGzH1WSp', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '1.00', '0.00', '1.00', 'online', 'N', '', 0, 3, 0, 1, 1555310542, 0),
-(21, 'SW-021', 'G0ZWkeCjXSOB', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '1.00', '0.00', '1.00', 'online', 'N', '', 0, 3, 0, 1, 1555311068, 0),
-(22, 'SW-022', 'Zvt1cBwSkq6Y', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '1.00', '0.00', '1.00', 'online', 'N', '', 0, 3, 0, 1, 1555311078, 0),
-(23, 'SW-023', 'OKcSBzUhwLPG', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '1.00', '0.00', '1.00', 'online', 'N', '', 0, 3, 0, 1, 1555394243, 0),
-(24, 'SW-024', 'hK37Ar2qBp9i', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '1.00', '0.00', '1.00', 'online', 'N', '', 0, 3, 0, 1, 1555394690, 0),
-(25, 'SW-025', 'fjM1bPgBQqDZ', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '1.00', '0.00', '1.00', 'online', 'N', '', 0, 3, 0, 1, 1555402209, 0),
-(26, 'SW-026', 'k4EU7b09P8Rs', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '1.00', '0.00', '1.00', 'online', 'N', '', 0, 3, 0, 1, 1555402413, 0),
-(27, 'SW-027', 'LzZpUJTW0sm4', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '1.00', '0.00', '1.00', 'online', 'N', '', 0, 3, 0, 1, 1555403093, 0),
-(28, 'SW-028', '8KoytOQAkE6w', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '1.00', '0.00', '1.00', 'online', 'N', '', 0, 3, 0, 1, 1555403191, 0),
-(29, 'SW-029', 'NMgbO9Kpd1jR', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '1.00', '0.00', '1.00', 'online', 'N', '', 0, 2, 1, 1, 1555430955, 0),
-(30, 'SW-030', 'SrWw20D19HCV', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '1.00', '0.00', '1.00', 'online', 'N', '', 0, 2, 1, 1, 1555432216, 0),
-(31, 'SW-031', 'B8yqwvJFNufW', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '1.00', '0.00', '1.00', 'online', 'N', '', 0, 3, 1, 1, 1555512883, 0),
-(32, 'SW-032', '1tBqOm9PynhV', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '3,600.00', '0.00', '3,600.00', 'cod', 'Y', 'INV-032.pdf', 1559586987, 3, 1, 1, 1559445519, 0),
-(33, 'SW-033', 'e35KonzB0DOp', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '1.00', '0.00', '1.00', 'online', 'N', '', 0, 3, 0, 1, 1559864082, 0),
-(34, 'SW-034', 'Gowt4z3lM95H', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '1,620.00', '0.00', '1,620.00', 'online', 'N', '', 0, 3, 0, 1, 1559984044, 0),
-(35, 'SW-035', 'uyobWsxM7kZE', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '1,620.00', '0.00', '1,620.00', 'online', 'N', '', 0, 3, 0, 1, 1560133326, 0),
-(36, 'SW-036', 'gdRCaLpmYBVO', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '1,620.00', '0.00', '1,620.00', 'online', 'N', '', 0, 3, 0, 1, 1560137719, 0),
-(37, 'SW-037', 'g0FDtHERN1Ph', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '1.00', '0.00', '1.00', 'online', 'N', '', 0, 3, 0, 1, 1560187414, 0),
-(38, 'SW-038', 'unR12gQKy0Ur', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '1.00', '0.00', '1.00', 'online', 'N', '', 0, 3, 0, 1, 1560303974, 0),
-(39, 'SW-039', 'odeaRF2pWGVh', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '1,602.00', '0.00', '1,602.00', 'online', 'N', '', 0, 3, 0, 1, 1560404915, 0),
-(40, 'SW-040', 'SYzmAdhrxZHD', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1561835368, 0),
-(41, 'SW-041', '2IhKvxHQrFDy', 'Sage of six', 'paths', 'kalpesh768@gmail.com', '9876543210', 'test', 'test', 'Mumbai', '400054', 101, 22, '1,602.00', '0.00', '1,602.00', 'online', 'N', '', 0, 6, 0, 1, 1561979746, 0),
-(42, 'SW-042', 'Ojgf3FPV2hv5', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1562007251, 0),
-(43, 'SW-043', 'AaHmCQbfzF7S', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1562007399, 0),
-(44, 'SW-044', 'FMlRntwj3mUJ', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1562007542, 0),
-(45, 'SW-045', 'tczY1L9sny2B', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1562007591, 0),
-(46, 'SW-046', '4bI0AFPdzO68', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1562007629, 0),
-(47, 'SW-047', 'z0i4YulBHE5p', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1562007670, 0),
-(48, 'SW-048', 'zV0rxEAiU4jv', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1562007703, 0),
-(49, 'SW-049', 'Z3kR1TU05VH6', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1562007763, 0),
-(50, 'SW-050', '93T0dhDuqsG7', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1562007830, 0),
-(51, 'SW-051', 'QOhPKodaLvAD', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1562007889, 0),
-(52, 'SW-052', 'ihQEmxYXGNtV', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1562007937, 0),
-(53, 'SW-053', 'rBHPvznZV2GR', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1562007965, 0),
-(54, 'SW-054', 'NFQacbk30elH', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1562007988, 0),
-(55, 'SW-055', 'MaPcnk0Hy8EJ', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1562008529, 0),
-(56, 'SW-056', '5yhIWBRGx3NJ', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1562008548, 0),
-(57, 'SW-057', 'x6hPjrosKdpN', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1562008704, 0),
-(58, 'SW-058', 'XF0S1MvUZWPO', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1562009427, 0),
-(59, 'SW-059', 'yMuzKCjm0RFB', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '3,222.00', '0.00', '3,222.00', 'online', 'N', '', 0, 3, 0, 1, 1562035931, 0),
-(60, 'SW-060', 'uvhLRSEa8g21', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1562091466, 0),
-(61, 'SW-061', 'D4ZcUVTYIuHh', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1562091682, 0),
-(62, 'SW-062', 'mBo3VFTPsEtJ', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1562091760, 0),
-(63, 'SW-063', 'K5Bdu7vV2lfm', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1562091804, 0),
-(64, 'SW-064', 'T46d8vlD3fBw', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1562091873, 0),
-(65, 'SW-065', 'geaMtiwkDLnS', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1562092079, 0),
-(66, 'SW-066', 'S80TpVgNMtCY', 'test', 'tester', 'kalpesh.chivilkar@avenues.info', '9876543210', 'test', '', 'Mumbai', '400054', 101, 22, '7,999.20', '0.00', '7,999.20', 'online', 'N', '', 0, 7, 0, 1, 1562320191, 0),
-(67, 'SW-067', 'VWwkftlY4mnS', 'test', 'tester', 'kalpesh.chivilkar@avenues.info', '9876543210', 'test', '', 'Mumbai', '400054', 101, 22, '7,999.20', '0.00', '7,999.20', 'online', 'N', '', 0, 7, 0, 1, 1562320792, 0),
-(68, 'SW-068', 'mf4p5cCxTqYH', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '1,620.00', '0.00', '1,620.00', 'online', 'N', '', 0, 3, 0, 1, 1562321786, 0),
-(69, 'SW-069', '8k0UEb2LBH1t', 'test', 'tester', 'kalpesh.chivilkar@avenues.info', '9876543210', 'test', '', 'Mumbai', '400054', 101, 22, '7,999.20', '0.00', '7,999.20', 'online', 'N', '', 0, 7, 0, 1, 1562322249, 0),
-(70, 'SW-070', 'j76heptRdmXJ', 'test', 'tester', 'kalpesh.chivilkar@avenues.info', '9876543210', 'hfghfghfghfgh', 'fghfghfgh', 'mumbai', '4000054', 101, 22, '7,999.20', '0.00', '7,999.20', 'online', 'N', '', 0, 7, 0, 1, 1562322675, 0),
-(71, 'SW-071', 'f7zMVKsr9Npb', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 0, 1, 1562353005, 0),
-(72, 'SW-072', 'XhtZHDCkaRUT', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '13,401.00', '0.00', '13,401.00', 'online', 'N', '', 0, 2, 1, 1, 1562353167, 0),
-(73, 'SW-073', '03wopfliGytc', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '1,656.00', '0.00', '1,656.00', 'online', 'N', '', 0, 2, 0, 1, 1562354752, 0),
-(74, 'SW-074', '6joQ1vJwl4ce', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '1,656.00', '0.00', '1,656.00', 'online', 'N', '', 0, 2, 1, 1, 1562354771, 0),
-(75, 'SW-075', 'BMw7tXc91N0K', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '1,620.00', '0.00', '1,620.00', 'online', 'N', '', 0, 2, 0, 1, 1562357560, 0),
-(76, 'SW-076', '8bcnO9HM5Sw4', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '699.30', '0.00', '699.30', 'online', 'N', '', 0, 3, 1, 1, 1562387933, 0),
-(77, 'SW-077', '7soIyLwfUY2q', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '699.30', '0.00', '699.30', 'online', 'N', '', 0, 3, 1, 1, 1562393045, 0),
-(78, 'SW-078', 'PcOB87Ko4Mwt', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '699.30', '0.00', '699.30', 'online', 'N', '', 0, 3, 0, 1, 1562458188, 0),
-(79, 'SW-079', 'dEr79KR0npX1', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '1,620.00', '0.00', '1,620.00', 'online', 'N', '', 0, 3, 1, 1, 1562510119, 0),
-(80, 'SW-080', 'KHcxYgOpbGS8', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '1,620.00', '0.00', '1,620.00', 'online', 'N', '', 0, 3, 1, 1, 1562543051, 0),
-(81, 'SW-081', 'SaxH4Bsrwh7d', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '1,620.00', '0.00', '1,620.00', 'online', 'N', '', 0, 3, 1, 1, 1562560780, 0),
-(82, 'SW-082', 'NRj59HzFlTMB', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '10.80', '0.00', '10.80', 'online', 'N', '', 0, 2, 0, 1, 1562586744, 0),
-(83, 'SW-083', 'SmAlwEqLyQNd', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '10.80', '0.00', '10.80', 'online', 'N', '', 0, 3, 1, 1, 1562593711, 0),
-(84, 'SW-084', '4NhJrVDBpdwQ', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '699.30', '0.00', '699.30', 'online', 'N', '', 0, 3, 0, 1, 1562668491, 0),
-(85, 'SW-085', 'Ts5lit4cMyg0', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '699.30', '0.00', '699.30', 'online', 'N', '', 0, 3, 0, 1, 1563010957, 0),
-(86, 'SW-086', '2RoxL7v16QY3', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '749.25', '0.00', '749.25', 'online', 'N', '', 0, 3, 0, 1, 1563024680, 0),
-(87, 'SW-087', 'uNbqm3t4wTGD', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '710', '0', '710', 'online', 'N', '', 0, 2, 0, 1, 1563308255, 0),
-(88, 'SW-088', 'BAp0DRchHber', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '710', '0', '710', 'online', 'N', '', 0, 2, 0, 1, 1563308403, 0),
-(89, 'SW-089', 'ULj5ngtkKzQP', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'Plot No. DC- 127, Street No.- 310', 'Newtown, Kolkata - 700156', 'Kolkata', '700156', 101, 41, '3104', '0', '3104', 'online', 'N', '', 0, 3, 0, 1, 1563593041, 0),
-(90, 'SW-090', 'vfOqaYLpik0Q', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '69999', '0', '69999', 'online', 'N', '', 0, 2, 0, 1, 1563649470, 0),
-(91, 'SW-091', 'gblQKXyUG40T', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '8451', '0', '8451', 'cod', 'N', '', 0, 3, 1, 1, 1563954023, 0),
-(92, 'SW-092', 'SAcmNgquHjB7', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '111293', '0', '111293', 'cod', 'N', '', 0, 3, 1, 1, 1563955050, 0),
-(93, 'SW-093', 'WvnJmEreB1zF', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '51602', '0', '51602', 'cod', 'N', '', 0, 3, 1, 1, 1564056193, 0),
-(94, 'SW-094', '8CT91GSxsRl2', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '749999', '0', '749999', 'online', 'N', '', 0, 3, 0, 1, 1564069028, 0),
-(95, 'SW-095', 'DGqi8lEOAQ7V', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '750398', '0', '750398', 'cod', 'Y', 'INV-095.pdf', 1575421418, 3, 1, 1, 1574457576, 0),
-(96, 'SW-096', '6VSztNWhOm9X', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '399', '0', '399', 'online', 'N', '', 0, 3, 0, 1, 1574457683, 0),
-(97, 'SW-097', 'OkVXzgxS27oD', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '399', '0', '399', 'online', 'N', '', 0, 3, 0, 1, 1574499517, 0),
-(98, 'SW-098', 'B5oKzOekb32S', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '1760', '0', '1760', 'online', 'N', '', 0, 2, 0, 1, 1575921931, 0),
-(99, 'SW-099', 'PxH5EJoU3WhO', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '798', '0', '798', 'online', 'N', '', 0, 3, 0, 1, 1575935688, 0),
-(100, 'SW-100', 'jWDYkNtSQG8w', 'Haridas', 'Pramanik', 'haridaspramanik@gmail.com', '08584061774', 'sdsd', '', 'kolkata', '43434', 55, 903, '1760', '0', '1760', 'cod', 'N', '', 0, 10, 1, 1, 1577392672, 0),
-(101, 'SW-101', 'j2tmMdTa4SXQ', 'Haridas', 'Pramanik', 'haridaspramanik@gmail.com', '08584061774', 'xcxcx', '', 'xcxcx', '3434343', 101, 15, '1598', '0', '1598', 'online', 'N', '', 0, 10, 0, 1, 1577392727, 0),
-(102, 'SW-102', 'i5ea8613wWZn', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '2159', '0', '2159', 'cod', 'N', '', 0, 3, 1, 1, 1584320053, 0),
-(103, 'SW-103', 'xmNwDuzSZTi5', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '798', '0', '798', 'online', 'N', '', 0, 3, 0, 1, 1584320076, 0),
-(104, 'SW-104', 'OH36q7xS2uBr', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '3118', '0', '3118', 'online', 'N', '', 0, 3, 0, 1, 1584350031, 0),
-(105, 'SW-105', 'HbPzQd1Isqxw', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '3520', '0', '3520', 'online', 'N', '', 0, 2, 0, 1, 1584355982, 0),
-(106, 'SW-106', 'AvGBmaHWkRlt', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '3520', '0', '3520', 'online', 'N', '', 0, 2, 0, 1, 1584358942, 0),
-(107, 'SW-107', 'bVU1q8Yse0kB', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '3517', '0', '3517', 'online', 'N', '', 0, 3, 0, 1, 1584362368, 0),
-(108, 'SW-108', 'ieHamAE4bRPr', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, '3916', '0', '3916', 'cod', 'N', '', 0, 3, 1, 1, 1591537695, 0),
-(109, 'SW-109', 'NkMwOcTSgdle', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '399', '0', '399', 'online', 'N', '', 0, 3, 0, 1, 1591537725, 0),
-(110, 'SW-110', 'hvtrms9U2FJR', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '2320', '0', '2320', 'online', 'N', '', 0, 3, 0, 1, 1594750007, 0),
-(111, 'SW-111', '6wic8JvoHUb3', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '20', '0', '20', 'online', 'N', '', 0, 3, 1, 1, 1595346173, 0),
-(112, 'SW-112', 'An9e28ySBMpd', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '20', '0', '20', 'online', 'N', '', 0, 3, 0, 1, 1595346897, 0),
-(113, 'SW-113', 'OY5dBDhMkbmr', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '20', '0', '20', 'cod', 'N', '', 0, 3, 1, 1, 1595388090, 0),
-(114, 'SW-114', 's6JoLnvMZue5', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '20', '0', '20', 'cod', 'N', '', 0, 3, 1, 1, 1595401592, 0),
-(115, 'SW-115', 'ZSLUDjzka3Xt', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '2320', '0', '2320', 'cod', 'N', '', 0, 3, 1, 1, 1596900085, 0),
-(116, 'SW-116', 'wlW07ouehfAn', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '799', '0', '799', 'online', 'N', '', 0, 3, 0, 1, 1599374034, 0),
-(117, 'SW-117', 'X7Zhi046PWGx', 'Mamta ', 'Singh ', 'mamtasingh0608@gmail.com', '9672602556', 'Jeevangeet colony ', '', 'Bulandshahr ', '203001 ', 101, 38, '699', '0', '699', 'cod', 'N', '', 0, 11, 1, 1, 1599413730, 0),
-(118, 'SW-118', 'ESIvu6F01hBJ', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '799', '0', '799', 'online', 'N', '', 0, 3, 0, 1, 1600730635, 0),
-(119, 'SW-119', '6t3XK84Yo7JO', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '799', '0', '799', 'cod', 'N', '', 0, 3, 1, 1, 1604073517, 0),
-(120, 'SW-120', 'BP2AVrH1DYFo', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '1299', '0', '1299', 'online', 'N', '', 0, 3, 0, 1, 1605433145, 0),
-(121, 'SW-121', 'HzyACUYwLS74', 'Santosh Kumar', 'Singh', 'santoshsingh3003@gmail.com', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 1, '1299', '0', '1299', 'online', 'N', '', 0, 3, 0, 1, 1610816231, 0),
-(122, 'SW-122', 'gb1RSw2EAs04', 'Shaswat', 'Jhunjhunwala', 'shaswatjjw@gmail.com', '9642597902', '7F Raja Santosh Road', '', 'Kolkata', '700027', 101, 41, '1760', '0', '1760', 'cod', 'Y', 'INV-122.pdf', 1611047709, 12, 1, 1, 1611047648, 0),
-(123, 'SW-123', 'In2FxKzOrqbc', 'Shaswat', 'Jhunjhunwala', 'shaswatjjw@gmail.com', '9642597902', '7F Raja Santosh Road', '', 'Kolkata', '700027', 101, 41, '40480', '0', '40480', 'cod', 'N', '', 0, 12, 1, 1, 1611047901, 0),
-(124, 'SW-124', 'SojveNDFrn8I', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '1760', '0', '1760', 'cod', 'Y', 'INV-124.pdf', 1611392438, 2, 1, 1, 1611392184, 0),
-(125, 'SW-125', 'sOuhHZoj0pCq', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '399', '0', '399', 'cod', 'N', '', 0, 2, 1, 1, 1611395818, 0),
-(126, 'SW-126', '9FhusnziPCDI', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '798', '0', '798', 'cod', 'N', '', 0, 2, 1, 1, 1611851408, 0),
-(127, 'SW-127', 'yF8hvEAr6pbx', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '399', '0', '399', 'cod', 'N', '', 0, 2, 1, 1, 1611858501, 0),
-(128, 'SW-128', 'WkiTv2IlQdKx', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '399', '0', '399', 'online', 'N', '', 0, 2, 0, 1, 1611859963, 0),
-(129, 'SW-129', '9zw1BSjiRQgP', 'Partha', 'Chowdhury', 'partha.freelancer.2015@gmail.com', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, '399', '0', '399', 'cod', 'N', '', 0, 2, 1, 1, 1611860471, 0);
 
 -- --------------------------------------------------------
 
@@ -1022,142 +867,6 @@ CREATE TABLE `saree_order_details` (
   `order_data` text NOT NULL,
   `order_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `saree_order_details`
---
-
-INSERT INTO `saree_order_details` (`order_detail_id`, `order_data`, `order_id`) VALUES
-(1, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00001\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00001\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"8999.10\\\";s:9:\\\"prd_count\\\";s:1:\\\"2\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"1\\\";}}\"', 1),
-(2, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"2\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}}\"', 2),
-(3, '\"a:2:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"2\\\";s:8:\\\"prd_name\\\";s:27:\\\"Aaina Check Buti Tant Saree\\\";s:8:\\\"prd_slug\\\";s:27:\\\"aaina-check-buti-tant-saree\\\";s:9:\\\"prd_price\\\";s:6:\\\"999.00\\\";s:20:\\\"prd_discounted_price\\\";s:6:\\\"899.10\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"5\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"3\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 3),
-(4, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"2\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 4),
-(5, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 5),
-(6, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 6),
-(7, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 7),
-(8, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"2\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}}\"', 8),
-(9, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}}\"', 9),
-(10, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}}\"', 10),
-(11, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}}\"', 11),
-(12, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}}\"', 12),
-(13, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"2\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}}\"', 13),
-(14, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"3\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}}\"', 14),
-(15, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 15),
-(16, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"5\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 16),
-(17, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"6\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"1.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 17),
-(18, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"6\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"1.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 18),
-(19, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"6\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"1.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 19),
-(20, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"6\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"1.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 20),
-(21, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"6\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"1.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 21),
-(22, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"6\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"1.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 22),
-(23, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"6\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"1.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 23),
-(24, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"6\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"1.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 24),
-(25, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"6\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"1.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 25),
-(26, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"6\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"1.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 26),
-(27, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"6\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"1.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 27),
-(28, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"6\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"1.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 28),
-(29, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"7\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"1.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 29),
-(30, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"8\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"1.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 30),
-(31, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"6\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"1.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 31),
-(32, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"9\\\";s:8:\\\"prd_name\\\";s:18:\\\"Jamdani Blue Color\\\";s:8:\\\"prd_slug\\\";s:18:\\\"jamdani-blue-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"2\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"11\\\";}}\"', 32),
-(33, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"12\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"1.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.90\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 33),
-(34, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"13\\\";s:8:\\\"prd_name\\\";s:18:\\\"Jamdani Blue Color\\\";s:8:\\\"prd_slug\\\";s:18:\\\"jamdani-blue-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1620.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"11\\\";}}\"', 34),
-(35, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"13\\\";s:8:\\\"prd_name\\\";s:18:\\\"Jamdani Blue Color\\\";s:8:\\\"prd_slug\\\";s:18:\\\"jamdani-blue-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1620.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"11\\\";}}\"', 35),
-(36, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"13\\\";s:8:\\\"prd_name\\\";s:18:\\\"Jamdani Blue Color\\\";s:8:\\\"prd_slug\\\";s:18:\\\"jamdani-blue-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1620.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"11\\\";}}\"', 36),
-(37, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"15\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"1.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.90\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 37),
-(38, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"15\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"1.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.90\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 38),
-(39, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"16\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 39),
-(40, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 40),
-(41, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"18\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"6\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 41),
-(42, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 42),
-(43, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 43),
-(44, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 44),
-(45, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 45),
-(46, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 46),
-(47, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 47),
-(48, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 48),
-(49, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 49),
-(50, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 50),
-(51, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 51),
-(52, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 52),
-(53, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 53),
-(54, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 54),
-(55, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 55),
-(56, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 56),
-(57, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 57),
-(58, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 58),
-(59, '\"a:2:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"16\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"19\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1620.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 59),
-(60, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 60),
-(61, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 61),
-(62, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 62),
-(63, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 63),
-(64, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 64),
-(65, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 65),
-(66, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"19\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"7999.20\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"7\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}}\"', 66),
-(67, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"19\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"7999.20\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"7\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}}\"', 67),
-(68, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"20\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1620.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 68),
-(69, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"19\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"7999.20\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"7\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}}\"', 69),
-(70, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"19\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"7999.20\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"7\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}}\"', 70);
-INSERT INTO `saree_order_details` (`order_detail_id`, `order_data`, `order_id`) VALUES
-(71, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 71),
-(72, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"1\\\";s:8:\\\"prd_name\\\";s:8:\\\"KVA00002\\\";s:8:\\\"prd_slug\\\";s:8:\\\"kva00002\\\";s:9:\\\"prd_price\\\";s:7:\\\"9999.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"4\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:1:\\\"4\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"0.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"17\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1602.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 72),
-(73, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"21\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1656.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}}\"', 73),
-(74, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"21\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1656.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}}\"', 74),
-(75, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"22\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:7:\\\"1800.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1620.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 75),
-(76, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"23\\\";s:8:\\\"prd_name\\\";s:31:\\\"Brilliant Embroidery Work Purse\\\";s:8:\\\"prd_slug\\\";s:31:\\\"brilliant-embroidery-work-purse\\\";s:9:\\\"prd_price\\\";s:6:\\\"999.00\\\";s:20:\\\"prd_discounted_price\\\";s:6:\\\"699.30\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"13\\\";}}\"', 76),
-(77, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"24\\\";s:8:\\\"prd_name\\\";s:31:\\\"Brilliant Embroidery Work Purse\\\";s:8:\\\"prd_slug\\\";s:31:\\\"brilliant-embroidery-work-purse\\\";s:9:\\\"prd_price\\\";s:6:\\\"999.00\\\";s:20:\\\"prd_discounted_price\\\";s:6:\\\"699.30\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"13\\\";}}\"', 77),
-(78, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"25\\\";s:8:\\\"prd_name\\\";s:33:\\\"Outstanding Embroidery Work Purse\\\";s:8:\\\"prd_slug\\\";s:33:\\\"outstanding-embroidery-work-purse\\\";s:9:\\\"prd_price\\\";s:6:\\\"999.00\\\";s:20:\\\"prd_discounted_price\\\";s:6:\\\"699.30\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"12\\\";}}\"', 78),
-(79, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"27\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:5:\\\"11.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1620.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 79),
-(80, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"28\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:5:\\\"11.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1620.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 80),
-(81, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"29\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:5:\\\"11.00\\\";s:20:\\\"prd_discounted_price\\\";s:7:\\\"1620.00\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 81),
-(82, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"23\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:5:\\\"12.00\\\";s:20:\\\"prd_discounted_price\\\";s:5:\\\"10.80\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 82),
-(83, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"24\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:5:\\\"12.00\\\";s:20:\\\"prd_discounted_price\\\";s:5:\\\"10.80\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 83),
-(84, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"25\\\";s:8:\\\"prd_name\\\";s:31:\\\"Brilliant Embroidery Work Purse\\\";s:8:\\\"prd_slug\\\";s:31:\\\"brilliant-embroidery-work-purse\\\";s:9:\\\"prd_price\\\";s:6:\\\"999.00\\\";s:20:\\\"prd_discounted_price\\\";s:6:\\\"699.30\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"13\\\";}}\"', 84),
-(85, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"25\\\";s:8:\\\"prd_name\\\";s:31:\\\"Brilliant Embroidery Work Purse\\\";s:8:\\\"prd_slug\\\";s:31:\\\"brilliant-embroidery-work-purse\\\";s:9:\\\"prd_price\\\";s:6:\\\"999.00\\\";s:20:\\\"prd_discounted_price\\\";s:6:\\\"699.30\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"13\\\";}}\"', 85),
-(86, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"28\\\";s:8:\\\"prd_name\\\";s:32:\\\"Enchanting Embroidery Work Purse\\\";s:8:\\\"prd_slug\\\";s:32:\\\"enchanting-embroidery-work-purse\\\";s:9:\\\"prd_price\\\";s:6:\\\"999.00\\\";s:20:\\\"prd_discounted_price\\\";s:6:\\\"749.25\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"16\\\";}}\"', 86),
-(87, '\"a:2:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"23\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:2:\\\"12\\\";s:20:\\\"prd_discounted_price\\\";s:2:\\\"11\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"37\\\";s:8:\\\"prd_name\\\";s:33:\\\"Outstanding Embroidery Work Purse\\\";s:8:\\\"prd_slug\\\";s:33:\\\"outstanding-embroidery-work-purse\\\";s:9:\\\"prd_price\\\";s:3:\\\"999\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"699\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:2:\\\"12\\\";}}\"', 87),
-(88, '\"a:2:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"23\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:2:\\\"12\\\";s:20:\\\"prd_discounted_price\\\";s:2:\\\"11\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"37\\\";s:8:\\\"prd_name\\\";s:33:\\\"Outstanding Embroidery Work Purse\\\";s:8:\\\"prd_slug\\\";s:33:\\\"outstanding-embroidery-work-purse\\\";s:9:\\\"prd_price\\\";s:3:\\\"999\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"699\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:2:\\\"12\\\";}}\"', 88),
-(89, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"39\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"1800\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"1656\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"40\\\";s:8:\\\"prd_name\\\";s:33:\\\"Outstanding Embroidery Work Purse\\\";s:8:\\\"prd_slug\\\";s:33:\\\"outstanding-embroidery-work-purse\\\";s:9:\\\"prd_price\\\";s:3:\\\"999\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"699\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"12\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"41\\\";s:8:\\\"prd_name\\\";s:31:\\\"Brilliant Embroidery Work Purse\\\";s:8:\\\"prd_slug\\\";s:31:\\\"brilliant-embroidery-work-purse\\\";s:9:\\\"prd_price\\\";s:3:\\\"999\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"749\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"13\\\";}}\"', 89),
-(90, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"43\\\";s:8:\\\"prd_name\\\";s:33:\\\"Outstanding Embroidery Work Purse\\\";s:8:\\\"prd_slug\\\";s:33:\\\"outstanding-embroidery-work-purse\\\";s:9:\\\"prd_price\\\";s:5:\\\"99999\\\";s:20:\\\"prd_discounted_price\\\";s:5:\\\"69999\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:2:\\\"12\\\";}}\"', 90),
-(91, '\"a:5:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"39\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"1800\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"1656\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"40\\\";s:8:\\\"prd_name\\\";s:33:\\\"Outstanding Embroidery Work Purse\\\";s:8:\\\"prd_slug\\\";s:33:\\\"outstanding-embroidery-work-purse\\\";s:9:\\\"prd_price\\\";s:3:\\\"999\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"699\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"12\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"41\\\";s:8:\\\"prd_name\\\";s:31:\\\"Brilliant Embroidery Work Purse\\\";s:8:\\\"prd_slug\\\";s:31:\\\"brilliant-embroidery-work-purse\\\";s:9:\\\"prd_price\\\";s:3:\\\"999\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"749\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"13\\\";}i:3;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"42\\\";s:8:\\\"prd_name\\\";s:30:\\\"Dazzling Embroidery Work Purse\\\";s:8:\\\"prd_slug\\\";s:30:\\\"dazzling-embroidery-work-purse\\\";s:9:\\\"prd_price\\\";s:3:\\\"999\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"749\\\";s:9:\\\"prd_count\\\";s:1:\\\"5\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"14\\\";}i:4;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"44\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:4:\\\"1800\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"1602\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 91),
-(92, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"45\\\";s:8:\\\"prd_name\\\";s:20:\\\"Jamdani Yellow Color\\\";s:8:\\\"prd_slug\\\";s:20:\\\"jamdani-yellow-color\\\";s:9:\\\"prd_price\\\";s:6:\\\"123659\\\";s:20:\\\"prd_discounted_price\\\";s:6:\\\"111293\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"9\\\";}}\"', 92),
-(93, '\"a:2:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"46\\\";s:8:\\\"prd_name\\\";s:30:\\\"Dazzling Embroidery Work Purse\\\";s:8:\\\"prd_slug\\\";s:30:\\\"dazzling-embroidery-work-purse\\\";s:9:\\\"prd_price\\\";s:5:\\\"99999\\\";s:20:\\\"prd_discounted_price\\\";s:5:\\\"50000\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"14\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"47\\\";s:8:\\\"prd_name\\\";s:11:\\\"Jamdani Red\\\";s:8:\\\"prd_slug\\\";s:7:\\\"jamdani\\\";s:9:\\\"prd_price\\\";s:4:\\\"1800\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"1602\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:1:\\\"6\\\";}}\"', 93),
-(94, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"48\\\";s:8:\\\"prd_name\\\";s:31:\\\"Brilliant Embroidery Work Purse\\\";s:8:\\\"prd_slug\\\";s:31:\\\"brilliant-embroidery-work-purse\\\";s:9:\\\"prd_price\\\";s:6:\\\"999999\\\";s:20:\\\"prd_discounted_price\\\";s:6:\\\"749999\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"13\\\";}}\"', 94),
-(95, '\"a:2:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"48\\\";s:8:\\\"prd_name\\\";s:31:\\\"Brilliant Embroidery Work Purse\\\";s:8:\\\"prd_slug\\\";s:31:\\\"brilliant-embroidery-work-purse\\\";s:9:\\\"prd_price\\\";s:6:\\\"999999\\\";s:20:\\\"prd_discounted_price\\\";s:6:\\\"749999\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"13\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"49\\\";s:8:\\\"prd_name\\\";s:39:\\\"Simple Embroidery Beige Coloured Clutch\\\";s:8:\\\"prd_slug\\\";s:39:\\\"simple-embroidery-beige-coloured-clutch\\\";s:9:\\\"prd_price\\\";s:3:\\\"499\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"399\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"30\\\";}}\"', 95),
-(96, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"51\\\";s:8:\\\"prd_name\\\";s:39:\\\"Simple Embroidery Beige Coloured Clutch\\\";s:8:\\\"prd_slug\\\";s:39:\\\"simple-embroidery-beige-coloured-clutch\\\";s:9:\\\"prd_price\\\";s:3:\\\"499\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"399\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"30\\\";}}\"', 96),
-(97, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"51\\\";s:8:\\\"prd_name\\\";s:39:\\\"Simple Embroidery Beige Coloured Clutch\\\";s:8:\\\"prd_slug\\\";s:39:\\\"simple-embroidery-beige-coloured-clutch\\\";s:9:\\\"prd_price\\\";s:3:\\\"499\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"399\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"30\\\";}}\"', 97),
-(98, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"52\\\";s:8:\\\"prd_name\\\";s:18:\\\"Jamdani Blue Color\\\";s:8:\\\"prd_slug\\\";s:18:\\\"jamdani-blue-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"2200\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"1760\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:2:\\\"11\\\";}}\"', 98),
-(99, '\"a:2:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"51\\\";s:8:\\\"prd_name\\\";s:39:\\\"Simple Embroidery Beige Coloured Clutch\\\";s:8:\\\"prd_slug\\\";s:39:\\\"simple-embroidery-beige-coloured-clutch\\\";s:9:\\\"prd_price\\\";s:3:\\\"499\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"399\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"30\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"53\\\";s:8:\\\"prd_name\\\";s:62:\\\"Golden Clutch with Classic Floral Embroidery Work Red and Blue\\\";s:8:\\\"prd_slug\\\";s:62:\\\"golden-clutch-with-classic-floral-embroidery-work-red-and-blue\\\";s:9:\\\"prd_price\\\";s:3:\\\"499\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"399\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"49\\\";}}\"', 99),
-(100, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"55\\\";s:8:\\\"prd_name\\\";s:32:\\\"Jamdani Sky Blue and white Color\\\";s:8:\\\"prd_slug\\\";s:32:\\\"jamdani-sky-blue-and-white-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"2200\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"1760\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:2:\\\"10\\\";s:10:\\\"product_id\\\";s:1:\\\"7\\\";}}\"', 100),
-(101, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"56\\\";s:8:\\\"prd_name\\\";s:33:\\\"Outstanding Embroidery Work Purse\\\";s:8:\\\"prd_slug\\\";s:33:\\\"outstanding-embroidery-work-purse\\\";s:9:\\\"prd_price\\\";s:3:\\\"999\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"799\\\";s:9:\\\"prd_count\\\";s:1:\\\"2\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:2:\\\"10\\\";s:10:\\\"product_id\\\";s:2:\\\"12\\\";}}\"', 101),
-(102, '\"a:2:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"54\\\";s:8:\\\"prd_name\\\";s:54:\\\"Adorable Embroidery work Red Purse Blue and Multicolor\\\";s:8:\\\"prd_slug\\\";s:54:\\\"adorable-embroidery-work-red-purse-blue-and-multicolor\\\";s:9:\\\"prd_price\\\";s:3:\\\"499\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"399\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"51\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"57\\\";s:8:\\\"prd_name\\\";s:18:\\\"Jamdani Blue Color\\\";s:8:\\\"prd_slug\\\";s:18:\\\"jamdani-blue-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"2200\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"1760\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"11\\\";}}\"', 102),
-(103, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"58\\\";s:8:\\\"prd_name\\\";s:45:\\\"Red Embroidery Clutch with Pink Flowers Green\\\";s:8:\\\"prd_slug\\\";s:45:\\\"red-embroidery-clutch-with-pink-flowers-green\\\";s:9:\\\"prd_price\\\";s:3:\\\"499\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"399\\\";s:9:\\\"prd_count\\\";s:1:\\\"2\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"59\\\";}}\"', 103),
-(104, '\"a:2:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"58\\\";s:8:\\\"prd_name\\\";s:45:\\\"Red Embroidery Clutch with Pink Flowers Green\\\";s:8:\\\"prd_slug\\\";s:45:\\\"red-embroidery-clutch-with-pink-flowers-green\\\";s:9:\\\"prd_price\\\";s:3:\\\"499\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"399\\\";s:9:\\\"prd_count\\\";s:1:\\\"2\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"59\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"59\\\";s:8:\\\"prd_name\\\";s:46:\\\"Enchanting Antique Brass Statue of Lord Ganesh\\\";s:8:\\\"prd_slug\\\";s:9:\\\"ganesh-ji\\\";s:9:\\\"prd_price\\\";s:4:\\\"2900\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"2320\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"60\\\";}}\"', 104),
-(105, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"52\\\";s:8:\\\"prd_name\\\";s:18:\\\"Jamdani Blue Color\\\";s:8:\\\"prd_slug\\\";s:18:\\\"jamdani-blue-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"2200\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"1760\\\";s:9:\\\"prd_count\\\";s:1:\\\"2\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:2:\\\"11\\\";}}\"', 105),
-(106, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"52\\\";s:8:\\\"prd_name\\\";s:18:\\\"Jamdani Blue Color\\\";s:8:\\\"prd_slug\\\";s:18:\\\"jamdani-blue-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"2200\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"1760\\\";s:9:\\\"prd_count\\\";s:1:\\\"2\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:2:\\\"11\\\";}}\"', 106),
-(107, '\"a:3:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"58\\\";s:8:\\\"prd_name\\\";s:45:\\\"Red Embroidery Clutch with Pink Flowers Green\\\";s:8:\\\"prd_slug\\\";s:45:\\\"red-embroidery-clutch-with-pink-flowers-green\\\";s:9:\\\"prd_price\\\";s:3:\\\"499\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"399\\\";s:9:\\\"prd_count\\\";s:1:\\\"2\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"59\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"59\\\";s:8:\\\"prd_name\\\";s:46:\\\"Enchanting Antique Brass Statue of Lord Ganesh\\\";s:8:\\\"prd_slug\\\";s:9:\\\"ganesh-ji\\\";s:9:\\\"prd_price\\\";s:4:\\\"2900\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"2320\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"60\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"60\\\";s:8:\\\"prd_name\\\";s:39:\\\"Simple Embroidery Beige Coloured Clutch\\\";s:8:\\\"prd_slug\\\";s:39:\\\"simple-embroidery-beige-coloured-clutch\\\";s:9:\\\"prd_price\\\";s:3:\\\"499\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"399\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"30\\\";}}\"', 107),
-(108, '\"a:4:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"58\\\";s:8:\\\"prd_name\\\";s:45:\\\"Red Embroidery Clutch with Pink Flowers Green\\\";s:8:\\\"prd_slug\\\";s:45:\\\"red-embroidery-clutch-with-pink-flowers-green\\\";s:9:\\\"prd_price\\\";s:3:\\\"499\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"399\\\";s:9:\\\"prd_count\\\";s:1:\\\"2\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"59\\\";}i:1;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"59\\\";s:8:\\\"prd_name\\\";s:46:\\\"Enchanting Antique Brass Statue of Lord Ganesh\\\";s:8:\\\"prd_slug\\\";s:9:\\\"ganesh-ji\\\";s:9:\\\"prd_price\\\";s:4:\\\"2900\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"2320\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"60\\\";}i:2;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"60\\\";s:8:\\\"prd_name\\\";s:39:\\\"Simple Embroidery Beige Coloured Clutch\\\";s:8:\\\"prd_slug\\\";s:39:\\\"simple-embroidery-beige-coloured-clutch\\\";s:9:\\\"prd_price\\\";s:3:\\\"499\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"399\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"30\\\";}i:3;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"61\\\";s:8:\\\"prd_name\\\";s:52:\\\"Beige Coloured Clutch with Red Floral Embroidery Red\\\";s:8:\\\"prd_slug\\\";s:52:\\\"beige-coloured-clutch-with-red-floral-embroidery-red\\\";s:9:\\\"prd_price\\\";s:3:\\\"499\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"399\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"40\\\";}}\"', 108),
-(109, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"62\\\";s:8:\\\"prd_name\\\";s:48:\\\"Yellow and Red Hand Purse with Floral Embroidery\\\";s:8:\\\"prd_slug\\\";s:48:\\\"yellow-and-red-hand-purse-with-floral-embroidery\\\";s:9:\\\"prd_price\\\";s:3:\\\"499\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"399\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"58\\\";}}\"', 109),
-(110, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"64\\\";s:8:\\\"prd_name\\\";s:46:\\\"Enchanting Antique Brass Statue of Lord Ganesh\\\";s:8:\\\"prd_slug\\\";s:9:\\\"ganesh-ji\\\";s:9:\\\"prd_price\\\";s:4:\\\"2900\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"2320\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"60\\\";}}\"', 110),
-(111, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"65\\\";s:8:\\\"prd_name\\\";s:27:\\\"Hand Sanitizer Sciinz 50 ml\\\";s:8:\\\"prd_slug\\\";s:12:\\\"sciinz-50-ml\\\";s:9:\\\"prd_price\\\";s:2:\\\"25\\\";s:20:\\\"prd_discounted_price\\\";s:2:\\\"20\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"64\\\";}}\"', 111),
-(112, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"66\\\";s:8:\\\"prd_name\\\";s:27:\\\"Hand Sanitizer Sciinz 50 ml\\\";s:8:\\\"prd_slug\\\";s:12:\\\"sciinz-50-ml\\\";s:9:\\\"prd_price\\\";s:2:\\\"25\\\";s:20:\\\"prd_discounted_price\\\";s:2:\\\"20\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"64\\\";}}\"', 112),
-(113, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"66\\\";s:8:\\\"prd_name\\\";s:27:\\\"Hand Sanitizer Sciinz 50 ml\\\";s:8:\\\"prd_slug\\\";s:12:\\\"sciinz-50-ml\\\";s:9:\\\"prd_price\\\";s:2:\\\"25\\\";s:20:\\\"prd_discounted_price\\\";s:2:\\\"20\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"64\\\";}}\"', 113),
-(114, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"67\\\";s:8:\\\"prd_name\\\";s:27:\\\"Hand Sanitizer Sciinz 50 ml\\\";s:8:\\\"prd_slug\\\";s:12:\\\"sciinz-50-ml\\\";s:9:\\\"prd_price\\\";s:2:\\\"25\\\";s:20:\\\"prd_discounted_price\\\";s:2:\\\"20\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"64\\\";}}\"', 114),
-(115, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"68\\\";s:8:\\\"prd_name\\\";s:46:\\\"Enchanting Antique Brass Statue of Lord Ganesh\\\";s:8:\\\"prd_slug\\\";s:9:\\\"ganesh-ji\\\";s:9:\\\"prd_price\\\";s:4:\\\"2900\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"2320\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"60\\\";}}\"', 115),
-(116, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"57\\\";s:8:\\\"prd_name\\\";s:87:\\\"Banarasi Chanderi Cotton Block Print, Katha Work, Off-White Green Brown Unstitched Suit\\\";s:8:\\\"prd_slug\\\";s:85:\\\"banarasi-chanderi-cotton-block-print-katha-work-off-white-green-brown-unstitched-suit\\\";s:9:\\\"prd_price\\\";s:3:\\\"799\\\";s:20:\\\"prd_discounted_price\\\";s:1:\\\"0\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"73\\\";}}\"', 116),
-(117, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"58\\\";s:8:\\\"prd_name\\\";s:71:\\\"Fancy Cotton Chanderi Block Print Off-White Brown Color Unstitched Suit\\\";s:8:\\\"prd_slug\\\";s:71:\\\"fancy-cotton-chanderi-block-print-off-white-brown-color-unstitched-suit\\\";s:9:\\\"prd_price\\\";s:3:\\\"699\\\";s:20:\\\"prd_discounted_price\\\";s:1:\\\"0\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:2:\\\"11\\\";s:10:\\\"product_id\\\";s:2:\\\"76\\\";}}\"', 117),
-(118, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"57\\\";s:8:\\\"prd_name\\\";s:87:\\\"Banarasi Chanderi Cotton Block Print, Katha Work, Off-White Green Brown Unstitched Suit\\\";s:8:\\\"prd_slug\\\";s:85:\\\"banarasi-chanderi-cotton-block-print-katha-work-off-white-green-brown-unstitched-suit\\\";s:9:\\\"prd_price\\\";s:3:\\\"799\\\";s:20:\\\"prd_discounted_price\\\";s:1:\\\"0\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"73\\\";}}\"', 118),
-(119, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"57\\\";s:8:\\\"prd_name\\\";s:87:\\\"Banarasi Chanderi Cotton Block Print, Katha Work, Off-White Green Brown Unstitched Suit\\\";s:8:\\\"prd_slug\\\";s:85:\\\"banarasi-chanderi-cotton-block-print-katha-work-off-white-green-brown-unstitched-suit\\\";s:9:\\\"prd_price\\\";s:3:\\\"799\\\";s:20:\\\"prd_discounted_price\\\";s:1:\\\"0\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"73\\\";}}\"', 119),
-(120, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"58\\\";s:8:\\\"prd_name\\\";s:69:\\\"Chanderi Hand Print with multi color, Unstitched Suit (SKU- KSV00017)\\\";s:8:\\\"prd_slug\\\";s:65:\\\"chanderi-hand-print-with-multi-color-unstitched-suit-sku-ksv00017\\\";s:9:\\\"prd_price\\\";s:4:\\\"1299\\\";s:20:\\\"prd_discounted_price\\\";s:1:\\\"0\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"88\\\";}}\"', 120),
-(121, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"58\\\";s:8:\\\"prd_name\\\";s:69:\\\"Chanderi Hand Print with multi color, Unstitched Suit (SKU- KSV00017)\\\";s:8:\\\"prd_slug\\\";s:65:\\\"chanderi-hand-print-with-multi-color-unstitched-suit-sku-ksv00017\\\";s:9:\\\"prd_price\\\";s:4:\\\"1299\\\";s:20:\\\"prd_discounted_price\\\";s:1:\\\"0\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"3\\\";s:10:\\\"product_id\\\";s:2:\\\"88\\\";}}\"', 121),
-(122, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"59\\\";s:8:\\\"prd_name\\\";s:19:\\\"Jamdani Punch Color\\\";s:8:\\\"prd_slug\\\";s:19:\\\"jamdani-punch-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"2200\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"1760\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:2:\\\"12\\\";s:10:\\\"product_id\\\";s:2:\\\"10\\\";}}\"', 122),
-(123, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"60\\\";s:8:\\\"prd_name\\\";s:18:\\\"Jamdani Blue Color\\\";s:8:\\\"prd_slug\\\";s:18:\\\"jamdani-blue-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"2200\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"1760\\\";s:9:\\\"prd_count\\\";s:2:\\\"23\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:2:\\\"12\\\";s:10:\\\"product_id\\\";s:2:\\\"11\\\";}}\"', 123),
-(124, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"52\\\";s:8:\\\"prd_name\\\";s:18:\\\"Jamdani Blue Color\\\";s:8:\\\"prd_slug\\\";s:18:\\\"jamdani-blue-color\\\";s:9:\\\"prd_price\\\";s:4:\\\"2200\\\";s:20:\\\"prd_discounted_price\\\";s:4:\\\"1760\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:2:\\\"11\\\";}}\"', 124),
-(125, '\"a:1:{i:0;O:8:\\\"stdClass\\\":9:{s:7:\\\"cart_id\\\";s:2:\\\"59\\\";s:8:\\\"prd_name\\\";s:54:\\\"Adorable Embroidery work Red Purse Blue and Multicolor\\\";s:8:\\\"prd_slug\\\";s:54:\\\"adorable-embroidery-work-red-purse-blue-and-multicolor\\\";s:9:\\\"prd_price\\\";s:3:\\\"499\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"399\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:2:\\\"51\\\";}}\"', 125),
-(126, '\"a:1:{i:0;O:8:\\\"stdClass\\\":10:{s:7:\\\"cart_id\\\";s:2:\\\"63\\\";s:8:\\\"prd_name\\\";s:39:\\\"Lovely Embroidery Work Clutch Black Red\\\";s:8:\\\"prd_slug\\\";s:39:\\\"lovely-embroidery-work-clutch-black-red\\\";s:8:\\\"prd_size\\\";s:2:\\\"32\\\";s:9:\\\"prd_price\\\";s:3:\\\"499\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"399\\\";s:9:\\\"prd_count\\\";s:1:\\\"2\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:2:\\\"34\\\";}}\"', 126),
-(127, '\"a:1:{i:0;O:8:\\\"stdClass\\\":10:{s:7:\\\"cart_id\\\";s:2:\\\"64\\\";s:8:\\\"prd_name\\\";s:39:\\\"Lovely Embroidery Work Clutch Black Red\\\";s:8:\\\"prd_slug\\\";s:39:\\\"lovely-embroidery-work-clutch-black-red\\\";s:8:\\\"prd_size\\\";s:2:\\\"32\\\";s:9:\\\"prd_price\\\";s:3:\\\"499\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"399\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:2:\\\"34\\\";}}\"', 127),
-(128, '\"a:1:{i:0;O:8:\\\"stdClass\\\":10:{s:7:\\\"cart_id\\\";s:2:\\\"65\\\";s:8:\\\"prd_name\\\";s:39:\\\"Lovely Embroidery Work Clutch Black Red\\\";s:8:\\\"prd_slug\\\";s:39:\\\"lovely-embroidery-work-clutch-black-red\\\";s:8:\\\"prd_size\\\";s:2:\\\"32\\\";s:9:\\\"prd_price\\\";s:3:\\\"499\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"399\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:2:\\\"34\\\";}}\"', 128),
-(129, '\"a:1:{i:0;O:8:\\\"stdClass\\\":10:{s:7:\\\"cart_id\\\";s:2:\\\"65\\\";s:8:\\\"prd_name\\\";s:39:\\\"Lovely Embroidery Work Clutch Black Red\\\";s:8:\\\"prd_slug\\\";s:39:\\\"lovely-embroidery-work-clutch-black-red\\\";s:8:\\\"prd_size\\\";s:2:\\\"32\\\";s:9:\\\"prd_price\\\";s:3:\\\"499\\\";s:20:\\\"prd_discounted_price\\\";s:3:\\\"399\\\";s:9:\\\"prd_count\\\";s:1:\\\"1\\\";s:6:\\\"status\\\";s:1:\\\"N\\\";s:7:\\\"user_id\\\";s:1:\\\"2\\\";s:10:\\\"product_id\\\";s:2:\\\"34\\\";}}\"', 129);
 
 -- --------------------------------------------------------
 
@@ -18448,7 +18157,7 @@ INSERT INTO `saree_product` (`product_id`, `name`, `description`, `note`, `slug`
 (8, 'Jamdani Black Color', '<ul>\r\n	<li>This elegantly designed Jamdani saree has floral and geometrical motifs woven all over it. The saree is of blue colour and the Jamdani work has been done with golden thread.</li>\r\n	<li>Fine detailing done all over the saree with woven border in golden colour thread.</li>\r\n	<li>This saree is a perfect buy for any party that is approaching. You can pair it with a golden blouse and golden heels.</li>\r\n	<li>A supplementary weft technique of weaving, in the Jamdani weave, the artistic motifs is produced by a non-structural weft in addition to the standard weft that holds the warp threads together. The standard weft creates a fine, sheer fabric while the supplementary weft with thicker threads adds the intricate patterns to it.<br />\r\n	&nbsp;</li>\r\n</ul>\r\n', '<ul>\r\n	<li>The first wash of the garment should always be Dry-Cleaned.</li>\r\n	<li>The shades may vary slightly from the colors displayed on your screen.</li>\r\n	<li>There might be slight color variation due to lightings &amp; flash while photo shoot.</li>\r\n	<li>The bright shade seen is the best closer view of fabric&#39;s colors.</li>\r\n</ul>\r\n', 'jamdani-black-color', 'FGS00004', 'Saree', 0, 9, 2200, 'Y', 'per', 20, 1760, 'N', 'Y', 1552714390, 1564173025, '', '', ''),
 (9, 'Jamdani Yellow Color', '<ul>\r\n	<li>Each supplementary weft motif in the Jamdani saree is added separately by hand by interlacing the weft threads into the warp with fine bamboo sticks using individual spools of thread.</li>\r\n	<li>The result is a myriad of vibrant patterns that appear to float on a shimmering surface.</li>\r\n	<li>This yellow coloured Jamdani saree is so pleasing to the eyes.</li>\r\n	<li>It has been woven with the same coloured cotton thread which gives a decent look to the saree. This saree will fit in for just any occasion.</li>\r\n	<li>The details have been done quite finely all over the cotton fabric. Explore our wide range of colourful Jamdani sarees and buy one as soon as possible.</li>\r\n</ul>\r\n', '<ul>\r\n	<li>The first wash of the garment should always be Dry-Cleaned.</li>\r\n	<li>The shades may vary slightly from the colors displayed on your screen.</li>\r\n	<li>There might be slight color variation due to lightings &amp; flash while photo shoot.</li>\r\n	<li>The bright shade seen is the best closer view of fabric&#39;s colors.</li>\r\n</ul>\r\n', 'jamdani-yellow-color', 'FGS00005', 'Saree', 0, 9, 2200, 'Y', 'per', 20, 1760, 'N', 'Y', 1552714598, 1564173426, '', '', ''),
 (10, 'Jamdani Punch Color', '<ul>\r\n	<li>Introducing the spectacular collection of designer patterns hot pink colour mixed resham silk Jamdani saree. This drape is thoroughly covered with geometric patterns and flowers, tribal motifs using silk thread. This makes the saree quite exclusive in nature.</li>\r\n	<li>Jamdani Sarees are mostly worn at the time of festivals, marriage party &amp; any special event that needs exclusive attire.</li>\r\n	<li>The silver colour embroidery on the pink saree gives an exclusive look to the product. You can match it with any silver coloured blouse.</li>\r\n	<li>Explore our wide range of Jamdani sarees and choose the colour of your choice.</li>\r\n</ul>\r\n', '<ul>\r\n	<li>The first wash of the garment should always be Dry-Cleaned.</li>\r\n	<li>The shades may vary slightly from the colors displayed on your screen.</li>\r\n	<li>There might be slight color variation due to lightings &amp; flash while photo shoot.</li>\r\n	<li>The bright shade seen is the best closer view of fabric&#39;s colors.</li>\r\n</ul>\r\n', 'jamdani-punch-color', 'FGS00006', 'Saree', 0, 9, 2200, 'Y', 'per', 20, 1760, 'N', 'Y', 1552715068, 1564173193, '', '', ''),
-(11, 'Jamdani Blue Color', '<ul>\r\n	<li>This elegantly designed Jamdani saree has floral and geometrical motifs woven all over it. The saree is of blue colour and the Jamdani work has been done with golden thread.</li>\r\n	<li>Fine detailing done all over the saree with woven border in golden colour thread.</li>\r\n	<li>This saree is a perfect buy for any party that is approaching. You can pair it with a golden blouse and golden heels.</li>\r\n	<li>A supplementary weft technique of weaving, in the Jamdani weave, the artistic motifs is produced by a non-structural weft in addition to the standard weft that holds the warp threads together. The standard weft creates a fine, sheer fabric while the supplementary weft with thicker threads adds the intricate patterns to it.</li>\r\n</ul>\r\n', '<ul>\r\n	<li>The first wash of the garment should always be Dry-Cleaned.</li>\r\n	<li>The shades may vary slightly from the colors displayed on your screen.</li>\r\n	<li>There might be slight color variation due to lightings &amp; flash while photo shoot.</li>\r\n	<li>The bright shade seen is the best closer view of fabric&#39;s colors.</li>\r\n</ul>\r\n', 'jamdani-blue-color', 'FGS00007', 'Saree', 0, 9, 2200, 'Y', 'per', 20, 1760, 'N', 'Y', 1552715401, 1611429860, '', '', ''),
+(11, 'Jamdani Blue Color', '<ul>\r\n	<li>This elegantly designed Jamdani saree has floral and geometrical motifs woven all over it. The saree is of blue colour and the Jamdani work has been done with golden thread.</li>\r\n	<li>Fine detailing done all over the saree with woven border in golden colour thread.</li>\r\n	<li>This saree is a perfect buy for any party that is approaching. You can pair it with a golden blouse and golden heels.</li>\r\n	<li>A supplementary weft technique of weaving, in the Jamdani weave, the artistic motifs is produced by a non-structural weft in addition to the standard weft that holds the warp threads together. The standard weft creates a fine, sheer fabric while the supplementary weft with thicker threads adds the intricate patterns to it.</li>\r\n</ul>\r\n', '<ul>\r\n	<li>The first wash of the garment should always be Dry-Cleaned.</li>\r\n	<li>The shades may vary slightly from the colors displayed on your screen.</li>\r\n	<li>There might be slight color variation due to lightings &amp; flash while photo shoot.</li>\r\n	<li>The bright shade seen is the best closer view of fabric&#39;s colors.</li>\r\n</ul>\r\n', 'jamdani-blue-color', 'FGS00007', 'Saree', 2, 7, 2200, 'Y', 'per', 20, 1760, 'N', 'Y', 1552715401, 1612002533, 'Jamdani Blue Color', 'Jamdani', 'Jamdami'),
 (12, 'Outstanding Embroidery Work Purse', '<ul>\r\n	<li>A hand purse is needed by almost all the women. How about a purse made from a perfectly eco-friendly material.</li>\r\n	<li>This purse is made from black coloured cotton cloth. The front of the bag has been embroidered with the floral designs and the images of birds sitting on the branches of tree.</li>\r\n	<li>The other part of the hand purse is kept simple with embroidered dots in red and yellow colours.</li>\r\n	<li>A plastic handle is attached to the bag which looks like a wooden.Explore our wide range of embroidery hand bags and choose the one that suits your requirements.</li>\r\n</ul>\r\n', '<ul>\r\n	<li>The first wash of the garment should always be Dry-Cleaned.</li>\r\n	<li>The shades may vary slightly from the colors displayed on your screen.</li>\r\n	<li>There might be slight color variation due to lightings &amp; flash while photo shoot.</li>\r\n	<li>The bright shade seen is the best closer view of fabric&#39;s colors.</li>\r\n</ul>\r\n', 'outstanding-embroidery-work-purse', 'EPMC0001', 'Embroidery Work Purse', 0, 5, 999, 'Y', 'per', 20, 799, 'N', 'Y', 1560445234, 1564158125, '', '', ''),
 (13, 'Brilliant Embroidery Work Purse', '<ul>\r\n	<li>The front portion of the bag has beautifully embroidered floral designs in red and yellow colours.</li>\r\n	<li>Apart from the main zip fastened to it, the bag also has a small pocket inside it.</li>\r\n	<li>The back portion of the bag is also embellished with the dotted embroidery in yellow and brown colours.</li>\r\n	<li>This trendy looking bag can be carried with style and elegance any where you go.</li>\r\n	<li>That suits your requirements.</li>\r\n</ul>\r\n', '<ul>\r\n	<li>The first wash of the garment should always be Dry-Cleaned.</li>\r\n	<li>The shades may vary slightly from the colors displayed on your screen.</li>\r\n	<li>There might be slight color variation due to lightings &amp; flash while photo shoot.</li>\r\n	<li>The bright shade seen is the best closer view of fabric&#39;s colors.</li>\r\n</ul>\r\n', 'brilliant-embroidery-work-purse', 'EPMC0002', 'Embroidery Work Purse', 0, 5, 999, 'Y', 'per', 20, 799, 'N', 'Y', 1560477779, 1564158093, '', '', ''),
 (14, 'Dazzling Embroidery Work Purse', '<ul>\r\n	<li>This beige coloured hand bag has been made from raw cotton cloth. The canvas material sewn inside it gives it a briefcase-like shape.</li>\r\n	<li>The front portion of the bag has beautifully embroidered floral designs in red and blue colours. Apart from the main zip fastened to it which extends almost up to the ends, the bag also has a small pocket inside it.</li>\r\n	<li>The back portion of the bag is also embellished with the dotted embroidery in red and white colours.</li>\r\n	<li>Explore our diverse range of embroidered purses and buy this trendy looking bag that can be carried with style and elegance any where you go.</li>\r\n</ul>\r\n', '<ul>\r\n	<li>The first wash of the garment should always be Dry-Cleaned.</li>\r\n	<li>The shades may vary slightly from the colors displayed on your screen.</li>\r\n	<li>There might be slight color variation due to lightings &amp; flash while photo shoot.</li>\r\n	<li>The bright shade seen is the best closer view of fabric&#39;s colors.</li>\r\n</ul>\r\n', 'dazzling-embroidery-work-purse', 'EPMC0003', 'Embroidery Work Purse', 0, 5, 999, 'Y', 'per', 20, 799, 'N', 'Y', 1560478099, 1564158073, '', '', ''),
@@ -18471,7 +18180,7 @@ INSERT INTO `saree_product` (`product_id`, `name`, `description`, `note`, `slug`
 (31, 'Butterfly Embroidery Design - Pretty Hand Purse', '<ul>\r\n	<li>Butterflies are among the beautiful creatures on earth which are loved by almost everyone.</li>\r\n	<li>The woman in the current time likes to wear the dresses with butterfly prints or patterns to love more pretty and attractive.</li>\r\n	<li>This beautiful butterfly embroidered cream coloured clutch is one of such articles that will be loved by every woman.</li>\r\n	<li>If you have a pretty purple dress and you want to complement it with a stylish clutch, then you must not miss this beautiful and attractive clutch for yourself.</li>\r\n</ul>\r\n', '<p>Wash</p>\r\n', 'butterfly-embroidery-design-pretty-hand-purse', 'EPMC0020', 'Embroidery Clutch', 0, 7, 499, 'Y', 'per', 20, 399, 'N', 'Y', 1565744456, 1566724596, '', '', ''),
 (32, 'Stunning Embroidery Work Clutch Red and Yellow', '<ul>\r\n	<li>This brown coloured hand clutch is adorned with beautiful embroidery on the front face.</li>\r\n	<li>The flowers have been embroidered in different colours such as red and yellow.</li>\r\n	<li>The colour of the hand purse is so elegant and simple that it can be carried almost anywhere you go.</li>\r\n	<li>On the back side of the purse small dots of red and yellow colours have been embroidered.</li>\r\n	<li>The embroidery done on the clutch purse speaks of the amazing art skills of our artists.</li>\r\n	<li>Buy this clutch which has beautifully embroidered flower buds and green leaves too.</li>\r\n</ul>\r\n', '<p>Dry Wash</p>\r\n', 'stunning-embroidery-work-clutch-red-and-yellow', 'EPMC0021', 'Embroidery Clutch', 0, 10, 499, 'Y', 'per', 20, 399, 'N', 'Y', 1566726142, 0, '', '', ''),
 (33, 'Attractive Embroidery Work Clutch Red Yellow', '<ul>\r\n	<li>This hand clutch will look perfect in your hands with any outfit, be it a saree or any other traditional wear.</li>\r\n	<li>The beige coloured clutch has a zip fastened to it on the top. It is quite spacious as a wallet to carry for any occasion.</li>\r\n	<li>The front portion of the clutch is embroidered with the designs of flowers of various shapes and kind.</li>\r\n	<li>The back portion has been embellished with embroidered dots of red and yellow colours.</li>\r\n	<li>Explore our wide range of hand purses available on mycraftsindia.com and choose the one of your choice.</li>\r\n</ul>\r\n', '<p>Dry Wash</p>\r\n', 'attractive-embroidery-work-clutch-red-yellow', 'EPMC0022', 'Embroidery Clutch', 0, 6, 499, 'Y', 'per', 20, 399, 'N', 'Y', 1566726702, 1566726735, '', '', ''),
-(34, 'Lovely Embroidery Work Clutch Black Red', '<ul>\r\n	<li>This black coloured clutch purse has been embroidered with large sized red colour flowers.</li>\r\n	<li>The embroidery has been accomplished with great skill by our talented artists.</li>\r\n	<li>A black coloured zip has been fastened to the top of the purse.</li>\r\n	<li>It is a spacious hand clutch which is a perfect product to buy for if you plan to go to a party.</li>\r\n	<li>The stylish and graceful look of the clutch is amazing to the eyes of the viewers.</li>\r\n	<li>The back portion of the clutch has been embroidered with dotted embroidery.</li>\r\n	<li>Explore our vast range of colourfully designed hand clutches at unbelievable prices.</li>\r\n</ul>\r\n', '<p>Dry Wash</p>\r\n', 'lovely-embroidery-work-clutch-black-red', 'EPMC0023', 'Embroidery Clutch', 2, 6, 499, 'Y', 'per', 20, 399, 'N', 'Y', 1566727220, 1612000524, 'rr', 'rrrr', 'rrrrr'),
+(34, 'Lovely Embroidery Work Clutch Black Red', '<ul>\r\n	<li>This black coloured clutch purse has been embroidered with large sized red colour flowers.</li>\r\n	<li>The embroidery has been accomplished with great skill by our talented artists.</li>\r\n	<li>A black coloured zip has been fastened to the top of the purse.</li>\r\n	<li>It is a spacious hand clutch which is a perfect product to buy for if you plan to go to a party.</li>\r\n	<li>The stylish and graceful look of the clutch is amazing to the eyes of the viewers.</li>\r\n	<li>The back portion of the clutch has been embroidered with dotted embroidery.</li>\r\n	<li>Explore our vast range of colourfully designed hand clutches at unbelievable prices.</li>\r\n</ul>\r\n', '<p>Dry Wash</p>\r\n', 'lovely-embroidery-work-clutch-black-red', 'EPMC0023', 'Embroidery Clutch', 0, 8, 499, 'Y', 'per', 20, 399, 'N', 'Y', 1566727220, 1566727251, '', '', ''),
 (35, 'Red Flower Embroidery Black Clutch', '<ul>\r\n	<li>Black &amp; red are the colours which just look fabulous in the prettiest form.</li>\r\n	<li>This black base clutch with red floral embroidery is perfectly evident of the complementary relation between red &amp; black.</li>\r\n	<li>You have to have this pretty purse in your collection to match with your black dress either in a day or night party.</li>\r\n	<li>This purse being available at a very reasonable price must not be missed.</li>\r\n</ul>\r\n', '<p>Dry Wash</p>\r\n', 'red-flower-embroidery-black-clutch', 'EPMC0024', 'Embroidery Clutch', 0, 5, 499, 'Y', 'per', 20, 399, 'N', 'Y', 1566727571, 1566752916, '', '', ''),
 (36, 'Captivating Embroidery Work Clutch Red and Green', '<ul>\r\n	<li>This white coloured hand clutch is a perfect match with all kinds of outfits.</li>\r\n	<li>You can use it while going to a party or carry it along with you on a casual trip.</li>\r\n	<li>Large sized flowers have been embroidered with red coloured threads of the finest quality.</li>\r\n	<li>Flower buds and the green leaves cover the entire space of the purse in the front.</li>\r\n	<li>The embroidery done on this clutch is of superior quality and skill and is done by the highly skilled artists working with us.</li>\r\n	<li>Explore our wide range of lovely and stylish hand clutches and place your order soon.</li>\r\n</ul>\r\n', '<p>Dry Wash</p>\r\n', 'captivating-embroidery-work-clutch-red-and-green', 'EPMC0025', 'Embroidery Clutch', 0, 6, 499, 'Y', 'per', 20, 399, 'N', 'Y', 1566785288, 1566785909, '', '', ''),
 (37, 'Wonderful Embroidery work Clutch Red and Purple', '<ul>\r\n	<li>This brown coloured hand clutch is adorned with beautiful embroidery on the front face.</li>\r\n	<li>The flowers have been embroidered in different colours such as red, yellow, and purple.</li>\r\n	<li>The colour of the hand purse is so elegant and simple that it can be carried almost anywhere you go.</li>\r\n	<li>On the back side of the purse small dots of red and yellow colours have been embroidered.</li>\r\n	<li>The embroidery done on the clutch purse speaks of the amazing art skills of our artists.</li>\r\n	<li>Buy this clutch which has beautifully embroidered flower buds and green leaves too.</li>\r\n</ul>\r\n', '<p>Dry Wash</p>\r\n', 'wonderful-embroidery-work-clutch-red-and-purple', 'EPMC0026', 'Embroidery Clutch', 0, 9, 499, 'Y', 'per', 20, 399, 'N', 'Y', 1566785426, 0, '', '', ''),
@@ -18526,9 +18235,7 @@ INSERT INTO `saree_product` (`product_id`, `name`, `description`, `note`, `slug`
 (85, 'Futaki Fancy Hand Work, Off-White and Blue Color, Unstitched Suit (SKU- KSV00018)', '<p><strong>Product Type : Suit (Unstitched)</strong></p>\r\n\r\n<p><strong>Top&nbsp;Material :</strong> Futaki&nbsp; Fancy</p>\r\n\r\n<p><strong>Dupatta&nbsp;Material :</strong> Chiffon</p>\r\n', '<p>Dry Clean</p>\r\n', 'futaki-fancy-hand-work-off-white-and-blue-color-unstitched-suit-sku-ksv00018', 'KSV00018', 'Top and Dupatta', 0, 20, 1599, 'N', 'flat', 0, 0, 'N', 'Y', 1601305505, 1601305961, '', '', ''),
 (86, 'Georgette Hand Work, Green, Red and Golden Color, Unstitched Suit (SKU- KSV00019)', '<p><strong>Product Type : Suit (Unstitched)</strong></p>\r\n\r\n<p><strong>Top&nbsp;Material :</strong> Georgette and Zari</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>Dupatta&nbsp;Material :</strong> Chiffon</p>\r\n', '<p>Dry Clean</p>\r\n', 'georgette-hand-work-green-red-and-golden-color-unstitched-suit-sku-ksv00019', 'KSV00019', 'Top Dupatta and Bottom', 0, 20, 2199, 'N', 'flat', 0, 0, 'N', 'Y', 1601305637, 1611502157, '', '', ''),
 (87, 'Futaki Fancy Hand Work Tie and Dye Dupatta, Off-White and Black Color, Unstitched Suit (SKU- KSV00020)', '<p><strong>Product Type : Suit (Unstitched)</strong></p>\r\n\r\n<p><strong>Top&nbsp;Material :</strong> Futaki Fancy Hand Work</p>\r\n\r\n<p><strong>Dupatta&nbsp;Material :</strong> Chiffon</p>\r\n', '<p>Dry Clean</p>\r\n', 'futaki-fancy-hand-work-tie-and-dye-dupatta-off-white-and-black-color-unstitched-suit-sku-ksv00020', 'KSV00020', 'Top and Dupatta', 0, 20, 1599, 'N', 'flat', 0, 0, 'N', 'Y', 1601305760, 1601306166, '', '', ''),
-(88, 'Chanderi Hand Print with multi color, Unstitched Suit (SKU- KSV00017)', '<p><strong>Product Type : Suit (Unstitched)</strong></p>\r\n\r\n<p><strong>Top&nbsp;Material :</strong> Chanderi Hand Print</p>\r\n\r\n<p><strong>Dupatta&nbsp;Material :</strong> Chiffon</p>\r\n', '<p>Dry Clean</p>\r\n', 'chanderi-hand-print-with-multi-color-unstitched-suit-sku-ksv00017', 'KSV00017', 'Top and Dupatta', 0, 20, 1299, 'N', 'flat', 0, 0, 'N', 'Y', 1601306505, 1611552355, '', '', ''),
-(89, 'partha-test', '<p>partha-test</p>\r\n', '<p>partha-test</p>\r\n', 'partha-test', 'partha-test', 'partha-test', 2, 0, 123, 'N', 'flat', 0, 0, 'N', 'N', 1611731793, 1611731793, '', '', ''),
-(90, 'sss1', '<p>sss</p>\r\n', '<p>ss</p>\r\n', 'sss', 'ssss', 'ss', 1, 12, 122, 'N', 'flat', 0, 0, 'N', 'Y', 1611949919, 1611950059, 'xx1', 'xxx1', 'xxxdfd111');
+(88, 'Chanderi Hand Print with multi color, Unstitched Suit (SKU- KSV00017)', '<p><strong>Product Type : Suit (Unstitched)</strong></p>\r\n\r\n<p><strong>Top&nbsp;Material :</strong> Chanderi Hand Print</p>\r\n\r\n<p><strong>Dupatta&nbsp;Material :</strong> Chiffon</p>\r\n', '<p>Dry Clean</p>\r\n', 'chanderi-hand-print-with-multi-color-unstitched-suit-sku-ksv00017', 'KSV00017', 'Top and Dupatta', 2, 20, 1299, 'N', 'flat', 0, 0, 'N', 'Y', 1601306505, 1611842654, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -18844,8 +18551,7 @@ INSERT INTO `saree_product_attribute` (`product_attribute_id`, `product_id`, `at
 (301, 87, 3, 'gm', '500'),
 (302, 88, 12, 'm', '2.5'),
 (303, 88, 13, 'm', '2.5'),
-(304, 88, 3, 'gm', '500'),
-(306, 90, 17, 'kg', 'd');
+(304, 88, 3, 'gm', '500');
 
 -- --------------------------------------------------------
 
@@ -18883,14 +18589,13 @@ CREATE TABLE `saree_product_category` (
 --
 
 INSERT INTO `saree_product_category` (`product_category_id`, `category_id`, `product_id`) VALUES
-(31, 2, 11),
-(30, 1, 11),
+(37, 2, 11),
+(36, 1, 11),
 (21, 4, 61),
 (19, 4, 60),
 (24, 4, 62),
 (26, 4, 63),
-(27, 5, 59),
-(33, 1, 90);
+(27, 5, 59);
 
 -- --------------------------------------------------------
 
@@ -18961,10 +18666,10 @@ INSERT INTO `saree_product_color` (`product_color_id`, `color_id`, `product_id`)
 (151, 2, 86),
 (130, 13, 87),
 (129, 5, 87),
-(157, 14, 88),
-(156, 7, 88),
-(155, 3, 88),
-(154, 2, 88);
+(177, 14, 88),
+(176, 7, 88),
+(175, 3, 88),
+(174, 2, 88);
 
 -- --------------------------------------------------------
 
@@ -18983,14 +18688,12 @@ CREATE TABLE `saree_product_colors` (
 --
 
 INSERT INTO `saree_product_colors` (`product_colors_id`, `colors_id`, `product_id`) VALUES
-(18, 3, 11),
-(17, 2, 11),
-(16, 1, 11),
+(27, 3, 11),
+(26, 2, 11),
+(25, 1, 11),
 (10, 2, 59),
 (11, 4, 59),
-(12, 5, 59),
-(29, 2, 34),
-(28, 1, 90);
+(12, 5, 59);
 
 -- --------------------------------------------------------
 
@@ -19097,6 +18800,9 @@ INSERT INTO `saree_product_entity` (`saree_product_entity_id`, `product_id`, `en
 (405, 33, 12),
 (406, 33, 9),
 (407, 33, 4),
+(411, 34, 12),
+(412, 34, 9),
+(413, 34, 4),
 (417, 35, 12),
 (418, 35, 9),
 (419, 35, 4),
@@ -19221,17 +18927,12 @@ INSERT INTO `saree_product_entity` (`saree_product_entity_id`, `product_id`, `en
 (769, 59, 4),
 (770, 59, 9),
 (771, 59, 12),
-(776, 11, 2),
-(777, 11, 8),
 (784, 86, 16),
 (785, 86, 4),
-(786, 88, 16),
-(787, 88, 4),
-(788, 89, 4),
-(814, 90, 2),
-(815, 34, 9),
-(816, 34, 4),
-(817, 34, 12);
+(798, 88, 16),
+(799, 88, 4),
+(804, 11, 2),
+(805, 11, 8);
 
 -- --------------------------------------------------------
 
@@ -19250,9 +18951,8 @@ CREATE TABLE `saree_product_fabric` (
 --
 
 INSERT INTO `saree_product_fabric` (`product_fabric_id`, `fabric_id`, `product_id`) VALUES
-(18, 2, 11),
-(17, 1, 11),
-(20, 1, 90);
+(24, 2, 11),
+(23, 1, 11);
 
 -- --------------------------------------------------------
 
@@ -19578,9 +19278,7 @@ INSERT INTO `saree_product_images` (`product_image_id`, `name`, `path`, `product
 (517, 'SangamKurti0019-1.jpg', 'uploads/product/SangamKurti0019-1.jpg', 86, '0edd9873-2d53-41f3-92b4-80d850948714', 1, 'Y', 'Y'),
 (518, 'SangamKurti0019-2.jpg', 'uploads/product/SangamKurti0019-2.jpg', 86, 'b59dbd52-8142-463f-bb71-22a890623e0c', 1, 'N', 'Y'),
 (519, 'SangamKurti0017-1.jpg', 'uploads/product/SangamKurti0017-1.jpg', 88, '710fb82d-a64c-4203-9964-0a49bf5ade19', 1, 'Y', 'Y'),
-(520, 'SangamKurti0017-2.jpg', 'uploads/product/SangamKurti0017-2.jpg', 88, 'f5efa25c-ac89-4e37-b5b6-4d3825eb6fc6', 1, 'N', 'Y'),
-(521, '68159.jpg', 'uploads/product/68159.jpg', 89, '6deba42c-15a3-4486-bbfd-c6c70e792157', 1, 'Y', 'Y'),
-(522, '68159.jpg', 'uploads/product/68159.jpg', 90, 'a17617c7-fd6b-4e98-9697-cebda5ec8251', 1, 'Y', 'Y');
+(520, 'SangamKurti0017-2.jpg', 'uploads/product/SangamKurti0017-2.jpg', 88, 'f5efa25c-ac89-4e37-b5b6-4d3825eb6fc6', 1, 'N', 'Y');
 
 -- --------------------------------------------------------
 
@@ -19622,7 +19320,7 @@ INSERT INTO `saree_product_material` (`product_material_id`, `material_id`, `pro
 (68, 19, 85),
 (76, 18, 86),
 (69, 19, 87),
-(77, 14, 88);
+(82, 14, 88);
 
 -- --------------------------------------------------------
 
@@ -19641,9 +19339,9 @@ CREATE TABLE `saree_product_occasion` (
 --
 
 INSERT INTO `saree_product_occasion` (`product_occasion_id`, `occasion_id`, `product_id`) VALUES
-(96, 3, 11),
-(95, 2, 11),
-(94, 1, 11),
+(129, 3, 11),
+(128, 2, 11),
+(127, 1, 11),
 (56, 2, 69),
 (66, 2, 70),
 (57, 2, 71),
@@ -19671,9 +19369,8 @@ INSERT INTO `saree_product_occasion` (`product_occasion_id`, `occasion_id`, `pro
 (106, 1, 86),
 (83, 3, 87),
 (82, 2, 87),
-(110, 3, 88),
-(109, 2, 88),
-(112, 1, 90);
+(120, 3, 88),
+(119, 2, 88);
 
 -- --------------------------------------------------------
 
@@ -19746,9 +19443,8 @@ INSERT INTO `saree_product_saree` (`product_saree_id`, `saree_id`, `product_id`)
 (52, 1, 85),
 (61, 1, 86),
 (53, 1, 87),
-(62, 1, 88),
-(56, 2, 59),
-(71, 1, 34);
+(67, 1, 88),
+(56, 2, 59);
 
 -- --------------------------------------------------------
 
@@ -19768,8 +19464,11 @@ CREATE TABLE `saree_product_size` (
 --
 
 INSERT INTO `saree_product_size` (`product_size_id`, `product_id`, `size`, `quantity`) VALUES
-(17, 34, 32, 8),
-(18, 34, 34, 0);
+(4, 88, 32, 9),
+(5, 88, 34, 10),
+(6, 88, 36, 9),
+(9, 11, 32, 8),
+(10, 11, 34, 8);
 
 -- --------------------------------------------------------
 
@@ -19788,9 +19487,8 @@ CREATE TABLE `saree_product_style` (
 --
 
 INSERT INTO `saree_product_style` (`product_style_id`, `style_id`, `product_id`) VALUES
-(18, 2, 11),
-(17, 1, 11),
-(20, 1, 90);
+(24, 2, 11),
+(23, 1, 11);
 
 -- --------------------------------------------------------
 
@@ -19816,7 +19514,7 @@ INSERT INTO `saree_product_tags` (`product_tag_id`, `tag_id`, `product_id`) VALU
 (145, 2, 8),
 (149, 2, 9),
 (147, 2, 10),
-(366, 2, 11),
+(389, 2, 11),
 (141, 2, 12),
 (140, 2, 13),
 (139, 2, 14),
@@ -19900,9 +19598,8 @@ INSERT INTO `saree_product_tags` (`product_tag_id`, `tag_id`, `product_id`) VALU
 (373, 1, 86),
 (356, 2, 87),
 (355, 1, 87),
-(376, 2, 88),
-(375, 1, 88),
-(378, 1, 90);
+(386, 2, 88),
+(385, 1, 88);
 
 -- --------------------------------------------------------
 
@@ -19944,10 +19641,9 @@ CREATE TABLE `saree_product_work` (
 --
 
 INSERT INTO `saree_product_work` (`product_work_id`, `work_id`, `product_id`) VALUES
-(19, 2, 11),
-(18, 1, 11),
-(15, 3, 59),
-(21, 1, 90);
+(25, 2, 11),
+(24, 1, 11),
+(15, 3, 59);
 
 -- --------------------------------------------------------
 
@@ -20073,7 +19769,7 @@ INSERT INTO `saree_settings` (`settings_id`, `sitename`, `siteaddress`, `logonam
 CREATE TABLE `saree_state` (
   `state_id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `country_id` int(11) NOT NULL DEFAULT 1
+  `country_id` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -24273,22 +23969,7 @@ CREATE TABLE `saree_users` (
 --
 
 INSERT INTO `saree_users` (`user_id`, `first_name`, `last_name`, `file_name`, `email`, `password`, `phone`, `address1`, `address2`, `city`, `post_code`, `country_id`, `state_id`, `status`, `last_login`, `date_added`, `date_modified`) VALUES
-(1, 'Partha', 'Chowdhury', '', 'partha.chowdhury.sit@gmail.com', '', '', '', '', '', '', 0, 0, 'Y', 1611260058, 1536088162, 0),
-(2, 'Partha', 'Chowdhury', 'a06586b755ef41d75c350094f4411ea2.png', 'partha.freelancer.2015@gmail.com', 'jpVf6PtSLugefu4CQzkUjXv2AupiwtueWCxR2Q2mK/w=', '9089130313', '131 Landsdowne Ave', '', 'Westfield', '07090', 101, 1, 'Y', 1611842353, 1536088346, 1563616230),
-(3, 'Santosh Kumar', 'Singh', 'be279128c00d3e3cc74e205967ea9b20.jpg', 'santoshsingh3003@gmail.com', '9g43vmZjmRwUn94+zkoJF7X3UwJ4Mwo911zfazswRFg=', '8820184008', 'HA 108, 1st Floor', '', 'Salt Lake, Sector 3, Kolkata', '700106', 101, 41, 'Y', 1611206486, 1542268188, 1576054584),
-(4, 'Deepanjan', 'Chakraborty', '', 'cdeepanjan890@gmail.com', '', '', '', '', '', '', 0, 0, 'Y', 1546807182, 1546807182, 0),
-(5, 'Soumya', 'Singharoy', '', 'soumyas.singharoy@gmail.com', 'ut0C9iAdZ/25NwFm4c2ooI71bTc67DjdD62uqvMGjZk=', '', '', '', '', '', 0, 0, 'Y', 1563017742, 1559275867, 1562925134),
-(6, 'Sage of six', 'paths', '', 'kalpesh768@gmail.com', '', '', '', '', '', '', 0, 0, 'Y', 1561979670, 1561979670, 0),
-(7, 'test', 'tester', '', 'kalpesh.chivilkar@avenues.info', '097D81OHFWSVy8IUcTE/hxVfh480NbaT9QB3wr5HkDM=', '9876543210', '', '', '', '', 0, 0, 'Y', 1562322605, 1562320100, 0),
-(8, 'Samosa', 'Poori', '', 'geogatedproject38@gmail.com', '', '', '', '', '', '', 0, 0, 'Y', 1567461197, 1567461197, 0),
-(9, 'niti', 'kohan', '', 'nitikohan@yahoo.com', 'HZWkxtaB7eWxjImyHOtGv+p7jk2PgkEHYVou4pdJNxA=', '8765432108', '', '', '', '', 0, 0, 'Y', 0, 1574657982, 0),
-(10, 'Haridas', 'Pramanik', '', 'haridaspramanik@gmail.com', '', '', '', '', '', '', 0, 0, 'Y', 1577392633, 1577392633, 0),
-(11, 'Mamta ', 'Singh ', '', 'mamtasingh0608@gmail.com', 'EzUQdXpQuI/UkRYkewUCa0rXI1wKNP/VLMWpdzzuMGE=', '9672602556', '', '', '', '', 0, 0, 'Y', 1599413604, 1599413575, 0),
-(12, 'Shaswat', 'Jhunjhunwala', '', 'shaswatjjw@gmail.com', 'AQRTUI11OzS8olUjAsIZf0HJOA5E57owIH6COM58JKg=', '9642597902', '', '', '', '', 0, 0, 'Y', 1611047569, 1611047558, 0),
-(13, 'Saree', 'Wali', '', '', '', '', '', '', '', '', 0, 0, 'Y', 1611083298, 1611083298, 0),
-(14, 'Saree', 'Wali', '', '', '', '', '', '', '', '', 0, 0, 'Y', 1611083369, 1611083369, 0),
-(15, 'Saree', 'Wali', '', 'sareewali.com@gmail.com', '', '', '', '', '', '', 0, 0, 'Y', 1611341314, 1611341314, 0),
-(16, 'Santosh Kumar', 'Singh', '', 'sareewaliofficial@gmail.com', '', '', '', '', '', '', 0, 0, 'Y', 1611502531, 1611502531, 0);
+(1, 'Partha', 'Chowdhury', '', 'partha.freelancer.2015@gmail.com', 'jpVf6PtSLugefu4CQzkUjXv2AupiwtueWCxR2Q2mK/w=', '8981329979', '', '', '', '', 0, 0, 'Y', 1612038259, 1612037557, 0);
 
 -- --------------------------------------------------------
 
@@ -24303,19 +23984,6 @@ CREATE TABLE `saree_wishlist` (
   `date_added` int(11) NOT NULL,
   `date_modified` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `saree_wishlist`
---
-
-INSERT INTO `saree_wishlist` (`wishlist_id`, `product_id`, `user_id`, `date_added`, `date_modified`) VALUES
-(10, 11, 3, 1564075233, 0),
-(5, 4, 5, 1562925248, 0),
-(6, 4, 3, 1563096188, 0),
-(7, 11, 2, 1563555100, 0),
-(9, 16, 3, 1563600718, 0),
-(11, 87, 2, 1611394745, 0),
-(12, 51, 2, 1611394780, 0);
 
 -- --------------------------------------------------------
 
@@ -24715,7 +24383,7 @@ ALTER TABLE `saree_attr`
 -- AUTO_INCREMENT for table `saree_attribute`
 --
 ALTER TABLE `saree_attribute`
-  MODIFY `attribute_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `attribute_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `saree_banner`
@@ -24733,7 +24401,7 @@ ALTER TABLE `saree_brand`
 -- AUTO_INCREMENT for table `saree_cart`
 --
 ALTER TABLE `saree_cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `saree_category`
@@ -24787,7 +24455,7 @@ ALTER TABLE `saree_entity`
 -- AUTO_INCREMENT for table `saree_entity_attribute`
 --
 ALTER TABLE `saree_entity_attribute`
-  MODIFY `entity_attribute_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=160;
+  MODIFY `entity_attribute_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=172;
 
 --
 -- AUTO_INCREMENT for table `saree_fabric`
@@ -24823,13 +24491,13 @@ ALTER TABLE `saree_occasion`
 -- AUTO_INCREMENT for table `saree_order`
 --
 ALTER TABLE `saree_order`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `saree_order_details`
 --
 ALTER TABLE `saree_order_details`
-  MODIFY `order_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+  MODIFY `order_detail_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `saree_pincode`
@@ -24841,13 +24509,13 @@ ALTER TABLE `saree_pincode`
 -- AUTO_INCREMENT for table `saree_product`
 --
 ALTER TABLE `saree_product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `saree_product_attribute`
 --
 ALTER TABLE `saree_product_attribute`
-  MODIFY `product_attribute_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=307;
+  MODIFY `product_attribute_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=305;
 
 --
 -- AUTO_INCREMENT for table `saree_product_brand`
@@ -24859,19 +24527,19 @@ ALTER TABLE `saree_product_brand`
 -- AUTO_INCREMENT for table `saree_product_category`
 --
 ALTER TABLE `saree_product_category`
-  MODIFY `product_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `product_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `saree_product_color`
 --
 ALTER TABLE `saree_product_color`
-  MODIFY `product_color_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
+  MODIFY `product_color_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
 
 --
 -- AUTO_INCREMENT for table `saree_product_colors`
 --
 ALTER TABLE `saree_product_colors`
-  MODIFY `product_colors_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `product_colors_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `saree_product_design`
@@ -24883,13 +24551,13 @@ ALTER TABLE `saree_product_design`
 -- AUTO_INCREMENT for table `saree_product_entity`
 --
 ALTER TABLE `saree_product_entity`
-  MODIFY `saree_product_entity_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=818;
+  MODIFY `saree_product_entity_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=806;
 
 --
 -- AUTO_INCREMENT for table `saree_product_fabric`
 --
 ALTER TABLE `saree_product_fabric`
-  MODIFY `product_fabric_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `product_fabric_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `saree_product_idol`
@@ -24901,19 +24569,19 @@ ALTER TABLE `saree_product_idol`
 -- AUTO_INCREMENT for table `saree_product_images`
 --
 ALTER TABLE `saree_product_images`
-  MODIFY `product_image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=523;
+  MODIFY `product_image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=521;
 
 --
 -- AUTO_INCREMENT for table `saree_product_material`
 --
 ALTER TABLE `saree_product_material`
-  MODIFY `product_material_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `product_material_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `saree_product_occasion`
 --
 ALTER TABLE `saree_product_occasion`
-  MODIFY `product_occasion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `product_occasion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
 
 --
 -- AUTO_INCREMENT for table `saree_product_purse`
@@ -24931,25 +24599,25 @@ ALTER TABLE `saree_product_sanitizer`
 -- AUTO_INCREMENT for table `saree_product_saree`
 --
 ALTER TABLE `saree_product_saree`
-  MODIFY `product_saree_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `product_saree_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `saree_product_size`
 --
 ALTER TABLE `saree_product_size`
-  MODIFY `product_size_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `product_size_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `saree_product_style`
 --
 ALTER TABLE `saree_product_style`
-  MODIFY `product_style_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `product_style_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `saree_product_tags`
 --
 ALTER TABLE `saree_product_tags`
-  MODIFY `product_tag_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=379;
+  MODIFY `product_tag_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=390;
 
 --
 -- AUTO_INCREMENT for table `saree_product_type`
@@ -24961,7 +24629,7 @@ ALTER TABLE `saree_product_type`
 -- AUTO_INCREMENT for table `saree_product_work`
 --
 ALTER TABLE `saree_product_work`
-  MODIFY `product_work_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `product_work_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `saree_purse`
@@ -25015,13 +24683,13 @@ ALTER TABLE `saree_type`
 -- AUTO_INCREMENT for table `saree_users`
 --
 ALTER TABLE `saree_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `saree_wishlist`
 --
 ALTER TABLE `saree_wishlist`
-  MODIFY `wishlist_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `wishlist_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `saree_work`

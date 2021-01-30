@@ -74,7 +74,7 @@
 
                           <div class="col-sm-12">
 
-                            <input type="text" class="form-control" placeholder="First Name" value="<?php echo $user->first_name;?>" name="first_name">
+                            <input type="text" class="form-control" placeholder="First Name" value="<?php echo isset($user->first_name) ? $user->first_name : '';?>" name="first_name">
 
                           </div>
 
@@ -86,7 +86,7 @@
 
                           <div class="col-sm-12">
 
-                            <input type="text" class="form-control" placeholder="Last Name" value="<?php echo $user->last_name;?>" name="last_name">
+                            <input type="text" class="form-control" placeholder="Last Name" value="<?php echo isset($user->last_name) ? $user->last_name : '';?>" name="last_name">
 
                           </div>
 
@@ -106,7 +106,7 @@
 
 
 
-                            <input type="email" class="form-control" placeholder="E-Mail" value="<?php echo $user->email;?>" name="email">
+                            <input type="email" class="form-control" placeholder="E-Mail" value="<?php echo isset($user->email) ? $user->email : '';?>" name="email">
 
 
 
@@ -130,7 +130,7 @@
 
 
 
-                            <input type="tel" class="form-control" placeholder="Telephone" value="<?php echo $user->phone;?>" name="phone">
+                            <input type="tel" class="form-control" placeholder="Telephone" value="<?php echo isset($user->phone) ? $user->phone : '';?>" name="phone">
 
 
 
@@ -178,7 +178,7 @@
 
 
 
-                            <input type="text" class="form-control" placeholder="Address 1" value="<?php echo $user->address1;?>" name="address1">
+                            <input type="text" class="form-control" placeholder="Address 1" value="<?php echo isset($user->address1) ? $user->address1 : '';?>" name="address1">
 
 
 
@@ -202,7 +202,7 @@
 
 
 
-                            <input type="text" class="form-control" placeholder="Address 2" value="<?php echo $user->address2;?>" name="address2">
+                            <input type="text" class="form-control" placeholder="Address 2" value="<?php echo isset($user->address2) ? $user->address2 : '';?>" name="address2">
 
 
 
@@ -226,7 +226,7 @@
 
 
 
-                            <input type="text" class="form-control" placeholder="City" value="<?php echo $user->city;?>" name="city">
+                            <input type="text" class="form-control" placeholder="City" value="<?php echo isset($user->city) ? $user->city : '';?>" name="city">
 
 
 
@@ -250,7 +250,7 @@
 
 
 
-                            <input id="pin_code" type="text" class="form-control" placeholder="Post Code" value="<?php echo $user->post_code;?>" name="post_code" onkeyup="checkAvailability();">
+                            <input id="pin_code" type="text" class="form-control" placeholder="Post Code" value="<?php echo isset($user->post_code) ? $user->post_code : '';?>" name="post_code" onkeyup="checkAvailability();">
 
                             <small class="text-success" id="txt_avl"></small>
 

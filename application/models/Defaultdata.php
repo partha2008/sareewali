@@ -35,7 +35,12 @@ class Defaultdata extends CI_Model {
 		$this->mydata['prd_cat'] = $this->entitydata->grab_entity(array("level" => "1", "status" => "Y"));		
 		$this->data = $this->mydata;
 		$this->headerdata = $this->mydata;
-		$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
+		if($this->session->userdata('user_id')){
+			$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('user_id'), "status" => "N"));
+		}else{
+			$cart_data = $this->cartdata->grab_cart(array("user_id" => $this->session->userdata('guest'), "status" => "N"));
+		}
+		
 		$count = 0;
 		$total_price = 0;
 		if(!empty($cart_data)){

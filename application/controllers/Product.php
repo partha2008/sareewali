@@ -72,7 +72,7 @@
 
 			$this->data['best_selling_products'] = $best_selling_products;
 
-			$reviews = $this->reviewdata->grab_review_user_list(array(TABLE_REVIEW.".status" => "Y"));
+			$reviews = $this->reviewdata->grab_review_user_list(array(TABLE_REVIEW.".status" => "Y", TABLE_REVIEW.".product_id" => $product[0]->product_id));
 			$this->data['reviews'] = $reviews;
 
 			$state_data = $this->defaultdata->grabStateData(array("country_id" => 101));
