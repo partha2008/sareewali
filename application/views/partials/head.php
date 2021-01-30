@@ -10,8 +10,12 @@
 <?php
 	if($tot_segments[1] == 'product-details'){
 ?>
-<meta name="description" content="Free Web tutorials">
-<meta name="keywords" content="HTML, CSS, JavaScript">
+<meta name="description" content="<?php echo $seo_details->meta_desc;?>">
+<meta name="keywords" content="<?php echo $seo_details->meta_key;?>">
+<title><?php echo $seo_details->title;?></title>
+<?php
+}else{
+?>
 <title><?php echo $general_settings->sitename;?></title>
 <?php
 }

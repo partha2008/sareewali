@@ -26,6 +26,7 @@ class Defaultdata extends CI_Model {
 
 	public function getFrontendDefaultData()
 	{
+		$this->mydata["seo_details"] = $this->getProduct(array("slug" => $this->getUrlSegments()[2]));
 		$this->mydata["tot_segments"] = $this->getUrlSegments();
 		$this->mydata['general_settings'] = $this->grabSettingData();
 		$this->mydata["modal"] = $this->load->view('partials/modal', null, true);	
@@ -121,6 +122,15 @@ class Defaultdata extends CI_Model {
 			$string=$string;
 		}
 		return stripslashes($string);
+	}
+	public function getProduct($cond = array()){
+		$this->db->select('title, meta_desc, meta_key');
+		if(!empty($cond)){
+			$this->db->where($cond);			
+		}
+		$query = $this->db->get(TABLE_PRODUCT);
+		
+		return $query->row();
 	}
 	public function grabSettingData(){
 		$query = $this->db->get(TABLE_SETTINGS);
