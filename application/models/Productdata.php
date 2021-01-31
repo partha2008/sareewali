@@ -381,4 +381,13 @@ class Productdata extends CI_Model {
 		
 		return true;
 	}
+
+	public function insert_notify($data = array()){
+
+		$this->db->insert(TABLE_NOTIFY, $data); 
+		
+		$insert_id = $this->db->insert_id();
+		
+		return $insert_id;
+	}
 }

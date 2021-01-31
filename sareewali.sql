@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 30, 2021 at 01:25 PM
+-- Generation Time: Jan 31, 2021 at 01:02 PM
 -- Server version: 5.6.49-cll-lve
 -- PHP Version: 7.3.6
 
@@ -218,6 +218,13 @@ CREATE TABLE `saree_cart` (
   `user_id` varchar(255) NOT NULL,
   `product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `saree_cart`
+--
+
+INSERT INTO `saree_cart` (`cart_id`, `prd_name`, `prd_slug`, `prd_size`, `prd_price`, `prd_discounted_price`, `prd_count`, `status`, `user_id`, `product_id`) VALUES
+(1, 'Chanderi Hand Print with multi color, Unstitched Suit (SKU- KSV00017)', 'chanderi-hand-print-with-multi-color-unstitched-suit-sku-ksv00017', 34, 1299, 0, 1, 'N', 'a1HUMd9dfxQcvs7M957fPdhhw7QGnwsRZho+76y7qRg=', 88);
 
 -- --------------------------------------------------------
 
@@ -801,6 +808,19 @@ INSERT INTO `saree_newsletter` (`newsletter_id`, `email`, `status`, `date_added`
 (3, 'santoshsingh3003@gmail.com', 'N', 1554774651, 0),
 (4, 'partha.freelancer.2015@gmail.com', 'N', 1574444603, 0),
 (7, 'partha.chowdhury.sit@gmail.com', 'N', 1576264561, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `saree_notify`
+--
+
+CREATE TABLE `saree_notify` (
+  `notify_id` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `size` varchar(255) NOT NULL,
+  `product_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -24136,6 +24156,12 @@ ALTER TABLE `saree_newsletter`
   ADD PRIMARY KEY (`newsletter_id`);
 
 --
+-- Indexes for table `saree_notify`
+--
+ALTER TABLE `saree_notify`
+  ADD PRIMARY KEY (`notify_id`);
+
+--
 -- Indexes for table `saree_occasion`
 --
 ALTER TABLE `saree_occasion`
@@ -24401,7 +24427,7 @@ ALTER TABLE `saree_brand`
 -- AUTO_INCREMENT for table `saree_cart`
 --
 ALTER TABLE `saree_cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `saree_category`
@@ -24480,6 +24506,12 @@ ALTER TABLE `saree_material`
 --
 ALTER TABLE `saree_newsletter`
   MODIFY `newsletter_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `saree_notify`
+--
+ALTER TABLE `saree_notify`
+  MODIFY `notify_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `saree_occasion`

@@ -277,5 +277,21 @@
 
 			echo json_encode($response);
 		}
+
+		public function notify(){
+
+			$post_data = $this->input->post();
+
+			if($this->productdata->insert_notify($post_data)){
+				$response['status'] = true;
+				$response['msg'] = 'Thanks for subscribing with us.';
+			}else{
+				$response['status'] = false;
+				$response['msg'] = 'Something went wrong!';
+			}
+
+			echo json_encode($response);
+
+		}
 	}
 ?>

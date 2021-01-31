@@ -144,3 +144,4 @@ define('TABLE_PINCODE', TABLE_PREFIX.'pincode');
 define('TABLE_ENTITY_ATTRIBUTE', TABLE_PREFIX.'entity_attribute');
 define('TABLE_ATTR', TABLE_PREFIX.'attr');
 define('TABLE_PRODUCT_SIZE', TABLE_PREFIX.'product_size');
+define('TABLE_NOTIFY', TABLE_PREFIX.'notify');

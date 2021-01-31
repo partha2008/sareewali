@@ -77,7 +77,9 @@
             ?>
           </div>
           <?php
+            $inquire_display = 'display: none';
             if($product->out_of_stock == 'Y' || $product->quantity == 0){
+              $inquire_display = 'display: block';
           ?>
           <p><span>Availability :</span> Out of Stock</p>
           <?php
@@ -143,7 +145,10 @@
           ?>
         </span>
           <span class="add_links">           
-          <a onclick="addToWishList('<?php echo $product->product_id;?>', '<?php echo $this->defaultdata->is_user_session_active();?>');" title="Add to Wish List" class="add_to_wishlist"> <i class="fa fa-heart-o" aria-hidden="true"></i> Add to Wishlist</a> <!-- <a href="#tab-inquire" class="inquire_now inline_inquire cboxElement" title="Inquire for 7547"> <i class="fa fa-envelope-o" aria-hidden="true"></i> Inquire Now </a> --> </span>
+          <a onclick="addToWishList('<?php echo $product->product_id;?>', '<?php echo $this->defaultdata->is_user_session_active();?>');" title="Add to Wish List" class="add_to_wishlist"> <i class="fa fa-heart-o" aria-hidden="true"></i> Add to Wishlist</a> 
+
+          <a id="inquire_now_link" href="javascript:void(0);" style="<?php echo $inquire_display;?>" onclick="inquireNow('<?php echo $product->product_id;?>');"> <i class="fa fa-envelope-o" aria-hidden="true"></i> Inquire Now </a> 
+        </span>
           <div class="clearall"></div>
           
           <div class="clearfix"></div>
