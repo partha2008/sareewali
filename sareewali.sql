@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 31, 2021 at 01:02 PM
+-- Generation Time: Feb 01, 2021 at 03:16 AM
 -- Server version: 5.6.49-cll-lve
 -- PHP Version: 7.3.6
 
@@ -224,7 +224,8 @@ CREATE TABLE `saree_cart` (
 --
 
 INSERT INTO `saree_cart` (`cart_id`, `prd_name`, `prd_slug`, `prd_size`, `prd_price`, `prd_discounted_price`, `prd_count`, `status`, `user_id`, `product_id`) VALUES
-(1, 'Chanderi Hand Print with multi color, Unstitched Suit (SKU- KSV00017)', 'chanderi-hand-print-with-multi-color-unstitched-suit-sku-ksv00017', 34, 1299, 0, 1, 'N', 'a1HUMd9dfxQcvs7M957fPdhhw7QGnwsRZho+76y7qRg=', 88);
+(1, 'Chanderi Hand Print with multi color, Unstitched Suit (SKU- KSV00017)', 'chanderi-hand-print-with-multi-color-unstitched-suit-sku-ksv00017', 34, 1299, 0, 1, 'N', 'a1HUMd9dfxQcvs7M957fPdhhw7QGnwsRZho+76y7qRg=', 88),
+(2, 'Chanderi Hand Print with multi color, Unstitched Suit (SKU- KSV00017)', 'chanderi-hand-print-with-multi-color-unstitched-suit-sku-ksv00017', 34, 1299, 0, 1, 'N', 'a1HUMd9dfxQcvs7M957fPdhhw7QGnwsRZho+76y7qRg=', 88);
 
 -- --------------------------------------------------------
 
@@ -819,8 +820,16 @@ CREATE TABLE `saree_notify` (
   `notify_id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `size` varchar(255) NOT NULL,
-  `product_id` int(11) NOT NULL
+  `product_id` int(11) NOT NULL,
+  `is_mail_send` enum('Y','N') NOT NULL DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `saree_notify`
+--
+
+INSERT INTO `saree_notify` (`notify_id`, `email`, `size`, `product_id`, `is_mail_send`) VALUES
+(1, 'partha.freelancer.2015@gmail.com', '', 11, 'Y');
 
 -- --------------------------------------------------------
 
@@ -18177,7 +18186,7 @@ INSERT INTO `saree_product` (`product_id`, `name`, `description`, `note`, `slug`
 (8, 'Jamdani Black Color', '<ul>\r\n	<li>This elegantly designed Jamdani saree has floral and geometrical motifs woven all over it. The saree is of blue colour and the Jamdani work has been done with golden thread.</li>\r\n	<li>Fine detailing done all over the saree with woven border in golden colour thread.</li>\r\n	<li>This saree is a perfect buy for any party that is approaching. You can pair it with a golden blouse and golden heels.</li>\r\n	<li>A supplementary weft technique of weaving, in the Jamdani weave, the artistic motifs is produced by a non-structural weft in addition to the standard weft that holds the warp threads together. The standard weft creates a fine, sheer fabric while the supplementary weft with thicker threads adds the intricate patterns to it.<br />\r\n	&nbsp;</li>\r\n</ul>\r\n', '<ul>\r\n	<li>The first wash of the garment should always be Dry-Cleaned.</li>\r\n	<li>The shades may vary slightly from the colors displayed on your screen.</li>\r\n	<li>There might be slight color variation due to lightings &amp; flash while photo shoot.</li>\r\n	<li>The bright shade seen is the best closer view of fabric&#39;s colors.</li>\r\n</ul>\r\n', 'jamdani-black-color', 'FGS00004', 'Saree', 0, 9, 2200, 'Y', 'per', 20, 1760, 'N', 'Y', 1552714390, 1564173025, '', '', ''),
 (9, 'Jamdani Yellow Color', '<ul>\r\n	<li>Each supplementary weft motif in the Jamdani saree is added separately by hand by interlacing the weft threads into the warp with fine bamboo sticks using individual spools of thread.</li>\r\n	<li>The result is a myriad of vibrant patterns that appear to float on a shimmering surface.</li>\r\n	<li>This yellow coloured Jamdani saree is so pleasing to the eyes.</li>\r\n	<li>It has been woven with the same coloured cotton thread which gives a decent look to the saree. This saree will fit in for just any occasion.</li>\r\n	<li>The details have been done quite finely all over the cotton fabric. Explore our wide range of colourful Jamdani sarees and buy one as soon as possible.</li>\r\n</ul>\r\n', '<ul>\r\n	<li>The first wash of the garment should always be Dry-Cleaned.</li>\r\n	<li>The shades may vary slightly from the colors displayed on your screen.</li>\r\n	<li>There might be slight color variation due to lightings &amp; flash while photo shoot.</li>\r\n	<li>The bright shade seen is the best closer view of fabric&#39;s colors.</li>\r\n</ul>\r\n', 'jamdani-yellow-color', 'FGS00005', 'Saree', 0, 9, 2200, 'Y', 'per', 20, 1760, 'N', 'Y', 1552714598, 1564173426, '', '', ''),
 (10, 'Jamdani Punch Color', '<ul>\r\n	<li>Introducing the spectacular collection of designer patterns hot pink colour mixed resham silk Jamdani saree. This drape is thoroughly covered with geometric patterns and flowers, tribal motifs using silk thread. This makes the saree quite exclusive in nature.</li>\r\n	<li>Jamdani Sarees are mostly worn at the time of festivals, marriage party &amp; any special event that needs exclusive attire.</li>\r\n	<li>The silver colour embroidery on the pink saree gives an exclusive look to the product. You can match it with any silver coloured blouse.</li>\r\n	<li>Explore our wide range of Jamdani sarees and choose the colour of your choice.</li>\r\n</ul>\r\n', '<ul>\r\n	<li>The first wash of the garment should always be Dry-Cleaned.</li>\r\n	<li>The shades may vary slightly from the colors displayed on your screen.</li>\r\n	<li>There might be slight color variation due to lightings &amp; flash while photo shoot.</li>\r\n	<li>The bright shade seen is the best closer view of fabric&#39;s colors.</li>\r\n</ul>\r\n', 'jamdani-punch-color', 'FGS00006', 'Saree', 0, 9, 2200, 'Y', 'per', 20, 1760, 'N', 'Y', 1552715068, 1564173193, '', '', ''),
-(11, 'Jamdani Blue Color', '<ul>\r\n	<li>This elegantly designed Jamdani saree has floral and geometrical motifs woven all over it. The saree is of blue colour and the Jamdani work has been done with golden thread.</li>\r\n	<li>Fine detailing done all over the saree with woven border in golden colour thread.</li>\r\n	<li>This saree is a perfect buy for any party that is approaching. You can pair it with a golden blouse and golden heels.</li>\r\n	<li>A supplementary weft technique of weaving, in the Jamdani weave, the artistic motifs is produced by a non-structural weft in addition to the standard weft that holds the warp threads together. The standard weft creates a fine, sheer fabric while the supplementary weft with thicker threads adds the intricate patterns to it.</li>\r\n</ul>\r\n', '<ul>\r\n	<li>The first wash of the garment should always be Dry-Cleaned.</li>\r\n	<li>The shades may vary slightly from the colors displayed on your screen.</li>\r\n	<li>There might be slight color variation due to lightings &amp; flash while photo shoot.</li>\r\n	<li>The bright shade seen is the best closer view of fabric&#39;s colors.</li>\r\n</ul>\r\n', 'jamdani-blue-color', 'FGS00007', 'Saree', 2, 7, 2200, 'Y', 'per', 20, 1760, 'N', 'Y', 1552715401, 1612002533, 'Jamdani Blue Color', 'Jamdani', 'Jamdami'),
+(11, 'Jamdani Blue Color', '<ul>\r\n	<li>This elegantly designed Jamdani saree has floral and geometrical motifs woven all over it. The saree is of blue colour and the Jamdani work has been done with golden thread.</li>\r\n	<li>Fine detailing done all over the saree with woven border in golden colour thread.</li>\r\n	<li>This saree is a perfect buy for any party that is approaching. You can pair it with a golden blouse and golden heels.</li>\r\n	<li>A supplementary weft technique of weaving, in the Jamdani weave, the artistic motifs is produced by a non-structural weft in addition to the standard weft that holds the warp threads together. The standard weft creates a fine, sheer fabric while the supplementary weft with thicker threads adds the intricate patterns to it.</li>\r\n</ul>\r\n', '<ul>\r\n	<li>The first wash of the garment should always be Dry-Cleaned.</li>\r\n	<li>The shades may vary slightly from the colors displayed on your screen.</li>\r\n	<li>There might be slight color variation due to lightings &amp; flash while photo shoot.</li>\r\n	<li>The bright shade seen is the best closer view of fabric&#39;s colors.</li>\r\n</ul>\r\n', 'jamdani-blue-color', 'FGS00007', 'Saree', 2, 7, 2200, 'Y', 'per', 20, 1760, 'N', 'Y', 1552715401, 1612123480, 'Jamdani Blue Color', 'Jamdani', 'Jamdami'),
 (12, 'Outstanding Embroidery Work Purse', '<ul>\r\n	<li>A hand purse is needed by almost all the women. How about a purse made from a perfectly eco-friendly material.</li>\r\n	<li>This purse is made from black coloured cotton cloth. The front of the bag has been embroidered with the floral designs and the images of birds sitting on the branches of tree.</li>\r\n	<li>The other part of the hand purse is kept simple with embroidered dots in red and yellow colours.</li>\r\n	<li>A plastic handle is attached to the bag which looks like a wooden.Explore our wide range of embroidery hand bags and choose the one that suits your requirements.</li>\r\n</ul>\r\n', '<ul>\r\n	<li>The first wash of the garment should always be Dry-Cleaned.</li>\r\n	<li>The shades may vary slightly from the colors displayed on your screen.</li>\r\n	<li>There might be slight color variation due to lightings &amp; flash while photo shoot.</li>\r\n	<li>The bright shade seen is the best closer view of fabric&#39;s colors.</li>\r\n</ul>\r\n', 'outstanding-embroidery-work-purse', 'EPMC0001', 'Embroidery Work Purse', 0, 5, 999, 'Y', 'per', 20, 799, 'N', 'Y', 1560445234, 1564158125, '', '', ''),
 (13, 'Brilliant Embroidery Work Purse', '<ul>\r\n	<li>The front portion of the bag has beautifully embroidered floral designs in red and yellow colours.</li>\r\n	<li>Apart from the main zip fastened to it, the bag also has a small pocket inside it.</li>\r\n	<li>The back portion of the bag is also embellished with the dotted embroidery in yellow and brown colours.</li>\r\n	<li>This trendy looking bag can be carried with style and elegance any where you go.</li>\r\n	<li>That suits your requirements.</li>\r\n</ul>\r\n', '<ul>\r\n	<li>The first wash of the garment should always be Dry-Cleaned.</li>\r\n	<li>The shades may vary slightly from the colors displayed on your screen.</li>\r\n	<li>There might be slight color variation due to lightings &amp; flash while photo shoot.</li>\r\n	<li>The bright shade seen is the best closer view of fabric&#39;s colors.</li>\r\n</ul>\r\n', 'brilliant-embroidery-work-purse', 'EPMC0002', 'Embroidery Work Purse', 0, 5, 999, 'Y', 'per', 20, 799, 'N', 'Y', 1560477779, 1564158093, '', '', ''),
 (14, 'Dazzling Embroidery Work Purse', '<ul>\r\n	<li>This beige coloured hand bag has been made from raw cotton cloth. The canvas material sewn inside it gives it a briefcase-like shape.</li>\r\n	<li>The front portion of the bag has beautifully embroidered floral designs in red and blue colours. Apart from the main zip fastened to it which extends almost up to the ends, the bag also has a small pocket inside it.</li>\r\n	<li>The back portion of the bag is also embellished with the dotted embroidery in red and white colours.</li>\r\n	<li>Explore our diverse range of embroidered purses and buy this trendy looking bag that can be carried with style and elegance any where you go.</li>\r\n</ul>\r\n', '<ul>\r\n	<li>The first wash of the garment should always be Dry-Cleaned.</li>\r\n	<li>The shades may vary slightly from the colors displayed on your screen.</li>\r\n	<li>There might be slight color variation due to lightings &amp; flash while photo shoot.</li>\r\n	<li>The bright shade seen is the best closer view of fabric&#39;s colors.</li>\r\n</ul>\r\n', 'dazzling-embroidery-work-purse', 'EPMC0003', 'Embroidery Work Purse', 0, 5, 999, 'Y', 'per', 20, 799, 'N', 'Y', 1560478099, 1564158073, '', '', ''),
@@ -18609,8 +18618,8 @@ CREATE TABLE `saree_product_category` (
 --
 
 INSERT INTO `saree_product_category` (`product_category_id`, `category_id`, `product_id`) VALUES
-(37, 2, 11),
-(36, 1, 11),
+(43, 2, 11),
+(42, 1, 11),
 (21, 4, 61),
 (19, 4, 60),
 (24, 4, 62),
@@ -18708,9 +18717,9 @@ CREATE TABLE `saree_product_colors` (
 --
 
 INSERT INTO `saree_product_colors` (`product_colors_id`, `colors_id`, `product_id`) VALUES
-(27, 3, 11),
-(26, 2, 11),
-(25, 1, 11),
+(36, 3, 11),
+(35, 2, 11),
+(34, 1, 11),
 (10, 2, 59),
 (11, 4, 59),
 (12, 5, 59);
@@ -18951,8 +18960,8 @@ INSERT INTO `saree_product_entity` (`saree_product_entity_id`, `product_id`, `en
 (785, 86, 4),
 (798, 88, 16),
 (799, 88, 4),
-(804, 11, 2),
-(805, 11, 8);
+(810, 11, 2),
+(811, 11, 8);
 
 -- --------------------------------------------------------
 
@@ -18971,8 +18980,8 @@ CREATE TABLE `saree_product_fabric` (
 --
 
 INSERT INTO `saree_product_fabric` (`product_fabric_id`, `fabric_id`, `product_id`) VALUES
-(24, 2, 11),
-(23, 1, 11);
+(30, 2, 11),
+(29, 1, 11);
 
 -- --------------------------------------------------------
 
@@ -19359,9 +19368,9 @@ CREATE TABLE `saree_product_occasion` (
 --
 
 INSERT INTO `saree_product_occasion` (`product_occasion_id`, `occasion_id`, `product_id`) VALUES
-(129, 3, 11),
-(128, 2, 11),
-(127, 1, 11),
+(138, 3, 11),
+(137, 2, 11),
+(136, 1, 11),
 (56, 2, 69),
 (66, 2, 70),
 (57, 2, 71),
@@ -19487,8 +19496,8 @@ INSERT INTO `saree_product_size` (`product_size_id`, `product_id`, `size`, `quan
 (4, 88, 32, 9),
 (5, 88, 34, 10),
 (6, 88, 36, 9),
-(9, 11, 32, 8),
-(10, 11, 34, 8);
+(15, 11, 32, 8),
+(16, 11, 34, 0);
 
 -- --------------------------------------------------------
 
@@ -19507,8 +19516,8 @@ CREATE TABLE `saree_product_style` (
 --
 
 INSERT INTO `saree_product_style` (`product_style_id`, `style_id`, `product_id`) VALUES
-(24, 2, 11),
-(23, 1, 11);
+(30, 2, 11),
+(29, 1, 11);
 
 -- --------------------------------------------------------
 
@@ -19534,7 +19543,7 @@ INSERT INTO `saree_product_tags` (`product_tag_id`, `tag_id`, `product_id`) VALU
 (145, 2, 8),
 (149, 2, 9),
 (147, 2, 10),
-(389, 2, 11),
+(392, 2, 11),
 (141, 2, 12),
 (140, 2, 13),
 (139, 2, 14),
@@ -19661,8 +19670,8 @@ CREATE TABLE `saree_product_work` (
 --
 
 INSERT INTO `saree_product_work` (`product_work_id`, `work_id`, `product_id`) VALUES
-(25, 2, 11),
-(24, 1, 11),
+(31, 2, 11),
+(30, 1, 11),
 (15, 3, 59);
 
 -- --------------------------------------------------------
@@ -24427,7 +24436,7 @@ ALTER TABLE `saree_brand`
 -- AUTO_INCREMENT for table `saree_cart`
 --
 ALTER TABLE `saree_cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `saree_category`
@@ -24511,7 +24520,7 @@ ALTER TABLE `saree_newsletter`
 -- AUTO_INCREMENT for table `saree_notify`
 --
 ALTER TABLE `saree_notify`
-  MODIFY `notify_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `notify_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `saree_occasion`
@@ -24559,7 +24568,7 @@ ALTER TABLE `saree_product_brand`
 -- AUTO_INCREMENT for table `saree_product_category`
 --
 ALTER TABLE `saree_product_category`
-  MODIFY `product_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `product_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `saree_product_color`
@@ -24571,7 +24580,7 @@ ALTER TABLE `saree_product_color`
 -- AUTO_INCREMENT for table `saree_product_colors`
 --
 ALTER TABLE `saree_product_colors`
-  MODIFY `product_colors_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `product_colors_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `saree_product_design`
@@ -24583,13 +24592,13 @@ ALTER TABLE `saree_product_design`
 -- AUTO_INCREMENT for table `saree_product_entity`
 --
 ALTER TABLE `saree_product_entity`
-  MODIFY `saree_product_entity_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=806;
+  MODIFY `saree_product_entity_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=812;
 
 --
 -- AUTO_INCREMENT for table `saree_product_fabric`
 --
 ALTER TABLE `saree_product_fabric`
-  MODIFY `product_fabric_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `product_fabric_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `saree_product_idol`
@@ -24613,7 +24622,7 @@ ALTER TABLE `saree_product_material`
 -- AUTO_INCREMENT for table `saree_product_occasion`
 --
 ALTER TABLE `saree_product_occasion`
-  MODIFY `product_occasion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+  MODIFY `product_occasion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
 
 --
 -- AUTO_INCREMENT for table `saree_product_purse`
@@ -24637,19 +24646,19 @@ ALTER TABLE `saree_product_saree`
 -- AUTO_INCREMENT for table `saree_product_size`
 --
 ALTER TABLE `saree_product_size`
-  MODIFY `product_size_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `product_size_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `saree_product_style`
 --
 ALTER TABLE `saree_product_style`
-  MODIFY `product_style_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `product_style_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `saree_product_tags`
 --
 ALTER TABLE `saree_product_tags`
-  MODIFY `product_tag_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=390;
+  MODIFY `product_tag_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=393;
 
 --
 -- AUTO_INCREMENT for table `saree_product_type`
@@ -24661,7 +24670,7 @@ ALTER TABLE `saree_product_type`
 -- AUTO_INCREMENT for table `saree_product_work`
 --
 ALTER TABLE `saree_product_work`
-  MODIFY `product_work_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `product_work_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `saree_purse`

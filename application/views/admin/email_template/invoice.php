@@ -46,7 +46,7 @@ margin:0px;  font-size:22px; color:#ffffff; text-align:left; font-weight:bold;">
 You received this email because you are registered on <?php echo $site_name;?> with the email<br />
 <h3 style="width:100%; font-size:16px; font-weight:bold;">CONTACT US</h3> 
 <?php echo $admin_profile->address;?>
-&copy; 2018, <?php echo $site_title;?>
+&copy; 2021, <?php echo $site_title;?>
 </div>
 </body>
 </html>

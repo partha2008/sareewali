@@ -390,4 +390,30 @@ class Productdata extends CI_Model {
 		
 		return $insert_id;
 	}
+
+	public function grab_notify($cond = array(), $like = array(), $limit = array()){
+		if(!empty($cond)){
+			$this->db->where($cond);
+		}		
+		if(!empty($like)){
+			$this->db->like($like);
+		}
+		if(!empty($limit)){
+			$per_page = $limit[0];
+			$offset = $limit[1];
+			$start = max(0, ( $offset -1 ) * $per_page);
+			$this->db->limit($per_page, $start);
+		}	
+		$query = $this->db->get(TABLE_NOTIFY);
+		
+		return $query->result();
+	}
+
+	public function update_notify($cond = array(), $data = array()){
+
+		$this->db->where($cond);
+		$this->db->update(TABLE_NOTIFY, $data); 
+		
+		return true;
+	}
 }
