@@ -5139,6 +5139,18 @@ a:focus {
 
 }
 
+.scl-logn a.check-guest {
+
+	background-color: #2e992f;
+
+	background-position: 10px center;
+
+	background-repeat: no-repeat;
+	width: 230px;
+    border-radius: 5px;
+    display: none;
+}
+
 .signup-btns {
 
 	background-color: #6a7490;
@@ -10460,6 +10472,40 @@ img.lazy {
 .prorightcart .out-of-stock_button {
 
 	background-color: #666;
+
+	color: #fff;
+
+	display: block;
+
+	font-size: 16px;
+
+	font-weight: 400;
+
+	height: auto;
+
+	margin-right: 0px;
+
+	line-height: 32px;
+
+	margin-top: 0px;
+
+	border-radius: 3px;
+
+	padding: 4px 50px;
+
+	text-align: center;
+
+	transition: all 0.3s linear 0s;
+
+	text-transform: uppercase;
+
+	margin: 10px 0;
+
+}
+
+.prorightcart .inquire_now_button {
+
+	background-color: #05b58e;
 
 	color: #fff;
 

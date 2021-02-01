@@ -275,6 +275,10 @@ $(document).ready(function() {
 
     sessionStorage.setItem('selected_size', '');
 
+    $('#loginModal').on('hidden.bs.modal', function () {
+      $("#checkout_guest").hide();
+    });
+
 });
 
 function inquireNow(product_id){
@@ -332,7 +336,7 @@ function openModal(mode, flag=false){
 		$("#loginform").html(data);        
 		$('#loginModal').modal('show');
         if(flag){
-            $("#loginform #checkout_guest").show();
+            $("#checkout_guest").css("display", "block");
         }
 	});
 }

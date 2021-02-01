@@ -143,11 +143,10 @@
           <?php
             }
           ?>
+          <span onclick="inquireNow('<?php echo $product->product_id;?>');" class="button inquire_now_button" style="<?php echo $inquire_display;?>">Inquire Now</span> 
         </span>
           <span class="add_links">           
-          <a onclick="addToWishList('<?php echo $product->product_id;?>', '<?php echo $this->defaultdata->is_user_session_active();?>');" title="Add to Wish List" class="add_to_wishlist"> <i class="fa fa-heart-o" aria-hidden="true"></i> Add to Wishlist</a> 
-
-          <a id="inquire_now_link" href="javascript:void(0);" style="<?php echo $inquire_display;?>" onclick="inquireNow('<?php echo $product->product_id;?>');"> <i class="fa fa-envelope-o" aria-hidden="true"></i> Inquire Now </a> 
+            <a onclick="addToWishList('<?php echo $product->product_id;?>', '<?php echo $this->defaultdata->is_user_session_active();?>');" title="Add to Wish List" class="add_to_wishlist"> <i class="fa fa-heart-o" aria-hidden="true"></i> Add to Wishlist</a> 
         </span>
           <div class="clearall"></div>
           

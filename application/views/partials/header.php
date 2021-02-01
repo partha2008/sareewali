@@ -15,43 +15,24 @@
         		<a href="<?php echo $general_settings->facebook_page_url;?>" class="fbIcon" target="_blank">
         			<i class="fa fa-facebook" aria-hidden="true"></i>
         		</a> 
-        		<!--<a href="#" class="twitterIcon" target="_blank">
-        			<i class="fa fa-twitter" aria-hidden="true"></i>
-        		</a> 
-        		<a href="#" class="gPlusIcon" target="_blank">
-        			<i class="fa fa-google-plus" aria-hidden="true"></i>
-        		</a> 
-        		<a href="#" class="gPlusIcon" target="_blank">
-        			<i class="fa fa-instagram" aria-hidden="true"></i>
-        		</a>--> 
         	</span> 
         </div>
         <div class="col-md-6">
           <ul class="tb_right">
 
-            <!--<li><a href="javascript:void(0)">INR <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-
-              <ul class="currencyBox">
-
-                <li><a onclick="change_currency('INR')" href="javascript:void(0)" title=""><i class="fa fa-inr" aria-hidden="true"></i> INR</a></li>
-
-                <li><a onclick="change_currency('USD')" href="javascript:void(0)" title=""><i class="fa fa-usd" aria-hidden="true"></i> Dollar</a></li>
-
-                <li><a onclick="change_currency('EUR')" href="javascript:void(0)" title=""><i class="fa fa-eur" aria-hidden="true"></i> Euro</a></li>
-
-                <li><a onclick="change_currency('GBP')" href="javascript:void(0)" title=""><i class="fa fa-gbp" aria-hidden="true"></i> Pound</a></li>
-
-                <li><a onclick="change_currency('BDT')" href="javascript:void(0)" title=""><b>&#x9f3;</b> BDT</a></li>
-
-              </ul>
-
-            </li>-->
-
-            <li> <a href="javascript:void(0)">My Account <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-
+            <li> 
+              <?php
+                if($this->defaultdata->is_user_session_active() != 0){
+              ?>
+              <a href="javascript:void(0)"><?php echo $this->session->userdata('first_name');?> <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+              <?php
+                }else{
+              ?>
+              <a href="javascript:void(0)">My Account <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+              <?php
+                }
+              ?>
               <ul class="myAccountDrop">
-
-                <!--<li class="currencyMyAccount"><a href="#" title=""><i class="fa fa-angle-down" aria-hidden="true"></i> INR</a></li>-->
 
                 <?php
                   if($this->defaultdata->is_user_session_active() == 1){
@@ -140,7 +121,7 @@
 
             </div>
 
-            </span> <span class="offer"><a href="javascript:void(0);">Offers</a></span> </div>
+            </span> </div>
 
           <div class="clearfix"></div>
 

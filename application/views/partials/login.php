@@ -30,7 +30,6 @@
         <p>Forgot password? <a class="showForgotPassPopup" href="javascript:void(0)" onclick="openModal('forget');">Click here</a></p>
 
         <p>New to Sareewali <a class="showSignUpPopup" href="javascript:void(0)" onclick="openModal('register');">SIGNUP</a></p>
-        <p style="display: none;" id="checkout_guest"><a href="javascript:void(0);" onclick="checkoutGuest()">Checkout as a Guest</a></p>
       </div>
 
     </div>

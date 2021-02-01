@@ -16,6 +16,7 @@
               <div class="scl-logn">
                 <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" data-onlogin="checkLoginState();" data-scope="public_profile,email"></div>
                 <a href="javascript:void(0);" class="gpl" id="google-login-button">Sign in with Google</a> 
+                <a href="javascript:void(0);" class="check-guest" id="checkout_guest" onclick="checkoutGuest()">Checkout as a Guest</a> 
               </div>
             </div>
             <div class="clearfix"></div>

@@ -193,12 +193,14 @@ class Defaultdata extends CI_Model {
 		{
 			$this->session->set_userdata('user_id', $user_data->user_id);
 			$this->session->set_userdata('user_email', $user_data->email);
+			$this->session->set_userdata('first_name', $user_data->first_name);
 		}
 	}
 	public function unsetFrontendLoginSession()
 	{
 		$this->session->unset_userdata('user_id');
 		$this->session->unset_userdata('user_email');
+		$this->session->unset_userdata('first_name');
 		$this->session->unset_userdata('active_coupon_code');
 		$this->session->unset_userdata('active_coupon');	
 	}
