@@ -38,7 +38,7 @@
             </th>
           </tr>
           <tr>
-            <td width="33%" class="purchase_item" style="box-sizing: border-box; color: #74787E; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 15px; line-height: 18px; padding: 10px 0; word-break: break-word;"><img src="<?php echo $prd_image;?>" alt="<?php echo $prd_image;?>" /></td>
+            <td width="33%" class="purchase_item" style="box-sizing: border-box; color: #74787E; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 15px; line-height: 18px; padding: 10px 0; word-break: break-word;"><img width="200" src="<?php echo $prd_image;?>" alt="<?php echo $prd_image;?>" /></td>
             <td width="33%" class="purchase_item" style="box-sizing: border-box; color: #74787E; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 15px; line-height: 18px; padding: 10px 0; word-break: break-word;"><?php echo $prd_name;?></td>
             <td width="34%" class="purchase_item" style="box-sizing: border-box; color: #74787E; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 15px; line-height: 18px; padding: 10px 0; word-break: break-word;"><i class="fa fa-inr"></i> <?php echo $prd_size;?></td>
           </tr>
