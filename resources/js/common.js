@@ -657,7 +657,8 @@ function cancelCoupon(){
         $("#price_chart").html(response.data);
         $("#coupon_code").val("");
     });
-}$('[data-toggle="tooltip"]').tooltip();
+}
+$('[data-toggle="tooltip"]').tooltip();
 
 function checkAvailability(){
     if(!$("#pin_code").val())

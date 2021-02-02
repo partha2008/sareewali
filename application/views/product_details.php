@@ -182,7 +182,7 @@
 <?php echo $foot; ?>
 <?php
   if($product->mode_qnty == "2" && $product->out_of_stock != 'Y' && $product->quantity != 0){
-    echo $how_to_measure;
-    echo $size_chart;
+     echo $how_to_measure;
+     echo $size_chart;
   }
   ?>

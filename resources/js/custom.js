@@ -96,7 +96,7 @@
 	});
 
 	$('body').on('click', function () {
-		$(".form-box").slideUp(300);
+		//$(".form-box").slideUp(300);
 		$(".search a i").removeClass("fa-times");
 	});
 

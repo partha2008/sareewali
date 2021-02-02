@@ -93,12 +93,12 @@
 				}
 			}
 			if(in_array('sarees', $prd_entity_arr)){
-				$this->data['how_to_measure'] = $this->load->view('partials/how_to_measure');
+				$this->data['how_to_measure'] = $this->load->view('partials/how_to_measure', null, true);
 			}else{
-				$this->data['how_to_measure'] = $this->load->view('partials/how_to_measure_kurti');
+				$this->data['how_to_measure'] = $this->load->view('partials/how_to_measure_kurti', null, true);
 			}
 			
-			$this->data['size_chart'] = $this->load->view('partials/size_chart');			
+			$this->data['size_chart'] = $this->load->view('partials/size_chart', null, true);			
 			
 			$this->data['more_collections'] = $this->load->view('partials/more_collections', $this->data, true);
 			$this->data['best_selling_products'] = $this->load->view('partials/best_selling_products', $this->data, true);
