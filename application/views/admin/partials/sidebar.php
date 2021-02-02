@@ -90,6 +90,9 @@
 					</ul>
 				</li>
 				<li>
+					<a href="<?php echo base_url('admin/seo');?>"><i class="fa fa-skyatlas"></i> SEO Management</a>
+				</li>
+				<li>
 					<a href="#"><i class="fa fa-th fa-fw"></i> Content Management<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li>

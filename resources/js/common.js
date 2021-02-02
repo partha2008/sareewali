@@ -644,6 +644,7 @@ function applyCoupon(){
             $("#coupon_err").html('');
         }else{
             $("#coupon_err").html(response.msgText);
+            cancelCoupon();
         }    
         $("#price_chart").html(response.data);    
     });

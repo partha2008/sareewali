@@ -80,6 +80,7 @@ $route['admin'] = 'admin/user/index';
 
 $route['admin/forget-password'] = 'admin/user/forget_password';
 $route['admin/ads'] = 'admin/user/ads';
+$route['admin/seo'] = 'admin/seo/index';
 $route['admin/dashboard'] = 'admin/user/dashboard';
 $route['admin/profile'] = 'admin/user/profile';
 $route['admin/settings'] = 'admin/user/settings';

@@ -16,7 +16,9 @@
 <?php
 }else{
 ?>
-<title><?php echo $general_settings->sitename;?></title>
+<meta name="description" content="<?php echo $seo->meta_desc;?>">
+<meta name="keywords" content="<?php echo $seo->meta_key;?>">
+<title><?php echo $seo->title;?></title>
 <?php
 }
 ?>

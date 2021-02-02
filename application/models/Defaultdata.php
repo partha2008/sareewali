@@ -26,6 +26,7 @@ class Defaultdata extends CI_Model {
 
 	public function getFrontendDefaultData()
 	{
+		$this->mydata["seo"] = $this->getSEO(array("page_value" => $this->getUrlSegments()[1]));
 		$this->mydata["seo_details"] = $this->getProduct(array("slug" => $this->getUrlSegments()[2]));
 		$this->mydata["tot_segments"] = $this->getUrlSegments();
 		$this->mydata['general_settings'] = $this->grabSettingData();
@@ -127,6 +128,15 @@ class Defaultdata extends CI_Model {
 			$string=$string;
 		}
 		return stripslashes($string);
+	}
+	public function getSEO($cond = array())
+	{
+		if(!empty($cond)){
+			$this->db->where($cond);			
+		}
+		$query = $this->db->get(TABLE_SEO);
+		
+		return $query->row();
 	}
 	public function getProduct($cond = array()){
 		$this->db->select('title, meta_desc, meta_key');

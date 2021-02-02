@@ -643,7 +643,7 @@
 
 
 
-			$coupon_data = $this->coupondata->grab_coupon(array("code" => $coupon));
+			$coupon_data = $this->coupondata->grab_coupon(array("code" => $coupon, "status" => "Y"));
 
 
 
