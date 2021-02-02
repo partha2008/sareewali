@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 01, 2021 at 03:16 AM
+-- Generation Time: Feb 02, 2021 at 12:20 AM
 -- Server version: 5.6.49-cll-lve
 -- PHP Version: 7.3.6
 
@@ -224,8 +224,14 @@ CREATE TABLE `saree_cart` (
 --
 
 INSERT INTO `saree_cart` (`cart_id`, `prd_name`, `prd_slug`, `prd_size`, `prd_price`, `prd_discounted_price`, `prd_count`, `status`, `user_id`, `product_id`) VALUES
-(1, 'Chanderi Hand Print with multi color, Unstitched Suit (SKU- KSV00017)', 'chanderi-hand-print-with-multi-color-unstitched-suit-sku-ksv00017', 34, 1299, 0, 1, 'N', 'a1HUMd9dfxQcvs7M957fPdhhw7QGnwsRZho+76y7qRg=', 88),
-(2, 'Chanderi Hand Print with multi color, Unstitched Suit (SKU- KSV00017)', 'chanderi-hand-print-with-multi-color-unstitched-suit-sku-ksv00017', 34, 1299, 0, 1, 'N', 'a1HUMd9dfxQcvs7M957fPdhhw7QGnwsRZho+76y7qRg=', 88);
+(2, 'Chanderi Hand Print with multi color, Unstitched Suit (SKU- KSV00017)', 'chanderi-hand-print-with-multi-color-unstitched-suit-sku-ksv00017', 34, 1299, 0, 10, 'N', 'a1HUMd9dfxQcvs7M957fPdhhw7QGnwsRZho+76y7qRg=', 88),
+(4, 'Chanderi Hand Print with multi color, Unstitched Suit (SKU- KSV00017)', 'chanderi-hand-print-with-multi-color-unstitched-suit-sku-ksv00017', 34, 1299, 0, 1, 'N', '4', 88),
+(5, 'Futaki Fancy Hand Work Tie and Dye Dupatta, Off-White and Black Color, Unstitched Suit (SKU- KSV00020)', 'futaki-fancy-hand-work-tie-and-dye-dupatta-off-white-and-black-color-unstitched-suit-sku-ksv00020', 0, 1599, 0, 1, 'N', '5', 87),
+(7, 'Fancy Chanderi Khadi Embroidery Work Off-White Color Unstitched Suit (KSV00002)', 'fancy-chanderi-khadi-embroidery-work-off-white-color-unstitched-suit', 0, 699, 0, 1, 'N', 'a1HUMd9dfxQcvs7M957fPdhhw7QGnwsRZho+76y7qRg=', 70),
+(8, 'Yellow and Red Hand Purse with Floral Embroidery', 'yellow-and-red-hand-purse-with-floral-embroidery', 0, 499, 399, 3, 'N', '6', 58),
+(9, 'Jamdani Blue Color', 'jamdani-blue-color', 0, 2200, 1760, 5, 'N', 'a1HUMd9dfxQcvs7M957fPdhhw7QGnwsRZho+76y7qRg=', 11),
+(10, 'Jamdani Blue Color', 'jamdani-blue-color', 0, 2200, 1760, 1, 'N', '7', 11),
+(11, 'Jamdani Blue Color', 'jamdani-blue-color', 0, 2200, 1760, 1, 'N', '1', 11);
 
 -- --------------------------------------------------------
 
@@ -614,7 +620,7 @@ CREATE TABLE `saree_coupon` (
 --
 
 INSERT INTO `saree_coupon` (`coupon_id`, `code`, `discount`, `status`, `date_added`, `date_modified`) VALUES
-(1, 'Test', 10.00, 'N', 1546893000, 1552903139),
+(1, 'Test', 10.00, 'N', 1546893000, 1612250170),
 (2, 'Test1', 12.00, 'N', 1552903133, 0);
 
 -- --------------------------------------------------------
@@ -808,7 +814,8 @@ INSERT INTO `saree_newsletter` (`newsletter_id`, `email`, `status`, `date_added`
 (2, 'amarjeet100163@gmail.com', 'N', 1552893502, 0),
 (3, 'santoshsingh3003@gmail.com', 'N', 1554774651, 0),
 (4, 'partha.freelancer.2015@gmail.com', 'N', 1574444603, 0),
-(7, 'partha.chowdhury.sit@gmail.com', 'N', 1576264561, 0);
+(7, 'partha.chowdhury.sit@gmail.com', 'N', 1576264561, 0),
+(8, 'aa@gmail.com', 'Y', 1612191363, 0);
 
 -- --------------------------------------------------------
 
@@ -829,7 +836,7 @@ CREATE TABLE `saree_notify` (
 --
 
 INSERT INTO `saree_notify` (`notify_id`, `email`, `size`, `product_id`, `is_mail_send`) VALUES
-(1, 'partha.freelancer.2015@gmail.com', '', 11, 'Y');
+(1, 'partha.freelancer.2015@gmail.com', '32', 11, 'Y');
 
 -- --------------------------------------------------------
 
@@ -18186,7 +18193,7 @@ INSERT INTO `saree_product` (`product_id`, `name`, `description`, `note`, `slug`
 (8, 'Jamdani Black Color', '<ul>\r\n	<li>This elegantly designed Jamdani saree has floral and geometrical motifs woven all over it. The saree is of blue colour and the Jamdani work has been done with golden thread.</li>\r\n	<li>Fine detailing done all over the saree with woven border in golden colour thread.</li>\r\n	<li>This saree is a perfect buy for any party that is approaching. You can pair it with a golden blouse and golden heels.</li>\r\n	<li>A supplementary weft technique of weaving, in the Jamdani weave, the artistic motifs is produced by a non-structural weft in addition to the standard weft that holds the warp threads together. The standard weft creates a fine, sheer fabric while the supplementary weft with thicker threads adds the intricate patterns to it.<br />\r\n	&nbsp;</li>\r\n</ul>\r\n', '<ul>\r\n	<li>The first wash of the garment should always be Dry-Cleaned.</li>\r\n	<li>The shades may vary slightly from the colors displayed on your screen.</li>\r\n	<li>There might be slight color variation due to lightings &amp; flash while photo shoot.</li>\r\n	<li>The bright shade seen is the best closer view of fabric&#39;s colors.</li>\r\n</ul>\r\n', 'jamdani-black-color', 'FGS00004', 'Saree', 0, 9, 2200, 'Y', 'per', 20, 1760, 'N', 'Y', 1552714390, 1564173025, '', '', ''),
 (9, 'Jamdani Yellow Color', '<ul>\r\n	<li>Each supplementary weft motif in the Jamdani saree is added separately by hand by interlacing the weft threads into the warp with fine bamboo sticks using individual spools of thread.</li>\r\n	<li>The result is a myriad of vibrant patterns that appear to float on a shimmering surface.</li>\r\n	<li>This yellow coloured Jamdani saree is so pleasing to the eyes.</li>\r\n	<li>It has been woven with the same coloured cotton thread which gives a decent look to the saree. This saree will fit in for just any occasion.</li>\r\n	<li>The details have been done quite finely all over the cotton fabric. Explore our wide range of colourful Jamdani sarees and buy one as soon as possible.</li>\r\n</ul>\r\n', '<ul>\r\n	<li>The first wash of the garment should always be Dry-Cleaned.</li>\r\n	<li>The shades may vary slightly from the colors displayed on your screen.</li>\r\n	<li>There might be slight color variation due to lightings &amp; flash while photo shoot.</li>\r\n	<li>The bright shade seen is the best closer view of fabric&#39;s colors.</li>\r\n</ul>\r\n', 'jamdani-yellow-color', 'FGS00005', 'Saree', 0, 9, 2200, 'Y', 'per', 20, 1760, 'N', 'Y', 1552714598, 1564173426, '', '', ''),
 (10, 'Jamdani Punch Color', '<ul>\r\n	<li>Introducing the spectacular collection of designer patterns hot pink colour mixed resham silk Jamdani saree. This drape is thoroughly covered with geometric patterns and flowers, tribal motifs using silk thread. This makes the saree quite exclusive in nature.</li>\r\n	<li>Jamdani Sarees are mostly worn at the time of festivals, marriage party &amp; any special event that needs exclusive attire.</li>\r\n	<li>The silver colour embroidery on the pink saree gives an exclusive look to the product. You can match it with any silver coloured blouse.</li>\r\n	<li>Explore our wide range of Jamdani sarees and choose the colour of your choice.</li>\r\n</ul>\r\n', '<ul>\r\n	<li>The first wash of the garment should always be Dry-Cleaned.</li>\r\n	<li>The shades may vary slightly from the colors displayed on your screen.</li>\r\n	<li>There might be slight color variation due to lightings &amp; flash while photo shoot.</li>\r\n	<li>The bright shade seen is the best closer view of fabric&#39;s colors.</li>\r\n</ul>\r\n', 'jamdani-punch-color', 'FGS00006', 'Saree', 0, 9, 2200, 'Y', 'per', 20, 1760, 'N', 'Y', 1552715068, 1564173193, '', '', ''),
-(11, 'Jamdani Blue Color', '<ul>\r\n	<li>This elegantly designed Jamdani saree has floral and geometrical motifs woven all over it. The saree is of blue colour and the Jamdani work has been done with golden thread.</li>\r\n	<li>Fine detailing done all over the saree with woven border in golden colour thread.</li>\r\n	<li>This saree is a perfect buy for any party that is approaching. You can pair it with a golden blouse and golden heels.</li>\r\n	<li>A supplementary weft technique of weaving, in the Jamdani weave, the artistic motifs is produced by a non-structural weft in addition to the standard weft that holds the warp threads together. The standard weft creates a fine, sheer fabric while the supplementary weft with thicker threads adds the intricate patterns to it.</li>\r\n</ul>\r\n', '<ul>\r\n	<li>The first wash of the garment should always be Dry-Cleaned.</li>\r\n	<li>The shades may vary slightly from the colors displayed on your screen.</li>\r\n	<li>There might be slight color variation due to lightings &amp; flash while photo shoot.</li>\r\n	<li>The bright shade seen is the best closer view of fabric&#39;s colors.</li>\r\n</ul>\r\n', 'jamdani-blue-color', 'FGS00007', 'Saree', 2, 7, 2200, 'Y', 'per', 20, 1760, 'N', 'Y', 1552715401, 1612123480, 'Jamdani Blue Color', 'Jamdani', 'Jamdami'),
+(11, 'Jamdani Blue Color', '<ul>\r\n	<li>This elegantly designed Jamdani saree has floral and geometrical motifs woven all over it. The saree is of blue colour and the Jamdani work has been done with golden thread.</li>\r\n	<li>Fine detailing done all over the saree with woven border in golden colour thread.</li>\r\n	<li>This saree is a perfect buy for any party that is approaching. You can pair it with a golden blouse and golden heels.</li>\r\n	<li>A supplementary weft technique of weaving, in the Jamdani weave, the artistic motifs is produced by a non-structural weft in addition to the standard weft that holds the warp threads together. The standard weft creates a fine, sheer fabric while the supplementary weft with thicker threads adds the intricate patterns to it.</li>\r\n</ul>\r\n', '<ul>\r\n	<li>The first wash of the garment should always be Dry-Cleaned.</li>\r\n	<li>The shades may vary slightly from the colors displayed on your screen.</li>\r\n	<li>There might be slight color variation due to lightings &amp; flash while photo shoot.</li>\r\n	<li>The bright shade seen is the best closer view of fabric&#39;s colors.</li>\r\n</ul>\r\n', 'jamdani-blue-color', 'FGS00007', 'Saree', 1, 7, 2200, 'Y', 'per', 20, 1760, 'N', 'Y', 1552715401, 1612175366, 'Jamdani Blue Color', 'Jamdani', 'Jamdami'),
 (12, 'Outstanding Embroidery Work Purse', '<ul>\r\n	<li>A hand purse is needed by almost all the women. How about a purse made from a perfectly eco-friendly material.</li>\r\n	<li>This purse is made from black coloured cotton cloth. The front of the bag has been embroidered with the floral designs and the images of birds sitting on the branches of tree.</li>\r\n	<li>The other part of the hand purse is kept simple with embroidered dots in red and yellow colours.</li>\r\n	<li>A plastic handle is attached to the bag which looks like a wooden.Explore our wide range of embroidery hand bags and choose the one that suits your requirements.</li>\r\n</ul>\r\n', '<ul>\r\n	<li>The first wash of the garment should always be Dry-Cleaned.</li>\r\n	<li>The shades may vary slightly from the colors displayed on your screen.</li>\r\n	<li>There might be slight color variation due to lightings &amp; flash while photo shoot.</li>\r\n	<li>The bright shade seen is the best closer view of fabric&#39;s colors.</li>\r\n</ul>\r\n', 'outstanding-embroidery-work-purse', 'EPMC0001', 'Embroidery Work Purse', 0, 5, 999, 'Y', 'per', 20, 799, 'N', 'Y', 1560445234, 1564158125, '', '', ''),
 (13, 'Brilliant Embroidery Work Purse', '<ul>\r\n	<li>The front portion of the bag has beautifully embroidered floral designs in red and yellow colours.</li>\r\n	<li>Apart from the main zip fastened to it, the bag also has a small pocket inside it.</li>\r\n	<li>The back portion of the bag is also embellished with the dotted embroidery in yellow and brown colours.</li>\r\n	<li>This trendy looking bag can be carried with style and elegance any where you go.</li>\r\n	<li>That suits your requirements.</li>\r\n</ul>\r\n', '<ul>\r\n	<li>The first wash of the garment should always be Dry-Cleaned.</li>\r\n	<li>The shades may vary slightly from the colors displayed on your screen.</li>\r\n	<li>There might be slight color variation due to lightings &amp; flash while photo shoot.</li>\r\n	<li>The bright shade seen is the best closer view of fabric&#39;s colors.</li>\r\n</ul>\r\n', 'brilliant-embroidery-work-purse', 'EPMC0002', 'Embroidery Work Purse', 0, 5, 999, 'Y', 'per', 20, 799, 'N', 'Y', 1560477779, 1564158093, '', '', ''),
 (14, 'Dazzling Embroidery Work Purse', '<ul>\r\n	<li>This beige coloured hand bag has been made from raw cotton cloth. The canvas material sewn inside it gives it a briefcase-like shape.</li>\r\n	<li>The front portion of the bag has beautifully embroidered floral designs in red and blue colours. Apart from the main zip fastened to it which extends almost up to the ends, the bag also has a small pocket inside it.</li>\r\n	<li>The back portion of the bag is also embellished with the dotted embroidery in red and white colours.</li>\r\n	<li>Explore our diverse range of embroidered purses and buy this trendy looking bag that can be carried with style and elegance any where you go.</li>\r\n</ul>\r\n', '<ul>\r\n	<li>The first wash of the garment should always be Dry-Cleaned.</li>\r\n	<li>The shades may vary slightly from the colors displayed on your screen.</li>\r\n	<li>There might be slight color variation due to lightings &amp; flash while photo shoot.</li>\r\n	<li>The bright shade seen is the best closer view of fabric&#39;s colors.</li>\r\n</ul>\r\n', 'dazzling-embroidery-work-purse', 'EPMC0003', 'Embroidery Work Purse', 0, 5, 999, 'Y', 'per', 20, 799, 'N', 'Y', 1560478099, 1564158073, '', '', ''),
@@ -18264,7 +18271,7 @@ INSERT INTO `saree_product` (`product_id`, `name`, `description`, `note`, `slug`
 (85, 'Futaki Fancy Hand Work, Off-White and Blue Color, Unstitched Suit (SKU- KSV00018)', '<p><strong>Product Type : Suit (Unstitched)</strong></p>\r\n\r\n<p><strong>Top&nbsp;Material :</strong> Futaki&nbsp; Fancy</p>\r\n\r\n<p><strong>Dupatta&nbsp;Material :</strong> Chiffon</p>\r\n', '<p>Dry Clean</p>\r\n', 'futaki-fancy-hand-work-off-white-and-blue-color-unstitched-suit-sku-ksv00018', 'KSV00018', 'Top and Dupatta', 0, 20, 1599, 'N', 'flat', 0, 0, 'N', 'Y', 1601305505, 1601305961, '', '', ''),
 (86, 'Georgette Hand Work, Green, Red and Golden Color, Unstitched Suit (SKU- KSV00019)', '<p><strong>Product Type : Suit (Unstitched)</strong></p>\r\n\r\n<p><strong>Top&nbsp;Material :</strong> Georgette and Zari</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>Dupatta&nbsp;Material :</strong> Chiffon</p>\r\n', '<p>Dry Clean</p>\r\n', 'georgette-hand-work-green-red-and-golden-color-unstitched-suit-sku-ksv00019', 'KSV00019', 'Top Dupatta and Bottom', 0, 20, 2199, 'N', 'flat', 0, 0, 'N', 'Y', 1601305637, 1611502157, '', '', ''),
 (87, 'Futaki Fancy Hand Work Tie and Dye Dupatta, Off-White and Black Color, Unstitched Suit (SKU- KSV00020)', '<p><strong>Product Type : Suit (Unstitched)</strong></p>\r\n\r\n<p><strong>Top&nbsp;Material :</strong> Futaki Fancy Hand Work</p>\r\n\r\n<p><strong>Dupatta&nbsp;Material :</strong> Chiffon</p>\r\n', '<p>Dry Clean</p>\r\n', 'futaki-fancy-hand-work-tie-and-dye-dupatta-off-white-and-black-color-unstitched-suit-sku-ksv00020', 'KSV00020', 'Top and Dupatta', 0, 20, 1599, 'N', 'flat', 0, 0, 'N', 'Y', 1601305760, 1601306166, '', '', ''),
-(88, 'Chanderi Hand Print with multi color, Unstitched Suit (SKU- KSV00017)', '<p><strong>Product Type : Suit (Unstitched)</strong></p>\r\n\r\n<p><strong>Top&nbsp;Material :</strong> Chanderi Hand Print</p>\r\n\r\n<p><strong>Dupatta&nbsp;Material :</strong> Chiffon</p>\r\n', '<p>Dry Clean</p>\r\n', 'chanderi-hand-print-with-multi-color-unstitched-suit-sku-ksv00017', 'KSV00017', 'Top and Dupatta', 2, 20, 1299, 'N', 'flat', 0, 0, 'N', 'Y', 1601306505, 1611842654, '', '', '');
+(88, 'Chanderi Hand Print with multi color, Unstitched Suit (SKU- KSV00017)', '<p><strong>Product Type : Suit (Unstitched)</strong></p>\r\n\r\n<p><strong>Top&nbsp;Material :</strong> Chanderi Hand Print</p>\r\n\r\n<p><strong>Dupatta&nbsp;Material :</strong> Chiffon</p>\r\n', '<p>Dry Clean</p>\r\n', 'chanderi-hand-print-with-multi-color-unstitched-suit-sku-ksv00017', 'KSV00017', 'Top and Dupatta', 2, 20, 1299, 'N', 'flat', 0, 0, 'N', 'Y', 1601306505, 1612194687, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -18618,8 +18625,8 @@ CREATE TABLE `saree_product_category` (
 --
 
 INSERT INTO `saree_product_category` (`product_category_id`, `category_id`, `product_id`) VALUES
-(43, 2, 11),
-(42, 1, 11),
+(45, 2, 11),
+(44, 1, 11),
 (21, 4, 61),
 (19, 4, 60),
 (24, 4, 62),
@@ -18695,10 +18702,10 @@ INSERT INTO `saree_product_color` (`product_color_id`, `color_id`, `product_id`)
 (151, 2, 86),
 (130, 13, 87),
 (129, 5, 87),
-(177, 14, 88),
-(176, 7, 88),
-(175, 3, 88),
-(174, 2, 88);
+(181, 14, 88),
+(180, 7, 88),
+(179, 3, 88),
+(178, 2, 88);
 
 -- --------------------------------------------------------
 
@@ -18717,9 +18724,9 @@ CREATE TABLE `saree_product_colors` (
 --
 
 INSERT INTO `saree_product_colors` (`product_colors_id`, `colors_id`, `product_id`) VALUES
-(36, 3, 11),
-(35, 2, 11),
-(34, 1, 11),
+(39, 3, 11),
+(38, 2, 11),
+(37, 1, 11),
 (10, 2, 59),
 (11, 4, 59),
 (12, 5, 59);
@@ -18958,10 +18965,10 @@ INSERT INTO `saree_product_entity` (`saree_product_entity_id`, `product_id`, `en
 (771, 59, 12),
 (784, 86, 16),
 (785, 86, 4),
-(798, 88, 16),
-(799, 88, 4),
-(810, 11, 2),
-(811, 11, 8);
+(812, 11, 2),
+(813, 11, 8),
+(814, 88, 16),
+(815, 88, 4);
 
 -- --------------------------------------------------------
 
@@ -18980,8 +18987,8 @@ CREATE TABLE `saree_product_fabric` (
 --
 
 INSERT INTO `saree_product_fabric` (`product_fabric_id`, `fabric_id`, `product_id`) VALUES
-(30, 2, 11),
-(29, 1, 11);
+(32, 2, 11),
+(31, 1, 11);
 
 -- --------------------------------------------------------
 
@@ -19349,7 +19356,7 @@ INSERT INTO `saree_product_material` (`product_material_id`, `material_id`, `pro
 (68, 19, 85),
 (76, 18, 86),
 (69, 19, 87),
-(82, 14, 88);
+(83, 14, 88);
 
 -- --------------------------------------------------------
 
@@ -19368,9 +19375,9 @@ CREATE TABLE `saree_product_occasion` (
 --
 
 INSERT INTO `saree_product_occasion` (`product_occasion_id`, `occasion_id`, `product_id`) VALUES
-(138, 3, 11),
-(137, 2, 11),
-(136, 1, 11),
+(141, 3, 11),
+(140, 2, 11),
+(139, 1, 11),
 (56, 2, 69),
 (66, 2, 70),
 (57, 2, 71),
@@ -19398,8 +19405,8 @@ INSERT INTO `saree_product_occasion` (`product_occasion_id`, `occasion_id`, `pro
 (106, 1, 86),
 (83, 3, 87),
 (82, 2, 87),
-(120, 3, 88),
-(119, 2, 88);
+(143, 3, 88),
+(142, 2, 88);
 
 -- --------------------------------------------------------
 
@@ -19472,7 +19479,7 @@ INSERT INTO `saree_product_saree` (`product_saree_id`, `saree_id`, `product_id`)
 (52, 1, 85),
 (61, 1, 86),
 (53, 1, 87),
-(67, 1, 88),
+(68, 1, 88),
 (56, 2, 59);
 
 -- --------------------------------------------------------
@@ -19493,11 +19500,9 @@ CREATE TABLE `saree_product_size` (
 --
 
 INSERT INTO `saree_product_size` (`product_size_id`, `product_id`, `size`, `quantity`) VALUES
-(4, 88, 32, 9),
-(5, 88, 34, 10),
-(6, 88, 36, 9),
-(15, 11, 32, 8),
-(16, 11, 34, 0);
+(17, 88, 32, 9),
+(18, 88, 34, 10),
+(19, 88, 36, 0);
 
 -- --------------------------------------------------------
 
@@ -19516,8 +19521,8 @@ CREATE TABLE `saree_product_style` (
 --
 
 INSERT INTO `saree_product_style` (`product_style_id`, `style_id`, `product_id`) VALUES
-(30, 2, 11),
-(29, 1, 11);
+(32, 2, 11),
+(31, 1, 11);
 
 -- --------------------------------------------------------
 
@@ -19543,7 +19548,7 @@ INSERT INTO `saree_product_tags` (`product_tag_id`, `tag_id`, `product_id`) VALU
 (145, 2, 8),
 (149, 2, 9),
 (147, 2, 10),
-(392, 2, 11),
+(393, 2, 11),
 (141, 2, 12),
 (140, 2, 13),
 (139, 2, 14),
@@ -19627,8 +19632,8 @@ INSERT INTO `saree_product_tags` (`product_tag_id`, `tag_id`, `product_id`) VALU
 (373, 1, 86),
 (356, 2, 87),
 (355, 1, 87),
-(386, 2, 88),
-(385, 1, 88);
+(395, 2, 88),
+(394, 1, 88);
 
 -- --------------------------------------------------------
 
@@ -19670,8 +19675,8 @@ CREATE TABLE `saree_product_work` (
 --
 
 INSERT INTO `saree_product_work` (`product_work_id`, `work_id`, `product_id`) VALUES
-(31, 2, 11),
-(30, 1, 11),
+(33, 2, 11),
+(32, 1, 11),
 (15, 3, 59);
 
 -- --------------------------------------------------------
@@ -19764,6 +19769,42 @@ CREATE TABLE `saree_saree` (
 INSERT INTO `saree_saree` (`saree_id`, `name`) VALUES
 (1, 'Kurti'),
 (2, 'Purse');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `saree_seo`
+--
+
+CREATE TABLE `saree_seo` (
+  `seo_id` int(11) NOT NULL,
+  `page_name` varchar(255) NOT NULL,
+  `page_value` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `meta_desc` text NOT NULL,
+  `meta_key` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `saree_seo`
+--
+
+INSERT INTO `saree_seo` (`seo_id`, `page_name`, `page_value`, `title`, `meta_desc`, `meta_key`) VALUES
+(1, 'Home', 'home', '', '', ''),
+(2, 'Product List', 'product-list', 'product list', 'product list', 'product list'),
+(3, 'About Us', 'about', '', '', ''),
+(4, 'Contact Us', 'contact', '', '', ''),
+(5, 'Wholesale Inquiry', 'feedback', '', '', ''),
+(6, 'Cancellation & Returns', 'return', '', '', ''),
+(7, 'Terms & Conditions', 'term', '', '', ''),
+(8, 'Privacy Policy', 'privacy', '', '', ''),
+(9, 'Shipping Policy', 'shipping', '', '', ''),
+(10, 'My Account', 'myaccount', '', '', ''),
+(11, 'Order History', 'orderhistory', '', '', ''),
+(12, 'My Wishlist', 'mywishlist', '', '', ''),
+(13, 'Change Password', 'changepassword', '', '', ''),
+(14, 'Cart', 'cart', '', '', ''),
+(15, 'Checkout', 'checkout', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -23998,7 +24039,8 @@ CREATE TABLE `saree_users` (
 --
 
 INSERT INTO `saree_users` (`user_id`, `first_name`, `last_name`, `file_name`, `email`, `password`, `phone`, `address1`, `address2`, `city`, `post_code`, `country_id`, `state_id`, `status`, `last_login`, `date_added`, `date_modified`) VALUES
-(1, 'Partha', 'Chowdhury', '', 'partha.freelancer.2015@gmail.com', 'jpVf6PtSLugefu4CQzkUjXv2AupiwtueWCxR2Q2mK/w=', '8981329979', '', '', '', '', 0, 0, 'Y', 1612038259, 1612037557, 0);
+(1, 'Partha', 'Chowdhury', '', 'partha.freelancer.2015@gmail.com', 'jpVf6PtSLugefu4CQzkUjXv2AupiwtueWCxR2Q2mK/w=', '8981329979', '', '', '', '', 0, 0, 'Y', 1612249436, 1612037557, 0),
+(5, 'Santosh', 'Singh', '', 'santoshsingh3003@gmail.com', '', '', '', '', '', '', 0, 0, 'Y', 1612193019, 1612190153, 0);
 
 -- --------------------------------------------------------
 
@@ -24345,6 +24387,12 @@ ALTER TABLE `saree_saree`
   ADD PRIMARY KEY (`saree_id`);
 
 --
+-- Indexes for table `saree_seo`
+--
+ALTER TABLE `saree_seo`
+  ADD PRIMARY KEY (`seo_id`);
+
+--
 -- Indexes for table `saree_settings`
 --
 ALTER TABLE `saree_settings`
@@ -24436,7 +24484,7 @@ ALTER TABLE `saree_brand`
 -- AUTO_INCREMENT for table `saree_cart`
 --
 ALTER TABLE `saree_cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `saree_category`
@@ -24514,7 +24562,7 @@ ALTER TABLE `saree_material`
 -- AUTO_INCREMENT for table `saree_newsletter`
 --
 ALTER TABLE `saree_newsletter`
-  MODIFY `newsletter_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `newsletter_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `saree_notify`
@@ -24568,19 +24616,19 @@ ALTER TABLE `saree_product_brand`
 -- AUTO_INCREMENT for table `saree_product_category`
 --
 ALTER TABLE `saree_product_category`
-  MODIFY `product_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `product_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `saree_product_color`
 --
 ALTER TABLE `saree_product_color`
-  MODIFY `product_color_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
+  MODIFY `product_color_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
 
 --
 -- AUTO_INCREMENT for table `saree_product_colors`
 --
 ALTER TABLE `saree_product_colors`
-  MODIFY `product_colors_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `product_colors_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `saree_product_design`
@@ -24592,13 +24640,13 @@ ALTER TABLE `saree_product_design`
 -- AUTO_INCREMENT for table `saree_product_entity`
 --
 ALTER TABLE `saree_product_entity`
-  MODIFY `saree_product_entity_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=812;
+  MODIFY `saree_product_entity_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=816;
 
 --
 -- AUTO_INCREMENT for table `saree_product_fabric`
 --
 ALTER TABLE `saree_product_fabric`
-  MODIFY `product_fabric_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `product_fabric_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `saree_product_idol`
@@ -24616,13 +24664,13 @@ ALTER TABLE `saree_product_images`
 -- AUTO_INCREMENT for table `saree_product_material`
 --
 ALTER TABLE `saree_product_material`
-  MODIFY `product_material_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `product_material_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `saree_product_occasion`
 --
 ALTER TABLE `saree_product_occasion`
-  MODIFY `product_occasion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
+  MODIFY `product_occasion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 
 --
 -- AUTO_INCREMENT for table `saree_product_purse`
@@ -24640,25 +24688,25 @@ ALTER TABLE `saree_product_sanitizer`
 -- AUTO_INCREMENT for table `saree_product_saree`
 --
 ALTER TABLE `saree_product_saree`
-  MODIFY `product_saree_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `product_saree_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `saree_product_size`
 --
 ALTER TABLE `saree_product_size`
-  MODIFY `product_size_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `product_size_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `saree_product_style`
 --
 ALTER TABLE `saree_product_style`
-  MODIFY `product_style_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `product_style_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `saree_product_tags`
 --
 ALTER TABLE `saree_product_tags`
-  MODIFY `product_tag_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=393;
+  MODIFY `product_tag_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=396;
 
 --
 -- AUTO_INCREMENT for table `saree_product_type`
@@ -24670,7 +24718,7 @@ ALTER TABLE `saree_product_type`
 -- AUTO_INCREMENT for table `saree_product_work`
 --
 ALTER TABLE `saree_product_work`
-  MODIFY `product_work_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `product_work_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `saree_purse`
@@ -24695,6 +24743,12 @@ ALTER TABLE `saree_sanitizer`
 --
 ALTER TABLE `saree_saree`
   MODIFY `saree_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `saree_seo`
+--
+ALTER TABLE `saree_seo`
+  MODIFY `seo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `saree_settings`
@@ -24724,7 +24778,7 @@ ALTER TABLE `saree_type`
 -- AUTO_INCREMENT for table `saree_users`
 --
 ALTER TABLE `saree_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `saree_wishlist`
