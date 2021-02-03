@@ -11095,3 +11095,36 @@ section.page-container {
 
 }
 
+#size_chart_tbl .modal-header .close {
+    font-size: 25px;
+    color: grey;
+    opacity: 1;
+    background: #fff;
+    font-weight: normal;
+    padding: 14px 0 0 5px;
+}
+
+#size_chart_tbl .modal-title {
+    margin: 0;
+    line-height: 1.42857143;
+    background: #eb1c35;
+    color: #ffffff;
+    padding: 5px 0px 5px 6px;
+    font-size: 15px;
+}
+#size_chart_tbl .modal-header {
+	border-bottom: none;
+}
+
+#size_chart_tbl .modal-header .modal-radio {
+	padding: 10px;
+    text-align: center;
+}
+
+#size_chart_tbl table thead {
+	background: #dcd8d8;
+}
+
+#size_chart_tbl table tbody {
+	height: 400px;
+}

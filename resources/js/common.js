@@ -157,7 +157,7 @@ $(document).ready(function() {
         );
     });
 
-    $('#keyword').autocomplete({
+    $('#keyword').devbridgeAutocomplete({
         serviceUrl: BASEPATH+"product/get_global_search",
         onSelect: function(suggestion) {
             $("#srch-btn").attr("onclick", "window.location.href='"+suggestion.data+"'");

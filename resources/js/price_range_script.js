@@ -30,8 +30,7 @@ $(document).ready(function(){
 	  });
 	});
 
-	$(function () {
-	  $("#slider-range").slider({
+	$("#slider-range").slider({
 		range: true,
 		orientation: "horizontal",
 		min: 0,
@@ -50,9 +49,8 @@ $(document).ready(function(){
 		}
 	  });
 
-	  $("#min_price").val($("#slider-range").slider("values", 0));
-	  $("#max_price").val($("#slider-range").slider("values", 1));
-	});
+	$("#min_price").val($("#slider-range").slider("values", 0));
+	$("#max_price").val($("#slider-range").slider("values", 1));
 
 	$("#slider-range,#price-range-submit").click(function () {
 	  	var min_price = $('#min_price').val();

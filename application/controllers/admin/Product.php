@@ -13,11 +13,11 @@
 
 			$this->data = $this->defaultdata->getBackendDefaultData();
 			
-			if(in_array($this->data['tot_segments'][1], $this->loggedin_method_arr))
+			if(in_array($this->data['tot_segments'][2], $this->loggedin_method_arr))
 			{
 				if($this->defaultdata->is_session_active() == 0)
 				{
-					redirect(base_url());
+					redirect(base_url('admin'));
 				}
 			}
 		}
