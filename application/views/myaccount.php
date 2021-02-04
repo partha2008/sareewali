@@ -33,20 +33,8 @@
 
                 <div class="col-md-9">
 
-                  <form id="frmProfile" class="form-horizontal" method="post" action="<?php echo base_url('home/update_account');?>" enctype="multipart/form-data" novalidate>
-                    <?php $sess_notify = $this->session->userdata('has_error');
-            if(isset($sess_notify) & $sess_notify){?>
-              <div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert">&times;</a><span class="error"><?php echo $this->session->userdata('myaccount_notification');?></span></div>
-           
-            <?php } ?>
-            <?php if(isset($sess_notify) & !$sess_notify){?>
-            <div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert">&times;</a><span class="success"><?php echo $this->session->userdata('myaccount_notification');?></span></div>
-            <?php } 
-              $this->session->unset_userdata('has_error');
-              $this->session->unset_userdata('myaccount_notification');            
-            ?>
-
-                      
+                  <form id="frmProfile" class="form-horizontal">
+                  <span id="msg_show"></span>                 
 
                   
 
@@ -220,13 +208,13 @@
                     <?php
                       }else{
                     ?>
-                    <img src="<?php echo base_url('resources/images/def_face1.jpg');?>" class="img img-thumbnail img-fluid" alt="no image" title="no image" />
+                    <img id="profile_img" src="<?php echo base_url('resources/images/def_face1.jpg');?>" class="img img-thumbnail img-fluid" alt="no image" title="no image" />
                     <?php
                       }
                     ?>
                   </label>
                   <div class="col-sm-10">
-                    <input type="file" class="form-control" name="user_image">
+                    <input type="file" class="form-control" name="user_image" onchange="preview()">
                   </div>
                 </div>
                 <div class="form-group">
@@ -258,4 +246,10 @@
 </section>
     <?php echo $footer; ?>
     <?php echo $foot; ?>
+
+    <script type="text/javascript">
+      function preview() {
+        $("#profile_img").attr("src", URL.createObjectURL(event.target.files[0]));
+    }
+    </script>
 

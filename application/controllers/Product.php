@@ -128,6 +128,12 @@
 				$this->data['entity'] = $entity_data[0]->name;
 			}	
 
+			$minPrice = min(array_column($product_list, 'price'));
+			$maxPrice = max(array_column($product_list, 'price'));
+
+			$this->data['minPrice'] = $minPrice;
+			$this->data['maxPrice'] = $maxPrice;
+
 			$ent_attr = $this->entitydata->grab_entity_attribute($entity_data[0]->entity_id);
 			if(!empty($ent_attr)){
 				foreach ($ent_attr as $key => $value) {
@@ -193,7 +199,14 @@
 				}
 			}
 
-			$this->data['product_list'] = $this->productdata->grab_product_list_all($entity, $start, $this->perPage, $order_by, $where, $join);
+			$product_list = $this->productdata->grab_product_list_all($entity, $start, $this->perPage, $order_by, $where, $join);
+			$minPrice = min(array_column($product_list, 'price'));
+			$maxPrice = max(array_column($product_list, 'price'));
+
+			$this->data['minPrice'] = $minPrice;
+			$this->data['maxPrice'] = $maxPrice;
+
+			$this->data['product_list'] = $product_list;
 
 			$products = $this->load->view('partials/products', $this->data, true);		
 

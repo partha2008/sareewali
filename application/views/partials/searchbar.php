@@ -72,9 +72,9 @@
 
           <div style="margin:30px auto">
 
-            <input type="number" min=0 max="9900" oninput="validity.valid||(value='0');" id="min_price" class="price-range-field" />
+            <input type="text" readonly id="min_price" class="price-range-field" value="<?php echo $minPrice;?>" />
 
-            <input type="number" min=0 max="20000" oninput="validity.valid||(value='20000');" id="max_price" class="price-range-field" />
+            <input type="text" readonly id="max_price" class="price-range-field" value="<?php echo $maxPrice;?>" />
 
           </div>
 

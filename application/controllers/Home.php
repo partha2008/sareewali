@@ -329,89 +329,97 @@
 			}
 		}
 
-		public function update_account(){
+		public function check_email(){
 			$post_data = $this->input->post();
 
 			if($post_data['email'] != $post_data['old_email']){
-				$is_unique =  '|is_unique['.TABLE_USER.'.email]';
+				$user = $this->userdata->grab_user_details(array("email" => $post_data['email']));
+			
+				if(!empty($user)){
+					echo 'false';
+				}else{
+					echo 'true';
+				}
 			}else{
-				$is_unique =  '';
+				echo 'true';
 			}
+			
+		}
+
+		public function check_phone(){
+			$post_data = $this->input->post();
 
 			if($post_data['phone'] != $post_data['old_phone']){
-				$is_unique1 =  '|is_unique['.TABLE_USER.'.phone]';
-			}else{
-				$is_unique1 =  '';
-			}				
+				$user = $this->userdata->grab_user_details(array("phone" => $post_data['phone']));
 				
-			$this->load->library('form_validation');
-			
-			$this->form_validation->set_rules('first_name', 'First Name', 'trim|required');
-			$this->form_validation->set_rules('last_name', 'Last Name', 'trim|required');
-			$this->form_validation->set_rules('email', 'E-mail', 'trim|required'.$is_unique);
-			$this->form_validation->set_rules('phone', 'Phone', 'trim|required'.$is_unique1);
-			$this->form_validation->set_rules('address1', 'Address1', 'trim|required');
-			$this->form_validation->set_rules('city', 'City', 'trim|required');
-			$this->form_validation->set_rules('post_code', 'Post Code', 'trim|required');
-			$this->form_validation->set_rules('country_id', 'Country', 'trim|required');
-			$this->form_validation->set_rules('state_id', 'State', 'trim|required');
-			
-			$this->session->unset_userdata($post_data);
-			if($this->form_validation->run() == FALSE)
-			{	
-				$this->session->set_userdata($post_data);
-				$this->session->set_userdata('has_error', true);
-				$this->session->set_userdata('myaccount_notification', validation_errors());
-			}else{
-				// image upload
-				if (!empty($_FILES['user_image']['name'])) {
-					$this->load->library('image_lib');
-
-					$config = array(
-						'upload_path' => UPLOAD_RELATIVE_PROFILE_IMAGE_PATH,
-						'allowed_types' => "jpg|png|jpeg",
-						'overwrite' => TRUE,
-						'file_ext_tolower' => TRUE,
-						'encrypt_name' => TRUE
-					);
-					$this->load->library('upload', $config);
-					if($this->upload->do_upload('user_image'))
-				    {
-			            $image_data = $this->upload->data();
-
-			            $file_name = $image_data['file_name'];
-			            $full_path = $image_data['full_path'];
-
-			            $configer = array(
-							'image_library'   => 'gd2',
-							'source_image'    =>  $full_path,
-							'maintain_ratio'  =>  TRUE,
-							'width'           =>  100,
-							'height'          =>  100,
-			            );
-			            $this->image_lib->clear();
-			            $this->image_lib->initialize($configer);
-			            $this->image_lib->resize();
-
-			            $post_data['file_name'] = $file_name;
-				    }else{			    	
-				    	$this->session->set_userdata('has_error', true);
-						$this->session->set_userdata('myaccount_notification', $this->upload->display_errors());
-
-						redirect($this->agent->referrer());
-				    }
+				if(!empty($user)){
+					echo 'false';
+				}else{
+					echo 'true';
 				}
-				unset($post_data['old_email']);
-				unset($post_data['old_phone']);
-				
-				$post_data['date_modified'] = time();
-				
-				$this->userdata->update_user_details(array("user_id" => $this->session->userdata('user_id')), $post_data);
-
-				$this->session->set_userdata('has_error', false);
-				$this->session->set_userdata('myaccount_notification', "Your account updated successfully");
+			}else{
+				echo 'true';
 			}
-			redirect($this->agent->referrer());
+		}
+
+		public function update_account(){
+			$post_data = $this->input->post();
+			$has_error = false;
+
+			unset($post_data['old_email']);
+			unset($post_data['old_phone']);
+			
+			// image upload
+			if (!empty($_FILES['user_image']['name'])) {
+				$this->load->library('image_lib');
+
+				$config = array(
+					'upload_path' => UPLOAD_RELATIVE_PROFILE_IMAGE_PATH,
+					'allowed_types' => "jpg|png|jpeg",
+					'overwrite' => TRUE,
+					'file_ext_tolower' => TRUE,
+					'encrypt_name' => TRUE
+				);
+				$this->load->library('upload', $config);
+				if($this->upload->do_upload('user_image'))
+			    {
+		            $image_data = $this->upload->data();
+
+		            $file_name = $image_data['file_name'];
+		            $full_path = $image_data['full_path'];
+
+		            $configer = array(
+						'image_library'   => 'gd2',
+						'source_image'    =>  $full_path,
+						'maintain_ratio'  =>  TRUE,
+						'width'           =>  100,
+						'height'          =>  100,
+		            );
+		            $this->image_lib->clear();
+		            $this->image_lib->initialize($configer);
+		            $this->image_lib->resize();
+
+		            $post_data['file_name'] = $file_name;
+		            $has_error = false;
+			    }else{	
+			    	$has_error = true;
+			    	$myaccount_notification = $this->upload->display_errors();
+			    }
+			}
+
+			if(!$has_error){
+				$post_data['date_modified'] = time();
+	
+				if($this->userdata->update_user_details(array("user_id" => $this->session->userdata('user_id')), $post_data)){
+					$has_error = false;
+		    		$myaccount_notification = "Your account updated successfully";
+				}
+			}
+
+			$response['has_error'] = $has_error;
+			$response['myaccount_notification'] = $myaccount_notification;
+
+			echo json_encode($response);
 		}
 
 		public function orderhistory(){

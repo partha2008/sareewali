@@ -157,6 +157,29 @@ $(document).ready(function() {
         );
     });
 
+    $("#slider-range").slider({
+        range: true,
+        orientation: "horizontal",
+        min: 0,
+        max: 200000,
+        values: [0, 200000],
+        step: 100,
+        slide: function (event, ui) {
+            if (ui.values[0] == ui.values[1]) {
+                return false;
+            }
+            
+            $("#min_price").val(ui.values[0]);
+            $("#max_price").val(ui.values[1]);
+
+            search_by_attr(0);
+        }
+    });
+
+    setTimeout(function(){ 
+        $("#slider-range").slider( "option", "values", [ $("#min_price").val(), $("#max_price").val() ] );
+    }, 3000);
+
     $('#keyword').devbridgeAutocomplete({
         serviceUrl: BASEPATH+"product/get_global_search",
         onSelect: function(suggestion) {
@@ -278,6 +301,91 @@ $(document).ready(function() {
     $('#loginModal').on('hidden.bs.modal', function () {
       $("#checkout_guest").hide();
     });
+
+    if(PAGENAME == 'myaccount'){
+        $('#frmProfile').validate({ 
+            rules: {
+                first_name: {
+                    required: true
+                },
+                last_name: {
+                    required: true
+                },
+                email: {
+                    required: true,
+                    email: true,
+                    remote: {
+                        url: BASEPATH + "home/check_email",
+                        type: "post",
+                        data: {
+                          old_email: function() {
+                            return $("input[name=old_email]").val();
+                          }
+                        }
+                      }
+                },
+                phone: {
+                    required: true,
+                    remote: {
+                        url: BASEPATH + "home/check_phone",
+                        type: "post",
+                        data: {
+                          old_phone: function() {
+                            return $("input[name=old_phone]").val();
+                          }
+                        }
+                      }
+                },
+                address1: {
+                    required: true
+                },
+                city: {
+                    required: true
+                },
+                post_code: {
+                    required: true
+                },
+                country_id: {
+                    required: true
+                },
+                state_id: {
+                    required: true
+                }
+            },
+            messages: { 
+                email: { email: "Please enter a valid email address", remote: "This email is already exists" },
+                phone: {remote: "This phone no is already exists"}
+            },
+            submitHandler: function (form) { 
+                var form_data = new FormData($('#frmProfile')[0]);
+
+                $("#update-btn").prop("disabled", true).html('<i class="fa fa-refresh fa-spin" aria-hidden="true"></i> Processing...');
+                
+
+                $.ajax({
+                    type: "POST",
+                    url: BASEPATH+"home/update_account",
+                    data: form_data,
+                    processData: false,
+                    contentType: false,
+                    success:function(data){
+                        $("#update-btn").prop("disabled", false).html('Update');
+
+                        var res = JSON.parse(data);
+                        if(res.has_error){
+                            var html = '<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert">&times;</a><span class="error">'+res.myaccount_notification+'</span></div>';
+                        }else{
+                            var html = '<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert">&times;</a><span class="success">'+res.myaccount_notification+'</span></div>';
+                        }
+
+                        $("#msg_show").html(html);
+                        
+                    }
+                });
+                return false;
+            }
+        });
+    }
 
 });
 
