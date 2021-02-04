@@ -157,28 +157,31 @@ $(document).ready(function() {
         );
     });
 
-    $("#slider-range").slider({
-        range: true,
-        orientation: "horizontal",
-        min: 0,
-        max: 200000,
-        values: [0, 200000],
-        step: 100,
-        slide: function (event, ui) {
-            if (ui.values[0] == ui.values[1]) {
-                return false;
+    if(PAGENAME == 'product-list'){
+        $("#slider-range").slider({
+            range: true,
+            orientation: "horizontal",
+            min: 0,
+            max: 200000,
+            values: [0, 200000],
+            step: 100,
+            slide: function (event, ui) {
+                if (ui.values[0] == ui.values[1]) {
+                    return false;
+                }
+                
+                $("#min_price").val(ui.values[0]);
+                $("#max_price").val(ui.values[1]);
+
+                search_by_attr(0);
             }
-            
-            $("#min_price").val(ui.values[0]);
-            $("#max_price").val(ui.values[1]);
+        });
 
-            search_by_attr(0);
-        }
-    });
+        setTimeout(function(){ 
+            $("#slider-range").slider( "option", "values", [ $("#min_price").val(), $("#max_price").val() ] );
+        }, 3000);
 
-    setTimeout(function(){ 
-        $("#slider-range").slider( "option", "values", [ $("#min_price").val(), $("#max_price").val() ] );
-    }, 3000);
+    }
 
     $('#keyword').devbridgeAutocomplete({
         serviceUrl: BASEPATH+"product/get_global_search",

@@ -142,9 +142,9 @@
           <span class="button out-of-stock_button">out of stock</span> 
           <?php
             }
-          ?>
-          <span onclick="inquireNow('<?php echo $product->product_id;?>');" class="button inquire_now_button" style="<?php echo $inquire_display;?>">Inquire Now</span> 
+          ?>          
         </span>
+        <span id="inquire_now_link" onclick="inquireNow('<?php echo $product->product_id;?>');" class="button inquire_now_button" style="<?php echo $inquire_display;?>">Inquire Now</span> 
           <span class="add_links">           
             <a onclick="addToWishList('<?php echo $product->product_id;?>', '<?php echo $this->defaultdata->is_user_session_active();?>');" title="Add to Wish List" class="add_to_wishlist"> <i class="fa fa-heart-o" aria-hidden="true"></i> Add to Wishlist</a> 
         </span>

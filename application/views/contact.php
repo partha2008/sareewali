@@ -96,7 +96,7 @@
 
           function initialize() {
               geocoder = new google.maps.Geocoder();
-              var latlng = new google.maps.LatLng(-34.397, 150.644);
+              var latlng = new google.maps.LatLng(22.572645, 88.363892);
               var myOptions = {
                   zoom: 8,
                   center: latlng,
