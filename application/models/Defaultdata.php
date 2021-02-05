@@ -296,7 +296,7 @@ class Defaultdata extends CI_Model {
 	public function _send_mail($config = array()){		
 		$this->email->initialize($this->config->item('smtp'));
 		
-		$this->email->from($config['from']);
+		$this->email->from($this->config->item('site_info')['mail_settings_email']);
 		$this->email->to($config['to']);
 		if(array_key_exists("cc", $config)){
 			$this->email->cc($config['cc']);

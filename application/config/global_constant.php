@@ -14,7 +14,8 @@
 		"ccavenue_access_code" => "AVXT85GF75AF06TXFA",
 		"ccavenue_working_key" => "FC60017733D91CA00B74D3A9CDE6E058",
 		"ccavenue_test_url" => "https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction",
-		"ccavenue_live_url" => "https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction"
+		"ccavenue_live_url" => "https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction",
+		"mail_settings_email" => "contact@sareewali.com"
 	);
 	
 	// Bootstrap Pagination Configuration
