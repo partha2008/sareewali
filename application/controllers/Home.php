@@ -31,7 +31,7 @@
 			$products = $this->productdata->grab_product_list();
 			$this->data['products'] = $products;
 
-			$enity_list = $this->entitydata->grab_random_entity(array("status" => "Y", "parent_id" => "1", "image_path !=" => ""), array(4, 0));
+			$enity_list = $this->entitydata->grab_random_entity(array("status" => "Y", "parent_id" => "1", "image_path !=" => ""), array(5, 0));
 			$this->data['enity_list'] = $enity_list;
 
 			$ads = $this->adsdata->grab_ads();
@@ -563,7 +563,7 @@
 				$message = $this->load->view('email_template/contact', $this->data, true);
 				$mail_config = array(
 					"from" => $admin_profile->email,
-					"to" => array($admin_profile->email),
+					"to" => array('contact@sareewali.com'),
 					"subject" => $general_settings->sitename.": Contact Us",
 					"message" => $message
 				);

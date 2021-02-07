@@ -161,10 +161,7 @@ $(document).ready(function() {
         $("#slider-range").slider({
             range: true,
             orientation: "horizontal",
-            min: 0,
-            max: 200000,
-            values: [0, 200000],
-            step: 100,
+            step: 1,
             slide: function (event, ui) {
                 if (ui.values[0] == ui.values[1]) {
                     return false;
@@ -177,9 +174,11 @@ $(document).ready(function() {
             }
         });
 
-        setTimeout(function(){ 
-            $("#slider-range").slider( "option", "values", [ $("#min_price").val(), $("#max_price").val() ] );
-        }, 3000);
+        $("#slider-range").slider( "option", "min", parseInt($("#min_price").val()) );
+        $("#slider-range").slider( "option", "max", parseInt($("#max_price").val()) );
+        $("#slider-range").slider( "option", "values", [ parseInt($("#min_price").val()), parseInt($("#max_price").val()) ] );
+
+        
 
     }
 
